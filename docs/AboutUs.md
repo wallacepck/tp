@@ -57,3 +57,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Wallace Peck
+
+<img src="images/wallacepck.png" width="200px">
+
+[[github](http://github.com/wallacepck)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Git expert
+* 
