@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/san-muyun.png" width="200px">
 
-[[github](http://github.com/jhttps://github.com/SAN-MUYUN)] [[portfolio](team/johndoe.mdhttps://www.linkedin.com/in/muyun-san-870748186/)]
+[[github](http://github.com/jhttps://github.com/SAN-MUYUN)] [[portfolio](https://www.linkedin.com/in/muyun-san-870748186/)]
 
 * Role: Developer
 * Responsibilities: Backend
