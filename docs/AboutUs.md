@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Faizal
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/teamakesmepee.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[linkedin](https://www.linkedin.com/in/faizal-0524/)]
+[[github](https://github.com/TeaMakesMePee)]
+[[portfolio](team/faizal.md)]
 
-* Role: Project Advisor
+* Role: Code quality
 
 ### Jane Doe
 
