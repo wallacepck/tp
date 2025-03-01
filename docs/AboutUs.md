@@ -9,15 +9,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Choo Jun Inn Darren
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/darrenchooji.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://www.linkedin.com/in/choojuninndarren/)]
+[[github](https://github.com/darrenchooji)]
 
-* Role: Project Advisor
+* Role: Backend coder
 
 ### Jane Doe
 
