@@ -9,14 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Choo Jun Inn Darren
+### John Doe
 
-<img src="images/darrenchooji.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[homepage](https://www.linkedin.com/in/choojuninndarren/)]
-[[github](https://github.com/darrenchooji)]
+[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+[[github](https://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
-* Role: Backend coder
+* Role: Project Advisor
 
 ### Jane Doe
 
@@ -47,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Choo Jun Inn darren
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/darrenchooji.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/darrenchooji)]
+[[portfolio](https://www.linkedin.com/in/choojuninndarren/)]
 
 * Role: Developer
 * Responsibilities: UI
