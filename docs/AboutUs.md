@@ -19,7 +19,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Code quality
 
-### Jane Doe
+### Liu Yu-Wei Jeff
 
 <img src="images/lonelyfort.png" width="200px">
 
