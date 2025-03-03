@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/jhttps://github.com/SAN-MUYUN)] [[portfolio](https://www.linkedin.com/in/muyun-san-870748186/)]
 
 * Role: Developer
-* Responsibilities: Backend
+* Responsibilities: Backend Developer
 
 ### Choo Jun Inn darren
 
