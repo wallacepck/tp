@@ -262,27 +262,41 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* struggles connecting with professors or teaching assistants
+* worry about losing contact details
 * prefer desktop apps over other types
-* can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* is comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Effortlessly connect with your Professors and Teaching Assistants.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​  | I want to …​                                     | So that I can…​                                                     |
+|----------|----------|--------------------------------------------------|---------------------------------------------------------------------|
+| `* * *`  | user     | have my professors and TA's contact              | contact them in the future                                          |
+| `* * *`  | new user | have a guide                                     | navigate around and use the app easily                              |
+| `* * *`  | new user | have a CLI syntax table                          | I can refer to it while using the app                               |
+| `* * *`  | user     | filter contacts according to their tag           | obtain all contacts with the same tag                               |
+| `* * *`  | user     | remove tags                                      | view only relevant tagged contacts                                  |
+| `* * *`  | user     | tag my contacts as TAs or professors             | filter them in one command                                          |
+| `* * *`  | user     | search contacts based on module code             | locate contact details without having to go through the entire list |
+| `* * *`  | user     | search contacts based on their name              | locate contact details without having to go through the entire list |
+| `* * *`  | user     | search contacts based on incomplete names        | locate contact details without remembering the full name            | 
+| `* * *`  | user     | search contacts based on incomplete phone number | locate contact details without remembering the full phone number    |
+| `* * *`  | user     | search contacts based on incomplete module names | locate contact details without remembering the full module name     |
+| `* * *`  | user     | see all available tags                           | know which tags to filter by                                        |
+| `* * *`  | user     | list all contacts                                | view of all my contact details                                      |
+| `* * *`  | user     | delete contacts                                  | remove outdated contacts                                            |
+| `* *`    | user     | mass operations                                  | make a lot of changes to my contact list efficiently                |
+| `* *`    | user     | a console window to display the contact          | copy and paste contact information efficiently                      |
+| `*`      | user     | have a personal contact list                     | locate contact details important to me                              |
+| `*`      | user     | add contacts to the personal contact list        | add important contacts to the list                                  |
+| `*`      | user     | delete contacts from the personal contact list   | remove no longer important contacts from the list                   |
+| `*`      | user     | list my personal contact list                    | view every contact in the list                                      |
 
 *{More to be added}*
 
