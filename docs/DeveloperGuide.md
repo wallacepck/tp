@@ -302,16 +302,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AcademySource` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to adds a contact
+2.  AcademySource adds a contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given command consists of invalid syntax.
+
+    * 2a1. AcademySource shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC02 - List contacts**
+
+**MSS**
+
+1.  User requests to list contacts
+2.  AcademySource shows a list of contacts
 
     Use case ends.
 
@@ -321,11 +336,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC03 - Delete a contact**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1.  User requests to <u>list contacts (UC02)</u>
+2.  User requests to delete a specific contact in the list
+3.  AcademySource deletes the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. AcademySource shows an error message.
+
+      Use case resumes at step 1.
+
+
+**Use case: UC04 - Search for a contact**
+
+**MSS**
+
+1.  User requests to search for a contact using either a full/incomplete name, module name, module code, or contact number.
+2.  AcademySource shows a list of contacts matching the search.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
 
 *{More to be added}*
 
