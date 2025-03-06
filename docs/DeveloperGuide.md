@@ -377,7 +377,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  All user operations should be completed within 10 seconds.
+4.  All commands should produce expected result with no more than 3 seconds delay.
 5.  Application should not occupy more than 50MB on hard disk.
 6.  Application should be user-friendly to first time users.
 7.  The application should support seamless upgrades without data loss.
