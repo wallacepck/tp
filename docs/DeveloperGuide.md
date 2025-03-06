@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to adds a contact
-2.  AcademySource adds a contact
+2.  AcademySource adds a contact 
 
     Use case ends.
 
@@ -375,16 +375,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  All user operations should be completed within 10 seconds.
+5.  Application should not occupy more than 50MB on hard disk.
+6.  Application should be user-friendly to first time users.
+7.  The application should support seamless upgrades without data loss.
+8.  Comprehensive documentation should be available for users and developers.
 
 *{More to be added}*
+
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Operations**: Any command-line input by the user.
+* **Data**: Contact data stored in the data/addressbook.json.
+* **CLI syntax table**: A strcutured reference that outlines the syntax, parameters and usage of command-line interface commands that helps the users to execute operations.
+* **Contact**: An information that holds name, email, telegram handle, phone number, module, role.
+* **Module**: Any NUS course.
+* **Role**: TA / Professor
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
