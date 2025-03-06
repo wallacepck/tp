@@ -1,18 +1,27 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2425S2-CS2103T-T17-4/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S2-CS2103T-T17-4/tp/actions)
 
 [![codecov](https://codecov.io/gh/AY2425S2-CS2103T-T17-4/tp/graph/badge.svg?token=TFM3X49ML5)](https://codecov.io/gh/AY2425S2-CS2103T-T17-4/tp)
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
+# AcademySource
+> "The key to success in tech industry is not good programming skills, it's strong networking." - An advice given by a computing senior when I first entered NUS.
 
-## test commit
+Ever wished to conduct research for a specific field but don't know the correct professors to look for? 
+
+Ever felt the dread of losing hundreds of telegram contacts because you lose your telegram account, with no way of getting them back without their telegram handle? 
+
+Or what if you want to become a TA for a module, want to know more about the TA experience from the senior who have taught you as a TA, but simply forgot their name and contacts?
+
+Fret not! With AcademySource, you can retrieve key contacts of TAs and Professors from a snap of a fingertip. This simple application stores handphone number, email address and even telegram handles of TAs so that even when you forget, even when you lose your account, there is a backup for you.
+
+## User Guide
+Detailed user guide can be found in the [User Guide](https://github.com/AY2425S2-CS2103T-T17-4/tp/blob/master/docs/UserGuide.md) section.
+
+## Developer Guide
+Interested to contribute to AcademySource? You may follow the [Developer Guide](https://github.com/AY2425S2-CS2103T-T17-4/tp/blob/master/docs/DeveloperGuide.md) for more.
+
+## Acknowledgement
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+
