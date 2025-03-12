@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.person.module.Module;
 
 /**
  * Represents a Person in the address book.
@@ -24,6 +25,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private Module module;
 
     /**
      * Every field must be present and not null.
@@ -54,11 +56,22 @@ public class Person {
     }
 
     /**
+     * To be used later.
+     */
+    public Module getModule() {
+        return this.module;
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
     }
 
     /**
