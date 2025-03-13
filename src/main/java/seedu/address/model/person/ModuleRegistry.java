@@ -1,14 +1,15 @@
-package seedu.address.model.person.module;
+package seedu.address.model.person;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Module Registry enum
- * Stores all preset modules
+ * Module Registry enum that stores all preset modules.
+ * The Module record is nested inside this enum to restrict its instantiation.
  */
 public enum ModuleRegistry {
+
     CS1231S(new Module("CS1231S", "Discrete Structures")),
     CS2030S(new Module("CS2030S", "Programming Methodology II")),
     CS2040S(new Module("CS2040S", "Data Structures and Algorithms")),
@@ -44,5 +45,38 @@ public enum ModuleRegistry {
             modules.add(entry.module);
         }
         return Collections.unmodifiableList(modules);
+    }
+
+    /**
+     * Represents a Module that stores the module code and name.
+     * This class is immutable and can only be instantiated by ModuleRegistry.
+     */
+    public static class Module {
+        private final String moduleCode; // Unique identifier for the module (e.g., "CS1010")
+        private final String moduleName; // Full name of the module (e.g., "Programming Methodology")
+
+        /**
+         * Private constructor to restrict instantiation to ModuleRegistry only.
+         *
+         * @param moduleCode The unique code of the module.
+         * @param moduleName The name of the module.
+         */
+        private Module(String moduleCode, String moduleName) {
+            this.moduleCode = moduleCode;
+            this.moduleName = moduleName;
+        }
+
+        public String getModuleCode() {
+            return this.moduleCode;
+        }
+
+        public String getModuleName() {
+            return this.moduleName;
+        }
+
+        @Override
+        public String toString() {
+            return this.moduleCode + " " + this.moduleName;
+        }
     }
 }

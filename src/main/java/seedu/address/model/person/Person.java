@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.module.Module;
+import seedu.address.model.person.ModuleRegistry.Module;
 import seedu.address.model.tag.Tag;
 
 /**

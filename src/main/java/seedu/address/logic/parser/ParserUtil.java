@@ -13,10 +13,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleRegistry;
+import seedu.address.model.person.ModuleRegistry.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.module.Module;
-import seedu.address.model.person.module.ModuleRegistry;
 import seedu.address.model.tag.Tag;
 
 /**

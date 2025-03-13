@@ -24,10 +24,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleRegistry.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.module.Module;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -104,7 +104,6 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
-
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
