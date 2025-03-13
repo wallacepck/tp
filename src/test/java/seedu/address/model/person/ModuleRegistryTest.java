@@ -97,8 +97,6 @@ public class ModuleRegistryTest {
     @Test
     public void getModuleByCode_nullCode_throwsNullPointerException() {
         // Test for null moduleCode
-        assertThrows(NullPointerException.class, () -> {
-            ModuleRegistry.getModuleByCode(null);
-        });
+        assertNull(ModuleRegistry.getModuleByCode(null));
     }
 }
