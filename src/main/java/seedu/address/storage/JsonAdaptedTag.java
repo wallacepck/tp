@@ -1,24 +1,40 @@
 package seedu.address.storage;
 
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.Role;
 import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Tag}.
  */
 class JsonAdaptedTag {
-
+    public static final String INVALID_TAG_TYPE = "Unknown tag type found";
     private final String tagName;
+    private String tagType = TagTypes.TAG.serialisedName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedTag} of type {@code Tag} with the given {@code tagName}.
+     */
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public JsonAdaptedTag(String tagName) {
+        this(tagName, TagTypes.TAG.serialisedName);
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedTag} of type {@code tagType} with the given {@code tagName}.
+     * See: {@link TagTypes} for types
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
+    public JsonAdaptedTag(@JsonProperty("tagName") String tagName, @JsonProperty("tagType") String tagType) {
         this.tagName = tagName;
+        this.tagType = tagType;
     }
 
     /**
@@ -26,11 +42,9 @@ class JsonAdaptedTag {
      */
     public JsonAdaptedTag(Tag source) {
         tagName = source.tagName;
-    }
-
-    @JsonValue
-    public String getTagName() {
-        return tagName;
+        if (source instanceof Role) {
+            tagType = TagTypes.ROLE.serialisedName;
+        }
     }
 
     /**
@@ -39,10 +53,34 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        try {
+            return TagTypes.getConstructorFromName(tagType).apply(tagName);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(e.getMessage());
         }
-        return new Tag(tagName);
     }
 
+    /**
+     * Enumeration defining the valid subclasses of {@code Tag} that can be saved via Jackson.
+     */
+    private enum TagTypes {
+        TAG("tag", Tag::new),
+        ROLE("role", Role::new);
+
+        public final String serialisedName;
+        public final Function<String, Tag> constructor;
+        TagTypes(String serialisedName, Function<String, Tag> tagConstructor) {
+            this.serialisedName = serialisedName;
+            this.constructor = tagConstructor;
+        }
+
+        public static Function<String, Tag> getConstructorFromName(String typeName) throws IllegalValueException {
+            for (TagTypes type : TagTypes.values()) {
+                if (type.serialisedName.equals(typeName)) {
+                    return type.constructor;
+                }
+            }
+            throw new IllegalValueException(INVALID_TAG_TYPE);
+        }
+    }
 }
