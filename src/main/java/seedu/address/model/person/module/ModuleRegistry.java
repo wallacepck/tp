@@ -1,9 +1,13 @@
 package seedu.address.model.person.module;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
+/**
+ * Module Registry enum
+ * Stores all preset modules
+ */
 public enum ModuleRegistry {
     CS1231S(new Module("CS1231S", "Discrete Structures")),
     CS2030S(new Module("CS2030S", "Programming Methodology II")),
