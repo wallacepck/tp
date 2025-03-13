@@ -25,7 +25,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private Module module;
+    private final Set<Module> modules = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -56,10 +56,11 @@ public class Person {
     }
 
     /**
-     * To be used later.
+     * Returns an immutable module set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
      */
-    public Module getModule() {
-        return this.module;
+    public Set<Module> getModules() {
+        return Collections.unmodifiableSet(this.modules);
     }
 
     /**
@@ -68,10 +69,6 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
-    }
-
-    public void setModule(Module module) {
-        this.module = module;
     }
 
     /**
