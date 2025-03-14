@@ -153,7 +153,8 @@ public class ParserUtil {
         }
         return roleSet;
     }
-  
+
+     /**
      * Parses a {@code String moduleCode} into a {@code Module}.
      * Leading and trailing whitespaces will be trimmed.
      *
