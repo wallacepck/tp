@@ -1,12 +1,16 @@
 package seedu.address.storage;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -15,7 +19,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Role;
+import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -23,6 +30,8 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_ROLE = "#friend";
+    private static final String INVALID_TAG_TYPE = "chocolate_cheesecake";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -31,6 +40,12 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
+
+    private static final String VALID_ROLE = "friend";
+    private static final List<JsonAdaptedTag> VALID_ROLES = Arrays.asList(
+            new JsonAdaptedTag("friend", "role")
+    );
+
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -107,4 +122,31 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
+    @Test
+    public void toModelType_invalidRoles_throwsIllegalValueException() {
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>();
+        invalidTags.add(new JsonAdaptedTag(INVALID_ROLE));
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTagType_throwsIllegalValueException() {
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>();
+        invalidTags.add(new JsonAdaptedTag(VALID_ROLE, INVALID_TAG_TYPE));
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_roleType_returnsRole() {
+        JsonAdaptedPerson jsonPerson =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ROLES);
+        Person person = assertDoesNotThrow(jsonPerson::toModelType);
+        Optional<Tag> tag = person.getTags().stream().findFirst();
+        assertTrue(tag.isPresent());
+        assertTrue(tag.get() instanceof Role);
+    }
 }
