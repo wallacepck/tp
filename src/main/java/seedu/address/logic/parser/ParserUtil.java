@@ -1,9 +1,11 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -11,6 +13,8 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleRegistry;
+import seedu.address.model.person.ModuleRegistry.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -120,5 +124,37 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String moduleCode} into a {@code Module}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param moduleCode The module code to be parsed.
+     * @return The corresponding {@code Module} from {@code ModuleRegistry}.
+     * @throws ParseException If the given {@code moduleCode} does not match any registered module.
+     */
+    public static Module parseModule(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedModule = moduleCode.trim();
+        return Optional.ofNullable(ModuleRegistry.getModuleByCode(trimmedModule))
+                .orElseThrow(() -> new ParseException(MESSAGE_INVALID_MODULE_CODE));
+    }
+
+    /**
+     * Parses a {@code Collection<String> moduleCodes} into a {@code Set<Module>}.
+     * Each module code in the collection is validated and converted into a {@code Module} object.
+     *
+     * @param moduleCodes A collection of module codes to be parsed.
+     * @return A {@code Set<Module>} containing the parsed modules.
+     * @throws ParseException If any of the module codes are invalid.
+     */
+    public static Set<Module> parseModules(Collection<String> moduleCodes) throws ParseException {
+        requireNonNull(moduleCodes);
+        final Set<Module> moduleSet = new HashSet<>();
+        for (String moduleCode : moduleCodes) {
+            moduleSet.add(parseModule(moduleCode));
+        }
+        return moduleSet;
     }
 }
