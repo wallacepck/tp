@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -41,13 +43,14 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private FlowPane modules;
+    private Label modules;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
+        Set<String> strModules = new HashSet<>();
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
@@ -58,7 +61,9 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getModules().stream()
-                .sorted(Comparator.comparing(module -> module.getModuleCode()))
-                .forEach(module -> modules.getChildren().add(new Label(module.getModuleCode())));
+                .sorted(Comparator.comparing(module -> module.toString()))
+                .forEach(module -> strModules.add(module.getModuleCode()));
+        modules.setText(String.join(", ", strModules));
+
     }
 }
