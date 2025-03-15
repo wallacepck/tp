@@ -93,6 +93,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Module} of the {@code Person} that we are building.
+     */
     public PersonBuilder withModule(String ...modules) {
         this.modules = SampleDataUtil.getModuleSet(modules);
         return this;
