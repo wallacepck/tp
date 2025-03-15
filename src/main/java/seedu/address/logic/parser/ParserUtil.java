@@ -153,14 +153,15 @@ public class ParserUtil {
         }
         return roleSet;
     }
-  
-     * Parses a {@code String moduleCode} into a {@code Module}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @param moduleCode The module code to be parsed.
-     * @return The corresponding {@code Module} from {@code ModuleRegistry}.
-     * @throws ParseException If the given {@code moduleCode} does not match any registered module.
-     */
+
+    /**
+    * Parses a {@code String moduleCode} into a {@code Module}.
+    * Leading and trailing whitespaces will be trimmed.
+    *
+    * @param moduleCode The module code to be parsed.
+    * @return The corresponding {@code Module} from {@code ModuleRegistry}.
+    * @throws ParseException If the given {@code moduleCode} does not match any registered module.
+    */
     public static Module parseModule(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
         String trimmedModule = moduleCode.trim();
