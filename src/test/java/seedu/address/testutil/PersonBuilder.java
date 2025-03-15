@@ -93,6 +93,11 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withModule(String ...modules) {
+        this.modules = SampleDataUtil.getModuleSet(modules);
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, tags, modules);
     }
