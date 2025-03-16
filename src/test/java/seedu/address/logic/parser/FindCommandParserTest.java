@@ -26,7 +26,7 @@ public class FindCommandParserTest {
     public void parse_missingKeywords_throwsParseException() {
         assertParseFailure(parser, "n/ ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "p/",
+        assertParseFailure(parser, "p/ ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
@@ -60,6 +60,15 @@ public class FindCommandParserTest {
         expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(
                 PersonContainsKeywordsPredicate.SearchField.PHONE, Arrays.asList("91234567", "98765432")));
         assertParseSuccess(parser, "p/ 91234567 98765432", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_caseInsensitivePrefix_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new PersonContainsKeywordsPredicate(
+                        PersonContainsKeywordsPredicate.SearchField.NAME, Arrays.asList("Alice", "Bob")));
+        assertParseSuccess(parser, "N/ Alice Bob", expectedFindCommand);
+        assertParseSuccess(parser, "n/ Alice Bob", expectedFindCommand);
     }
 
     @Test
