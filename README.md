@@ -7,7 +7,7 @@
 # AcademySource
 > "The key to success in tech industry is not good programming skills, it's strong networking." - An advice given by a computing senior when I first entered NUS.
 
-Ever wished to conduct research for a specific field but don't know the correct professors to look for? 
+Ever wished to conduct research for a specific field but don't know the correct professors to look for?
 
 Ever felt the dread of losing hundreds of telegram contacts because you lose your telegram account, with no way of getting them back without their telegram handle? 
 
@@ -23,5 +23,3 @@ Interested to contribute to AcademySource? You may follow the [Developer Guide](
 
 ## Acknowledgement
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-
-
