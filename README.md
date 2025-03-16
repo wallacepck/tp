@@ -22,4 +22,4 @@ Detailed user guide can be found in the [User Guide](https://github.com/AY2425S2
 Interested to contribute to AcademySource? You may follow the [Developer Guide](https://github.com/AY2425S2-CS2103T-T17-4/tp/blob/master/docs/DeveloperGuide.md) for more.
 
 ## Acknowledgement
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org). 
