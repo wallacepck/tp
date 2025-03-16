@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to adds a contact
-2.  AcademySource adds a contact 
+2.  AcademySource adds a contact
 
     Use case ends.
 
