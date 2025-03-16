@@ -285,7 +285,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | tag my contacts as TAs or professors             | filter them in one command                                          |
 | `* * *`  | user     | search contacts based on module code             | locate contact details without having to go through the entire list |
 | `* * *`  | user     | search contacts based on their name              | locate contact details without having to go through the entire list |
-| `* * *`  | user     | search contacts based on incomplete names        | locate contact details without remembering the full name            | 
+| `* * *`  | user     | search contacts based on incomplete names        | locate contact details without remembering the full name            |
 | `* * *`  | user     | search contacts based on incomplete phone number | locate contact details without remembering the full phone number    |
 | `* * *`  | user     | search contacts based on incomplete module names | locate contact details without remembering the full module name     |
 | `* * *`  | user     | see all available tags                           | know which tags to filter by                                        |
