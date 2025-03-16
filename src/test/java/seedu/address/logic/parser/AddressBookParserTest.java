@@ -69,19 +69,19 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_findName() throws Exception {
+    public void parseCommand_findName_success() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " /name " + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " n/ " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new PersonContainsKeywordsPredicate(
                 PersonContainsKeywordsPredicate.SearchField.NAME, keywords)), command);
     }
 
     @Test
-    public void parseCommand_findPhone() throws Exception {
+    public void parseCommand_findPhone_success() throws Exception {
         List<String> keywords = Arrays.asList("91234567");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " /phone " + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " p/ " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new PersonContainsKeywordsPredicate(
                 PersonContainsKeywordsPredicate.SearchField.PHONE, keywords)), command);
     }

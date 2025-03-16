@@ -35,10 +35,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         String keyword = splitArgs[1].trim();
         PersonContainsKeywordsPredicate.SearchField searchField;
         switch (prefix.toLowerCase()) {
-        case "/name":
+        case "n/":
             searchField = PersonContainsKeywordsPredicate.SearchField.NAME;
             break;
-        case "/phone":
+        case "p/":
             searchField = PersonContainsKeywordsPredicate.SearchField.PHONE;
             break;
         default:
