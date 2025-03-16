@@ -414,8 +414,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   3. Saving window preferences 
-   
+   3. Saving window preferences
+
    4. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    5. Re-launch the app by double-clicking the jar file.<br>
