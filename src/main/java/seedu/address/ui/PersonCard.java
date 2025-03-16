@@ -2,11 +2,13 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
@@ -41,7 +43,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label tag;
+    @FXML
+    private ImageView tagType;
     @FXML
     private Label modules;
 
@@ -57,13 +61,18 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        // there will be only one tag.
+        //TODO: change this when Tag is stored as a string in future iterations.
+        tag.setText(person.getTags().stream().toList().get(0).tagName);
+
+        // sets tag colour based on the role. TA = yellow. Prof = orange
+        Image taTag = new Image(getClass().getResourceAsStream("/images/tag_TA.png"));
+        Image profTag = new Image(getClass().getResourceAsStream("/images/tag_Prof.png"));
+        tagType.setImage(Objects.equals(tag.getText(), "TA") ? taTag : profTag);
         person.getModules().stream()
                 .sorted(Comparator.comparing(module -> module.toString()))
                 .forEach(module -> strModules.add(module.getModuleCode()));
         modules.setText(String.join(", ", strModules));
-
     }
 }

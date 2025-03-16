@@ -285,7 +285,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | tag my contacts as TAs or professors             | filter them in one command                                          |
 | `* * *`  | user     | search contacts based on module code             | locate contact details without having to go through the entire list |
 | `* * *`  | user     | search contacts based on their name              | locate contact details without having to go through the entire list |
-| `* * *`  | user     | search contacts based on incomplete names        | locate contact details without remembering the full name            | 
+| `* * *`  | user     | search contacts based on incomplete names        | locate contact details without remembering the full name            |
 | `* * *`  | user     | search contacts based on incomplete phone number | locate contact details without remembering the full phone number    |
 | `* * *`  | user     | search contacts based on incomplete module names | locate contact details without remembering the full module name     |
 | `* * *`  | user     | see all available tags                           | know which tags to filter by                                        |
@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to adds a contact
-2.  AcademySource adds a contact 
+2.  AcademySource adds a contact
 
     Use case ends.
 
@@ -414,8 +414,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   3. Saving window preferences 
-   
+   3. Saving window preferences
+
    4. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    5. Re-launch the app by double-clicking the jar file.<br>
