@@ -17,24 +17,24 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            throwParseException();
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-
         String[] splitArgs = trimmedArgs.split("\\s+", 2);
-        if (splitArgs.length != 2) {
-            throwParseException();
+        // Ensure prefix and keywords exist
+        if (splitArgs.length < 2 || splitArgs[1].trim().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-
         String prefix = splitArgs[0].trim();
         String keyword = splitArgs[1].trim();
-
-        PersonContainsKeywordsPredicate.SearchField searchField = null;
-        switch (prefix) {
+        PersonContainsKeywordsPredicate.SearchField searchField;
+        switch (prefix.toLowerCase()) {
         case "/name":
             searchField = PersonContainsKeywordsPredicate.SearchField.NAME;
             break;
@@ -42,19 +42,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             searchField = PersonContainsKeywordsPredicate.SearchField.PHONE;
             break;
         default:
-            throwParseException();
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-
-        if (searchField == null) {
-            throwParseException();
-        }
-
         List<String> keywords = Arrays.asList(keyword.split("\\s+"));
         return new FindCommand(new PersonContainsKeywordsPredicate(searchField, keywords));
-    }
-
-    private void throwParseException() throws ParseException {
-        throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 }
