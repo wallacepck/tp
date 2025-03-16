@@ -1,6 +1,9 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -67,7 +70,6 @@ public class PersonCard extends UiPart<Region> {
         Image taTag = new Image(getClass().getResourceAsStream("/images/tag_TA.png"));
         Image profTag = new Image(getClass().getResourceAsStream("/images/tag_Prof.png"));
         tagType.setImage(Objects.equals(tag.getText(), "TA") ? taTag : profTag);
-      
         person.getModules().stream()
                 .sorted(Comparator.comparing(module -> module.toString()))
                 .forEach(module -> strModules.add(module.getModuleCode()));
