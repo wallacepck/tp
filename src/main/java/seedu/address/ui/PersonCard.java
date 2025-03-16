@@ -39,17 +39,19 @@ public class PersonCard extends UiPart<Region> {
     private Label address;
     @FXML
     private Label email;
-
     @FXML
     private Label tag;
     @FXML
     private ImageView tagType;
+    @FXML
+    private Label modules;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
+        Set<String> strModules = new HashSet<>();
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
@@ -65,5 +67,10 @@ public class PersonCard extends UiPart<Region> {
         Image taTag = new Image(getClass().getResourceAsStream("/images/tag_TA.png"));
         Image profTag = new Image(getClass().getResourceAsStream("/images/tag_Prof.png"));
         tagType.setImage(Objects.equals(tag.getText(), "TA") ? taTag : profTag);
+      
+        person.getModules().stream()
+                .sorted(Comparator.comparing(module -> module.toString()))
+                .forEach(module -> strModules.add(module.getModuleCode()));
+        modules.setText(String.join(", ", strModules));
     }
 }
