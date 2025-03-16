@@ -177,20 +177,24 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #65798a;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #416989;
 }
 
 .list-cell:filled:hover {
-    -fx-background-color: #416989;
+    -fx-background-color: #6c96b8;
     -fx-cursor: hand;
 }
 
 .list-cell .label {
     -fx-text-fill: white;
+}
+
+.list-cell:filled:selected {
+    -fx-background-insets: 0;
 }
 
 .cell_big_label {
@@ -279,16 +283,7 @@
 }
 
 /* Handles styling of tags */
-#tags {
-    -fx-hgap: 7;
-    -fx-vgap: 3;
-}
-
-#tags .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
+#tag {
+    -fx-text-fill: black;
     -fx-font-size: 11;
 }

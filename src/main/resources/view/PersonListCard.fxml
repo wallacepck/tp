@@ -5,12 +5,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<!--<?import javafx.scene.layout.FlowPane?>-->
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+
+<!--<?import javafx.scene.layout.FlowPane?>-->
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
@@ -29,11 +31,11 @@
           </minWidth>
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
-            <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/bookmark.png" />
-               </image>
-            </ImageView>
+        <Region HBox.hgrow="ALWAYS" />
+          <StackPane>
+              <ImageView fx:id="tagType" fitHeight="120.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0"/>
+              <Label fx:id="tag" text="\$tag" translateX="-17.0" />
+          </StackPane>
       </HBox>
 <!--      <FlowPane fx:id="tags" />-->
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
