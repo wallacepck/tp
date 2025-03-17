@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.ModuleRegistry.Module;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,17 +25,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Module> modules = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Module> modules) {
+        requireAllNonNull(name, phone, email, address, tags, modules);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.modules.addAll(modules);
     }
 
     public Name getName() {
@@ -51,6 +54,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Returns an immutable module set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Module> getModules() {
+        return Collections.unmodifiableSet(this.modules);
     }
 
     /**
@@ -94,13 +105,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && modules.equals(otherPerson.modules);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, modules);
     }
 
     @Override
@@ -111,6 +123,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("modules", modules)
                 .toString();
     }
 
