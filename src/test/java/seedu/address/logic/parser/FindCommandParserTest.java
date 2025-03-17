@@ -50,6 +50,34 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_validModuleArgs_returnsFindCommand() {
+        // Full module code
+        FindCommand expectedFindCommand =
+                new FindCommand(new PersonContainsKeywordsPredicate(
+                        PersonContainsKeywordsPredicate.SearchField.MODULE, Arrays.asList("CS2103T")
+                ));
+        assertParseSuccess(parser, "m/ CS2103T", expectedFindCommand);
+        // Partial module code
+        expectedFindCommand =
+                new FindCommand(new PersonContainsKeywordsPredicate(
+                        PersonContainsKeywordsPredicate.SearchField.MODULE, Arrays.asList("2103")
+                ));
+        assertParseSuccess(parser, "m/ 2103", expectedFindCommand);
+        // Multiple full module codes
+        expectedFindCommand =
+                new FindCommand(new PersonContainsKeywordsPredicate(
+                        PersonContainsKeywordsPredicate.SearchField.MODULE, Arrays.asList("CS2103T", "CS3230")
+                ));
+        assertParseSuccess(parser, "m/ CS2103T CS3230", expectedFindCommand);
+        // Multiple partial module codes
+        expectedFindCommand =
+                new FindCommand(new PersonContainsKeywordsPredicate(
+                        PersonContainsKeywordsPredicate.SearchField.MODULE, Arrays.asList("2101", "3230", "IS")
+                ));
+        assertParseSuccess(parser, "m/ 2101 3230 IS", expectedFindCommand);
+    }
+
+    @Test
     public void parse_validPhoneArgs_returnsFindCommand() {
         // Single phone number
         FindCommand expectedFindCommand =
@@ -58,9 +86,16 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "p/ 91234567", expectedFindCommand);
 
         // Multiple phone numbers
-        expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(
-                PersonContainsKeywordsPredicate.SearchField.PHONE, Arrays.asList("91234567", "98765432")));
+        expectedFindCommand =
+                new FindCommand(new PersonContainsKeywordsPredicate(
+                        PersonContainsKeywordsPredicate.SearchField.PHONE, Arrays.asList("91234567", "98765432")));
         assertParseSuccess(parser, "p/ 91234567 98765432", expectedFindCommand);
+
+
+        // Multiple partial phone numbers
+        expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(
+                PersonContainsKeywordsPredicate.SearchField.PHONE, Arrays.asList("9123", "4567", "5432")));
+        assertParseSuccess(parser, "p/ 9123 4567 5432", expectedFindCommand);
     }
 
     @Test
