@@ -22,7 +22,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         String trimmedArgs = args.trim();
         detectInvalidNumberOfPrefixes(trimmedArgs);
 
-        // Extract and validate prefix & keywords
         String[] splitArgs = extractPrefixAndKeywords(trimmedArgs);
         String prefix = splitArgs[0].trim();
         String keywordString = validateKeywordString(splitArgs[1].trim());
