@@ -8,14 +8,15 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.PersonBuilder;
 
 class PersonContainsKeywordsPredicateTest {
 
     @Test
     void test_nameContainsKeyword_returnsTrue() {
-        PersonContainsKeywordsPredicate.SearchField field
-                = PersonContainsKeywordsPredicate.SearchField.NAME;
+        PersonContainsKeywordsPredicate.SearchField field =
+                PersonContainsKeywordsPredicate.SearchField.NAME;
 
         // One keyword
         PersonContainsKeywordsPredicate predicate =
@@ -37,8 +38,8 @@ class PersonContainsKeywordsPredicateTest {
 
     @Test
     void test_nameDoesNotContainKeyword_returnsFalse() {
-        PersonContainsKeywordsPredicate.SearchField field
-                = PersonContainsKeywordsPredicate.SearchField.NAME;
+        PersonContainsKeywordsPredicate.SearchField field =
+                PersonContainsKeywordsPredicate.SearchField.NAME;
 
         // Zero keywords
         PersonContainsKeywordsPredicate predicate =
@@ -48,17 +49,18 @@ class PersonContainsKeywordsPredicateTest {
         predicate = new PersonContainsKeywordsPredicate(field, Arrays.asList("Carol"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
         // Keywords match phone, email and address, but does not match name
-        predicate = new PersonContainsKeywordsPredicate(field, Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345").withModule("CS2103T")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
+        predicate = new PersonContainsKeywordsPredicate(field,
+                Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
+                .withModule("CS2103T").withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 
     @Test
     void test_phoneContainsKeyword_returnsTrue() {
         PersonContainsKeywordsPredicate.SearchField field = PersonContainsKeywordsPredicate.SearchField.PHONE;
         // One keyword
-        PersonContainsKeywordsPredicate predicate
-                = new PersonContainsKeywordsPredicate(field, Collections.singletonList("91234567"));
+        PersonContainsKeywordsPredicate predicate =
+                new PersonContainsKeywordsPredicate(field, Collections.singletonList("91234567"));
         assertTrue(predicate.test(new PersonBuilder().withPhone("91234567").build()));
         // Partial matching keyword
         predicate = new PersonContainsKeywordsPredicate(field, List.of("1234"));
@@ -78,8 +80,8 @@ class PersonContainsKeywordsPredicateTest {
 
     @Test
     void test_moduleContainsKeyword_returnsTrue() {
-        PersonContainsKeywordsPredicate.SearchField field
-                = PersonContainsKeywordsPredicate.SearchField.MODULE;
+        PersonContainsKeywordsPredicate.SearchField field =
+                PersonContainsKeywordsPredicate.SearchField.MODULE;
         // Fully matched
         PersonContainsKeywordsPredicate predicate =
                 new PersonContainsKeywordsPredicate(field, Collections.singletonList("CS2103T"));
@@ -108,7 +110,8 @@ class PersonContainsKeywordsPredicateTest {
         assertTrue(predicate1.equals(predicate2));
 
         PersonContainsKeywordsPredicate predicate3 =
-                new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
+                new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.PHONE,
+                        List.of("91234567"));
         assertFalse(predicate1.equals(predicate3));
     }
 }

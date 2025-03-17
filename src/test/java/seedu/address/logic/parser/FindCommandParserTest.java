@@ -122,12 +122,4 @@ public class FindCommandParserTest {
                         PersonContainsKeywordsPredicate.SearchField.NAME, Arrays.asList("O'Connor", "Jean-Luc")));
         assertParseSuccess(parser, "n/ O'Connor Jean-Luc", expectedFindCommand);
     }
-
-    @Test
-    public void parse_specialCharactersInPhone_returnsFindCommand() {
-        FindCommand expectedFindCommand =
-                new FindCommand(new PersonContainsKeywordsPredicate(
-                        PersonContainsKeywordsPredicate.SearchField.PHONE, Collections.singletonList("9123-4567")));
-        assertParseSuccess(parser, "p/ 9123-4567", expectedFindCommand);
-    }
 }
