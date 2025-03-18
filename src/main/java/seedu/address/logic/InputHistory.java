@@ -49,8 +49,7 @@ public class InputHistory {
 
     /**
      * Shifts the history to the command before {@code commandText} was entered, then adds {@code commandText}
-     * to history. If the history is over {@link InputHistory.MAX_SIZE}, older entries are deleted until history
-     * is {@link InputHistory.MAX_SIZE} again.
+     * to history. If the history is over {@link InputHistory.MAX_SIZE}, the oldest entry is deleted.
      *
      * @param commandText The new command to add to history
      */
