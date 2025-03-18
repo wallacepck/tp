@@ -32,9 +32,9 @@
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
         <Region HBox.hgrow="ALWAYS" />
-          <StackPane>
+          <StackPane fx:id="tag">
               <ImageView fx:id="tagType" fitHeight="120.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0"/>
-              <Label fx:id="tag" text="\$tag" translateX="-17.0" />
+              <Label fx:id="tagLabel" text="\$tag" translateX="-17.0" />
           </StackPane>
       </HBox>
       <Label fx:id="modules" />

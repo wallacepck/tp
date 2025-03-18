@@ -283,7 +283,7 @@
 }
 
 /* Handles styling of tags */
-#tag {
+#tagLabel {
     -fx-text-fill: black;
-    -fx-font-size: 11;
+    -fx-font-size: 14;
 }
