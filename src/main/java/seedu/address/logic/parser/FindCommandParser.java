@@ -13,7 +13,6 @@ import seedu.address.model.person.PersonContainsKeywordsPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -21,31 +20,83 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        detectInvalidNumberOfPrefixes(trimmedArgs);
+
+        String[] splitArgs = extractPrefixAndKeywords(trimmedArgs);
+        String prefix = splitArgs[0].trim();
+        String keywordString = validateKeywordString(splitArgs[1].trim());
+
+        PersonContainsKeywordsPredicate.SearchField searchField = getSearchField(prefix);
+        List<String> keywords = Arrays.asList(keywordString.split("\\s+"));
+        return new FindCommand(new PersonContainsKeywordsPredicate(searchField, keywords));
+    }
+
+    /**
+     * Ensures only one valid prefix is present.
+     * @throws ParseException if multiple or missing prefixes are found.
+     */
+    private void detectInvalidNumberOfPrefixes(String args) throws ParseException {
+        if (args.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+
+        long invalidPrefixCount = Arrays.stream(args.split("\\s+"))
+                .map(String::toLowerCase)
+                .filter(token -> token.matches("^[a-z]+/$"))
+                .filter(token -> !token.matches("^(n/|m/|p/)$"))
+                .count();
+        if (invalidPrefixCount > 0) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        long prefixCount = Arrays.stream(args.split("\\s+"))
+                .map(String::toLowerCase)
+                .filter(token -> token.matches("^(n/|p/|m/)$"))
+                .count();
+        if (prefixCount != 1) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+    }
+
+    /**
+     * Extracts the prefix and keyword string from the input.
+     * @throws ParseException if the format is incorrect.
+     */
+    private String[] extractPrefixAndKeywords(String trimmedArgs) throws ParseException {
         String[] splitArgs = trimmedArgs.split("\\s+", 2);
-        // Ensure prefix and keywords exist
         if (splitArgs.length < 2 || splitArgs[1].trim().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        String prefix = splitArgs[0].trim();
-        String keyword = splitArgs[1].trim();
-        PersonContainsKeywordsPredicate.SearchField searchField;
-        switch (prefix.toLowerCase()) {
-        case "n/":
-            searchField = PersonContainsKeywordsPredicate.SearchField.NAME;
-            break;
-        case "p/":
-            searchField = PersonContainsKeywordsPredicate.SearchField.PHONE;
-            break;
-        default:
+        return splitArgs;
+    }
+
+    /**
+     * Ensures that the keyword string is not empty.
+     * @throws ParseException if the keyword string is empty.
+     */
+    private String validateKeywordString(String keywordString) throws ParseException {
+        if (keywordString.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        List<String> keywords = Arrays.asList(keyword.split("\\s+"));
-        return new FindCommand(new PersonContainsKeywordsPredicate(searchField, keywords));
+        return keywordString;
+    }
+
+    /**
+     * Converts a prefix string into the corresponding SearchField.
+     * @throws ParseException if the prefix is invalid.
+     */
+    private PersonContainsKeywordsPredicate.SearchField getSearchField(String prefix) throws ParseException {
+        return switch (prefix.toLowerCase()) {
+        case "n/" -> PersonContainsKeywordsPredicate.SearchField.NAME;
+        case "p/" -> PersonContainsKeywordsPredicate.SearchField.PHONE;
+        case "m/" -> PersonContainsKeywordsPredicate.SearchField.MODULE;
+        default -> throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE));
+        };
     }
 }
