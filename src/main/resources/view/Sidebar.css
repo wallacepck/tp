@@ -4,16 +4,15 @@
     -fx-border-color: transparent;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-text-fill: white;
+    -fx-background-radius: 10;
 }
 
 .button:hover {
     -fx-cursor: hand;
-    -fx-background-radius: 10;
 }
 
 .button:focused {
     -fx-background-color: #416989;
-    -fx-background-radius: 10;
     -fx-text-fill: white;
     -fx-border-color: transparent;
 }

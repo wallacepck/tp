@@ -40,8 +40,10 @@ public class Sidebar extends UiPart<Region> {
         moduleButton.requestFocus();
         selectedButton = moduleButton; // set module button as default on
         moduleButton.setOnAction(event -> {
-            selectedButton = moduleButton;
             switchableWindow.setSwitchWindowPlaceholder("Modules");
+            setButtonOnClick(moduleButton);
+            selectedButton = moduleButton;
+
         });
 
         Platform.runLater(() -> moduleButton.requestFocus());
@@ -50,8 +52,9 @@ public class Sidebar extends UiPart<Region> {
         setButtonImage(contactButton, "/images/phone-icon.png");
         contactButton.setText("Contacts");
         contactButton.setOnAction(event -> {
-            selectedButton = contactButton;
             switchableWindow.setSwitchWindowPlaceholder("Contacts");
+            setButtonOnClick(contactButton);
+            selectedButton = contactButton;
         });
     }
 
@@ -77,5 +80,16 @@ public class Sidebar extends UiPart<Region> {
      */
     public void onFolderClick() {
         selectedButton = contactButton;
+    }
+
+    /**
+     * Handles the change of style in buttons when it is clicked.
+     */
+    public void setButtonOnClick(Button button) {
+        if (selectedButton == button) {
+            return;
+        }
+        selectedButton.setStyle("-fx-background-color: derive(#3c3c3c, 20%);");
+        button.setStyle("-fx-background-color: #416989;");
     }
 }
