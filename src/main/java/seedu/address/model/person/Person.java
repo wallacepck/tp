@@ -23,7 +23,6 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Module> modules = new HashSet<>();
     private final Boolean isFavourite;
@@ -31,24 +30,22 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Module> modules) {
-        requireAllNonNull(name, phone, email, address, tags, modules);
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags, Set<Module> modules) {
+        requireAllNonNull(name, phone, email, tags, modules);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
         this.modules.addAll(modules);
         this.isFavourite = false;
     }
 
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags,
                   Set<Module> modules, Boolean isFavourite) {
-        requireAllNonNull(name, phone, email, address, tags, modules, isFavourite);
+        requireAllNonNull(name, phone, email, tags, modules, isFavourite);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
         this.modules.addAll(modules);
         this.isFavourite = isFavourite;
@@ -66,9 +63,6 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
     public boolean getIsFavourite() {
         return isFavourite;
     }
@@ -109,7 +103,7 @@ public class Person {
      */
     public Person toggleFav() {
         Person toggled = new Person(this.getName(), this.getPhone(),
-                this.getEmail(), this.getAddress(), this.getTags(), this.getModules(), !this.isFavourite);
+                this.getEmail(), this.getTags(), this.getModules(), !this.isFavourite);
         return toggled;
     }
 
@@ -132,7 +126,6 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && modules.equals(otherPerson.modules)
                 && isFavourite == (otherPerson.isFavourite);
@@ -140,8 +133,9 @@ public class Person {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, modules, isFavourite);
+        // use this method for custom fields hashing instead of implementing your own.
+        return Objects.hash(name, phone, email, tags, modules, isFavourite);
+
     }
 
     @Override
@@ -150,7 +144,6 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
                 .add("tags", tags)
                 .add("modules", modules)
                 .add("isFavourite", isFavourite)

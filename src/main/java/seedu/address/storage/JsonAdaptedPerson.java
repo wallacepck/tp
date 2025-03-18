@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleRegistry;
 import seedu.address.model.person.ModuleRegistry.Module;
@@ -29,7 +28,6 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<String> modules = new ArrayList<>();
     private final Boolean isFavourite;
@@ -39,13 +37,13 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("email") String email,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("modules") List<String> modules,
             @JsonProperty("isFavourite") Boolean isFavourite) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -60,7 +58,6 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -113,15 +110,6 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-
-        final Address modelAddress = new Address(address);
-
         if (isFavourite == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "is Favourite"));
         }
@@ -130,7 +118,6 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final Set<Module> modelModules = new HashSet<>(personModules);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelModules, modelIsFavourite);
+        return new Person(modelName, modelPhone, modelEmail, modelTags, modelModules, modelIsFavourite);
     }
-
 }

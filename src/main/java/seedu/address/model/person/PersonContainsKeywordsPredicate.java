@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -18,10 +17,18 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
      * Represents the search field type for finding persons.
      */
     public enum SearchField {
-        /** Search by name field */
+        /**
+         * Search by name field
+         */
         NAME,
-        /** Search by phone number field */
-        PHONE
+        /**
+         * Search by phone number field
+         */
+        PHONE,
+        /**
+         * Search by module
+         */
+        MODULE
     }
 
     /**
@@ -37,16 +44,25 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        switch (field) {
-        case NAME:
-            return keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
-        case PHONE:
-            return keywords.stream()
-                    .anyMatch(keyword -> person.getPhone().value.contains(keyword));
-        default:
-            return false;
-        }
+        return switch (field) {
+        case NAME -> keywords.stream()
+                .anyMatch(keyword -> person
+                        .getName()
+                        .fullName
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()));
+        case PHONE -> keywords.stream()
+                .anyMatch(keyword -> person
+                        .getPhone()
+                        .value
+                        .contains(keyword));
+        case MODULE -> keywords.stream()
+                .anyMatch(keyword -> person.getModules().stream()
+                        .anyMatch(module -> module
+                                .getModuleCode()
+                                .toLowerCase()
+                                .contains(keyword.toLowerCase())));
+        };
     }
 
     @Override

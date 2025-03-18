@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
@@ -57,7 +59,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_emptyInput_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonContainsKeywordsPredicate predicate =
                 preparePredicate(" ", PersonContainsKeywordsPredicate.SearchField.NAME);
@@ -76,6 +78,61 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_partialPhoneSearch_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        PersonContainsKeywordsPredicate predicate =
+                preparePredicate("9876", PersonContainsKeywordsPredicate.SearchField.PHONE);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(BENSON), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_caseInsensitiveSearch_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        PersonContainsKeywordsPredicate predicate =
+                preparePredicate("alice benson", PersonContainsKeywordsPredicate.SearchField.NAME);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_phoneSearch_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        PersonContainsKeywordsPredicate predicate =
+                preparePredicate("98765432", PersonContainsKeywordsPredicate.SearchField.PHONE);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(BENSON), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_moduleSearch_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        PersonContainsKeywordsPredicate predicate =
+                preparePredicate("CS3230", PersonContainsKeywordsPredicate.SearchField.MODULE);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_partialModuleSearch_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        PersonContainsKeywordsPredicate predicate =
+                preparePredicate("3230", PersonContainsKeywordsPredicate.SearchField.MODULE);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(FIONA), model.getFilteredPersonList());
     }
 
     @Test
