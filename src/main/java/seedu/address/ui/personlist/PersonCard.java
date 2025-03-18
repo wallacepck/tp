@@ -1,10 +1,9 @@
-package seedu.address.ui;
+package seedu.address.ui.personlist;
 
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.ui.UiPart;
 
 /**
  * An UI component that displays information of a {@code Person}.
