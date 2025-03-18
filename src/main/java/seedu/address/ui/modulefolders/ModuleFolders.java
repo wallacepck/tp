@@ -14,7 +14,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
-import seedu.address.ui.FunctionalGUI;
+import seedu.address.ui.FunctionalGui;
 import seedu.address.ui.UiPart;
 
 /**
@@ -36,7 +36,7 @@ public class ModuleFolders extends UiPart<Region> {
      *
      * @param personList The list of persons containing module data.
      */
-    public ModuleFolders(ObservableList<Person> personList, FunctionalGUI guiFunction) {
+    public ModuleFolders(ObservableList<Person> personList, FunctionalGui guiFunction) {
         super(FXML);
         Set<String> moduleStringSet = new HashSet<>();
 
@@ -55,7 +55,7 @@ public class ModuleFolders extends UiPart<Region> {
             folderButton.setGraphic(folderImageView);
             folderButton.setTranslateX(20.0);
             folderButton.setOnAction(e -> {
-                guiFunction.filterListByGUI(moduleString);
+                guiFunction.filterListByGui(moduleString);
                 guiFunction.setSwitchWindowPlaceholder("Contacts");
             });
 

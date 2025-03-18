@@ -52,5 +52,5 @@ public interface Logic {
     /**
      * Allows logic to update filtered task in model using GUI.
      */
-    void updatePredicateViaGUI(Predicate<Person> predicate);
+    void updatePredicateViaGui(Predicate<Person> predicate);
 }

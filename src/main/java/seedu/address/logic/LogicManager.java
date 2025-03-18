@@ -88,7 +88,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void updatePredicateViaGUI(Predicate<Person> predicate) {
+    public void updatePredicateViaGui(Predicate<Person> predicate) {
         model.updateFilteredPersonList(predicate);
     }
 }

@@ -29,7 +29,7 @@ import seedu.address.ui.topnav.HelpWindow;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> implements FunctionalGUI {
+public class MainWindow extends UiPart<Stage> implements FunctionalGui {
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -163,10 +163,12 @@ public class MainWindow extends UiPart<Stage> implements FunctionalGUI {
     }
 
     @Override
-    public void filterListByGUI(String keyword) {
+    public void filterListByGui(String keyword) {
         List<String> moduleCodeList = new ArrayList<>();
         moduleCodeList.add(keyword);
-        logic.updatePredicateViaGUI(new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.MODULE, moduleCodeList));
+        logic.updatePredicateViaGui(
+                new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.MODULE,
+                        moduleCodeList));
     }
 
     /**

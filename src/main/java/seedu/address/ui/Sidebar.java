@@ -29,9 +29,9 @@ public class Sidebar extends UiPart<Region> {
      * Constructs a Sidebar component.
      * Initializes buttons and their corresponding event handlers.
      *
-     * @param functionalGUI Any UI component that implements SwitchableWindow interface.
+     * @param functionalGui Any UI component that implements SwitchableWindow interface.
      */
-    public Sidebar(FunctionalGUI functionalGUI) {
+    public Sidebar(FunctionalGui functionalGui) {
         super(FXML);
 
         // Set Module button
@@ -40,7 +40,7 @@ public class Sidebar extends UiPart<Region> {
         moduleButton.requestFocus();
         selectedButton = moduleButton; // set module button as default on
         moduleButton.setOnAction(event -> {
-            functionalGUI.setSwitchWindowPlaceholder("Modules");
+            functionalGui.setSwitchWindowPlaceholder("Modules");
             setButtonOnClick(moduleButton);
         });
 
@@ -50,7 +50,7 @@ public class Sidebar extends UiPart<Region> {
         setButtonImage(contactButton, "/images/phone-icon.png");
         contactButton.setText("Contacts");
         contactButton.setOnAction(event -> {
-            functionalGUI.setSwitchWindowPlaceholder("Contacts");
+            functionalGui.setSwitchWindowPlaceholder("Contacts");
             setButtonOnClick(contactButton);
         });
     }
