@@ -26,6 +26,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Module> modules = new HashSet<>();
+    private final Boolean isFavourite;
 
     /**
      * Every field must be present and not null.
@@ -38,6 +39,19 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.modules.addAll(modules);
+        this.isFavourite = false;
+    }
+
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  Set<Module> modules, Boolean isFavourite) {
+        requireAllNonNull(name, phone, email, address, tags, modules, isFavourite);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.modules.addAll(modules);
+        this.isFavourite = isFavourite;
     }
 
     public Name getName() {
@@ -54,6 +68,9 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+    public boolean getIsFavourite() {
+        return isFavourite;
     }
 
     /**
@@ -86,6 +103,17 @@ public class Person {
     }
 
     /**
+     * Creates a new person with the exact same attribute as the current person, except
+     * isFavourite is toggled.
+     * @return A new person object that is created.
+     */
+    public Person toggleFav() {
+        Person toggled = new Person(this.getName(), this.getPhone(),
+                this.getEmail(), this.getAddress(), this.getTags(), this.getModules(), !this.isFavourite);
+        return toggled;
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -106,13 +134,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && modules.equals(otherPerson.modules);
+                && modules.equals(otherPerson.modules)
+                && isFavourite == (otherPerson.isFavourite);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, modules);
+        return Objects.hash(name, phone, email, address, tags, modules, isFavourite);
     }
 
     @Override
@@ -124,6 +153,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("modules", modules)
+                .add("isFavourite", isFavourite)
                 .toString();
     }
 
