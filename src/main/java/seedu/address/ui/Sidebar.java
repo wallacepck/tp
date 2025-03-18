@@ -42,8 +42,6 @@ public class Sidebar extends UiPart<Region> {
         moduleButton.setOnAction(event -> {
             switchableWindow.setSwitchWindowPlaceholder("Modules");
             setButtonOnClick(moduleButton);
-            selectedButton = moduleButton;
-
         });
 
         Platform.runLater(() -> moduleButton.requestFocus());
@@ -54,7 +52,6 @@ public class Sidebar extends UiPart<Region> {
         contactButton.setOnAction(event -> {
             switchableWindow.setSwitchWindowPlaceholder("Contacts");
             setButtonOnClick(contactButton);
-            selectedButton = contactButton;
         });
     }
 
@@ -91,5 +88,6 @@ public class Sidebar extends UiPart<Region> {
         }
         selectedButton.setStyle("-fx-background-color: derive(#3c3c3c, 20%);");
         button.setStyle("-fx-background-color: #416989;");
+        selectedButton = button;
     }
 }
