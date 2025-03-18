@@ -8,11 +8,13 @@ import java.util.Stack;
  * Manages input history of the command line
  */
 public class InputHistory {
+    public static final int MAX_SIZE = 16;
     private final Deque<String> back;
     private final Stack<String> front;
 
-    public static final int MAX_SIZE = 16;
-
+    /**
+     * Creates a {@code InputHistory} with blank history
+     */
     public InputHistory() {
         this.back = new LinkedList<>();
         this.front = new Stack<>();
@@ -64,6 +66,11 @@ public class InputHistory {
         }
     }
 
+    /**
+     * Returns a proxy class for easy navigation of the history
+     *
+     * @return The proxy
+     */
     public HistoryNavigator getNavigator() {
         return new HistoryNavigator() {
             @Override

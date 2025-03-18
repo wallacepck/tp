@@ -1,14 +1,10 @@
 package seedu.address.ui;
 
-import java.util.function.Function;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
-import seedu.address.logic.InputHistory;
 import seedu.address.logic.InputHistory.HistoryNavigator;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -37,7 +33,6 @@ public class CommandBox extends UiPart<Region> {
         this.historyNavigator = historyNavigator;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
-//        commandTextField.setOnKeyPressed(event -> handleKeyPress(event));
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, this::handleKeyPress);
     }
 
@@ -69,15 +64,15 @@ public class CommandBox extends UiPart<Region> {
         }
 
         String history = switch (keyEvent.getCode()) {
-            case UP -> {
-                keyEvent.consume();
-                yield historyNavigator.backward();
-            }
-            case DOWN -> {
-                keyEvent.consume();
-                yield historyNavigator.forward();
-            }
-            default -> null;
+        case UP -> {
+            keyEvent.consume();
+            yield historyNavigator.backward();
+        }
+        case DOWN -> {
+            keyEvent.consume();
+            yield historyNavigator.forward();
+        }
+        default -> null;
         };
         if (history != null) {
             commandTextField.setText(history);
