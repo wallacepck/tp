@@ -53,6 +53,7 @@ class PersonContainsKeywordsPredicateTest {
                 Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withModule("CS2103T").withEmail("alice@email.com").withAddress("Main Street").build()));
+                .withModule("CS2103T").withEmail("alice@email.com").build()));
     }
 
     @Test
