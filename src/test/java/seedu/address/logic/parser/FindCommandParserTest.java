@@ -36,7 +36,16 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "a/ Blk 123 Street",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
 
+    @Test
+    public void parse_multiplePrefixes_throwsParseException() {
+        assertParseFailure(parser, "n/ Darren e/ fiona@test.com",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "n/ Darren n/ Fiona",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "n/ Darren p/ 91234567",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -54,13 +63,13 @@ public class FindCommandParserTest {
         // Full module code
         FindCommand expectedFindCommand =
                 new FindCommand(new PersonContainsKeywordsPredicate(
-                        PersonContainsKeywordsPredicate.SearchField.MODULE, Arrays.asList("CS2103T")
+                        PersonContainsKeywordsPredicate.SearchField.MODULE, Collections.singletonList("CS2103T")
                 ));
         assertParseSuccess(parser, "m/ CS2103T", expectedFindCommand);
         // Partial module code
         expectedFindCommand =
                 new FindCommand(new PersonContainsKeywordsPredicate(
-                        PersonContainsKeywordsPredicate.SearchField.MODULE, Arrays.asList("2103")
+                        PersonContainsKeywordsPredicate.SearchField.MODULE, Collections.singletonList("2103")
                 ));
         assertParseSuccess(parser, "m/ 2103", expectedFindCommand);
         // Multiple full module codes
