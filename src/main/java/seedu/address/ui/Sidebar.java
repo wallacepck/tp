@@ -29,9 +29,9 @@ public class Sidebar extends UiPart<Region> {
      * Constructs a Sidebar component.
      * Initializes buttons and their corresponding event handlers.
      *
-     * @param switchableWindow Any UI component that implements SwitchableWindow interface.
+     * @param functionalGUI Any UI component that implements SwitchableWindow interface.
      */
-    public Sidebar(SwitchableWindow switchableWindow) {
+    public Sidebar(FunctionalGUI functionalGUI) {
         super(FXML);
 
         // Set Module button
@@ -40,7 +40,7 @@ public class Sidebar extends UiPart<Region> {
         moduleButton.requestFocus();
         selectedButton = moduleButton; // set module button as default on
         moduleButton.setOnAction(event -> {
-            switchableWindow.setSwitchWindowPlaceholder("Modules");
+            functionalGUI.setSwitchWindowPlaceholder("Modules");
             setButtonOnClick(moduleButton);
         });
 
@@ -50,7 +50,7 @@ public class Sidebar extends UiPart<Region> {
         setButtonImage(contactButton, "/images/phone-icon.png");
         contactButton.setText("Contacts");
         contactButton.setOnAction(event -> {
-            switchableWindow.setSwitchWindowPlaceholder("Contacts");
+            functionalGUI.setSwitchWindowPlaceholder("Contacts");
             setButtonOnClick(contactButton);
         });
     }
@@ -72,15 +72,8 @@ public class Sidebar extends UiPart<Region> {
     }
 
     /**
-     * Handles the event when the module folder is clicked.
-     * Updates the selected button to the contact button.
-     */
-    public void onFolderClick() {
-        selectedButton = contactButton;
-    }
-
-    /**
      * Handles the change of style in buttons when it is clicked.
+     * @param button the new button press event
      */
     public void setButtonOnClick(Button button) {
         if (selectedButton == button) {
@@ -89,5 +82,22 @@ public class Sidebar extends UiPart<Region> {
         selectedButton.setStyle("-fx-background-color: derive(#3c3c3c, 20%);");
         button.setStyle("-fx-background-color: #416989;");
         selectedButton = button;
+    }
+
+    public void setButtonOnClick(String buttonName) {
+        if (!buttonName.equals("Modules") && !buttonName.equals("Contacts")) {
+            return;
+        } else if (buttonName.equals(selectedButton.getText())) {
+            return;
+        }
+
+        selectedButton.setStyle("-fx-background-color: derive(#3c3c3c, 20%);");
+        if (buttonName.equals("Modules")) {
+            moduleButton.setStyle("-fx-background-color: #416989;");
+            selectedButton = moduleButton;
+        } else {
+            contactButton.setStyle("-fx-background-color: #416989;");
+            selectedButton = contactButton;
+        }
     }
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -47,4 +48,9 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Allows logic to update filtered task in model using GUI.
+     */
+    void updatePredicateViaGUI(Predicate<Person> predicate);
 }

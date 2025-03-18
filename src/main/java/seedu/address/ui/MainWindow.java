@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -18,6 +20,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.ui.modulefolders.ModuleFolders;
 import seedu.address.ui.personlist.PersonListPanel;
 import seedu.address.ui.topnav.HelpWindow;
@@ -26,7 +29,7 @@ import seedu.address.ui.topnav.HelpWindow;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> implements SwitchableWindow {
+public class MainWindow extends UiPart<Stage> implements FunctionalGUI {
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -39,8 +42,8 @@ public class MainWindow extends UiPart<Stage> implements SwitchableWindow {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
     private ModuleFolders moduleFolders;
+    private Sidebar sidebar;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -132,12 +135,12 @@ public class MainWindow extends UiPart<Stage> implements SwitchableWindow {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        Sidebar sidebar = new Sidebar(this);
+        sidebar = new Sidebar(this);
         sidebarPlaceholder.getChildren().add(sidebar.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
 
-        moduleFolders = new ModuleFolders(logic.getFilteredPersonList());
+        moduleFolders = new ModuleFolders(logic.getFilteredPersonList(), this);
 
         setSwitchWindowPlaceholder("Modules");
     }
@@ -146,15 +149,24 @@ public class MainWindow extends UiPart<Stage> implements SwitchableWindow {
     public void setSwitchWindowPlaceholder(String selectedButton) {
 
         boolean isValidState = selectedButton.equals("Contacts") || selectedButton.equals("Modules");
-        assert isValidState : "selectedButton may have stored an unknown value or it is null.";
+        assert isValidState : "an invalid button state is passed into selectedButton.";
 
         switchWindowPlaceholder.getChildren().clear();
 
         if (selectedButton.equals("Modules")) {
             switchWindowPlaceholder.getChildren().add(moduleFolders.getRoot());
+            sidebar.setButtonOnClick("Modules");
         } else {
             switchWindowPlaceholder.getChildren().add(personListPanel.getRoot());
+            sidebar.setButtonOnClick("Contacts");
         }
+    }
+
+    @Override
+    public void filterListByGUI(String keyword) {
+        List<String> moduleCodeList = new ArrayList<>();
+        moduleCodeList.add(keyword);
+        logic.updatePredicateViaGUI(new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.MODULE, moduleCodeList));
     }
 
     /**
