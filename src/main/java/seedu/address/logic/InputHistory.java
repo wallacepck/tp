@@ -28,7 +28,11 @@ public class InputHistory {
      */
     public String navigateBackward() {
         if (back.isEmpty()) {
-            return null;
+            if (front.isEmpty()) {
+                return null;
+            } else {
+                return front.peek();
+            }
         } else {
             return front.push(back.removeFirst());
         }
@@ -42,7 +46,11 @@ public class InputHistory {
      */
     public String navigateForward() {
         if (front.size() < 2) {
-            return null;
+            if (front.isEmpty()) {
+                return null;
+            } else {
+                return front.peek();
+            }
         } else {
             back.push(front.pop());
             return front.peek();
