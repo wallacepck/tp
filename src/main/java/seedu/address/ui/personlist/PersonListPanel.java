@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.personlist;
 
 import java.util.logging.Logger;
 
@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.ui.UiPart;
 
 /**
  * Panel containing the list of persons.
@@ -29,6 +30,7 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setCellFactory(listView -> new PersonListViewCell());
 
         /* Disable until tag drifting bug is fixed. */
+        /* TODO: This causes NullPointerException but does not crash application. Fix asap.*/
         personListView.setSelectionModel(null);
 
     }

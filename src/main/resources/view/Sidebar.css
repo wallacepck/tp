@@ -1,18 +1,18 @@
 /* Handles styling of buttons */
 .button {
-    -fx-background-color: #416989;
+    -fx-background-color: derive(#3c3c3c, 20%);
     -fx-border-color: transparent;
-    -fx-background-radius: 10;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-text-fill: white;
+    -fx-background-radius: 10;
 }
 
 .button:hover {
-    -fx-background-color: #416989;
-    -fx-cursor: pointer;
+    -fx-cursor: hand;
 }
 
 .button:focused {
-    -fx-border-color: transparent;
+    -fx-background-color: #416989;
     -fx-text-fill: white;
+    -fx-border-color: transparent;
 }
