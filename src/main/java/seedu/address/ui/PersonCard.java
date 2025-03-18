@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -46,12 +48,15 @@ public class PersonCard extends UiPart<Region> {
     private ImageView tagType;
     @FXML
     private Label modules;
+    @FXML
+    private ImageView favourite;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
+        BooleanProperty isFavourite = new SimpleBooleanProperty(person.getIsFavourite());
         Set<String> strModules = new HashSet<>();
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -67,6 +72,11 @@ public class PersonCard extends UiPart<Region> {
         Image taTag = new Image(getClass().getResourceAsStream("/images/tag_TA.png"));
         Image profTag = new Image(getClass().getResourceAsStream("/images/tag_Prof.png"));
         tagType.setImage(Objects.equals(tag.getText(), "TA") ? taTag : profTag);
+
+        Image favouriteStar = new Image(getClass().getResourceAsStream("/images/favourite_star.png"));
+        favourite.setImage(favouriteStar);
+        favourite.visibleProperty().bind(isFavourite);
+
         person.getModules().stream()
                 .sorted(Comparator.comparing(module -> module.toString()))
                 .forEach(module -> strModules.add(module.getModuleCode()));

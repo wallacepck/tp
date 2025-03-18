@@ -31,6 +31,7 @@
           </minWidth>
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <ImageView fx:id="favourite" fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true" translateX="10.0"/>
         <Region HBox.hgrow="ALWAYS" />
           <StackPane>
               <ImageView fx:id="tagType" fitHeight="120.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0"/>

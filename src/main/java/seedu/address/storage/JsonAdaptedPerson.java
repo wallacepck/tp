@@ -30,6 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<String> modules = new ArrayList<>();
+    private final Boolean isFavourite;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -37,7 +38,9 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("modules") List<String> modules) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("modules") List<String> modules,
+            @JsonProperty("isFavourite") Boolean isFavourite) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,6 +48,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.modules.addAll(modules);
+        this.isFavourite = isFavourite;
     }
 
     /**
@@ -60,6 +64,7 @@ class JsonAdaptedPerson {
         modules.addAll(source.getModules().stream()
                 .map(Module::getModuleCode)
                 .collect(Collectors.toList()));
+        isFavourite = source.getIsFavourite();
     }
 
     /**
@@ -105,10 +110,14 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (isFavourite == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "is Favourite"));
+        }
+        final Boolean modelIsFavourite = isFavourite;
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final Set<Module> modelModules = new HashSet<>(personModules);
-        return new Person(modelName, modelPhone, modelEmail, modelTags, modelModules);
+        return new Person(modelName, modelPhone, modelEmail, modelTags, modelModules, modelIsFavourite);
     }
-
 }
