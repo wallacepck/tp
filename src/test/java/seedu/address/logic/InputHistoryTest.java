@@ -13,6 +13,7 @@ public class InputHistoryTest {
     public void navigate_emptyHistory_returnsNull() {
         InputHistory history = new InputHistory();
         assertNull(history.navigateBackward());
+        assertNull(history.navigateForward());
     }
 
     @Test
@@ -47,5 +48,18 @@ public class InputHistoryTest {
         InputHistory.HistoryNavigator navigator = history.getNavigator();
         assertEquals(TEST_COMMAND, navigator.backward());
         assertEquals(TEST_COMMAND_2, navigator.forward());
+    }
+
+    @Test
+    public void enterCommand_overSize_dropsLast() {
+        InputHistory history = new InputHistory();
+        for (int i = 0; i < InputHistory.MAX_SIZE + 1; i++) {
+            history.enterCommand(String.format("%d", i));
+        }
+        String result = "";
+        for (int i = 0; i < InputHistory.MAX_SIZE + 1; i++) {
+            result = history.navigateBackward();
+        }
+        assertEquals("1", result);
     }
 }
