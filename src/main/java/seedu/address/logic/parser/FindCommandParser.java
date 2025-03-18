@@ -40,11 +40,21 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        // Ensure only one prefix exists
-        long prefixCount = Arrays.stream(args.split("\\s+"))
-                .filter(token -> token.matches("^(n/|p/|m/|N/|P/|M/)$"))
+
+        long invalidPrefixCount = Arrays.stream(args.split("\\s+"))
+                .map(String::toLowerCase)
+                .filter(token -> token.matches("^[a-z]+/$"))
+                .filter(token -> !token.matches("^(n/|m/|p/)$"))
                 .count();
-        // If multiple prefix exists, invalid prefix used, or no specified prefix
+        if (invalidPrefixCount > 0) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        long prefixCount = Arrays.stream(args.split("\\s+"))
+                .map(String::toLowerCase)
+                .filter(token -> token.matches("^(n/|p/|m/)$"))
+                .count();
         if (prefixCount != 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
