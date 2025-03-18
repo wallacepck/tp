@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,14 +20,14 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
 public class FavCommandTest {
-    FavCommand favFirst = new FavCommand(INDEX_FIRST_PERSON);
-    FavCommand sameFavFirst = new FavCommand(INDEX_FIRST_PERSON);
-    FavCommand favSecond = new FavCommand(INDEX_SECOND_PERSON);
+    private FavCommand favFirst = new FavCommand(INDEX_FIRST_PERSON);
+    private FavCommand sameFavFirst = new FavCommand(INDEX_FIRST_PERSON);
+    private FavCommand favSecond = new FavCommand(INDEX_SECOND_PERSON);
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
 
     @Test
-    public void execute_ValidIndex_success() throws CommandException {
+    public void execute_validIndex_success() throws CommandException {
         //marks the person first.
         Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person markedPerson = personToMark.toggleFav();

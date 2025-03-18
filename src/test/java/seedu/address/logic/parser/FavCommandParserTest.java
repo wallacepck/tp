@@ -6,10 +6,11 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.FavCommand;
 
 public class FavCommandParserTest {
-    FavCommandParser parser = new FavCommandParser();
+    private FavCommandParser parser = new FavCommandParser();
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new FavCommand(INDEX_FIRST_PERSON));
