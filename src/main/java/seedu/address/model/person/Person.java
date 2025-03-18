@@ -40,6 +40,10 @@ public class Person {
         this.isFavourite = false;
     }
 
+    /**
+     * Every field must be present and not null.
+     * Allows setting of isFavourite when constructing new Person object.
+     */
     public Person(Name name, Phone phone, Email email, Set<Tag> tags,
                   Set<Module> modules, Boolean isFavourite) {
         requireAllNonNull(name, phone, email, tags, modules, isFavourite);
