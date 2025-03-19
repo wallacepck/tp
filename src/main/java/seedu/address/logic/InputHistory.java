@@ -21,6 +21,19 @@ public class InputHistory {
     }
 
     /**
+     * Returns the currently pointed command.
+     *
+     * @return The pointed command (May be null)
+     */
+    public String navigateCurrent() {
+        if (front.isEmpty()) {
+            return null;
+        } else {
+            return front.peek();
+        }
+    }
+
+    /**
      * Shifts the history one command back if there are commands behind and returns the newly pointed command,
      * else returns the currently pointed command.
      *
@@ -28,11 +41,7 @@ public class InputHistory {
      */
     public String navigateBackward() {
         if (back.isEmpty()) {
-            if (front.isEmpty()) {
-                return null;
-            } else {
-                return front.peek();
-            }
+            return this.navigateCurrent();
         } else {
             return front.push(back.removeFirst());
         }
@@ -46,11 +55,7 @@ public class InputHistory {
      */
     public String navigateForward() {
         if (front.size() < 2) {
-            if (front.isEmpty()) {
-                return null;
-            } else {
-                return front.peek();
-            }
+            return this.navigateCurrent();
         } else {
             back.push(front.pop());
             return front.peek();
@@ -82,6 +87,11 @@ public class InputHistory {
     public HistoryNavigator getNavigator() {
         return new HistoryNavigator() {
             @Override
+            public String current() {
+                return InputHistory.this.navigateCurrent();
+            }
+
+            @Override
             public String backward() {
                 return InputHistory.this.navigateBackward();
             }
@@ -91,20 +101,5 @@ public class InputHistory {
                 return InputHistory.this.navigateForward();
             }
         };
-    }
-
-    /**
-     * Represents a function that navigates the command history based on input
-     */
-    public interface HistoryNavigator {
-        /**
-         * Navigates the command history in the backward direction and returns the result.
-         */
-        String backward();
-
-        /**
-         * Navigates the command history in the forward direction and returns the result.
-         */
-        String forward();
     }
 }
