@@ -37,7 +37,6 @@ public class Sidebar extends UiPart<Region> {
         // Set Module button
         setButtonImage(moduleButton, "/images/notebook-pen.png");
         moduleButton.setText("Modules");
-        moduleButton.requestFocus();
         selectedButton = moduleButton; // set module button as default on
         moduleButton.setOnAction(event -> {
             functionalGui.setSwitchWindowPlaceholder("Modules");
