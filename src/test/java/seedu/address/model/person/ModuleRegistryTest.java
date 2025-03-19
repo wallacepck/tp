@@ -98,4 +98,19 @@ public class ModuleRegistryTest {
         // Test for null moduleCode
         assertNull(ModuleRegistry.getModuleByCode(null));
     }
+
+    // Test equal() function
+    @Test
+    public void modules_equal_test() {
+        // Test for nulls
+        assertFalse(ModuleRegistry.getModuleByCode("CS2101").equals(null));
+
+        // Test for equality
+        assertTrue(ModuleRegistry.getModuleByCode("CS2101")
+                .equals(ModuleRegistry.getModuleByCode("CS2101")));
+
+        // Test for inequality
+        assertFalse(ModuleRegistry.getModuleByCode("CS2101")
+                .equals(ModuleRegistry.getModuleByCode("CS2103T")));
+    }
 }
