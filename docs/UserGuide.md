@@ -128,6 +128,22 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Mark / un-mark a person as favourite : `fav`
+
+Mark a specific person as favourite, or un-mark a person from favourite if that person is
+already marked as favourite.
+A star will be shown beside the person's name if it is marked as favourite.
+
+Format: `fav INDEX`
+
+* Toggles the favourite status of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* the index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `fav 2` marks the 2nd person in the address book as favourite.
+* `fav 2` again un-marks the person.
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
