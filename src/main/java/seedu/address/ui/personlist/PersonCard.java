@@ -1,17 +1,20 @@
-package seedu.address.ui;
+package seedu.address.ui.personlist;
 
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import seedu.address.model.person.Person;
+import seedu.address.ui.UiPart;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -41,17 +44,22 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label tag;
+    private StackPane tag;
+    @FXML
+    private Label tagLabel;
     @FXML
     private ImageView tagType;
     @FXML
     private Label modules;
+    @FXML
+    private ImageView favourite;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
+        BooleanProperty isFavourite = new SimpleBooleanProperty(person.getIsFavourite());
         Set<String> strModules = new HashSet<>();
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -59,14 +67,34 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
 
-        // there will be only one tag.
+        // there will be only one tag. If tag is empty tag will not be shown.
         //TODO: change this when Tag is stored as a string in future iterations.
-        tag.setText(person.getTags().stream().toList().get(0).tagName);
+        boolean isEmptySet = person.getTags().isEmpty();
 
-        // sets tag colour based on the role. TA = yellow. Prof = orange
-        Image taTag = new Image(getClass().getResourceAsStream("/images/tag_TA.png"));
-        Image profTag = new Image(getClass().getResourceAsStream("/images/tag_Prof.png"));
-        tagType.setImage(Objects.equals(tag.getText(), "TA") ? taTag : profTag);
+        if (isEmptySet) {
+            tag.getChildren().clear();
+        } else {
+            String tagName = person.getTags().stream().toList().get(0).tagName;
+            boolean isValidTag = tagName.equals("TA") || tagName.equals("Professor");
+
+            if (!isValidTag) {
+                tag.getChildren().clear();
+            } else {
+                tagLabel.setText(tagName);
+
+                // sets tag colour based on the role. TA = yellow. Prof = orange
+                Image taTag = new Image(getClass().getResourceAsStream("/images/tag_TA.png"));
+                Image profTag = new Image(getClass().getResourceAsStream("/images/tag_Prof.png"));
+                tagType.setImage(
+                        tagLabel.getText().equals("TA")
+                                ? taTag
+                                : profTag
+                );
+            }
+        }
+        Image favouriteStar = new Image(getClass().getResourceAsStream("/images/favourite_star.png"));
+        favourite.setImage(favouriteStar);
+        favourite.visibleProperty().bind(isFavourite);
         person.getModules().stream()
                 .sorted(Comparator.comparing(module -> module.toString()))
                 .forEach(module -> strModules.add(module.getModuleCode()));

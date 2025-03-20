@@ -25,6 +25,7 @@ public class PersonBuilder {
     private Email email;
     private Set<Tag> tags;
     private Set<Module> modules;
+    private Boolean isFavourite;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,6 +36,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         tags = new HashSet<>();
         modules = new HashSet<>();
+        isFavourite = false;
     }
 
     /**
@@ -46,6 +48,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         tags = new HashSet<>(personToCopy.getTags());
         modules = new HashSet<>(personToCopy.getModules());
+        isFavourite = personToCopy.getIsFavourite();
     }
 
     /**
@@ -85,6 +88,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withModule(String ...modules) {
         this.modules = SampleDataUtil.getModuleSet(modules);
+        return this;
+    }
+
+    /**
+     * Sets the {@code isFavourite} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFavourite(Boolean favourite) {
+        this.isFavourite = favourite;
         return this;
     }
 

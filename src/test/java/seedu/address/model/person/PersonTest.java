@@ -51,6 +51,14 @@ public class PersonTest {
     }
 
     @Test
+    public void toggleFav() {
+        Person notFavourite = new PersonBuilder(ALICE).build();
+        Person favourite = new PersonBuilder(ALICE).withFavourite(true).build();
+        assertTrue(notFavourite.toggleFav().isSamePerson(favourite));
+        assertTrue(favourite.toggleFav().isSamePerson(notFavourite));
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();
@@ -89,7 +97,8 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", tags=" + ALICE.getTags()
-                + ", modules=" + ALICE.getModules() + "}";
+                + ", modules=" + ALICE.getModules() + ", isFavourite=" + ALICE.getIsFavourite() + "}";
+
         assertEquals(expected, ALICE.toString());
     }
 }

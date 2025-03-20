@@ -50,14 +50,9 @@
             <padding>
               <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
-            <fx:include source="Sidebar.fxml"/>
+            <VBox fx:id="sidebarPlaceholder" VBox.vgrow="NEVER"/>
           </VBox>
-          <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
-            <padding>
-              <Insets bottom="10" left="10" right="10" top="10" />
-            </padding>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
-          </VBox>
+          <StackPane fx:id="switchWindowPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
         </HBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
