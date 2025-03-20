@@ -75,6 +75,22 @@ public enum ModuleRegistry {
         }
 
         @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof Module)) {
+                return false;
+            }
+
+            Module otherModule = (Module) other;
+            return moduleCode.equals(otherModule.moduleCode)
+                    && moduleName.equals(otherModule.moduleName);
+        }
+
+        @Override
         public String toString() {
             return this.moduleCode + " " + this.moduleName;
         }

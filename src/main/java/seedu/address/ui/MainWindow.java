@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -9,6 +12,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -17,12 +21,16 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.ui.modulefolders.ModuleFolders;
+import seedu.address.ui.personlist.PersonListPanel;
+import seedu.address.ui.topnav.HelpWindow;
 
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> {
+public class MainWindow extends UiPart<Stage> implements FunctionalGui {
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -36,6 +44,8 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ModuleFolders moduleFolders;
+    private Sidebar sidebar;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -51,6 +61,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private VBox sidebarPlaceholder;
+
+    @FXML
+    private StackPane switchWindowPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -113,9 +129,6 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -124,6 +137,41 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand, this.history.getNavigator());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        sidebar = new Sidebar(this);
+        sidebarPlaceholder.getChildren().add(sidebar.getRoot());
+
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+
+        moduleFolders = new ModuleFolders(logic.getFilteredPersonList(), this);
+
+        setSwitchWindowPlaceholder("Modules");
+    }
+
+    @Override
+    public void setSwitchWindowPlaceholder(String selectedButton) {
+
+        boolean isValidState = selectedButton.equals("Contacts") || selectedButton.equals("Modules");
+        assert isValidState : "an invalid button state is passed into selectedButton.";
+
+        switchWindowPlaceholder.getChildren().clear();
+
+        if (selectedButton.equals("Modules")) {
+            switchWindowPlaceholder.getChildren().add(moduleFolders.getRoot());
+            sidebar.setButtonOnClick("Modules");
+        } else {
+            switchWindowPlaceholder.getChildren().add(personListPanel.getRoot());
+            sidebar.setButtonOnClick("Contacts");
+        }
+    }
+
+    @Override
+    public void filterListByGui(String keyword) {
+        List<String> moduleCodeList = new ArrayList<>();
+        moduleCodeList.add(keyword);
+        logic.updatePredicateViaGui(
+                new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.MODULE,
+                        moduleCodeList));
     }
 
     /**
