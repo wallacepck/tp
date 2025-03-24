@@ -18,7 +18,7 @@ public class RoleTest {
     }
 
     @Test
-    public void print_Role_returnsPrettyName() {
+    public void print_role_returnsPrettyName() {
         assertEquals("TA", Role.TA.toString());
     }
 }

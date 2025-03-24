@@ -7,8 +7,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-
 /**
  * Represents a Role that a person may have.
  * Guarantees: immutable; name is one of the valid enum values as declared in {@link Role}
@@ -18,9 +16,9 @@ public enum Role {
     PROFESSOR("prof", "Professor");
 
     public static final String MESSAGE_CONSTRAINTS = "Roles should be one of the following: ta, prof";
-    private static final Map<String,Role> lookupTable = new HashMap<>();
+    private static final Map<String, Role> lookupTable = new HashMap<>();
     static {
-        for(Role r : EnumSet.allOf(Role.class)) {
+        for (Role r : EnumSet.allOf(Role.class)) {
             lookupTable.put(r.roleName, r);
         }
     }
