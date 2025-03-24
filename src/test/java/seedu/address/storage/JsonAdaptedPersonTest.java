@@ -1,16 +1,12 @@
 package seedu.address.storage;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -19,18 +15,13 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleRegistry;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Role;
-import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_ROLE = "#friend";
-    private static final String INVALID_TAG_TYPE = "chocolate_cheesecake";
     private static final String INVALID_MODULE = "CS2103G";
 
     private static final String VALID_NAME = BENSON.getName().toString();
@@ -42,12 +33,6 @@ public class JsonAdaptedPersonTest {
     private static final List<String> VALID_MODULES = BENSON.getModules().stream()
             .map(ModuleRegistry.Module::getModuleCode)
             .collect(Collectors.toList());
-
-    private static final String VALID_ROLE = "friend";
-    private static final List<JsonAdaptedTag> VALID_ROLES = Arrays.asList(
-            new JsonAdaptedTag("friend", "role")
-    );
-
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -122,46 +107,12 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidRoles_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>();
-        invalidTags.add(new JsonAdaptedTag(INVALID_ROLE));
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, invalidTags,
-                        VALID_MODULES, false);
-
-        assertThrows(IllegalValueException.class, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidTagType_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>();
-        invalidTags.add(new JsonAdaptedTag(VALID_ROLE, INVALID_TAG_TYPE));
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, invalidTags,
-                        VALID_MODULES, false);
-
-        assertThrows(IllegalValueException.class, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_roleType_returnsRole() {
-        JsonAdaptedPerson jsonPerson =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ROLES,
-                        VALID_MODULES, false);
-
-        Person person = assertDoesNotThrow(jsonPerson::toModelType);
-        Optional<Tag> tag = person.getTags().stream().findFirst();
-        assertTrue(tag.isPresent());
-        assertTrue(tag.get() instanceof Role);
-    }
-
-    @Test
     public void toModelType_invalidModules_throwIllegalValueException() {
         List<String> invalidModules = new ArrayList<>();
         invalidModules.add(INVALID_MODULE);
         JsonAdaptedPerson jsonPerson =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                        VALID_ROLES, invalidModules, false);
+                        VALID_TAGS, invalidModules, false);
 
         assertThrows(IllegalValueException.class, jsonPerson::toModelType);
     }
