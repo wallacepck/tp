@@ -14,8 +14,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Guarantees: immutable; name is one of the valid enum values as declared in {@link Role}
  */
 public enum Role {
-    TA("ta"),
-    PROFESSOR("prof");
+    TA("ta", "TA"),
+    PROFESSOR("prof", "Professor");
 
     public static final String MESSAGE_CONSTRAINTS = "Roles should be one of the following: ta, prof";
     private static final Map<String,Role> lookupTable = new HashMap<>();
@@ -26,14 +26,16 @@ public enum Role {
     }
 
     public final String roleName;
+    private final String prettyName;
 
     /**
      * Constructs a {@code Role}.
      *
      * @param roleName A valid role name.
      */
-    Role(String roleName) {
+    Role(String roleName, String prettyName) {
         this.roleName = roleName;
+        this.prettyName = prettyName;
     }
 
     /**
@@ -57,9 +59,9 @@ public enum Role {
     }
 
     /**
-     * Format state as text for viewing.
+     * Print the pretty name of this role
      */
     public String toString() {
-        return "[Role: " + roleName + ']';
+        return prettyName;
     }
 }
