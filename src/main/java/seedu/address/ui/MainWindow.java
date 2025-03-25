@@ -166,7 +166,7 @@ public class MainWindow extends UiPart<Stage> implements FunctionalGui {
     }
 
     @Override
-    public void filterListByGui(String keyword) {
+    public void filterListByModuleName(String keyword) {
         List<String> moduleCodeList = new ArrayList<>();
         moduleCodeList.add(keyword);
         logic.updatePredicateViaGui(

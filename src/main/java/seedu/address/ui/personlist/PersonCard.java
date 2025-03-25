@@ -68,7 +68,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
 
         // there will be only one tag. If tag is empty tag will not be shown.
-        //TODO: change this when Tag is stored as a string in future iterations.
+        // TODO: change this when Tag is stored as a string in future iterations.
         boolean isEmptySet = person.getTags().isEmpty();
 
         if (isEmptySet) {

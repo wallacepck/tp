@@ -4,6 +4,8 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,6 +28,8 @@ public class ModuleFolders extends UiPart<Region> {
 
     private static final String FXML = "ModuleFolders.fxml";
     private final Image folderImage = new Image(getClass().getResourceAsStream("/images/module_folder.png"));
+    private final ObservableList<Person> personList;
+    private final FunctionalGui guiFunction;
 
     @FXML
     private FlowPane folders;
@@ -38,32 +42,71 @@ public class ModuleFolders extends UiPart<Region> {
      */
     public ModuleFolders(ObservableList<Person> personList, FunctionalGui guiFunction) {
         super(FXML);
-        Set<String> moduleStringSet = new HashSet<>();
+        this.personList = personList;
+        this.guiFunction = guiFunction;
 
-        // Add all unique modules into a set
-        personList.forEach(person -> person.getModules()
-                .stream()
-                .sorted(Comparator.comparing(module -> module.toString()))
-                .forEach(module -> moduleStringSet.add(module.getModuleCode())));
+        // Initialise UI
+        updateFolders();
 
-        moduleStringSet.forEach(moduleString -> {
-            ImageView folderImageView = new ImageView(folderImage);
-            folderImageView.setFitHeight(100.0);
-            folderImageView.setFitWidth(100.0);
-
-            Button folderButton = new Button();
-            folderButton.setGraphic(folderImageView);
-            folderButton.setTranslateX(20.0);
-            folderButton.setOnAction(e -> {
-                guiFunction.filterListByGui(moduleString);
-                guiFunction.setSwitchWindowPlaceholder("Contacts");
-            });
-
-            Label label = new Label(moduleString);
-            label.setTranslateX(40.0);
-
-            VBox container = new VBox(folderButton, label);
-            folders.getChildren().add(container);
+        // Listen for changes in personList and update UI.
+        // Behaviour similarly to useEffect in ReactJS.
+        this.personList.addListener((ListChangeListener<? super Person>) change -> {
+            while (change.next()) {
+                if (change.wasAdded() || change.wasRemoved()) {
+                    updateFolders();
+                }
+            }
         });
     }
+
+    /**
+     * Updates the folder UI dynamically when personList changes.
+     */
+    private void updateFolders() {
+        Platform.runLater(() -> {
+            folders.getChildren().clear();
+
+            Set<String> moduleStringSet = new HashSet<>();
+
+            // Add all unique modules into a set
+            personList.forEach(person -> person.getModules()
+                    .stream()
+                    .sorted(Comparator.comparing(module -> module.toString()))
+                    .forEach(module -> moduleStringSet.add(module.getModuleCode())));
+
+            moduleStringSet.forEach(moduleString -> createFolder(moduleString, guiFunction));
+        });
+    }
+
+    /**
+     * Create a folder element with its respective tag inside the Modules Tab.
+     * @param moduleString
+     * @param guiFunction
+     */
+    private void createFolder(String moduleString, FunctionalGui guiFunction) {
+
+        // Set folder image
+        ImageView folderImageView = new ImageView(folderImage);
+        folderImageView.setFitHeight(100.0);
+        folderImageView.setFitWidth(100.0);
+
+        // Set button function
+        Button folderButton = new Button();
+        folderButton.setGraphic(folderImageView);
+        folderButton.setTranslateX(20.0);
+        folderButton.setOnAction(e -> {
+            guiFunction.filterListByModuleName(moduleString);
+            guiFunction.setSwitchWindowPlaceholder("Contacts");
+        });
+
+        // Set label
+        Label label = new Label(moduleString);
+        label.setTranslateX(40.0);
+
+        // Group all JavaFX element into one VBox and add it into FlowPane
+        VBox container = new VBox(folderButton, label);
+        folders.getChildren().add(container);
+    }
+
+
 }

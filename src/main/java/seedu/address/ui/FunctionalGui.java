@@ -13,5 +13,5 @@ public interface FunctionalGui {
      */
     void setSwitchWindowPlaceholder(String url);
 
-    void filterListByGui(String keyword);
+    void filterListByModuleName(String keyword);
 }
