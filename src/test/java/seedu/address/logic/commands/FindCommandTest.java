@@ -14,6 +14,9 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,12 +34,16 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> firstFieldKeywordMap = new HashMap<>();
+        firstFieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME,
+                Collections.singletonList("first"));
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> secondFieldKeywordMap = new HashMap<>();
+        secondFieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME,
+                Collections.singletonList("second"));
         PersonContainsKeywordsPredicate firstPredicate =
-                new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.NAME,
-                        Collections.singletonList("first"));
+                new PersonContainsKeywordsPredicate(firstFieldKeywordMap);
         PersonContainsKeywordsPredicate secondPredicate =
-                new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.NAME,
-                        Collections.singletonList("second"));
+                new PersonContainsKeywordsPredicate(secondFieldKeywordMap);
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -137,9 +144,9 @@ public class FindCommandTest {
 
     @Test
     public void toStringMethod() {
-        PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.NAME,
-                        Arrays.asList("keyword"));
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, Arrays.asList("keyword"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
@@ -150,6 +157,8 @@ public class FindCommandTest {
      */
     private PersonContainsKeywordsPredicate preparePredicate(String userInput,
                                                              PersonContainsKeywordsPredicate.SearchField field) {
-        return new PersonContainsKeywordsPredicate(field, Arrays.asList(userInput.split("\\s+")));
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(field, Arrays.asList(userInput.split("\\s+")));
+        return new PersonContainsKeywordsPredicate(fieldKeywordMap);
     }
 }
