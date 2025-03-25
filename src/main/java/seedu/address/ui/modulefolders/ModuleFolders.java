@@ -39,6 +39,8 @@ public class ModuleFolders extends UiPart<Region> {
      * Generates folder buttons for each unique CS Module found inside the personList.
      *
      * @param personList The list of persons containing module data.
+     * @param guiFunction the JavaFX element that implements FunctionalGui, which
+     *                    in this context is the MainWindow.
      */
     public ModuleFolders(ObservableList<Person> personList, FunctionalGui guiFunction) {
         super(FXML);
@@ -80,8 +82,9 @@ public class ModuleFolders extends UiPart<Region> {
 
     /**
      * Create a folder element with its respective tag inside the Modules Tab.
-     * @param moduleString
-     * @param guiFunction
+     * @param moduleString module code stored as a string.
+     * @param guiFunction the JavaFX element that implements FunctionalGui, which
+     *                    in this context is the MainWindow.
      */
     private void createFolder(String moduleString, FunctionalGui guiFunction) {
 
