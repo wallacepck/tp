@@ -3,10 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -37,6 +34,17 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    public static List<Index> parseMassIndex(String oneBasedIndexes) throws ParseException {
+        String trimmedIndexes = oneBasedIndexes.trim();
+        String[] splittedIndexes = trimmedIndexes.split(" ");
+        List<Index> indexes = new LinkedList<>();
+
+        for (String index : splittedIndexes) {
+            indexes.add(parseIndex(index));
+        }
+        return indexes;
     }
 
     /**

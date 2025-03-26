@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
  * outside of the DeleteCommand code. For example, inputs "1" and "1 abc" take the
@@ -22,7 +25,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new DeleteCommand(Arrays.asList(INDEX_FIRST_PERSON)));
     }
 
     @Test
