@@ -4,13 +4,17 @@ package seedu.address.ui;
  * Represents an interface for panes that allow filtering of person List with GUI interaction events
  * such as button press.
  */
-public interface FilterHandler {
+public interface GuiFilterHandler {
 
     /**
      * Filters the contact list with the module code received via label in Module Folder.
      *
-     * @param moduleName module code in string.
+     * @param moduleCode module code in string.
      */
-    void filterListByModuleName(String moduleName);
+    void filterListByModuleCode(String moduleCode);
 
+    /**
+     * Clears filter when switching to Contacts tab manually.
+     */
+    void clearFilter();
 }

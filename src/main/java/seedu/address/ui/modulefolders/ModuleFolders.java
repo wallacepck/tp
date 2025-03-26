@@ -96,7 +96,7 @@ public class ModuleFolders extends UiPart<Region> {
         folderButton.setGraphic(folderImageView);
         folderButton.setTranslateX(20.0);
         folderButton.setOnAction(e -> {
-            mainWindow.filterListByModuleName(moduleString);
+            mainWindow.filterListByModuleCode(moduleString);
             mainWindow.setSwitchWindowPlaceholder("Contacts");
         });
 

@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -30,7 +32,7 @@ import seedu.address.ui.topnav.HelpWindow;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, FilterHandler {
+public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, GuiFilterHandler {
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -143,7 +145,7 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Fi
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
 
-        moduleFolders = new ModuleFolders(logic.getFilteredPersonList(), this);
+        moduleFolders = new ModuleFolders(logic.getUnfilteredPersonList(), this);
 
         setSwitchWindowPlaceholder("Modules");
     }
@@ -166,12 +168,17 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Fi
     }
 
     @Override
-    public void filterListByModuleName(String moduleName) {
+    public void filterListByModuleCode(String moduleCode) {
         List<String> moduleCodeList = new ArrayList<>();
-        moduleCodeList.add(moduleName);
+        moduleCodeList.add(moduleCode);
         logic.updatePredicateViaGui(
                 new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.MODULE,
                         moduleCodeList));
+    }
+
+    @Override
+    public void clearFilter() {
+        logic.updatePredicateViaGui(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     /**
