@@ -110,23 +110,54 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name, phone, module, and favourites: `find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/ NAME_KEYWORDS] [p/ PHONE_KEYWORDS] [m/ MODULE_KEYWORDS] [f/ FAVOURITE_STATUS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- `n/` — Matches names using **case-insensitive, partial matches**.
+- `p/` — Matches phone numbers using **partial matches**.
+- `m/` — Matches module codes using **case-insensitive, partial matches**.
+- `f/` — Filters by favourite status. Accepts only:
+    - `y` → Favourite
+    - `n` → Not favourite
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+#### 🔎 Search Behavior
+
+- Keywords are **case-insensitive** for `name`, `phone`, and `module`.
+- Name keyword **order does not matter**. For example, `Hans Bo` matches `Bo Hans`.
+- Supports **partial keyword matching** for name, phone, and module.
+- Only **one instance** of each prefix is allowed. Repeating a prefix is **not permitted**.
+- All specified prefixes must match (**AND keywords**) for a person to be included in the results.
+
+---
+
+#### ✅ Valid Examples
+
+| Command                   | Description                                                                                |
+|---------------------------|--------------------------------------------------------------------------------------------|
+| `find n/ John`            | Finds persons with names matching `John`, e.g., `John Doe`.                                |
+| `find n/ alex david`      | Finds persons with names matching either `alex` or `david`, e.g., `Alex Yeoh`, `David Li`. |
+| `find p/ 9123`            | Finds persons whose phone numbers contain `9123`. e.g. `91234567`                          |
+| `find m/ 2103`            | Finds persons with module codes like "CS2103T".                                            |
+| `find f/ y`               | Finds persons marked as favourites.                                                        |
+| `find f/ n`               | Finds persons who are not marked as favourites.                                            |
+| `find n/ John m/ CS2103T` | Finds persons whose name matches "John" **and** who are in the module "CS2103T".           |
+| `find m/ CS2103 f/ y`     | Finds persons whose module matches `CS2103` **and** who are marked as favourites.          |
+
+---
+
+#### ❌ Invalid Examples
+
+| Command | Reason |
+|--------|--------|
+| `find` | No search prefixes provided. |
+| `find n/ John n/ Doe` | Duplicate `n/` prefix is not allowed. |
+| `find f/ maybe` | Invalid value for `f/`. Only `y` or `n` are allowed. |
+
+---
+
 
 ### Mark / un-mark a person as favourite : `fav`
 
@@ -211,6 +242,7 @@ _Details coming soon ..._
 | **Clear**  | `clear`                                                                                                                          |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                              |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                  |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                       |
+| **Find**   | `find [n/ NAME_KEYWORDS] [p/ PHONE_KEYWORDS] [m/ MODULE_KEYWORDS] [f/ FAVOURITE_STATUS]` e.g. `find n/ James p/ 98765432 m/ CS2106 f/ y`
+|
 | **List**   | `list`                                                                                                                           |
 | **Help**   | `help`                                                                                                                           |
