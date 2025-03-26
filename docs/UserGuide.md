@@ -3,40 +3,95 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+<div style="display: flex; justify-content: center; align-items: center;">
+<span class="parisienne-regular" style="font-size: 3em; font-weight: bold;">
+  AcademySource User Guide
+</span>
+</div>
 
-* Table of Contents
-{:toc}
+**AcademySource** is a streamlined contact management **desktop app built for use via command-line interface (CLI)**, designed to help students stay connected with their academic network. It centralizes key contact details of professors and teaching assistants,
+removing the need to dig through emails or portals. With its simple and efficient CLI-based design, AcademySource lets you manage academic contacts quickly and effortlessly—so you can stay organized and focused on your learning journey.
 
+With AcademySource, you can:
+* Store and manage contact information of professors and TAs (e.g., email, phone number, module)
+* Search for contacts by name, contact details, and/or module code
+* Mark important contacts as favorites for quick access
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+1. Ensure you have `Java 17` or above installed on your computer. Follow the steps below to check if you already have `Java 17` installed:
+   2. Navigate to your operating system's terminal:
+      <details>
+          <summary><strong>For Windows:</strong></summary>
+              <ol>
+                  <li>Hold down Windows button and R (⊞ Win + R)</li>
+                  <li>Type <code>cmd</code> and press enter</li>
+              </ol>
+      </details>
+      <details>
+          <summary><strong>For MacOS:</strong></summary>
+              <ol>
+                  <li>Click the Launchpad icon in the Dock, type <code>Terminal</code> in the search field, then click Terminal, OR</li>
+                  <li>In the Finder, open the <code>/Applications/Utilities</code> folder, then double-click Terminal.</li>
+              </ol>
+      </details>
+      
+   3. Type <code>java -version</code> and press enter. 
+   4. If you have `Java 17` installed, the terminal should look like:
+       <details>
+           <summary><strong>On Windows:</strong></summary>
+               <pre><code>
+       C:\Users\UserName>java -version
+       java version "17.0.12" 2024-07-16 LTS
+       Java(TM) SE Runtime Environment (build 17.0.12+8-LTS-286)
+       Java HotSpot(TM) 64-Bit Server VM (build 17.0.12+8-LTS-286, mixed mode, sharing)
+               </code></pre>
+       </details>
+       <details>
+           <summary><strong>On MacOS:</strong></summary>
+               <pre><code>
+      user@username-MacBook-Air-3 ~ % java -version
+      openjdk version "17.0.11" 2024-04-16 LTS
+      OpenJDK Runtime Environment Zulu17.50+19-CA (build 17.0.11+9-LTS)
+      OpenJDK 64-Bit Server VM Zulu17.50+19-CA (build 17.0.11+9-LTS, mixed mode, sharing)
+               </code></pre>
+       </details>
+   
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. If you have `Java 17` installed, proceed to Step 3. If not, follow these instructions:
+   3. Download `Java 17` from [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html). 
+   4. Select the installation package based on your Operating System. 
+   5. Follow the instruction guide to install Java on your device. For more information, click [here](https://docs.oracle.com/en/java/javase/23/install/overview-jdk-installation.html).
+   6. **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).  
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+3. Download the latest version of AcademySource from [here](https://github.com/AY2425S2-CS2103T-T17-4/tp/releases/tag/v1.3). Select `academysource.jar` to begin the download.
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+
+4. Copy the file to the folder you want to use as the _home folder_ for AcademySource. Note: This will create additional files required for AcademySource in your _home folder_.
+
+
+5. Open AcademySource by double-clicking the program file, `academysource.jar`. Alternatively, you may type `java -jar academysource.jar` into your [terminal](#quick-start) and press enter.  
+   **What you'll see:**  
+   <img src="images/BootGui.png" width="700" onclick="openModal(this)"/>
+
+
+6. Type a command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com r/TA m/CS2103T` : Adds a contact named John Doe to AcademySource with the phone number 98765432, email address johnd@example.com, role of TA and module CS2103T.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -77,15 +132,17 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
+* `ROLE` must be either `ta` or `prof` (Case-insensitive, which means `TA` or `prOf` are also valid).
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com r/prof, block 123, #01-01`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 r/TA t/criminal`
 
 ### Listing all persons : `list`
 
@@ -102,6 +159,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Roles can not be edited.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
@@ -236,13 +294,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                 |
-|------------|----------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com t/friend t/colleague`  |
-| **Clear**  | `clear`                                                                                                                          |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                              |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                  |
-| **Find**   | `find [n/ NAME_KEYWORDS] [p/ PHONE_KEYWORDS] [m/ MODULE_KEYWORDS] [f/ FAVOURITE_STATUS]` e.g. `find n/ James p/ 98765432 m/ CS2106 f/ y`
-|
-| **List**   | `list`                                                                                                                           |
-| **Help**   | `help`                                                                                                                           |
+| Action     | Format, Examples                                                                                                                            |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                     |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                         |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                             |
+| **Find**   | `find [n/ NAME_KEYWORDS] [p/ PHONE_KEYWORDS] [m/ MODULE_KEYWORDS] [f/ FAVOURITE_STATUS]` e.g. `find n/ James p/ 98765432 m/ CS2106 f/ y`                                                                                |
+| **List**   | `list`                                                                                                                                      |
+| **Help**   | `help`                                                                                                                                      |
