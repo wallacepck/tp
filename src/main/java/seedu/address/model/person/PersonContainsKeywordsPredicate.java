@@ -28,7 +28,11 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         /**
          * Search by module
          */
-        MODULE
+        MODULE,
+        /**
+         * Search by favourite
+         */
+        FAVOURITE,
     }
 
     /**
@@ -62,6 +66,13 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                             .anyMatch(module -> module
                                     .getModuleCode().toLowerCase()
                                     .contains(keyword.toLowerCase())));
+            case FAVOURITE -> keywords.stream()
+                    .anyMatch(keyword -> {
+                        String lowerKeyword = keyword.toLowerCase();
+                        boolean isFavourite = person.getIsFavourite();
+                        return (lowerKeyword.equals("y") && isFavourite
+                                || lowerKeyword.equals("n") && !isFavourite);
+                    });
             };
         });
     }

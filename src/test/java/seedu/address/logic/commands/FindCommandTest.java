@@ -143,6 +143,71 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_favourite_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        PersonContainsKeywordsPredicate predicate =
+                preparePredicate("y", PersonContainsKeywordsPredicate.SearchField.FAVOURITE);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_caseInsensitiveFavourite_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        PersonContainsKeywordsPredicate predicate =
+                preparePredicate("Y", PersonContainsKeywordsPredicate.SearchField.FAVOURITE);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_nameAndFavourite_onePersonFound() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> map = new HashMap<>();
+        map.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Fiona"));
+        map.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(map);
+        FindCommand command = new FindCommand(predicate);
+
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_moduleAndFavourite_onePersonFound() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> map = new HashMap<>();
+        map.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("CS3230"));
+        map.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(map);
+        FindCommand command = new FindCommand(predicate);
+
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_nameModuleAndFavourite_onePersonFound() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> map = new HashMap<>();
+        map.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Fiona"));
+        map.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("CS3230"));
+        map.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(map);
+        FindCommand command = new FindCommand(predicate);
+
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
     public void toStringMethod() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, Arrays.asList("keyword"));

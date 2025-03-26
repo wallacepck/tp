@@ -134,4 +134,23 @@ public class FindCommandParserTest {
                 new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
         assertParseSuccess(parser, "n/ O'Connor Jean-Luc", expectedFindCommand);
     }
+
+    @Test
+    public void parse_favourite_returnsFindCommand() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, Arrays.asList("y"));
+        FindCommand expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
+        assertParseSuccess(parser, "f/ y", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_namePhoneModuleAndFavourite_returnsFindCommand() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Darren"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("CS3230"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
+        FindCommand expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
+        assertParseSuccess(parser, "n/ Darren p/ 91234567 m/ CS3230 f/ y", expectedFindCommand);
+    }
 }

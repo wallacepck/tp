@@ -40,7 +40,7 @@ public class TypicalPersons {
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com")
-            .withModule("CS3230")
+            .withModule("CS3230").withFavourite(true)
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com")

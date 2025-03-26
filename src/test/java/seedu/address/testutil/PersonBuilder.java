@@ -100,7 +100,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, tags, modules);
+        return new Person(name, phone, email, tags, modules, isFavourite);
     }
 
 }

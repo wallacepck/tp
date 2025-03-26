@@ -135,6 +135,66 @@ class PersonContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withModule("CS2103T").build()));
     }
 
+    @Test
+    void test_isFavourite_returnsTrue() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
+        PersonContainsKeywordsPredicate predicate =
+                new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertTrue(predicate.test(new PersonBuilder().withFavourite(true).build()));
+    }
+
+    @Test
+    void test_isFavourite_returnsFalse() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertFalse(predicate.test(new PersonBuilder().withFavourite(false).build()));
+    }
+
+    @Test
+    void test_keywordContainsNameAndPhone_returnsTrue() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Alice"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567").build()));
+    }
+
+    @Test
+    void test_keywordContainsNamePhoneAndFavourite_returnsTrue() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Alice"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice")
+                .withPhone("91234567").withFavourite(true).build()));
+    }
+
+    @Test
+    void test_keywordContainsNamePhoneModuleAndFavourite_returnsTrue() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Alice"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("CS2103T"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice")
+                .withPhone("91234567").withFavourite(true).withModule("CS2103T").build()));
+    }
+
+    @Test
+    void test_partialKeywordContainsNamePhoneModuleAndFavourite_returnsTrue() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("A"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("9123"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("2103"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice")
+                .withPhone("91234567").withFavourite(true).withModule("CS2103T").build()));
+    }
 
     @Test
     void test_equals() {
