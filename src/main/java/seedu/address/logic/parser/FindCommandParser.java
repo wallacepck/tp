@@ -74,6 +74,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (field == SearchField.FAVOURITE) {
                 validateFavouriteKeywords(keywords);
             }
+            if (fieldKeywordsMap.containsKey(field)) {
+                throw new ParseException("Duplicate prefix detected: " + prefix
+                        + ". Each prefix should only appear once.");
+            }
             fieldKeywordsMap.put(field, keywords);
         }
         return fieldKeywordsMap;
