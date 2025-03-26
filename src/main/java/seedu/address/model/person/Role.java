@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -40,7 +41,7 @@ public enum Role {
      * Returns true if the given string is a valid role name
      */
     public static boolean isValidRole(String roleName) {
-        return lookupTable.containsKey(roleName);
+        return lookupTable.containsKey(roleName.toLowerCase(Locale.ROOT));
     }
 
     /**
@@ -53,7 +54,7 @@ public enum Role {
     public static Role getRole(String roleName) {
         requireNonNull(roleName);
         checkArgument(isValidRole(roleName), MESSAGE_CONSTRAINTS);
-        return lookupTable.get(roleName);
+        return lookupTable.get(roleName.toLowerCase(Locale.ROOT));
     }
 
     /**
