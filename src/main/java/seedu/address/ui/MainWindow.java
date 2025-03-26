@@ -166,9 +166,9 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Fi
     }
 
     @Override
-    public void filterListByModuleName(String keyword) {
+    public void filterListByModuleName(String moduleName) {
         List<String> moduleCodeList = new ArrayList<>();
-        moduleCodeList.add(keyword);
+        moduleCodeList.add(moduleName);
         logic.updatePredicateViaGui(
                 new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.MODULE,
                         moduleCodeList));

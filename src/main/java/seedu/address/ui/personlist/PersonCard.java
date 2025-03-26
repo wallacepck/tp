@@ -83,8 +83,8 @@ public class PersonCard extends UiPart<Region> {
                 tagLabel.setText(tagName);
 
                 // sets tag colour based on the role. TA = yellow. Prof = orange
-                Image taTag = new Image(getClass().getResourceAsStream("/images/tag_TA.png"));
-                Image profTag = new Image(getClass().getResourceAsStream("/images/tag_Prof.png"));
+                Image taTag = new Image(getClass().getResourceAsStream("/images/tag_ta.png"));
+                Image profTag = new Image(getClass().getResourceAsStream("/images/tag_prof.png"));
                 tagType.setImage(
                         tagLabel.getText().equals("TA")
                                 ? taTag

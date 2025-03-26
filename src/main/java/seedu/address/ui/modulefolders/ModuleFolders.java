@@ -17,7 +17,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 import seedu.address.ui.MainWindow;
-import seedu.address.ui.WindowSwitchHandler;
 import seedu.address.ui.UiPart;
 
 /**
