@@ -30,7 +30,7 @@ import seedu.address.ui.topnav.HelpWindow;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> implements FunctionalGui {
+public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, FilterHandler {
 
     private static final String FXML = "MainWindow.fxml";
 

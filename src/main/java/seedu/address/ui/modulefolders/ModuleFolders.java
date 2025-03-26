@@ -16,7 +16,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
-import seedu.address.ui.FunctionalGui;
+import seedu.address.ui.MainWindow;
+import seedu.address.ui.WindowSwitchHandler;
 import seedu.address.ui.UiPart;
 
 /**
@@ -29,7 +30,7 @@ public class ModuleFolders extends UiPart<Region> {
     private static final String FXML = "ModuleFolders.fxml";
     private final Image folderImage = new Image(getClass().getResourceAsStream("/images/module_folder.png"));
     private final ObservableList<Person> personList;
-    private final FunctionalGui guiFunction;
+    private final MainWindow mainWindow;
 
     @FXML
     private FlowPane folders;
@@ -39,13 +40,12 @@ public class ModuleFolders extends UiPart<Region> {
      * Generates folder buttons for each unique CS Module found inside the personList.
      *
      * @param personList The list of persons containing module data.
-     * @param guiFunction the JavaFX element that implements FunctionalGui, which
-     *                    in this context is the MainWindow.
+     * @param mainWindow mainWindow object that is created when GUI is loaded.
      */
-    public ModuleFolders(ObservableList<Person> personList, FunctionalGui guiFunction) {
+    public ModuleFolders(ObservableList<Person> personList, MainWindow mainWindow) {
         super(FXML);
         this.personList = personList;
-        this.guiFunction = guiFunction;
+        this.mainWindow = mainWindow;
 
         // Initialise UI
         updateFolders();
@@ -76,17 +76,16 @@ public class ModuleFolders extends UiPart<Region> {
                     .sorted(Comparator.comparing(module -> module.toString()))
                     .forEach(module -> moduleStringSet.add(module.getModuleCode())));
 
-            moduleStringSet.forEach(moduleString -> createFolder(moduleString, guiFunction));
+            moduleStringSet.forEach(moduleString -> createFolder(moduleString, mainWindow));
         });
     }
 
     /**
      * Create a folder element with its respective tag inside the Modules Tab.
      * @param moduleString module code stored as a string.
-     * @param guiFunction the JavaFX element that implements FunctionalGui, which
-     *                    in this context is the MainWindow.
+     * @param mainWindow mainWindow object that is created when GUI is loaded.
      */
-    private void createFolder(String moduleString, FunctionalGui guiFunction) {
+    private void createFolder(String moduleString, MainWindow mainWindow) {
 
         // Set folder image
         ImageView folderImageView = new ImageView(folderImage);
@@ -98,8 +97,8 @@ public class ModuleFolders extends UiPart<Region> {
         folderButton.setGraphic(folderImageView);
         folderButton.setTranslateX(20.0);
         folderButton.setOnAction(e -> {
-            guiFunction.filterListByModuleName(moduleString);
-            guiFunction.setSwitchWindowPlaceholder("Contacts");
+            mainWindow.filterListByModuleName(moduleString);
+            mainWindow.setSwitchWindowPlaceholder("Contacts");
         });
 
         // Set label

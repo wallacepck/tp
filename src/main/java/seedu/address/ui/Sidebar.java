@@ -31,7 +31,7 @@ public class Sidebar extends UiPart<Region> {
      *
      * @param functionalGui Any UI component that implements SwitchableWindow interface.
      */
-    public Sidebar(FunctionalGui functionalGui) {
+    public Sidebar(WindowSwitchHandler functionalGui) {
         super(FXML);
 
         // Set Module button
