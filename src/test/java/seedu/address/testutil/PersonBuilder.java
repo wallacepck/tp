@@ -8,6 +8,7 @@ import seedu.address.model.person.ModuleRegistry.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,12 +20,14 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final Role DEFAULT_ROLE = Role.PROFESSOR;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Set<Tag> tags;
     private Set<Module> modules;
+    private Role role;
     private Boolean isFavourite;
 
     /**
@@ -36,6 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         tags = new HashSet<>();
         modules = new HashSet<>();
+        role = DEFAULT_ROLE;
         isFavourite = false;
     }
 
@@ -48,6 +52,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         tags = new HashSet<>(personToCopy.getTags());
         modules = new HashSet<>(personToCopy.getModules());
+        role = personToCopy.getRole();
         isFavourite = personToCopy.getIsFavourite();
     }
 
@@ -88,6 +93,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withModule(String ...modules) {
         this.modules = SampleDataUtil.getModuleSet(modules);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Role} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRole(Role role) {
+        this.role = role;
         return this;
     }
 
