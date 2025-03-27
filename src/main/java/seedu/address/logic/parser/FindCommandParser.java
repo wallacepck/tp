@@ -69,6 +69,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
             SearchField field = getSearchField(prefix);
+            assert field != null : "Parsed prefix must map to a valid SearchField";
             List<String> keywords = Arrays.asList(keywordStr.split("\\s+"));
 
             if (field == SearchField.FAVOURITE) {
