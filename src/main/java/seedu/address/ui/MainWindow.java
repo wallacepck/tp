@@ -4,7 +4,9 @@ package seedu.address.ui;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -171,9 +173,10 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Gu
     public void filterListByModuleCode(String moduleCode) {
         List<String> moduleCodeList = new ArrayList<>();
         moduleCodeList.add(moduleCode);
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> searchFieldMap = new HashMap<>();
+        searchFieldMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, moduleCodeList);
         logic.updatePredicateViaGui(
-                new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.MODULE,
-                        moduleCodeList));
+                new PersonContainsKeywordsPredicate(searchFieldMap));
     }
 
     @Override
