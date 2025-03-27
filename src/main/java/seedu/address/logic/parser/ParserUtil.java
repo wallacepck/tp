@@ -5,6 +5,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -37,6 +39,23 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code onBasedIndex} into a list of {@code Index} and returns it.Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if any of the specified index given in the string is invalid
+     *     (not non-zero unsigned integer).
+     */
+    public static List<Index> parseMassIndex(String oneBasedIndexes) throws ParseException {
+        String trimmedIndexes = oneBasedIndexes.trim();
+        String[] splittedIndexes = trimmedIndexes.split(" ");
+        List<Index> indexes = new LinkedList<>();
+
+        for (String index : splittedIndexes) {
+            indexes.add(parseIndex(index));
+        }
+        return indexes;
     }
 
     /**
