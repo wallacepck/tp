@@ -24,19 +24,19 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 Role.TA, getTagSet("TA"), getModuleSet("CS2103T")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                Role.PROFESSOR,getTagSet("Professor"), getModuleSet("CS2040S")),
+                Role.PROFESSOR, getTagSet("Professor"), getModuleSet("CS2040S")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 Role.TA, getTagSet("TA"), getModuleSet("CS2030S")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                Role.PROFESSOR,getTagSet("Professor"), getModuleSet("CS2100")),
+                Role.PROFESSOR, getTagSet("Professor"), getModuleSet("CS2100")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                Role.TA,getTagSet("Professor"), getModuleSet("CS2106")),
+                Role.TA, getTagSet("Professor"), getModuleSet("CS2106")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                Role.PROFESSOR,getTagSet("TA"), getModuleSet("CS2109S")),
+                Role.PROFESSOR, getTagSet("TA"), getModuleSet("CS2109S")),
             new Person(new Name("Hoo Lee Seet"), new Phone("90900808"), new Email("horyshet@example.com"),
-                Role.TA,getTagSet("Professor"), getModuleSet("CS3230")),
+                Role.TA, getTagSet("Professor"), getModuleSet("CS3230")),
             new Person(new Name("Wat De Fak"), new Phone("83221199"), new Email("wdf@example.com"),
-                Role.PROFESSOR,getTagSet("TA"), getModuleSet("CS2101"))
+                Role.PROFESSOR, getTagSet("TA"), getModuleSet("CS2101"))
         };
     }
 
