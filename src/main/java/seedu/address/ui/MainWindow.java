@@ -1,8 +1,12 @@
 package seedu.address.ui;
 
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -30,7 +34,7 @@ import seedu.address.ui.topnav.HelpWindow;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> implements FunctionalGui {
+public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, GuiFilterHandler {
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -143,7 +147,7 @@ public class MainWindow extends UiPart<Stage> implements FunctionalGui {
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
 
-        moduleFolders = new ModuleFolders(logic.getFilteredPersonList(), this);
+        moduleFolders = new ModuleFolders(logic.getUnfilteredPersonList(), this);
 
         setSwitchWindowPlaceholder("Modules");
     }
@@ -166,12 +170,18 @@ public class MainWindow extends UiPart<Stage> implements FunctionalGui {
     }
 
     @Override
-    public void filterListByGui(String keyword) {
+    public void filterListByModuleCode(String moduleCode) {
         List<String> moduleCodeList = new ArrayList<>();
-        moduleCodeList.add(keyword);
+        moduleCodeList.add(moduleCode);
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> searchFieldMap = new HashMap<>();
+        searchFieldMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, moduleCodeList);
         logic.updatePredicateViaGui(
-                new PersonContainsKeywordsPredicate(PersonContainsKeywordsPredicate.SearchField.MODULE,
-                        moduleCodeList));
+                new PersonContainsKeywordsPredicate(searchFieldMap));
+    }
+
+    @Override
+    public void clearFilter() {
+        logic.updatePredicateViaGui(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     /**
