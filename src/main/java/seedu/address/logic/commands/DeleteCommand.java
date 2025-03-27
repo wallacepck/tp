@@ -76,9 +76,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public String toString() {
-//        return new ToStringBuilder(this)
-//                .add("targetIndex", targetIndexes)
-//                .toString();
         StringBuilder targetIndexBuilder = new StringBuilder();
         for (Index index : targetIndexes) {
             targetIndexBuilder.append(index.toString());
