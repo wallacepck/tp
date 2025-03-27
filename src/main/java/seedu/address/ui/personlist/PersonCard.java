@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 import seedu.address.ui.UiPart;
 
 /**
@@ -67,31 +68,20 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
 
-        // there will be only one tag. If tag is empty tag will not be shown.
-        //TODO: change this when Tag is stored as a string in future iterations.
-        boolean isEmptySet = person.getTags().isEmpty();
+        Role role = person.getRole();
 
-        if (isEmptySet) {
-            tag.getChildren().clear();
-        } else {
-            String tagName = person.getTags().stream().toList().get(0).tagName;
-            boolean isValidTag = tagName.equals("TA") || tagName.equals("Professor");
+        tagLabel.setText(role.toString());
 
-            if (!isValidTag) {
-                tag.getChildren().clear();
-            } else {
-                tagLabel.setText(tagName);
+        // sets tag colour based on the role. TA = yellow. Prof = orange
+        Image taTag = new Image(getClass().getResourceAsStream("/images/tag_ta.png"));
+        Image profTag = new Image(getClass().getResourceAsStream("/images/tag_prof.png"));
 
-                // sets tag colour based on the role. TA = yellow. Prof = orange
-                Image taTag = new Image(getClass().getResourceAsStream("/images/tag_TA.png"));
-                Image profTag = new Image(getClass().getResourceAsStream("/images/tag_Prof.png"));
-                tagType.setImage(
-                        tagLabel.getText().equals("TA")
-                                ? taTag
-                                : profTag
-                );
-            }
-        }
+        Image image = switch (role) {
+        case TA -> taTag;
+        case PROFESSOR -> profTag;
+        };
+        tagType.setImage(image);
+
         Image favouriteStar = new Image(getClass().getResourceAsStream("/images/favourite_star.png"));
         favourite.setImage(favouriteStar);
         favourite.visibleProperty().bind(isFavourite);
