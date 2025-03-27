@@ -113,7 +113,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, tags, modules, isFavourite);
+        return new Person(name, phone, email, role, tags, modules, isFavourite);
     }
 
 }
