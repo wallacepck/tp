@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Faizal
 
-<img src="images/teamakesmepee.png" width="200px">
+<img src="images/TeaMakesMePee.png" width="200px">
 
 [[linkedin](https://www.linkedin.com/in/faizal-0524/)]
 [[github](https://github.com/TeaMakesMePee)]
