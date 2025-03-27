@@ -33,9 +33,9 @@ public class SampleDataUtil {
                 Role.TA, getTagSet("Professor"), getModuleSet("CS2106")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 Role.PROFESSOR, getTagSet("TA"), getModuleSet("CS2109S")),
-            new Person(new Name("Hoo Lee Seet"), new Phone("90900808"), new Email("horyshet@example.com"),
+            new Person(new Name("Fernandez Keith"), new Phone("90900808"), new Email("fernk@example.com"),
                 Role.TA, getTagSet("Professor"), getModuleSet("CS3230")),
-            new Person(new Name("Wat De Fak"), new Phone("83221199"), new Email("wdf@example.com"),
+            new Person(new Name("Ishizawa Naoru"), new Phone("83221199"), new Email("naoishi@example.com"),
                 Role.PROFESSOR, getTagSet("TA"), getModuleSet("CS2101"))
         };
     }
