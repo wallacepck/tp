@@ -249,7 +249,7 @@ Format: `delete INDEX [MORE INDEX]`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete 1 2 3` delete the first 3 person in the address book, given that all index are within the size of addressbook.
+* `delete 1 2 3` delete the first 3 person in contacts, given that all index are within the size of the contact list.
 
 ### Clearing all entries : `clear`
 
@@ -269,7 +269,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AcademySource data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
