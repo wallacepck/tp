@@ -19,6 +19,32 @@ With AcademySource, you can:
   
 --------------------------------------------------------------------------------------------------------------------
 
+## Table of Content
+- [Quick start](#quick-start)
+- <details>
+      <summary>
+      <a href="#features">Features</a>
+      </summary>
+  
+    - [Prefix Table](#prefix-table)
+    - [Viewing help](#viewing-help--help)
+    - [Adding a person](#adding-a-person-add)
+    - [Listing all persons](#listing-all-persons--list)
+    - [Editing a person](#editing-a-person--edit)
+    - [Locating persons by name, phone, module and favourite](#locating-persons-by-name-phone-module-and-favourites-find)
+    - [Mark / un-mark a person as favourite](#mark--un-mark-a-person-as-favourite--fav)
+    - [Deleting a person](#deleting-a-person--delete)
+    - [Clearing all entries](#clearing-all-entries--clear)
+    - [Exiting the program](#exiting-the-program--exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files(coming soon)](#archiving-data-files-coming-in-v20)
+  </details>
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
+- [Glossary](#glossary)
+
 ## Quick start
 
 1. Ensure you have `Java 17` or above installed on your computer. Follow the steps below to check if you already have `Java 17` installed:
@@ -100,7 +126,8 @@ With AcademySource, you can:
 
 
 7. Refer to the [Features](#features) below for details of each command.
-
+<br><br>
+[Back to top](#table-of-content)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -127,7 +154,8 @@ With AcademySource, you can:
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Prefix Table
+
+### Prefix Table [🔝](#table-of-content)
 
 | **Prefix** | **Meaning**                | **Usage Example**     | **Remarks**                                                           |
 |------------|----------------------------|-----------------------|-----------------------------------------------------------------------|
@@ -156,10 +184,11 @@ Format: `list`
 
 Adds a contact to AcademySource.
 
+
 <img src="images/add_before.png" width="500" onclick="openModal(this)"/>
 <img src="images/add_after.png" width="500" onclick="openModal(this)"/>
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE [m/MODULE]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -204,7 +233,7 @@ Examples:
 *  `edit 2 m/CS2103T m/CS2106` Edits the module of the 2nd person to be `CS2103T` and `CS2106`.
 
 
-### Locating persons by name, phone, module, and favourites: `find`
+### Locating persons by name, phone, module, and favourites: `find` [🔝](#table-of-content)
 
 Finds persons whose names contain any of the given keywords.
 
@@ -256,7 +285,7 @@ Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [m/MODULE_KEYWORDS] [f/FAVOUR
 ---
 
 
-### Mark / un-mark a person as favourite : `fav`
+### Mark / un-mark a person as favourite : `fav` [🔝](#table-of-content)
 
 Mark a specific person as favourite, or un-mark a person from favourite if that person is
 already marked as favourite.
@@ -311,7 +340,7 @@ Exits AcademySource.
 
 Format: `exit`
 
-### Saving the data
+### Saving the data [🔝](#table-of-content)
 
 AcademySource data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
@@ -335,12 +364,16 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AcademySource home folder.
 
+[back to top](#table-of-content)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+[back to top](#table-of-content)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -354,7 +387,9 @@ _Details coming soon ..._
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                      |
 | **Find**   | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [m/MODULE_KEYWORDS] [f/FAVOURITE_STATUS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y`               |
 | **List**   | `list`                                                                                                                                               |
-| **Help**   | `help`                                                                                                                                               |     
+| **Help**   | `help`                                                                                                                                               |
+
+[back to top](#table-of-content)
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
@@ -366,3 +401,6 @@ _Details coming soon ..._
 | **JDK**        | `Java Development Kit; a software development environment required to run and develop Java` <br> `applications like AcademySource. Version 17 or above is needed`              |
 | **Parameters** | `Values supplied by the user in commands (e.g., name, phone, module) that determine the` <br> `action taken by AcademySource. Often prefixed with identifiers like n/, p/, m/` |
 | **Field**      | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                       |
+
+[back to top](#table-of-content)
+
