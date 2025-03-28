@@ -22,14 +22,14 @@ With AcademySource, you can:
 ## Table of Content
 - [Quick start](#quick-start)
 - <details>
-      <summary>
-      <a href="#features">Features</a>
-      </summary>
-  
-    - [Prefix Table](#prefix-table)
-    - [Viewing help](#viewing-help--help)
-    - [Adding a person](#adding-a-person-add)
-    - [Listing all persons](#listing-all-persons--list)
+    <summary>
+    <a href="#features">Features</a>
+    </summary>
+    <a href="#Prefix-table"> - Prefix table <br></a>
+    <a href="#Viewing-help--help"> - View help <br></a>
+    <a href="#adding-a-person-add"> - Adding a person <br></a>
+    <a href="#listing-all-persons--list"> Listing all persons <br></a>
+    
     - [Editing a person](#editing-a-person--edit)
     - [Locating persons by name, phone, module and favourite](#locating-persons-by-name-phone-module-and-favourites-find)
     - [Mark / un-mark a person as favourite](#mark--un-mark-a-person-as-favourite--fav)
