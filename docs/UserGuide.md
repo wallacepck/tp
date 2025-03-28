@@ -29,7 +29,7 @@ With AcademySource, you can:
     <a href="#prefix-table"> - Prefix table <br></a>
     <a href="#viewing-help--help"> - Viewing help <br></a>
     <a href="#listing-all-persons--list"> - Listing all persons <br></a>
-    <a href="#adding-a-person-add"> - Adding a person <br></a>
+    <a href="#adding-a-person--add"> - Adding a person <br></a>
     <a href="#editing-a-person--edit"> - Editing a person <br></a>
     <a href="#locating-persons-by-name-phone-module-and-favourites--find"> - Locating persons by name, phone, module and favourite <br></a>
     <a href="#mark-un-mark-a-person-as-favourite--fav"> - Mark / un-mark a person as favourite <br></a>
@@ -38,7 +38,7 @@ With AcademySource, you can:
     <a href="#exiting-academysource--exit"> - Exiting AcademySource <br></a>
     <a href="#saving-the-data"> - Saving the data <br></a>
     <a href="#editing-the-data-file"> - Editing the data file <br></a>
-    <a href="#archiving-data-files-coming-in-v20"> - Archiving data files(coming soon) <br></a>
+    <a href="#archiving-data-files"> - Archiving data files (coming soon) <br></a>
 
   </details>
 - [FAQ](#faq)
@@ -151,6 +151,8 @@ Contacts Page:
 2. Role: The role which each contact is assigned to. TA will be displayed as yellow bookmarker while Professor will be displayed as orange bookmarker.
 3. Favourite Mark: A star symbol which indicate a contact is marked as favourite by you.
 
+[Back to top](#table-of-content)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -189,7 +191,8 @@ Contacts Page:
 | `m/`       | Module (can have multiple) | `m/CS2103T m/CS2101`  | Used differently in `find`. For multiple modules, `m/CS2103T CS2106`. |
 | `f/`       | Favourite                  | `f/y` or `f/n`        | Not used in `add` or `edit`.                                          |
 
-### Viewing help : `help`
+<a id="viewing-help--help"></a>
+### Viewing help : `help` [🔝](#table-of-content)
 
 Shows a message explaning how to access the help page.
 
@@ -197,13 +200,15 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Listing all persons : `list`
+<a id="listing-all-persons--list"></a>
+### Listing all persons : `list` [🔝](#table-of-content)
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Adding a person: `add`
+<a id="adding-a-person--add"></a>
+### Adding a person: `add` [🔝](#table-of-content)
 
 Adds a contact to AcademySource.
 
@@ -223,7 +228,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/prof`
 * `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 r/TA m/CS2103T`
 
-### Listing all persons : `list`
+### Listing all persons : `list` [🔝](#table-of-content)
 
 Shows a list of all contacts in AcademySource.
 
@@ -232,7 +237,8 @@ Shows a list of all contacts in AcademySource.
 
 Format: `list`
 
-### Editing a person : `edit`
+<a id="editing-a-person--edit"></a>
+### Editing a person : `edit` [🔝](#table-of-content)
 
 Edits an existing contact in AcademySource.
 
@@ -327,7 +333,8 @@ Examples:
 * `list` followed by `fav 2` marks the 2nd contact in AcademySource as favourite.
 * `fav 2` again un-marks the person.
 
-### Deleting a person : `delete`
+<a id="deleting-a-person--delete"></a>
+### Deleting a person : `delete` [🔝](#table-of-content)
 
 Deletes the specified contact from AcademySource.
 
@@ -346,7 +353,8 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 * `delete 1 2 3` deletes the first 3 contacts, given that all indexes exist within the contact list.
 
-### Clearing all entries : `clear`
+<a id="clearing-all-entries--clear"></a>
+### Clearing all entries : `clear` [🔝](#table-of-content)
 
 Clears all entries from AcademySource.
 
@@ -355,7 +363,8 @@ Clears all entries from AcademySource.
 
 Format: `clear`
 
-### Exiting AcademySource : `exit`
+<a id="exiting-academysource--exit"></a>
+### Exiting AcademySource : `exit` [🔝](#table-of-content)
 
 Exits AcademySource.
 
@@ -366,7 +375,8 @@ Format: `exit`
 
 AcademySource data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+<a id="editing-the-data-file"/></a>
+### Editing the data file [🔝](#table-of-content)
 
 AcademySource data are saved automatically as a JSON file `[JAR file location]/data/academysource.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -375,7 +385,8 @@ If your changes to the data file makes its format invalid, AcademySource will di
 Furthermore, certain edits can cause AcademySource to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+<a id="archiving-data-files"></a>
+### Archiving data files `[coming in v2.0]` [🔝](#table-of-content)
 
 _Details coming soon ..._
 
