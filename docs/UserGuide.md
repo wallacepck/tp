@@ -203,7 +203,15 @@ Format: `help`
 <a id="listing-all-persons--list"></a>
 ### Listing all persons : `list` [🔝](#table-of-content)
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in AcademySource.
+
+Before command:
+
+<img src="images/list_before.png" width="500" onclick="openModal(this)"/>
+
+After command:
+
+<img src="images/list_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `list`
 
@@ -231,20 +239,6 @@ A person can have any number of tags (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/prof`
 * `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 r/TA m/CS2103T`
-
-### Listing all persons : `list` [🔝](#table-of-content)
-
-Shows a list of all contacts in AcademySource.
-
-Before command:
-
-<img src="images/list_before.png" width="500" onclick="openModal(this)"/>
-
-After command:
-
-<img src="images/list_after.png" width="500" onclick="openModal(this)"/>
-
-Format: `list`
 
 <a id="editing-a-person--edit"></a>
 ### Editing a person : `edit` [🔝](#table-of-content)
