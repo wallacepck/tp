@@ -311,10 +311,10 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
-| Term        | Definition                                                                                                                                                                     |
-|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **CLI**     | `Command Line Interface; a way to interact with the application using` <br> `text-based commands`                                                                              |
-| **index**   | `A positive integer that refers to a contact's position in the displayed list`                                                                                                 |
-| **JDK**     | `Java Development Kit; a software development environment required to run and develop Java` <br> `applications like AcademySource. Version 17 or above is needed`              |
+| Term           | Definition                                                                                                                                                                     |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**        | `Command Line Interface; a way to interact with the application using` <br> `text-based commands`                                                                              |
+| **Index**      | `A positive integer that refers to a contact's position in the displayed list`                                                                                                 |
+| **JDK**        | `Java Development Kit; a software development environment required to run and develop Java` <br> `applications like AcademySource. Version 17 or above is needed`              |
 | **Parameters** | `Values supplied by the user in commands (e.g., name, phone, module) that determine the` <br> `action taken by AcademySource. Often prefixed with identifiers like n/, p/, m/` |
-| **Field**   | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                       |
+| **Field**      | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                       |
