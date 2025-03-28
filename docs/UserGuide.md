@@ -21,6 +21,7 @@ With AcademySource, you can:
 
 ## Table of Content
 - [Quick start](#quick-start)
+- [Graphic User Interface Layout](#graphic-user-interface-layout)
 - <details>
     <summary>
         <a href="#features">Features</a>
