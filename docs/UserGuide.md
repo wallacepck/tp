@@ -13,8 +13,8 @@ title: User Guide
 removing the need to dig through emails or portals. With its simple and efficient CLI-based design, AcademySource lets you manage academic contacts quickly and effortlessly—so you can stay organized and focused on your learning journey.
 
 With AcademySource, you can:
-* Store and manage contact information of professors and TAs (e.g., email, phone number, module)
-* Search for contacts by name, contact details, and/or module code
+* Store and manage contact information of professors and TAs (e.g., email, phone number, role, tags, module)
+* Search for contacts by name, contact details, role, and/or module code
 * Mark important contacts as favorites for quick access
   
 --------------------------------------------------------------------------------------------------------------------
@@ -127,6 +127,17 @@ With AcademySource, you can:
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+### Prefix Table
+
+| **Prefix** | **Meaning**                | **Usage Example**     | **Remarks**                                                           |
+|------------|----------------------------|-----------------------|-----------------------------------------------------------------------|
+| `n/`       | Name                       | `n/John Doe`          |                                                                       |
+| `p/`       | Phone number               | `p/98765432`          |                                                                       |
+| `e/`       | Email address              | `e/johnd@example.com` |                                                                       |
+| `r/`       | Role (`ta` or `prof`)      | `r/TA` or `r/PROF`    | Not used in `find`.                                                   |
+| `m/`       | Module (can have multiple) | `m/CS2103T m/CS2101`  | Used differently in `find`. For multiple modules, `m/CS2103T CS2106`. |
+| `f/`       | Favourite                  | `f/y` or `f/n`        | Not used in `add` or `edit`.                                          |
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -135,10 +146,15 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Listing all persons : `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a contact to AcademySource.
 
 <img src="images/add_before.png" width="500" onclick="openModal(this)"/>
 <img src="images/add_after.png" width="500" onclick="openModal(this)"/>
@@ -149,15 +165,15 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE…​`
 A person can have any number of tags (including 0)
 </div>
 
-* `ROLE` must be either `ta` or `prof` (Case-insensitive, which means `TA` or `prOf` are also valid).
+* `ROLE` must be either `ta` or `prof` (Case-insensitive, which means `TA` or `prof` are also valid).
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/prof`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 r/TA t/criminal m/CS2103T`
+* `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 r/TA m/CS2103T`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in AcademySource.
 
 <img src="images/list_before.png" width="500" onclick="openModal(this)"/>
 <img src="images/list_after.png" width="500" onclick="openModal(this)"/>
@@ -166,7 +182,7 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing contact in AcademySource.
 
 <img src="images/edit_before.png" width="500" onclick="openModal(this)"/>
 <img src="images/edit_after.png" width="500" onclick="openModal(this)"/>
@@ -187,6 +203,7 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 2 m/CS2103T m/CS2106` Edits the module of the 2nd person to be `CS2103T` and `CS2106`.
 
+
 ### Locating persons by name, phone, module, and favourites: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -194,7 +211,7 @@ Finds persons whose names contain any of the given keywords.
 <img src="images/find_before.png" width="500" onclick="openModal(this)"/>
 <img src="images/find_after.png" width="500" onclick="openModal(this)"/>
 
-Format: `find [n/ NAME_KEYWORDS] [p/ PHONE_KEYWORDS] [m/ MODULE_KEYWORDS] [f/ FAVOURITE_STATUS]`
+Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [m/MODULE_KEYWORDS] [f/FAVOURITE_STATUS]`
 
 - `n/` — Matches names using **case-insensitive, partial matches**.
 - `p/` — Matches phone numbers using **partial matches**.
@@ -215,16 +232,16 @@ Format: `find [n/ NAME_KEYWORDS] [p/ PHONE_KEYWORDS] [m/ MODULE_KEYWORDS] [f/ FA
 
 #### ✅ Valid Examples
 
-| Command                   | Description                                                                                |
-|---------------------------|--------------------------------------------------------------------------------------------|
-| `find n/ John`            | Finds persons with names matching `John`, e.g., `John Doe`.                                |
-| `find n/ alex david`      | Finds persons with names matching either `alex` or `david`, e.g., `Alex Yeoh`, `David Li`. |
-| `find p/ 9123`            | Finds persons whose phone numbers contain `9123`. e.g. `91234567`                          |
-| `find m/ 2103`            | Finds persons with module codes like "CS2103T".                                            |
-| `find f/ y`               | Finds persons marked as favourites.                                                        |
-| `find f/ n`               | Finds persons who are not marked as favourites.                                            |
-| `find n/ John m/ CS2103T` | Finds persons whose name matches "John" **and** who are in the module "CS2103T".           |
-| `find m/ CS2103 f/ y`     | Finds persons whose module matches `CS2103` **and** who are marked as favourites.          |
+| Command             | Description                                                                     |  
+|---------------------|---------------------------------------------------------------------------------|
+| `find n/John`       | Finds persons with names matching `John`, e.g., `John Doe`.                     |
+| `find n/alex david` | Finds persons with names matching either `alex` or `david`, e.g., `Alex Yeoh`, `David Li`. |
+| `find p/9123`       | Finds persons whose phone numbers contain `9123`. e.g. `91234567`               |
+| `find m/2103`       | Finds persons with module codes like "CS2103T".                                 |
+| `find f/y`          | Finds persons marked as favourites.                                             |
+| `find f/n`          | Finds persons who are not marked as favourites.                                 |
+| `find n/John m/CS2103T` | Finds persons whose name matches "John" **and** who are in the module "CS2103T".|
+| `find m/CS2103 f/y` | Finds persons whose module matches `CS2103` **and** who are marked as favourites. |             
 
 ---
 
@@ -233,8 +250,8 @@ Format: `find [n/ NAME_KEYWORDS] [p/ PHONE_KEYWORDS] [m/ MODULE_KEYWORDS] [f/ FA
 | Command | Reason |
 |--------|--------|
 | `find` | No search prefixes provided. |
-| `find n/ John n/ Doe` | Duplicate `n/` prefix is not allowed. |
-| `find f/ maybe` | Invalid value for `f/`. Only `y` or `n` are allowed. |
+| `find n/John n/Doe` | Duplicate `n/` prefix is not allowed. |
+| `find f/maybe` | Invalid value for `f/`. Only `y` or `n` are allowed. |
 
 ---
 
@@ -255,12 +272,12 @@ Format: `fav INDEX`
 * the index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `fav 2` marks the 2nd person in the address book as favourite.
+* `list` followed by `fav 2` marks the 2nd contact in AcademySource as favourite.
 * `fav 2` again un-marks the person.
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified contact from AcademySource.
 
 <img src="images/delete_before.png" width="500" onclick="openModal(this)"/>
 <img src="images/delete_after.png" width="500" onclick="openModal(this)"/>
@@ -273,22 +290,22 @@ Format: `delete INDEX [MORE INDEX]`
 * Index should not repeat in the same command.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete 1 2 3` delete the first 3 person in contacts, given that all index are within the size of the contact list.
+* `list` followed by `delete 2` deletes the 2nd contact from the result of the `list` command..
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+* `delete 1 2 3` deletes the first 3 contacts, given that all indexes exist within the contact list.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from AcademySource.
 
 <img src="images/clear_before.png" width="500" onclick="openModal(this)"/>
 <img src="images/clear_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting AcademySource : `exit`
 
-Exits the program.
+Exits AcademySource.
 
 <img src="images/exit_before.png" width="500" onclick="openModal(this)"/>
 
@@ -300,7 +317,7 @@ AcademySource data are saved in the hard disk automatically after any command th
 
 ### Editing the data file
 
-AcademySource data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AcademySource data are saved automatically as a JSON file `[JAR file location]/data/academysource.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AcademySource will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -338,3 +355,14 @@ _Details coming soon ..._
 | **Find**   | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [m/MODULE_KEYWORDS] [f/FAVOURITE_STATUS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y`               |
 | **List**   | `list`                                                                                                                                               |
 | **Help**   | `help`                                                                                                                                               |     
+
+--------------------------------------------------------------------------------------------------------------------
+## Glossary
+
+| Term           | Definition                                                                                                                                                                     |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**        | `Command Line Interface; a way to interact with the application using` <br> `text-based commands`                                                                              |
+| **Index**      | `A positive integer that refers to a contact's position in the displayed list`                                                                                                 |
+| **JDK**        | `Java Development Kit; a software development environment required to run and develop Java` <br> `applications like AcademySource. Version 17 or above is needed`              |
+| **Parameters** | `Values supplied by the user in commands (e.g., name, phone, module) that determine the` <br> `action taken by AcademySource. Often prefixed with identifiers like n/, p/, m/` |
+| **Field**      | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                       |
