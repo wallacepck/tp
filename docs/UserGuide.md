@@ -39,6 +39,7 @@ With AcademySource, you can:
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
     - [Archiving data files(coming soon)](#archiving-data-files-coming-in-v20)
+
   </details>
 - [FAQ](#faq)
 - [Known issues](#known-issues)
