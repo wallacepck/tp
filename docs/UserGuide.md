@@ -147,7 +147,9 @@ With AcademySource, you can:
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+
 ### Prefix Table [🔝](#table-of-content)
+
 | **Prefix** | **Meaning**                | **Usage Example**     | **Remarks**                                                           |
 |------------|----------------------------|-----------------------|-----------------------------------------------------------------------|
 | `n/`       | Name                       | `n/John Doe`          |                                                                       |
@@ -361,12 +363,13 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
-| Term        | Definition                                                                                                                                                                     |
-|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **CLI**     | `Command Line Interface; a way to interact with the application using` <br> `text-based commands`                                                                              |
-| **index**   | `A positive integer that refers to a contact's position in the displayed list`                                                                                                 |
-| **JDK**     | `Java Development Kit; a software development environment required to run and develop Java` <br> `applications like AcademySource. Version 17 or above is needed`              |
+| Term           | Definition                                                                                                                                                                     |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**        | `Command Line Interface; a way to interact with the application using` <br> `text-based commands`                                                                              |
+| **Index**      | `A positive integer that refers to a contact's position in the displayed list`                                                                                                 |
+| **JDK**        | `Java Development Kit; a software development environment required to run and develop Java` <br> `applications like AcademySource. Version 17 or above is needed`              |
 | **Parameters** | `Values supplied by the user in commands (e.g., name, phone, module) that determine the` <br> `action taken by AcademySource. Often prefixed with identifiers like n/, p/, m/` |
-| **Field**   | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                       |
+| **Field**      | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                       |
 
 [back to top](#table-of-content)
+
