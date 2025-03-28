@@ -16,6 +16,7 @@ With AcademySource, you can:
 * Store and manage contact information of professors and TAs (e.g., email, phone number, module)
 * Search for contacts by name, contact details, and/or module code
 * Mark important contacts as favorites for quick access
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
