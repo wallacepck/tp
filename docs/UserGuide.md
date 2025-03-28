@@ -100,8 +100,15 @@ With AcademySource, you can:
 
 
 5. Open AcademySource by double-clicking the program file, `academysource.jar`. Alternatively, you may type `java -jar academysource.jar` into your [terminal](#quick-start) and press enter.  
-   **What you'll see:**  
-   <img src="images/BootGui.png" width="700" onclick="openModal(this)"/>
+   **What you'll see:**   
+   <details>
+        <summary><strong>On Windows:</strong></summary>
+            <img src="images/BootGuiWindows.png" width="700" onclick="openModal(this)"/>
+   </details>
+   <details>
+        <summary><strong>On Mac OS:</strong></summary>
+            <img src="images/BootGui.png" width="700" onclick="openModal(this)"/>
+   </details>
 
 
 6. Type a command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br>
@@ -121,6 +128,28 @@ With AcademySource, you can:
 7. Refer to the [Features](#features) below for details of each command.
 <br><br>
 [Back to top](#table-of-content)
+--------------------------------------------------------------------------------------------------------------------
+## Graphic User Interface Layout
+
+![Module Page](https://github.com/user-attachments/assets/b60b3f57-c899-435b-b07f-8ffcd3cdb34b)
+![Contacts Page](https://github.com/user-attachments/assets/16145b59-b771-4418-8859-b1cdfca36604)
+
+
+Basic features:
+1. Menu Bar: A top menu bar which provides access to various functions within AcademySource.
+2. Command Box: An input with a placeholder "Enter Command Here..." to enter commands into.
+3. Result Display: A rectangular display box to display success message upon successful command execution, or error message upon failure.
+4. Side Navigation: Navigates between Modules and Contacts tab.
+
+Modules Page:
+1. Module Files: A folder that stores all contacts related to the module code.
+   Upon pressing, AcademySource will be directed to contacts page which displays contacts that matches the module code.
+
+Contacts Page:
+1. Contact List: A list of contacts stored inside AcademySource. Each row stores a contact name card with their relevant details.
+2. Role: The role which each contact is assigned to. TA will be displayed as yellow bookmarker while Professor will be displayed as orange bookmarker.
+3. Favourite Mark: A star symbol which indicate a contact is marked as favourite by you.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -163,7 +192,7 @@ With AcademySource, you can:
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+<img src="images/helpMessage.png" width="956" onclick="openModal(this)"/>
 
 Format: `help`
 
@@ -176,6 +205,10 @@ Format: `list`
 ### Adding a person: `add`
 
 Adds a contact to AcademySource.
+
+
+<img src="images/add_before.png" width="500" onclick="openModal(this)"/>
+<img src="images/add_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE [m/MODULE]…​`
 
@@ -193,11 +226,17 @@ Examples:
 
 Shows a list of all contacts in AcademySource.
 
+<img src="images/list_before.png" width="500" onclick="openModal(this)"/>
+<img src="images/list_after.png" width="500" onclick="openModal(this)"/>
+
 Format: `list`
 
 ### Editing a person : `edit`
 
 Edits an existing contact in AcademySource.
+
+<img src="images/edit_before.png" width="500" onclick="openModal(this)"/>
+<img src="images/edit_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG] [m/MODULE] [m/MORE_MODULES]…​`
 
@@ -219,6 +258,9 @@ Examples:
 ### Locating persons by name, phone, module, and favourites: `find` [🔝](#table-of-content)
 
 Finds persons whose names contain any of the given keywords.
+
+<img src="images/find_before.png" width="500" onclick="openModal(this)"/>
+<img src="images/find_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [m/MODULE_KEYWORDS] [f/FAVOURITE_STATUS]`
 
@@ -271,6 +313,9 @@ Mark a specific person as favourite, or un-mark a person from favourite if that 
 already marked as favourite.
 A star will be shown beside the person's name if it is marked as favourite.
 
+<img src="images/fav_before.png" width="500" onclick="openModal(this)"/>
+<img src="images/fav_after.png" width="500" onclick="openModal(this)"/>
+
 Format: `fav INDEX`
 
 * Toggles the favourite status of the person at the specified `INDEX`.
@@ -284,6 +329,9 @@ Examples:
 ### Deleting a person : `delete`
 
 Deletes the specified contact from AcademySource.
+
+<img src="images/delete_before.png" width="500" onclick="openModal(this)"/>
+<img src="images/delete_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `delete INDEX [MORE INDEX]`
 
@@ -300,6 +348,9 @@ Examples:
 ### Clearing all entries : `clear`
 
 Clears all entries from AcademySource.
+
+<img src="images/clear_before.png" width="500" onclick="openModal(this)"/>
+<img src="images/clear_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `clear`
 
