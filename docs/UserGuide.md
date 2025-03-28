@@ -122,6 +122,28 @@ With AcademySource, you can:
 <br><br>
 [Back to top](#table-of-content)
 --------------------------------------------------------------------------------------------------------------------
+## Graphic User Interface Layout
+
+![Module Page](https://github.com/user-attachments/assets/b60b3f57-c899-435b-b07f-8ffcd3cdb34b)
+![Contacts Page](https://github.com/user-attachments/assets/16145b59-b771-4418-8859-b1cdfca36604)
+
+
+Basic features:
+1. Menu Bar: A top menu bar which provides access to various functions within AcademySource.
+2. Command Box: An input with a placeholder "Enter Command Here..." to enter commands into.
+3. Result Display: A rectangular display box to display success message upon successful command execution, or error message upon failure.
+4. Side Navigation: Navigates between Modules and Contacts tab.
+
+Modules Page:
+1. Module Files: A folder that stores all contacts related to the module code.
+   Upon pressing, AcademySource will be directed to contacts page which displays contacts that matches the module code.
+
+Contacts Page:
+1. Contact List: A list of contacts stored inside AcademySource. Each row stores a contact name card with their relevant details.
+2. Role: The role which each contact is assigned to. TA will be displayed as yellow bookmarker while Professor will be displayed as orange bookmarker.
+3. Favourite Mark: A star symbol which indicate a contact is marked as favourite by you.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
