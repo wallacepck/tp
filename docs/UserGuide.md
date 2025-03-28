@@ -23,22 +23,21 @@ With AcademySource, you can:
 - [Quick start](#quick-start)
 - <details>
     <summary>
-    <a href="#features">Features</a>
+        <a href="#features">Features</a>
     </summary>
     <a href="#Prefix-table"> - Prefix table <br></a>
     <a href="#Viewing-help--help"> - View help <br></a>
     <a href="#adding-a-person-add"> - Adding a person <br></a>
-    <a href="#listing-all-persons--list"> Listing all persons <br></a>
-    
-    - [Editing a person](#editing-a-person--edit)
-    - [Locating persons by name, phone, module and favourite](#locating-persons-by-name-phone-module-and-favourites-find)
-    - [Mark / un-mark a person as favourite](#mark--un-mark-a-person-as-favourite--fav)
-    - [Deleting a person](#deleting-a-person--delete)
-    - [Clearing all entries](#clearing-all-entries--clear)
-    - [Exiting the program](#exiting-the-program--exit)
-    - [Saving the data](#saving-the-data)
-    - [Editing the data file](#editing-the-data-file)
-    - [Archiving data files(coming soon)](#archiving-data-files-coming-in-v20)
+    <a href="#listing-all-persons--list"> - Listing all persons <br></a>
+    <a href="#editing-a-person--edit"> - Editing a person <br></a>
+    <a href="#locating-persons-by-name-phone-module-and-favourites-find"> - Locating persons by name, phone, module and favourite <br></a>
+    <a href="#mark--un-mark-a-person-as-favourite--fav"> - Mark / un-mark a person as favourite <br></a>
+    <a href="#deleting-a-person--delete"> - Deleting a person <br></a>
+    <a href="#clearing-all-entries--clear"> - Clearing all entries <br></a>
+    <a href="#exiting-the-program--exit"> - Exiting the program <br></a>
+    <a href="#saving-the-data"> - Saving the data <br></a>
+    <a href="#editing-the-data-file"> - Editing the data file <br></a>
+    <a href="#archiving-data-files-coming-in-v20"> - Archiving data files(coming soon) <br></a>
 
   </details>
 - [FAQ](#faq)
