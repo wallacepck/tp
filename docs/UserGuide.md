@@ -207,8 +207,12 @@ Format: `list`
 
 Adds a contact to AcademySource.
 
+Before command:
 
 <img src="images/add_before.png" width="500" onclick="openModal(this)"/>
+
+After command:
+
 <img src="images/add_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE [m/MODULE]…​`
@@ -227,7 +231,12 @@ Examples:
 
 Shows a list of all contacts in AcademySource.
 
+Before command:
+
 <img src="images/list_before.png" width="500" onclick="openModal(this)"/>
+
+After command:
+
 <img src="images/list_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `list`
@@ -236,7 +245,12 @@ Format: `list`
 
 Edits an existing contact in AcademySource.
 
+Before command:
+
 <img src="images/edit_before.png" width="500" onclick="openModal(this)"/>
+
+After command:
+
 <img src="images/edit_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG] [m/MODULE] [m/MORE_MODULES]…​`
@@ -260,7 +274,12 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
+Before command:
+
 <img src="images/find_before.png" width="500" onclick="openModal(this)"/>
+
+After command:
+
 <img src="images/find_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [m/MODULE_KEYWORDS] [f/FAVOURITE_STATUS]`
@@ -314,7 +333,12 @@ Mark a specific person as favourite, or un-mark a person from favourite if that 
 already marked as favourite.
 A star will be shown beside the person's name if it is marked as favourite.
 
+Before command:
+
 <img src="images/fav_before.png" width="500" onclick="openModal(this)"/>
+
+After command:
+
 <img src="images/fav_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `fav INDEX`
@@ -331,7 +355,12 @@ Examples:
 
 Deletes the specified contact from AcademySource.
 
+Before command:
+
 <img src="images/delete_before.png" width="500" onclick="openModal(this)"/>
+
+After command:
+
 <img src="images/delete_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `delete INDEX [MORE INDEX]`
@@ -350,7 +379,12 @@ Examples:
 
 Clears all entries from AcademySource.
 
+Before command:
+
 <img src="images/clear_before.png" width="500" onclick="openModal(this)"/>
+
+After command:
+
 <img src="images/clear_after.png" width="500" onclick="openModal(this)"/>
 
 Format: `clear`
