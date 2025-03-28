@@ -18,6 +18,30 @@ With AcademySource, you can:
 * Mark important contacts as favorites for quick access
 --------------------------------------------------------------------------------------------------------------------
 
+## Table of Content
+- [Quick start](#quick-start)
+- <details>
+      <summary>
+      <a href="#features">Features</a>
+      </summary>
+  
+    - [Viewing help](#viewing-help--help)
+    - [Adding a person](#adding-a-person-add)
+    - [Listing all persons](#listing-all-persons--list)
+    - [Editing a person](#editing-a-person--edit)
+    - [Locating persons by name, phone, module and favourite](#locating-persons-by-name-phone-module-and-favourites-find)
+    - [Mark / un-mark a person as favourite](#mark--un-mark-a-person-as-favourite--fav)
+    - [Deleting a person](#deleting-a-person--delete)
+    - [Clearing all entries](#clearing-all-entries--clear)
+    - [Exiting the program](#exiting-the-program--exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files(coming soon)](#archiving-data-files-coming-in-v20)
+  </details>
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
+
 ## Quick start
 
 1. Ensure you have `Java 17` or above installed on your computer. Follow the steps below to check if you already have `Java 17` installed:
@@ -132,7 +156,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE [m/MODULE]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
