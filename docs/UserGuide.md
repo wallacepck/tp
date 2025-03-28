@@ -21,24 +21,25 @@ With AcademySource, you can:
 
 ## Table of Content
 - [Quick start](#quick-start)
+- [Graphic User Interface Layout](#graphic-user-interface-layout)
 - <details>
-      <summary>
-      <a href="#features">Features</a>
-      </summary>
-  
-    - [Prefix Table](#prefix-table)
-    - [Viewing help](#viewing-help--help)
-    - [Adding a person](#adding-a-person-add)
-    - [Listing all persons](#listing-all-persons--list)
-    - [Editing a person](#editing-a-person--edit)
-    - [Locating persons by name, phone, module and favourite](#locating-persons-by-name-phone-module-and-favourites-find)
-    - [Mark / un-mark a person as favourite](#mark--un-mark-a-person-as-favourite--fav)
-    - [Deleting a person](#deleting-a-person--delete)
-    - [Clearing all entries](#clearing-all-entries--clear)
-    - [Exiting the program](#exiting-the-program--exit)
-    - [Saving the data](#saving-the-data)
-    - [Editing the data file](#editing-the-data-file)
-    - [Archiving data files(coming soon)](#archiving-data-files-coming-in-v20)
+    <summary>
+        <a href="#features">Features</a>
+    </summary>
+    <a href="#prefix-table"> - Prefix table <br></a>
+    <a href="#viewing-help--help"> - Viewing help <br></a>
+    <a href="#listing-all-persons--list"> - Listing all persons <br></a>
+    <a href="#adding-a-person-add"> - Adding a person <br></a>
+    <a href="#editing-a-person--edit"> - Editing a person <br></a>
+    <a href="#locating-persons-by-name-phone-module-and-favourites--find"> - Locating persons by name, phone, module and favourite <br></a>
+    <a href="#mark-un-mark-a-person-as-favourite--fav"> - Mark / un-mark a person as favourite <br></a>
+    <a href="#deleting-a-person--delete"> - Deleting a person <br></a>
+    <a href="#clearing-all-entries--clear"> - Clearing all entries <br></a>
+    <a href="#exiting-academysource--exit"> - Exiting AcademySource <br></a>
+    <a href="#saving-the-data"> - Saving the data <br></a>
+    <a href="#editing-the-data-file"> - Editing the data file <br></a>
+    <a href="#archiving-data-files-coming-in-v20"> - Archiving data files(coming soon) <br></a>
+
   </details>
 - [FAQ](#faq)
 - [Known issues](#known-issues)
@@ -176,7 +177,7 @@ Contacts Page:
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-
+<a id="prefix-table"></a>
 ### Prefix Table [🔝](#table-of-content)
 
 | **Prefix** | **Meaning**                | **Usage Example**     | **Remarks**                                                           |
@@ -254,7 +255,7 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 2 m/CS2103T m/CS2106` Edits the module of the 2nd person to be `CS2103T` and `CS2106`.
 
-
+<a id="locating-persons-by-name-phone-module-and-favourites--find"></a>
 ### Locating persons by name, phone, module, and favourites: `find` [🔝](#table-of-content)
 
 Finds persons whose names contain any of the given keywords.
@@ -306,7 +307,7 @@ Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [m/MODULE_KEYWORDS] [f/FAVOUR
 
 ---
 
-
+<a id="mark-un-mark-a-person-as-favourite--fav"></a>
 ### Mark / un-mark a person as favourite : `fav` [🔝](#table-of-content)
 
 Mark a specific person as favourite, or un-mark a person from favourite if that person is
@@ -360,6 +361,7 @@ Exits AcademySource.
 
 Format: `exit`
 
+<a id="saving-the-data"></a>
 ### Saving the data [🔝](#table-of-content)
 
 AcademySource data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
