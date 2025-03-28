@@ -170,7 +170,7 @@ With AcademySource, you can:
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+<img src="images/helpMessage.png" width="956" onclick="openModal(this)"/>
 
 Format: `help`
 
@@ -335,8 +335,6 @@ Format: `clear`
 ### Exiting AcademySource : `exit`
 
 Exits AcademySource.
-
-<img src="images/exit_before.png" width="500" onclick="openModal(this)"/>
 
 Format: `exit`
 
