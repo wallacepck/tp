@@ -13,8 +13,6 @@ title: User Guide
 removing the need to dig through emails or portals. With its simple and efficient CLI-based design, AcademySource lets you manage academic contacts quickly and effortlessly—so you can stay organized and focused on your learning journey.
 
 With AcademySource, you can:
-* Store and manage contact information of professors and TAs (e.g., email, phone number, module)
-* Search for contacts by name, contact details, and/or module code
 * Store and manage contact information of professors and TAs (e.g., email, phone number, role, tags, module)
 * Search for contacts by name, contact details, role, and/or module code
 * Mark important contacts as favorites for quick access
