@@ -120,6 +120,16 @@ With AcademySource, you can:
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+### Prefix Table
+| **Prefix** | **Meaning**                | **Usage Example**     | **Remarks**                                                           |
+|------------|----------------------------|-----------------------|-----------------------------------------------------------------------|
+| `n/`       | Name                       | `n/John Doe`          |                                                                       |
+| `p/`       | Phone number               | `p/98765432`          |                                                                       |
+| `e/`       | Email address              | `e/johnd@example.com` |                                                                       |
+| `r/`       | Role (`ta` or `prof`)      | `r/TA` or `r/PROF`    | Not used in `find`.                                                   |
+| `m/`       | Module (can have multiple) | `m/CS2103T m/CS2101`  | Used differently in `find`. For multiple modules, `m/CS2103T CS2106`. |
+| `f/`       | Favourite                  | `f/y` or `f/n`        | Not used in `add` or `edit`.                                          |
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -128,6 +138,11 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Listing all persons : `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
 
 ### Adding a person: `add`
 
@@ -143,13 +158,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/prof`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 r/TA t/criminal m/CS2103T`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
+* `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 r/TA m/CS2103T`
 
 ### Editing a person : `edit`
 
@@ -170,6 +179,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 2 m/CS2103T m/CS2106` Edits the module of the 2nd person to be `CS2103T` and `CS2106`.
+
 
 ### Locating persons by name, phone, module, and favourites: `find`
 
