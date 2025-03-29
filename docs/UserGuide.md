@@ -372,7 +372,7 @@ Format: `delete INDEX [MORE INDEX]`
 * Index should not repeat in the same command.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd contact from the result of the `list` command..
+* `list` followed by `delete 2` deletes the 2nd contact from the result of the `list` command.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 * `delete 1 2 3` deletes the first 3 contacts, given that all indexes exist within the contact list.
 
@@ -403,7 +403,7 @@ Format: `exit`
 
 AcademySource data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-<a id="editing-the-data-file"/></a>
+<a id="editing-the-data-file"></a>
 ### Editing the data file [🔝](#table-of-content)
 
 AcademySource data are saved automatically as a JSON file `[JAR file location]/data/academysource.json`. Advanced users are welcome to update data directly by editing that data file.
