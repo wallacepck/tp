@@ -132,7 +132,7 @@ With AcademySource, you can:
 
 **:information_source: Notes about the command box:**<br>
 
-The command box remembers up to 16 previous commands. You can use the Up Arrow (↑) to scroll back through them and the Down Arrow (↓) to move forward. This saves time by letting you reuse commands without retyping them.
+The command box remembers up to 16 previous commands. You can use the Up Arrow (↑) on your keyboard to scroll back through them and the Down Arrow (↓) to move forward. This saves time by letting you reuse commands without retyping them.
 
 If you edit a recalled command, the history navigation resets, and you can’t scroll forward anymore. Once you press Enter, the modified command is saved as a new history entry.
 
