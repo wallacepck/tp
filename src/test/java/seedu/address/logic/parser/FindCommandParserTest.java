@@ -41,6 +41,8 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "n/ Darren e/ darren@test.com",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "m/2101",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -62,25 +64,25 @@ public class FindCommandParserTest {
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, Collections.singletonList("CS2103T"));
         FindCommand expectedFindCommand =
                 new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
-        assertParseSuccess(parser, "m/CS2103T", expectedFindCommand);
+        assertParseSuccess(parser, "mm/CS2103T", expectedFindCommand);
         // Partial module code
         fieldKeywordMap.clear();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, Collections.singletonList("2103"));
         expectedFindCommand =
                 new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
-        assertParseSuccess(parser, "m/2103", expectedFindCommand);
+        assertParseSuccess(parser, "mm/2103", expectedFindCommand);
         // Multiple full module codes
         fieldKeywordMap.clear();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, Arrays.asList("CS2103T", "CS3230"));
         expectedFindCommand =
                 new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
-        assertParseSuccess(parser, "m/CS2103T CS3230", expectedFindCommand);
+        assertParseSuccess(parser, "mm/CS2103T CS3230", expectedFindCommand);
         // Multiple partial module codes
         fieldKeywordMap.clear();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, Arrays.asList("2101", "3230", "IS"));
         expectedFindCommand =
                 new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
-        assertParseSuccess(parser, "m/2101 3230 IS", expectedFindCommand);
+        assertParseSuccess(parser, "mm/2101 3230 IS", expectedFindCommand);
     }
 
     @Test
@@ -182,6 +184,6 @@ public class FindCommandParserTest {
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.ROLE, List.of("TA"));
         FindCommand expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
-        assertParseSuccess(parser, "n/Darren p/91234567 m/CS3230 f/y r/TA", expectedFindCommand);
+        assertParseSuccess(parser, "n/Darren p/91234567 mm/CS3230 f/y r/TA", expectedFindCommand);
     }
 }

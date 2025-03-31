@@ -19,7 +19,7 @@ import seedu.address.model.person.PersonContainsKeywordsPredicate.SearchField;
  */
 public class FindCommandParser implements Parser<FindCommand> {
     private static final Pattern PREFIX_PATTERN =
-            Pattern.compile("(?<prefix>[npmfr]/)(?<keywords>.*?)(?=\\s+[npmfr]/|$)",
+            Pattern.compile("(?<prefix>(n/|p/|mm/|f/|r/))(?<keywords>.*?)(?=\\s+(n/|p/|mm/|f/|r/)|$)",
                     Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 
     /**
@@ -49,7 +49,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         long invalidPrefixCount = Arrays.stream(args.split("\\s+"))
                 .map(String::toLowerCase)
                 .filter(token -> token.matches("^[a-z]+/$"))
-                .filter(token -> !token.matches("^(n/|m/|p/|f/|r/)$"))
+                .filter(token -> !token.matches("^(n/|mm/|p/|f/|r/)$"))
                 .count();
         if (invalidPrefixCount > 0) {
             throw new ParseException(
@@ -115,7 +115,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         return switch (prefix.toLowerCase()) {
         case "n/" -> PersonContainsKeywordsPredicate.SearchField.NAME;
         case "p/" -> PersonContainsKeywordsPredicate.SearchField.PHONE;
-        case "m/" -> PersonContainsKeywordsPredicate.SearchField.MODULE;
+        case "mm/" -> PersonContainsKeywordsPredicate.SearchField.MODULE;
         case "f/" -> PersonContainsKeywordsPredicate.SearchField.FAVOURITE;
         case "r/" -> PersonContainsKeywordsPredicate.SearchField.ROLE;
         default -> throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

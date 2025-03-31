@@ -20,7 +20,7 @@ public class FindCommand extends Command {
             + "Examples:\n"
             + "  " + COMMAND_WORD + " n/alice bob charlie\n"
             + "  " + COMMAND_WORD + " p/91234567\n"
-            + "  " + COMMAND_WORD + " m/CS2103T\n"
+            + "  " + COMMAND_WORD + " mm/CS2103T\n"
             + "  " + COMMAND_WORD + " f/y\n"
             + "  " + COMMAND_WORD + " r/professor\n";
 
