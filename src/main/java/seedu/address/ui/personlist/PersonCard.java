@@ -23,6 +23,10 @@ import seedu.address.ui.UiPart;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final Image TA_TAG = new Image(PersonCard.class.getResourceAsStream("/images/tag_ta.png"));
+    private static final Image PROF_TAG = new Image(PersonCard.class.getResourceAsStream("/images/tag_prof.png"));
+    private static final Image FAVOURITE_STAR = new Image(PersonCard.class
+            .getResourceAsStream("/images/favourite_star.png"));
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -73,17 +77,13 @@ public class PersonCard extends UiPart<Region> {
         tagLabel.setText(role.toString());
 
         // sets tag colour based on the role. TA = yellow. Prof = orange
-        Image taTag = new Image(getClass().getResourceAsStream("/images/tag_ta.png"));
-        Image profTag = new Image(getClass().getResourceAsStream("/images/tag_prof.png"));
-
         Image image = switch (role) {
-        case TA -> taTag;
-        case PROFESSOR -> profTag;
+        case TA -> TA_TAG;
+        case PROFESSOR -> PROF_TAG;
         };
         tagType.setImage(image);
 
-        Image favouriteStar = new Image(getClass().getResourceAsStream("/images/favourite_star.png"));
-        favourite.setImage(favouriteStar);
+        favourite.setImage(FAVOURITE_STAR);
         favourite.visibleProperty().bind(isFavourite);
         person.getModules().stream()
                 .sorted(Comparator.comparing(module -> module.toString()))
