@@ -8,6 +8,8 @@ import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -30,6 +32,7 @@ public class ModuleFolders extends UiPart<Region> {
     private final Image folderImage = new Image(getClass().getResourceAsStream("/images/module_folder.png"));
     private final ObservableList<Person> personList;
     private final MainWindow mainWindow;
+    private final VBox emptyPlaceholder;
 
     @FXML
     private FlowPane folders;
@@ -45,6 +48,7 @@ public class ModuleFolders extends UiPart<Region> {
         super(FXML);
         this.personList = personList;
         this.mainWindow = mainWindow;
+        this.emptyPlaceholder = createEmptyPlaceholder();
 
         // Initialise UI
         updateFolders();
@@ -76,6 +80,8 @@ public class ModuleFolders extends UiPart<Region> {
                     .forEach(module -> moduleStringSet.add(module.getModuleCode())));
 
             moduleStringSet.forEach(moduleString -> createFolder(moduleString, mainWindow));
+
+            displayFolders();
         });
     }
 
@@ -109,5 +115,32 @@ public class ModuleFolders extends UiPart<Region> {
         folders.getChildren().add(container);
     }
 
+    // TODO: Add javadoc
+    private VBox createEmptyPlaceholder() {
+        // Set Label
+        Label emptyLabel = new Label("Contacts list is currently empty");
+        emptyLabel.setStyle("-fx-font-size: 20px; -fx-text-fill: #888;");
 
+        // Set Image
+        Image folderNotFoundImage = new Image(getClass().getResourceAsStream("/images/empty-folder.png"));
+        ImageView emptyFolderImage = new ImageView(folderNotFoundImage);
+        emptyFolderImage.setOpacity(0.40);
+
+        VBox placeholder = new VBox(emptyFolderImage, emptyLabel);
+        placeholder.setAlignment(Pos.CENTER);
+        placeholder.setPadding(new Insets(20));
+
+        return placeholder;
+    }
+
+    // TODO: Add javadoc
+    private void displayFolders() {
+        if (folders.getChildren().isEmpty()) {
+            folders.setAlignment(Pos.CENTER);
+            folders.getChildren().add(emptyPlaceholder);
+        } else {
+            folders.setAlignment(Pos.TOP_LEFT);
+            folders.getChildren().remove(emptyPlaceholder);
+        }
+    }
 }

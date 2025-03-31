@@ -186,8 +186,11 @@
 }
 
 .list-cell:filled:hover {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
     -fx-background-color: #6c96b8;
-    -fx-cursor: hand;
+    -fx-cursor: pointer;
 }
 
 .list-cell .label {
@@ -195,6 +198,9 @@
 }
 
 .list-cell:filled:selected {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
     -fx-background-insets: 0;
 }
 
