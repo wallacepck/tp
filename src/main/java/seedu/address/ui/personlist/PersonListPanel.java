@@ -51,6 +51,7 @@ public class PersonListPanel extends UiPart<Region> {
          *  Relevant topic from StackOverflow:
          *  https://stackoverflow.com/questions/76586932/javafx-listview-selection#comment135033888_76586932
          */
+        personListView.setSelectionModel(null);
         personListView.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> event.consume());
     }
 
@@ -79,6 +80,7 @@ public class PersonListPanel extends UiPart<Region> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
+            setOnMouseClicked(MouseEvent::consume);
 
             if (empty || person == null) {
                 setGraphic(null);
