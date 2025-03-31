@@ -19,7 +19,7 @@ import seedu.address.model.person.PersonContainsKeywordsPredicate.SearchField;
  */
 public class FindCommandParser implements Parser<FindCommand> {
     private static final Pattern PREFIX_PATTERN =
-            Pattern.compile("(?<prefix>[npmf]/)(?<keywords>.*?)(?=\\s+[npmf]/|$)",
+            Pattern.compile("(?<prefix>[npmfr]/)(?<keywords>.*?)(?=\\s+[npmfr]/|$)",
                     Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 
     /**
@@ -49,7 +49,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         long invalidPrefixCount = Arrays.stream(args.split("\\s+"))
                 .map(String::toLowerCase)
                 .filter(token -> token.matches("^[a-z]+/$"))
-                .filter(token -> !token.matches("^(n/|m/|p/|f/)$"))
+                .filter(token -> !token.matches("^(n/|m/|p/|f/|r/)$"))
                 .count();
         if (invalidPrefixCount > 0) {
             throw new ParseException(
@@ -71,9 +71,11 @@ public class FindCommandParser implements Parser<FindCommand> {
             SearchField field = getSearchField(prefix);
             assert field != null : "Parsed prefix must map to a valid SearchField";
             List<String> keywords = Arrays.asList(keywordStr.split("\\s+"));
-
             if (field == SearchField.FAVOURITE) {
                 validateFavouriteKeywords(keywords);
+            }
+            if (field == SearchField.ROLE) {
+                validateRoleKeywords(keywords);
             }
             if (fieldKeywordsMap.containsKey(field)) {
                 throw new ParseException("Duplicate prefix detected: " + prefix
@@ -84,12 +86,24 @@ public class FindCommandParser implements Parser<FindCommand> {
         return fieldKeywordsMap;
     }
 
+    private void validateRoleKeywords(List<String> keywords) throws ParseException {
+        if (keywords.size() != 1) {
+            throw new ParseException("r/ field must contain exactly one keyword: "
+                    + "'professor' or 'TA' (case-insensitive).");
+        }
+        String lower = keywords.get(0).toLowerCase();
+        if (!lower.equals("professor") && !lower.equals("ta")) {
+            throw new ParseException("r/ field only accepts 'professor' or 'TA' (case-insensitive).");
+        }
+    }
+
     private void validateFavouriteKeywords(List<String> keywords) throws ParseException {
-        for (String keyword : keywords) {
-            String lower = keyword.toLowerCase();
-            if (!lower.equals("y") && !lower.equals("n")) {
-                throw new ParseException("f/ field only accepts 'y' or 'n' (case-insensitive).");
-            }
+        if (keywords.size() != 1) {
+            throw new ParseException("f/ field must contain exactly one keyword: 'y' or 'n' (case-insensitive).");
+        }
+        String lower = keywords.get(0).toLowerCase();
+        if (!lower.equals("y") && !lower.equals("n")) {
+            throw new ParseException("f/ field only accepts 'y' or 'n' (case-insensitive).");
         }
     }
 
@@ -103,6 +117,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         case "p/" -> PersonContainsKeywordsPredicate.SearchField.PHONE;
         case "m/" -> PersonContainsKeywordsPredicate.SearchField.MODULE;
         case "f/" -> PersonContainsKeywordsPredicate.SearchField.FAVOURITE;
+        case "r/" -> PersonContainsKeywordsPredicate.SearchField.ROLE;
         default -> throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindCommand.MESSAGE_USAGE));
         };

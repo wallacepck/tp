@@ -42,6 +42,7 @@ public class TypicalPersons {
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com")
+            .withPhone("91234567")
             .withFavourite(true)
             .withModule("CS3230")
             .withRole(Role.TA)

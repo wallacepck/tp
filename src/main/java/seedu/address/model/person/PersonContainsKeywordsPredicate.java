@@ -33,6 +33,10 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
          * Search by favourite
          */
         FAVOURITE,
+        /**
+         * Search by role
+         */
+        ROLE
     }
 
     /**
@@ -48,33 +52,56 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return fieldKeywordMap.entrySet().stream().allMatch(entry -> {
-            SearchField searchField = entry.getKey();
-            List<String> keywords = entry.getValue();
+        return fieldKeywordMap.entrySet().stream()
+                .allMatch(entry ->
+                        testField(person, entry.getKey(), entry.getValue()));
+    }
 
-            return switch (searchField) {
-            case NAME -> keywords.stream()
-                    .anyMatch(keyword -> person
-                            .getName().fullName.toLowerCase()
-                            .contains(keyword.toLowerCase()));
-            case PHONE -> keywords.stream()
-                    .anyMatch(keyword -> person
-                            .getPhone().value
-                            .contains(keyword));
-            case MODULE -> keywords.stream()
-                    .anyMatch(keyword -> person.getModules().stream()
-                            .anyMatch(module -> module
-                                    .getModuleCode().toLowerCase()
-                                    .contains(keyword.toLowerCase())));
-            case FAVOURITE -> keywords.stream()
-                    .anyMatch(keyword -> {
-                        String lowerKeyword = keyword.toLowerCase();
-                        boolean isFavourite = person.getIsFavourite();
-                        return (lowerKeyword.equals("y") && isFavourite
-                                || lowerKeyword.equals("n") && !isFavourite);
-                    });
-            };
-        });
+    private boolean testField(Person person, SearchField searchField, List<String> keywords) {
+        return switch (searchField) {
+        case NAME -> testName(person, keywords);
+        case PHONE -> testPhone(person, keywords);
+        case MODULE -> testModule(person, keywords);
+        case FAVOURITE -> testFavourite(person, keywords);
+        case ROLE -> testRole(person, keywords);
+        };
+    }
+
+    private boolean testName(Person person, List<String> keywords) {
+        return keywords.stream()
+                .anyMatch(keyword -> person.getName().fullName.toLowerCase()
+                        .contains(keyword.toLowerCase()));
+    }
+
+    private boolean testPhone(Person person, List<String> keywords) {
+        return keywords.stream()
+                .anyMatch(keyword -> person.getPhone().value
+                        .contains(keyword));
+    }
+
+    private boolean testModule(Person person, List<String> keywords) {
+        return keywords.stream()
+                .anyMatch(keyword -> person.getModules().stream()
+                        .anyMatch(module -> module
+                                .getModuleCode().toLowerCase()
+                                .contains(keyword.toLowerCase())));
+    }
+
+    private boolean testFavourite(Person person, List<String> keywords) {
+        return keywords.stream()
+                .anyMatch(keyword -> {
+                    String lowerKeyword = keyword.toLowerCase();
+                    boolean isFavourite = person.getIsFavourite();
+                    return (lowerKeyword.equals("y") && isFavourite
+                            || lowerKeyword.equals("n") && !isFavourite);
+                });
+    }
+
+    private boolean testRole(Person person, List<String> keywords) {
+        return keywords.stream()
+                .anyMatch(keyword -> person.getRole().toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()));
     }
 
     @Override

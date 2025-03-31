@@ -26,7 +26,7 @@ class PersonContainsKeywordsPredicateTest {
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        // Multiple keyword
+        // Multiple keywords
         fieldKeywordMap.clear();
         fieldKeywordMap.put(field, Arrays.asList("Alice", "Bob"));
         predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
@@ -68,17 +68,21 @@ class PersonContainsKeywordsPredicateTest {
         predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        // Keywords match phone, email and address, but does not match name
+        // Keywords match phone, email and address, but do not match name
         fieldKeywordMap.clear();
         fieldKeywordMap.put(field, Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withModule("CS2103T").withEmail("alice@email.com").build()));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice")
+                .withPhone("12345")
+                .withModule("CS2103T")
+                .withEmail("alice@email.com")
+                .build()));
     }
 
     @Test
     void test_phoneContainsKeyword_returnsTrue() {
-        PersonContainsKeywordsPredicate.SearchField field = PersonContainsKeywordsPredicate.SearchField.PHONE;
+        PersonContainsKeywordsPredicate.SearchField field =
+                PersonContainsKeywordsPredicate.SearchField.PHONE;
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
 
         // One keyword
@@ -119,7 +123,7 @@ class PersonContainsKeywordsPredicateTest {
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
         assertTrue(predicate.test(new PersonBuilder().withModule("CS2103T").build()));
 
-        // Partial matched
+        // Partial match
         fieldKeywordMap.clear();
         fieldKeywordMap.put(field, Collections.singletonList("2103"));
         predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
@@ -153,44 +157,79 @@ class PersonContainsKeywordsPredicateTest {
     }
 
     @Test
-    void test_keywordContainsNameAndPhone_returnsTrue() {
+    void test_favouriteContainsInvalidKeyword_returnsFalse() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
-        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Alice"));
-        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("hello"));
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withPhone("91234567").build()));
+        assertFalse(predicate.test(new PersonBuilder().withFavourite(true).build()));
     }
 
     @Test
-    void test_keywordContainsNamePhoneAndFavourite_returnsTrue() {
+    void test_roleContainsKeyword_returnsTrue() {
+        PersonContainsKeywordsPredicate.SearchField field =
+                PersonContainsKeywordsPredicate.SearchField.ROLE;
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
-        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Alice"));
-        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
-        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
+
+        // Test for professor
+        fieldKeywordMap.put(field, Collections.singletonList("professor"));
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice")
-                .withPhone("91234567").withFavourite(true).build()));
+        assertTrue(predicate.test(new PersonBuilder().withRole(Role.PROFESSOR).build()));
+
+        // Test for TA with mixed-case
+        fieldKeywordMap.clear();
+        fieldKeywordMap.put(field, Arrays.asList("ta", "Professor")); // even one valid keyword is enough
+        predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertTrue(predicate.test(new PersonBuilder().withRole(Role.TA).build()));
     }
 
     @Test
-    void test_keywordContainsNamePhoneModuleAndFavourite_returnsTrue() {
+    void test_roleDoesNotContainRole_returnsFalse() {
+        PersonContainsKeywordsPredicate.SearchField field =
+                PersonContainsKeywordsPredicate.SearchField.ROLE;
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+
+        // Test with non-matching role
+        fieldKeywordMap.put(field, Collections.singletonList("professor"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertFalse(predicate.test(new PersonBuilder().withRole(Role.TA).build()));
+
+        fieldKeywordMap.clear();
+        fieldKeywordMap.put(field, Collections.singletonList("ta"));
+        predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertFalse(predicate.test(new PersonBuilder().withRole(Role.PROFESSOR).build()));
+    }
+
+    @Test
+    void test_roleWithInvalidKeyword_returnsFalse() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.ROLE, Collections.singletonList("student"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertFalse(predicate.test(new PersonBuilder().withRole(Role.PROFESSOR).build()));
+    }
+
+    @Test
+    void test_keywordContainsNamePhoneModuleFavouriteAndRole_returnsTrue() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Alice"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("CS2103T"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.ROLE, List.of("professor"));
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice")
-                .withPhone("91234567").withFavourite(true).withModule("CS2103T").build()));
+                .withPhone("91234567").withFavourite(true)
+                .withModule("CS2103T").withRole(Role.PROFESSOR)
+                .build()));
     }
 
     @Test
-    void test_partialKeywordContainsNamePhoneModuleAndFavourite_returnsTrue() {
+    void test_partialKeywordContainsNamePhoneModuleFavouriteAndRole_returnsTrue() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("A"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("9123"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("2103"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.ROLE, List.of("professor"));
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice")
                 .withPhone("91234567").withFavourite(true).withModule("CS2103T").build()));
