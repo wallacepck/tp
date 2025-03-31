@@ -1,7 +1,6 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,53 +9,62 @@ public class InputHistoryTest {
     public static final String TEST_COMMAND_2 = "def";
 
     @Test
-    public void navigate_emptyHistory_returnsNull() {
+    public void navigate_emptyHistory_returnsEmptyString() {
         InputHistory history = new InputHistory();
-        assertNull(history.navigateCurrent());
-        assertNull(history.navigateBackward());
-        assertNull(history.navigateForward());
+        assertEquals("", history.getCurrentEntry());
+        assertEquals("", history.navigateBackward());
+        assertEquals("", history.navigateForward());
     }
 
     @Test
-    public void navigate_history_returnsValue() {
+    public void navigate_current_returnsCurrentEntry() {
         InputHistory history = new InputHistory();
 
-        history.enterCommand(TEST_COMMAND);
-        assertEquals(TEST_COMMAND, history.navigateCurrent());
+        history.enterInput(TEST_COMMAND);
+        assertEquals(TEST_COMMAND, history.getCurrentEntry());
     }
 
     @Test
-    public void navigateBackward_backwardEnd_returnsValue() {
+    public void edit_navigatedEntry_navigatesToLatest() {
         InputHistory history = new InputHistory();
-        history.enterCommand(TEST_COMMAND);
+        history.enterInput(TEST_COMMAND);
+        history.navigateBackward();
+        history.checkActiveText(TEST_COMMAND_2);
+
+        assertEquals(TEST_COMMAND_2, history.getCurrentEntry());
+        assertEquals(TEST_COMMAND, history.navigateBackward());
+    }
+
+    @Test
+    public void navigate_backwardEnd_returnsValue() {
+        InputHistory history = new InputHistory();
+        history.enterInput(TEST_COMMAND);
         history.navigateBackward();
         assertEquals(TEST_COMMAND, history.navigateBackward());
     }
 
     @Test
-    public void navigateForward_forwardEnd_returnsValue() {
+    public void navigate_forwardEnd_returnsValue() {
         InputHistory history = new InputHistory();
-        history.enterCommand(TEST_COMMAND);
+        history.enterInput(TEST_COMMAND);
         assertEquals(TEST_COMMAND, history.navigateForward());
     }
 
     @Test
-    public void navigate_navigator_equivalentToSelf() {
+    public void navigate_multiple_correctOrder() {
         InputHistory history = new InputHistory();
-        history.enterCommand(TEST_COMMAND);
-        history.enterCommand(TEST_COMMAND_2);
-
-        HistoryNavigator navigator = history.getNavigator();
-        assertEquals(TEST_COMMAND_2, navigator.current());
-        assertEquals(TEST_COMMAND, navigator.backward());
-        assertEquals(TEST_COMMAND_2, navigator.forward());
+        history.enterInput(TEST_COMMAND);
+        history.enterInput(TEST_COMMAND_2);
+        assertEquals(TEST_COMMAND_2, history.navigateBackward());
+        assertEquals(TEST_COMMAND, history.navigateBackward());
+        assertEquals(TEST_COMMAND_2, history.navigateForward());
     }
 
     @Test
     public void enterCommand_overSize_dropsLast() {
         InputHistory history = new InputHistory();
         for (int i = 0; i < InputHistory.MAX_SIZE + 1; i++) {
-            history.enterCommand(String.format("%d", i));
+            history.enterInput(String.format("%d", i));
         }
         String result = "";
         for (int i = 0; i < InputHistory.MAX_SIZE + 1; i++) {
