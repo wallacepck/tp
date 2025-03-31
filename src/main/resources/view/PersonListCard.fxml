@@ -35,7 +35,7 @@
         <Region HBox.hgrow="ALWAYS" />
           <StackPane fx:id="role">
               <ImageView fx:id="roleType" fitHeight="120.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0"/>
-              <Label fx:id="roleLabel" text="\$tag" translateX="-17.0" />
+              <Label fx:id="roleLabel" text="\$role" translateX="-17.0" />
           </StackPane>
       </HBox>
       <Label fx:id="modules" />

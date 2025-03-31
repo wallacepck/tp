@@ -127,12 +127,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
@@ -280,15 +274,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | have my professors and TA's contact              | contact them in the future                                          |
 | `* * *`  | new user | have a guide                                     | navigate around and use the app easily                              |
 | `* * *`  | new user | have a CLI syntax table                          | I can refer to it while using the app                               |
-| `* * *`  | user     | filter contacts according to their tag           | obtain all contacts with the same tag                               |
-| `* * *`  | user     | remove tags                                      | view only relevant tagged contacts                                  |
-| `* * *`  | user     | tag my contacts as TAs or professors             | filter them in one command                                          |
+| `* * *`  | user     | filter contacts according to their role          | obtain all contacts with the same role                              |
+| `* * *`  | user     | set my contacts as TAs or professors             | filter them in one command                                          |
 | `* * *`  | user     | search contacts based on module code             | locate contact details without having to go through the entire list |
 | `* * *`  | user     | search contacts based on their name              | locate contact details without having to go through the entire list |
 | `* * *`  | user     | search contacts based on incomplete names        | locate contact details without remembering the full name            |
 | `* * *`  | user     | search contacts based on incomplete phone number | locate contact details without remembering the full phone number    |
 | `* * *`  | user     | search contacts based on incomplete module names | locate contact details without remembering the full module name     |
-| `* * *`  | user     | see all available tags                           | know which tags to filter by                                        |
 | `* * *`  | user     | list all contacts                                | view of all my contact details                                      |
 | `* * *`  | user     | delete contacts                                  | remove outdated contacts                                            |
 | `* *`    | user     | mass operations                                  | make a lot of changes to my contact list efficiently                |
