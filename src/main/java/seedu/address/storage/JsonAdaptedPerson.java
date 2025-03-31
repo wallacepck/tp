@@ -17,7 +17,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -29,7 +28,6 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<String> modules = new ArrayList<>();
     private final String role;
     private final Boolean isFavourite;
@@ -39,16 +37,12 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("modules") List<String> modules,
+            @JsonProperty("email") String email, @JsonProperty("modules") List<String> modules,
             @JsonProperty("role") String role, @JsonProperty("isFavourite") Boolean isFavourite) {
 
         this.name = name;
         this.phone = phone;
         this.email = email;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
         this.modules.addAll(modules);
         this.role = role;
         this.isFavourite = isFavourite;
@@ -61,9 +55,6 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
         modules.addAll(source.getModules().stream()
                 .map(Module::getModuleCode)
                 .collect(Collectors.toList()));
@@ -77,11 +68,7 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
         final List<Module> personModules = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
         for (String module : modules) {
             Module toAdd = ModuleRegistry.getModuleByCode(module);
             if (toAdd == null) {
@@ -127,9 +114,7 @@ class JsonAdaptedPerson {
         }
         final Boolean modelIsFavourite = isFavourite;
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-
         final Set<Module> modelModules = new HashSet<>(personModules);
-        return new Person(modelName, modelPhone, modelEmail, modelRole, modelTags, modelModules, modelIsFavourite);
+        return new Person(modelName, modelPhone, modelEmail, modelRole, modelModules, modelIsFavourite);
     }
 }

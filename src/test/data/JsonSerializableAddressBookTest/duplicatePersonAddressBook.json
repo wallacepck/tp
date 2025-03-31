@@ -5,7 +5,6 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "role" : "ta",
-    "tags": [ "friends" ],
     "modules" : [ "CS2103T" ],
     "isFavourite" : false
   }, {
@@ -14,7 +13,6 @@
     "email": "pauline@example.com",
     "address": "4th street",
     "role" : "ta",
-    "tags" : [ "friends" ],
     "modules" : [ "CS2103T" ],
     "isFavourite" : false
   } ]

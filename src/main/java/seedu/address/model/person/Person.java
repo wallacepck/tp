@@ -9,7 +9,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.ModuleRegistry.Module;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -24,20 +23,18 @@ public class Person {
     private final Role role;
 
     // Data fields
-    private final Set<Tag> tags = new HashSet<>();
     private final Set<Module> modules = new HashSet<>();
     private final Boolean isFavourite;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Role role, Set<Tag> tags, Set<Module> modules) {
-        requireAllNonNull(name, phone, email, tags, modules);
+    public Person(Name name, Phone phone, Email email, Role role, Set<Module> modules) {
+        requireAllNonNull(name, phone, email, modules);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.role = role;
-        this.tags.addAll(tags);
         this.modules.addAll(modules);
         this.isFavourite = false;
     }
@@ -46,14 +43,13 @@ public class Person {
      * Every field must be present and not null.
      * Allows setting of isFavourite when constructing new Person object.
      */
-    public Person(Name name, Phone phone, Email email, Role role, Set<Tag> tags,
+    public Person(Name name, Phone phone, Email email, Role role,
                   Set<Module> modules, Boolean isFavourite) {
-        requireAllNonNull(name, phone, email, tags, modules, isFavourite);
+        requireAllNonNull(name, phone, email, modules, isFavourite);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.role = role;
-        this.tags.addAll(tags);
         this.modules.addAll(modules);
         this.isFavourite = isFavourite;
     }
@@ -86,14 +82,6 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -113,7 +101,7 @@ public class Person {
      */
     public Person toggleFav() {
         Person toggled = new Person(this.getName(), this.getPhone(),
-                this.getEmail(), this.getRole(), this.getTags(), this.getModules(), !this.isFavourite);
+                this.getEmail(), this.getRole(), this.getModules(), !this.isFavourite);
         return toggled;
     }
 
@@ -136,7 +124,6 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && tags.equals(otherPerson.tags)
                 && modules.equals(otherPerson.modules)
                 && isFavourite == (otherPerson.isFavourite);
     }
@@ -144,7 +131,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own.
-        return Objects.hash(name, phone, email, tags, modules, isFavourite);
+        return Objects.hash(name, phone, email, modules, isFavourite);
 
     }
 
@@ -154,7 +141,6 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("tags", tags)
                 .add("modules", modules)
                 .add("isFavourite", isFavourite)
                 .toString();

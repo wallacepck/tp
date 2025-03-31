@@ -45,11 +45,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private StackPane tag;
+    private StackPane role;
     @FXML
-    private Label tagLabel;
+    private Label roleLabel;
     @FXML
-    private ImageView tagType;
+    private ImageView roleType;
     @FXML
     private Label modules;
     @FXML
@@ -70,9 +70,9 @@ public class PersonCard extends UiPart<Region> {
 
         Role role = person.getRole();
 
-        tagLabel.setText(role.toString());
+        roleLabel.setText(role.toString());
 
-        // sets tag colour based on the role. TA = yellow. Prof = orange
+        // sets role colour based on the role. TA = yellow. Prof = orange
         Image taTag = new Image(getClass().getResourceAsStream("/images/tag_ta.png"));
         Image profTag = new Image(getClass().getResourceAsStream("/images/tag_prof.png"));
 
@@ -80,7 +80,7 @@ public class PersonCard extends UiPart<Region> {
         case TA -> taTag;
         case PROFESSOR -> profTag;
         };
-        tagType.setImage(image);
+        roleType.setImage(image);
 
         Image favouriteStar = new Image(getClass().getResourceAsStream("/images/favourite_star.png"));
         favourite.setImage(favouriteStar);

@@ -13,7 +13,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -22,21 +21,21 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                Role.TA, getTagSet("TA"), getModuleSet("CS2103T")),
+                Role.TA, getModuleSet("CS2103T")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                Role.PROFESSOR, getTagSet("Professor"), getModuleSet("CS2040S")),
+                Role.PROFESSOR, getModuleSet("CS2040S")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                Role.TA, getTagSet("TA"), getModuleSet("CS2030S")),
+                Role.TA, getModuleSet("CS2030S")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                Role.PROFESSOR, getTagSet("Professor"), getModuleSet("CS2100")),
+                Role.PROFESSOR, getModuleSet("CS2100")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                Role.TA, getTagSet("Professor"), getModuleSet("CS2106")),
+                Role.TA, getModuleSet("CS2106")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                Role.PROFESSOR, getTagSet("TA"), getModuleSet("CS2109S")),
+                Role.PROFESSOR, getModuleSet("CS2109S")),
             new Person(new Name("Fernandez Keith"), new Phone("90900808"), new Email("fernk@example.com"),
-                Role.TA, getTagSet("Professor"), getModuleSet("CS3230")),
+                Role.TA, getModuleSet("CS3230")),
             new Person(new Name("Ishizawa Naoru"), new Phone("83221199"), new Email("naoishi@example.com"),
-                Role.PROFESSOR, getTagSet("TA"), getModuleSet("CS2101"))
+                Role.PROFESSOR, getModuleSet("CS2101"))
         };
     }
 
@@ -46,15 +45,6 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
-    }
-
-    /**
-     * Returns a tag set containing the list of strings given.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
     }
 
     /**
