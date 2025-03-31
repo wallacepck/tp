@@ -3,7 +3,6 @@ package seedu.address.ui.personlist;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -55,7 +54,11 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> event.consume());
     }
 
-    // TODO: Add javadoc
+    /**
+     * Creates a placeholder for empty person List.
+     *
+     * @return a VBox object to be displayed as placeholder for personListView.
+     */
     private VBox createEmptyPlaceholder() {
         // Set Label
         Label emptyLabel = new Label("It's rather empty here...");

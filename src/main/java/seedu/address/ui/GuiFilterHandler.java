@@ -14,6 +14,11 @@ public interface GuiFilterHandler {
     void filterListByModuleCode(String moduleCode);
 
     /**
+     * Filters the contact list by those which are marked as favourite.
+     */
+    void filterListByFavourites();
+
+    /**
      * Clears filter when switching to Contacts tab manually.
      */
     void clearFilter();

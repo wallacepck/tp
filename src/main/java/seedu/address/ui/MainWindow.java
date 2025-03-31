@@ -25,6 +25,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.ui.modulefolders.ModuleFolders;
 import seedu.address.ui.personlist.PersonListPanel;
@@ -176,7 +177,13 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Gu
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> searchFieldMap = new HashMap<>();
         searchFieldMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, moduleCodeList);
         logic.updatePredicateViaGui(
-                new PersonContainsKeywordsPredicate(searchFieldMap));
+                new PersonContainsKeywordsPredicate(searchFieldMap)
+        );
+    }
+
+    @Override
+    public void filterListByFavourites() {
+        logic.updatePredicateViaGui(Person::getIsFavourite);
     }
 
     @Override
