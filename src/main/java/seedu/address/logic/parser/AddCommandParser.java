@@ -7,7 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -19,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,7 +38,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE,
-                        PREFIX_TAG, PREFIX_MODULE);
+                        PREFIX_TAG, PREFIX_MODULE, PREFIX_TELEGRAM);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -49,8 +52,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Module> moduleList = ParserUtil.parseModules(argMultimap.getAllValues(PREFIX_MODULE));
+        Optional<Telegram> telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM));
 
-        Person person = new Person(name, phone, email, role, tagList, moduleList);
+        Person person = new Person(name, phone, email, role, tagList, moduleList, telegram);
 
         return new AddCommand(person);
     }

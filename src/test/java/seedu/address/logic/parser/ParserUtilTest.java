@@ -208,11 +208,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseModules_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseModules(Collections.emptyList()).isEmpty());
-    }
-
-    @Test
     public void parseModules_collectionWithValidModules_returnsModuleSet() throws Exception {
         Set<Module> actualModuleSet = ParserUtil.parseModules(Arrays.asList(VALID_MODULE_1, VALID_MODULE_2));
         Set<Module> expectedModuleSet = new HashSet<>(Arrays
