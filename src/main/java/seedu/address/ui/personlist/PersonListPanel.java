@@ -38,15 +38,20 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setCellFactory(listView -> new PersonListViewCell());
         personListView.setPlaceholder(createEmptyPlaceholder()); // Displays when personList is empty
 
-        /* Disable until cell flickering bug is fixed. */
-        personListView.setSelectionModel(null);
-
-        /* The bottom code is the temporary solution to the above problem.
-        *  Only use it when there is genuinely no solution to the bug */
-        EventHandler<MouseEvent> handler = MouseEvent::consume;
-
-        // block mouse click events
-        personListView.addEventFilter(MouseEvent.ANY, handler);
+        /*
+         *
+         *  The following code addresses the issue of ListView flickering when a ListCell is selected.
+         *  Basically ListView re-renders whenever a selection is made, and this refreshing of
+         *  layout is what causes the flicker.
+         *  The code below essentially disables this behaviour, thus removing the flicker when an item
+         *  is selected.
+         *
+         *  The following code may be removed once the issue is fixed in the later JDK.
+         *
+         *  Relevant topic from StackOverflow:
+         *  https://stackoverflow.com/questions/76586932/javafx-listview-selection#comment135033888_76586932
+         */
+        personListView.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> event.consume());
     }
 
     // TODO: Add javadoc
@@ -83,5 +88,4 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
