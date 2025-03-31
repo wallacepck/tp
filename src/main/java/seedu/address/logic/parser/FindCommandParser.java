@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -15,86 +16,73 @@ import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.model.person.PersonContainsKeywordsPredicate.SearchField;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new {@code FindCommand} object.
+ * If no valid prefix is provided, or if any validation fails, a {@code ParseException}
+ * is thrown.
  */
 public class FindCommandParser implements Parser<FindCommand> {
-    private static final Pattern PREFIX_PATTERN =
-            Pattern.compile("(?<prefix>(n/|p/|mm/|f/|r/))(?<keywords>.*?)(?=\\s+(n/|p/|mm/|f/|r/)|$)",
-                    Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 
-    /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform to the expected format
-     */
+    private static final List<String> ALLOWED_PREFIXES = List.of("n/", "p/", "mm/", "f/", "r/");
+
+    @Override
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        detectInvalidPrefixes(trimmedArgs);
+        detectInvalidPrefixes(args);
 
-        Map<SearchField, List<String>> fieldKeywordsMap = extractFieldKeywordsMap(trimmedArgs);
-        if (fieldKeywordsMap.isEmpty()) {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
+                CliSyntax.PREFIX_NAME,
+                CliSyntax.PREFIX_PHONE,
+                CliSyntax.PREFIX_MULTIPLE_MODULES,
+                CliSyntax.PREFIX_FAVOURITE,
+                CliSyntax.PREFIX_ROLE);
+        argMultimap.verifyNoDuplicatePrefixesFor(
+                CliSyntax.PREFIX_NAME,
+                CliSyntax.PREFIX_PHONE,
+                CliSyntax.PREFIX_MULTIPLE_MODULES,
+                CliSyntax.PREFIX_FAVOURITE,
+                CliSyntax.PREFIX_ROLE);
+
+        Map<SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        addFieldIfPresent(argMultimap, CliSyntax.PREFIX_NAME, SearchField.NAME, fieldKeywordMap, null);
+        addFieldIfPresent(argMultimap, CliSyntax.PREFIX_PHONE, SearchField.PHONE, fieldKeywordMap, null);
+        addFieldIfPresent(argMultimap, CliSyntax.PREFIX_MULTIPLE_MODULES, SearchField.MODULE, fieldKeywordMap, null);
+        addFieldIfPresent(argMultimap, CliSyntax.PREFIX_FAVOURITE, SearchField.FAVOURITE, fieldKeywordMap,
+                this::validateFavouriteKeywords);
+        addFieldIfPresent(argMultimap, CliSyntax.PREFIX_ROLE, SearchField.ROLE, fieldKeywordMap,
+                this::validateRoleKeywords);
+        if (fieldKeywordMap.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        return new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordsMap));
+        return new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
     }
 
-    /**
-     * Ensures only valid prefix(es) is present.
-     * @throws ParseException if invalid prefix(es) are found.
-     */
     private void detectInvalidPrefixes(String args) throws ParseException {
-        if (args.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-        long invalidPrefixCount = Arrays.stream(args.split("\\s+"))
-                .map(String::toLowerCase)
-                .filter(token -> token.matches("^[a-z]+/$"))
-                .filter(token -> !token.matches("^(n/|mm/|p/|f/|r/)$"))
-                .count();
-        if (invalidPrefixCount > 0) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-    }
-
-    private Map<SearchField, List<String>> extractFieldKeywordsMap(String args) throws ParseException {
-        Map<SearchField, List<String>> fieldKeywordsMap = new HashMap<>();
-        Matcher matcher = PREFIX_PATTERN.matcher(args);
-
+        Pattern prefixDetection = Pattern.compile("(?<=\\s|^)([a-zA-Z]+/)");
+        Matcher matcher = prefixDetection.matcher(args);
         while (matcher.find()) {
-            String prefix = matcher.group("prefix").trim();
-            String keywordStr = matcher.group("keywords").trim();
-
-            if (keywordStr.isEmpty()) {
+            String prefix = matcher.group(1).toLowerCase();
+            if (!ALLOWED_PREFIXES.contains(prefix)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
-            SearchField field = getSearchField(prefix);
-            assert field != null : "Parsed prefix must map to a valid SearchField";
-            List<String> keywords = Arrays.asList(keywordStr.split("\\s+"));
-            if (field == SearchField.FAVOURITE) {
-                validateFavouriteKeywords(keywords);
-            }
-            if (field == SearchField.ROLE) {
-                validateRoleKeywords(keywords);
-            }
-            if (fieldKeywordsMap.containsKey(field)) {
-                throw new ParseException("Duplicate prefix detected: " + prefix
-                        + ". Each prefix should only appear once.");
-            }
-            fieldKeywordsMap.put(field, keywords);
         }
-        return fieldKeywordsMap;
     }
 
-    private void validateRoleKeywords(List<String> keywords) throws ParseException {
-        if (keywords.size() != 1) {
-            throw new ParseException("r/ field must contain exactly one keyword: "
-                    + "'professor' or 'TA' (case-insensitive).");
+    private void addFieldIfPresent(ArgumentMultimap argMultimap, Prefix prefix, SearchField searchField,
+                                   Map<SearchField, List<String>> fieldKeywordMap,
+                                   Validator<List<String>> validator) throws ParseException {
+        if (!argMultimap.getAllValues(prefix).isEmpty()) {
+            List<String> keywords = extractKeywords(argMultimap, prefix);
+            if (validator != null) {
+                validator.validate(keywords);
+            }
+            fieldKeywordMap.put(searchField, keywords);
         }
-        String lower = keywords.get(0).toLowerCase();
-        if (!lower.equals("professor") && !lower.equals("ta")) {
-            throw new ParseException("r/ field only accepts 'professor' or 'TA' (case-insensitive).");
-        }
+    }
+
+    private List<String> extractKeywords(ArgumentMultimap argMultimap, Prefix prefix) {
+        return argMultimap.getAllValues(prefix)
+                .stream()
+                .flatMap(s -> Arrays.stream(s.split("\\s+")))
+                .collect(Collectors.toList());
     }
 
     private void validateFavouriteKeywords(List<String> keywords) throws ParseException {
@@ -107,19 +95,19 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 
-    /**
-     * Converts a prefix string into the corresponding SearchField.
-     * @throws ParseException if the prefix is invalid.
-     */
-    private PersonContainsKeywordsPredicate.SearchField getSearchField(String prefix) throws ParseException {
-        return switch (prefix.toLowerCase()) {
-        case "n/" -> PersonContainsKeywordsPredicate.SearchField.NAME;
-        case "p/" -> PersonContainsKeywordsPredicate.SearchField.PHONE;
-        case "mm/" -> PersonContainsKeywordsPredicate.SearchField.MODULE;
-        case "f/" -> PersonContainsKeywordsPredicate.SearchField.FAVOURITE;
-        case "r/" -> PersonContainsKeywordsPredicate.SearchField.ROLE;
-        default -> throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FindCommand.MESSAGE_USAGE));
-        };
+    private void validateRoleKeywords(List<String> keywords) throws ParseException {
+        if (keywords.size() != 1) {
+            throw new ParseException("r/ field must contain exactly one keyword: 'professor' "
+                    + "or 'TA' (case-insensitive).");
+        }
+        String lower = keywords.get(0).toLowerCase();
+        if (!lower.equals("professor") && !lower.equals("ta")) {
+            throw new ParseException("r/ field only accepts 'professor' or 'TA' (case-insensitive).");
+        }
+    }
+
+    @FunctionalInterface
+    private interface Validator<T> {
+        void validate(T t) throws ParseException;
     }
 }
