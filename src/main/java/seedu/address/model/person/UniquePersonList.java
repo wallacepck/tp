@@ -42,7 +42,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean containsTelegram(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameTelegram);
+        return internalList.stream().anyMatch(toCheck::isSameName);
     }
 
     /**
@@ -54,6 +54,7 @@ public class UniquePersonList implements Iterable<Person> {
         if (containsName(toAdd)) {
             throw new DuplicateNameException();
         }
+
         if (containsTelegram(toAdd)) {
             throw new DuplicateTelegramException();
         }
