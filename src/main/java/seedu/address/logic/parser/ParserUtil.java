@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 
 import java.util.Collection;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleRegistry;
@@ -19,6 +21,7 @@ import seedu.address.model.person.ModuleRegistry.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -170,10 +173,33 @@ public class ParserUtil {
      */
     public static Set<Module> parseModules(Collection<String> moduleCodes) throws ParseException {
         requireNonNull(moduleCodes);
+        if (moduleCodes.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
         final Set<Module> moduleSet = new HashSet<>();
         for (String moduleCode : moduleCodes) {
             moduleSet.add(parseModule(moduleCode));
         }
         return moduleSet;
+    }
+
+    /**
+     * Parse a {@code Optional<String>} into an {@code Optional<Telegram>} object.
+     * If the {@code ArgumentMultimap} does not contain the prefix for telegram, return an empty Optional object.
+     * Otherwise, return an Optional object containing the Telegram object.
+     * @param telegramString Optional object from {@code ArgumentMultimap}
+     * @return a {@code Optional} object containing {@code Telegram} if it is present.
+     * @throws ParseException
+     */
+    public static Optional<Telegram> parseTelegram(Optional<String> telegramString) throws ParseException {
+        requireNonNull(telegramString);
+        if (telegramString.isEmpty()) {
+            return Optional.empty();
+        }
+        String telegramHandle = telegramString.get();
+        if (!Telegram.isValidHandle(telegramHandle)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
+        }
+        return Optional.of(new Telegram(telegramHandle));
     }
 }
