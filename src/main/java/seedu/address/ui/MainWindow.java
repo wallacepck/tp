@@ -35,7 +35,7 @@ import seedu.address.ui.topnav.HelpWindow;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, GuiFilterHandler {
+public class MainWindow extends UiPart<Stage> implements GuiFunctionHandler {
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -203,11 +203,8 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Gu
         }
     }
 
-    /**
-     * Opens the help window or focuses on it if it's already opened.
-     */
     @FXML
-    public void handleHelp() {
+    private void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
@@ -229,10 +226,6 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Gu
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
     }
 
     /**

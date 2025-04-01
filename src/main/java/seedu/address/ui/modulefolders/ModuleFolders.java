@@ -19,7 +19,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
-import seedu.address.ui.MainWindow;
+import seedu.address.ui.GuiFunctionHandler;
 import seedu.address.ui.UiPart;
 import seedu.address.ui.personlist.PersonCard;
 
@@ -36,8 +36,6 @@ public class ModuleFolders extends UiPart<Region> {
     private static final Image FAVOURITE_STAR = new Image(PersonCard.class
             .getResourceAsStream("/images/favourite_star.png"));
 
-    private final ObservableList<Person> personList;
-    private final MainWindow mainWindow;
     private final VBox emptyPlaceholder;
 
     @FXML
@@ -47,24 +45,22 @@ public class ModuleFolders extends UiPart<Region> {
      * Constructs a ModuleFolders component.
      * Generates folder buttons for each unique CS Module found inside the personList.
      *
-     * @param personList The list of persons containing module data.
-     * @param mainWindow mainWindow object that is created when GUI is loaded.
+     * @param personList         The list of persons containing module data.
+     * @param guiFunctionHandler mainWindow object that is created when GUI is loaded.
      */
-    public ModuleFolders(ObservableList<Person> personList, MainWindow mainWindow) {
+    public ModuleFolders(ObservableList<Person> personList, GuiFunctionHandler guiFunctionHandler) {
         super(FXML);
-        this.personList = personList;
-        this.mainWindow = mainWindow;
         this.emptyPlaceholder = createEmptyPlaceholder();
 
         // Initialise UI
-        updateFolders();
+        updateFolders(personList, guiFunctionHandler);
 
         // Listen for changes in personList and update UI.
         // Behaviour similarly to useEffect in ReactJS.
-        this.personList.addListener((ListChangeListener<? super Person>) change -> {
+        personList.addListener((ListChangeListener<? super Person>) change -> {
             while (change.next()) {
                 if (change.wasAdded() || change.wasRemoved()) {
-                    updateFolders();
+                    updateFolders(personList, guiFunctionHandler);
                 }
             }
         });
@@ -73,7 +69,7 @@ public class ModuleFolders extends UiPart<Region> {
     /**
      * Updates the folder UI dynamically when personList changes.
      */
-    private void updateFolders() {
+    private void updateFolders(ObservableList<Person> personList, GuiFunctionHandler guiFunctionHandler) {
         Platform.runLater(() -> {
             folders.getChildren().clear();
 
@@ -86,12 +82,12 @@ public class ModuleFolders extends UiPart<Region> {
                     .forEach(module -> moduleStringSet.add(module.getModuleCode())));
 
             // Add modules folders into FlowPane
-            moduleStringSet.forEach(moduleString -> createFolder(moduleString, mainWindow));
+            moduleStringSet.forEach(moduleString -> createFolder(moduleString, guiFunctionHandler));
 
             // Create a favourite folder if there exists a favourite contact
             boolean hasFavContact = personList.stream().anyMatch(Person::getIsFavourite);
             if (hasFavContact) {
-                createFavouriteFolder(mainWindow);
+                createFavouriteFolder(guiFunctionHandler);
             }
 
             displayFolders();
@@ -101,10 +97,10 @@ public class ModuleFolders extends UiPart<Region> {
     /**
      * Creates a folder element with its respective tag inside the Modules Tab.
      *
-     * @param moduleString module code stored as a string.
-     * @param mainWindow mainWindow object that is created when GUI is loaded.
+     * @param moduleString       module code stored as a string.
+     * @param guiFunctionHandler the Ui object that implements GuiFunctionHandler
      */
-    private void createFolder(String moduleString, MainWindow mainWindow) {
+    private void createFolder(String moduleString, GuiFunctionHandler guiFunctionHandler) {
         // Set folder image
         ImageView folderImageView = new ImageView(FOLDER_IMAGE);
         folderImageView.setFitHeight(100.0);
@@ -115,8 +111,8 @@ public class ModuleFolders extends UiPart<Region> {
         folderButton.setGraphic(folderImageView);
         folderButton.setTranslateX(20.0);
         folderButton.setOnAction(e -> {
-            mainWindow.filterListByModuleCode(moduleString);
-            mainWindow.setSwitchWindowPlaceholder("Contacts");
+            guiFunctionHandler.filterListByModuleCode(moduleString);
+            guiFunctionHandler.setSwitchWindowPlaceholder("Contacts");
         });
 
         // Set label
@@ -131,9 +127,9 @@ public class ModuleFolders extends UiPart<Region> {
     /**
      * Creates a favourite folder inside Module's tab.
      *
-     * @param mainWindow mainWindow object that is created when GUI is loaded.
+     * @param guiFunctionHandler mainWindow object that is created when GUI is loaded.
      */
-    private void createFavouriteFolder(MainWindow mainWindow) {
+    private void createFavouriteFolder(GuiFunctionHandler guiFunctionHandler) {
 
         // Set folder image and favourite star
         ImageView folderImageView = new ImageView(FOLDER_IMAGE);
@@ -153,8 +149,8 @@ public class ModuleFolders extends UiPart<Region> {
         folderButton.setGraphic(favFolder);
         folderButton.setTranslateX(20.0);
         folderButton.setOnAction(e -> {
-            mainWindow.filterListByFavourites();
-            mainWindow.setSwitchWindowPlaceholder("Contacts");
+            guiFunctionHandler.filterListByFavourites();
+            guiFunctionHandler.setSwitchWindowPlaceholder("Contacts");
         });
 
         // Set label

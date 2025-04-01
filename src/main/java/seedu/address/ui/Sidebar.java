@@ -29,9 +29,9 @@ public class Sidebar extends UiPart<Region> {
      * Constructs a Sidebar component.
      * Initializes buttons and their corresponding event handlers.
      *
-     * @param mainWindow Any UI component that implements SwitchableWindow interface.
+     * @param guiFunctionHandler Any UI component that implements SwitchableWindow interface.
      */
-    public Sidebar(MainWindow mainWindow) {
+    public Sidebar(GuiFunctionHandler guiFunctionHandler) {
         super(FXML);
 
         // Set Module button
@@ -39,8 +39,8 @@ public class Sidebar extends UiPart<Region> {
         moduleButton.setText("Modules");
         selectedButton = moduleButton; // set module button as default on
         moduleButton.setOnAction(event -> {
-            mainWindow.setSwitchWindowPlaceholder("Modules");
-            setButtonOnClick(moduleButton);
+            guiFunctionHandler.setSwitchWindowPlaceholder("Modules");
+            setButtonOnClick("Modules");
         });
 
         Platform.runLater(() -> moduleButton.requestFocus());
@@ -49,9 +49,9 @@ public class Sidebar extends UiPart<Region> {
         setButtonImage(contactButton, "/images/phone-icon.png");
         contactButton.setText("Contacts");
         contactButton.setOnAction(event -> {
-            mainWindow.setSwitchWindowPlaceholder("Contacts");
-            mainWindow.clearFilter();
-            setButtonOnClick(contactButton);
+            guiFunctionHandler.setSwitchWindowPlaceholder("Contacts");
+            guiFunctionHandler.clearFilter();
+            setButtonOnClick("Contacts");
         });
     }
 
@@ -69,19 +69,6 @@ public class Sidebar extends UiPart<Region> {
         buttonImage.setFitWidth(15.0);
         buttonImage.setTranslateX(-10.0);
         button.setGraphic(buttonImage);
-    }
-
-    /**
-     * Handles the change of style in buttons when it is clicked.
-     * @param button the new button press event
-     */
-    public void setButtonOnClick(Button button) {
-        if (selectedButton == button) {
-            return;
-        }
-        selectedButton.setStyle("-fx-background-color: derive(#3c3c3c, 20%);");
-        button.setStyle("-fx-background-color: #416989;");
-        selectedButton = button;
     }
 
     public void setButtonOnClick(String buttonName) {
