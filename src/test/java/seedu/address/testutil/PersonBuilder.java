@@ -121,6 +121,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code telegram} of the {@code Person} that we are building.
+     */
     public PersonBuilder withTelegram(String telegram) {
         this.telegram = Optional.of(new Telegram(telegram));
         return this;
