@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -243,12 +242,12 @@ class PersonContainsKeywordsPredicateTest {
                 new PersonContainsKeywordsPredicate(map1);
         PersonContainsKeywordsPredicate predicate2 =
                 new PersonContainsKeywordsPredicate(map1);
-        assertTrue(predicate1.equals(predicate2));
+        assertEquals(predicate1, predicate2);
 
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> map2 = new HashMap<>();
         map2.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
         PersonContainsKeywordsPredicate predicate3 =
                 new PersonContainsKeywordsPredicate(map2);
-        assertFalse(predicate1.equals(predicate3));
+        assertNotEquals(predicate1, predicate3);
     }
 }

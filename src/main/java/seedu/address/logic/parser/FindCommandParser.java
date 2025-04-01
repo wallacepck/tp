@@ -1,6 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MULTIPLE_MODULES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,25 +34,25 @@ public class FindCommandParser implements Parser<FindCommand> {
         detectInvalidPrefixes(args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                CliSyntax.PREFIX_NAME,
-                CliSyntax.PREFIX_PHONE,
-                CliSyntax.PREFIX_MULTIPLE_MODULES,
-                CliSyntax.PREFIX_FAVOURITE,
-                CliSyntax.PREFIX_ROLE);
+                PREFIX_NAME,
+                PREFIX_PHONE,
+                PREFIX_MULTIPLE_MODULES,
+                PREFIX_FAVOURITE,
+                PREFIX_ROLE);
         argMultimap.verifyNoDuplicatePrefixesFor(
-                CliSyntax.PREFIX_NAME,
-                CliSyntax.PREFIX_PHONE,
-                CliSyntax.PREFIX_MULTIPLE_MODULES,
-                CliSyntax.PREFIX_FAVOURITE,
-                CliSyntax.PREFIX_ROLE);
+                PREFIX_NAME,
+                PREFIX_PHONE,
+                PREFIX_MULTIPLE_MODULES,
+                PREFIX_FAVOURITE,
+                PREFIX_ROLE);
 
         Map<SearchField, List<String>> fieldKeywordMap = new HashMap<>();
-        addFieldIfPresent(argMultimap, CliSyntax.PREFIX_NAME, SearchField.NAME, fieldKeywordMap, null);
-        addFieldIfPresent(argMultimap, CliSyntax.PREFIX_PHONE, SearchField.PHONE, fieldKeywordMap, null);
-        addFieldIfPresent(argMultimap, CliSyntax.PREFIX_MULTIPLE_MODULES, SearchField.MODULE, fieldKeywordMap, null);
-        addFieldIfPresent(argMultimap, CliSyntax.PREFIX_FAVOURITE, SearchField.FAVOURITE, fieldKeywordMap,
+        addFieldIfPresent(argMultimap, PREFIX_NAME, SearchField.NAME, fieldKeywordMap, null);
+        addFieldIfPresent(argMultimap, PREFIX_PHONE, SearchField.PHONE, fieldKeywordMap, null);
+        addFieldIfPresent(argMultimap, PREFIX_MULTIPLE_MODULES, SearchField.MODULE, fieldKeywordMap, null);
+        addFieldIfPresent(argMultimap, PREFIX_FAVOURITE, SearchField.FAVOURITE, fieldKeywordMap,
                 this::validateFavouriteKeywords);
-        addFieldIfPresent(argMultimap, CliSyntax.PREFIX_ROLE, SearchField.ROLE, fieldKeywordMap,
+        addFieldIfPresent(argMultimap, PREFIX_ROLE, SearchField.ROLE, fieldKeywordMap,
                 this::validateRoleKeywords);
         if (fieldKeywordMap.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -69,7 +74,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     private void addFieldIfPresent(ArgumentMultimap argMultimap, Prefix prefix, SearchField searchField,
                                    Map<SearchField, List<String>> fieldKeywordMap,
                                    Validator<List<String>> validator) throws ParseException {
-        if (!argMultimap.getAllValues(prefix).isEmpty()) {
+        if (isPrefixPresent(argMultimap, prefix)) {
             List<String> keywords = extractKeywords(argMultimap, prefix);
             if (validator != null) {
                 validator.validate(keywords);
@@ -104,6 +109,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (!lower.equals("professor") && !lower.equals("ta")) {
             throw new ParseException("r/ field only accepts 'professor' or 'TA' (case-insensitive).");
         }
+    }
+
+    private static boolean isPrefixPresent(ArgumentMultimap argMultimap, Prefix prefix) {
+        return argMultimap.getValue(prefix).isPresent();
     }
 
     @FunctionalInterface
