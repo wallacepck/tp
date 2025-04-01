@@ -58,6 +58,8 @@ public class PersonCard extends UiPart<Region> {
     private Label modules;
     @FXML
     private ImageView favourite;
+    @FXML
+    private Label telegram;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -71,6 +73,9 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
+        telegram.setText(person.getTelegram().isPresent()
+                ? person.getTelegram().get().toString()
+                : "Telegram not added");
 
         Role role = person.getRole();
 
