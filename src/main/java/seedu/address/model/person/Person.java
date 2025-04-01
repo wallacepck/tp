@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -22,6 +23,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Role role;
+    private final Optional<Telegram> telegram;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -31,8 +33,9 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Role role, Set<Tag> tags, Set<Module> modules) {
-        requireAllNonNull(name, phone, email, tags, modules);
+    public Person(Name name, Phone phone, Email email, Role role, Set<Tag> tags, Set<Module> modules,
+                  Optional<Telegram> telegram) {
+        requireAllNonNull(name, phone, email, tags, modules, telegram);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -40,6 +43,7 @@ public class Person {
         this.tags.addAll(tags);
         this.modules.addAll(modules);
         this.isFavourite = false;
+        this.telegram = telegram;
     }
 
     /**
@@ -47,7 +51,7 @@ public class Person {
      * Allows setting of isFavourite when constructing new Person object.
      */
     public Person(Name name, Phone phone, Email email, Role role, Set<Tag> tags,
-                  Set<Module> modules, Boolean isFavourite) {
+                  Set<Module> modules, Boolean isFavourite, Optional<Telegram> telegram) {
         requireAllNonNull(name, phone, email, tags, modules, isFavourite);
         this.name = name;
         this.phone = phone;
@@ -56,6 +60,7 @@ public class Person {
         this.tags.addAll(tags);
         this.modules.addAll(modules);
         this.isFavourite = isFavourite;
+        this.telegram = telegram;
     }
 
     public Name getName() {
@@ -94,6 +99,12 @@ public class Person {
     }
 
     /**
+     * Returns an optional object containing telegram handle.
+     */
+    public Optional<Telegram> getTelegram() {
+        return this.telegram;
+    }
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -113,7 +124,7 @@ public class Person {
      */
     public Person toggleFav() {
         Person toggled = new Person(this.getName(), this.getPhone(),
-                this.getEmail(), this.getRole(), this.getTags(), this.getModules(), !this.isFavourite);
+                this.getEmail(), this.getRole(), this.getTags(), this.getModules(), !this.isFavourite, this.telegram);
         return toggled;
     }
 
@@ -138,13 +149,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && tags.equals(otherPerson.tags)
                 && modules.equals(otherPerson.modules)
-                && isFavourite == (otherPerson.isFavourite);
+                && isFavourite == (otherPerson.isFavourite)
+                && telegram.equals(otherPerson.telegram);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own.
-        return Objects.hash(name, phone, email, tags, modules, isFavourite);
+        return Objects.hash(name, phone, email, tags, modules, isFavourite, telegram);
 
     }
 
@@ -154,6 +166,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
+                .add("telegram", telegram.isPresent() ? telegram.get().toString() : "")
                 .add("tags", tags)
                 .add("modules", modules)
                 .add("isFavourite", isFavourite)
