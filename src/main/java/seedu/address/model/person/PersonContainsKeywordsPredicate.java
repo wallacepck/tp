@@ -18,11 +18,11 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
      */
     public enum SearchField {
         /**
-         * Search by name field
+         * Search by name
          */
         NAME,
         /**
-         * Search by phone number field
+         * Search by phone number
          */
         PHONE,
         /**
@@ -36,7 +36,11 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         /**
          * Search by role
          */
-        ROLE
+        ROLE,
+        /**
+         * Search by telegram
+         */
+        TELEGRAM,
     }
 
     /**
@@ -64,18 +68,23 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         case MODULE -> testModule(person, keywords);
         case FAVOURITE -> testFavourite(person, keywords);
         case ROLE -> testRole(person, keywords);
+        case TELEGRAM -> testTelegram(person, keywords);
         };
     }
 
     private boolean testName(Person person, List<String> keywords) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getName().fullName.toLowerCase()
+                .anyMatch(keyword -> person
+                        .getName()
+                        .fullName
+                        .toLowerCase()
                         .contains(keyword.toLowerCase()));
     }
 
     private boolean testPhone(Person person, List<String> keywords) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getPhone().value
+                .anyMatch(keyword -> person
+                        .getPhone().value
                         .contains(keyword));
     }
 
@@ -83,7 +92,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.stream()
                 .anyMatch(keyword -> person.getModules().stream()
                         .anyMatch(module -> module
-                                .getModuleCode().toLowerCase()
+                                .getModuleCode()
+                                .toLowerCase()
                                 .contains(keyword.toLowerCase())));
     }
 
@@ -99,7 +109,18 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
 
     private boolean testRole(Person person, List<String> keywords) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getRole().toString()
+                .anyMatch(keyword -> person
+                        .getRole()
+                        .toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()));
+    }
+
+    private boolean testTelegram(Person person, List<String> keywords) {
+        return keywords.stream()
+                .anyMatch(keyword -> person
+                        .getTelegram()
+                        .toString()
                         .toLowerCase()
                         .contains(keyword.toLowerCase()));
     }

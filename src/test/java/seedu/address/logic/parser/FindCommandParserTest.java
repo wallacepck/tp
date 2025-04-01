@@ -13,7 +13,9 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.person.Role;
 
 public class FindCommandParserTest {
 
@@ -50,6 +52,8 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " N/Darren",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " Mm/ 3230",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " T/@d",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
@@ -118,6 +122,14 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_invalidPhone_throwsParseException() {
+        assertParseFailure(parser, " p/9123_4567",
+                "Phone number must only contain digits.");
+        assertParseFailure(parser, " p/charlie",
+                "Phone number must only contain digits.");
+    }
+
+    @Test
     public void parse_extraSpaces_returnsFindCommand() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, Arrays.asList("Charlie", "David"));
@@ -127,12 +139,9 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_specialCharactersInName_returnsFindCommand() {
-        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
-        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, Arrays.asList("O'Connor", "Jean-Luc"));
-        FindCommand expectedFindCommand =
-                new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
-        assertParseSuccess(parser, " n/ O'Connor Jean-Luc", expectedFindCommand);
+    public void parse_specialCharactersInName_throwsParseException() {
+        assertParseFailure(parser, " n/ O'Connor", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " n/Daniel Lucas Jean-Luc", Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -159,9 +168,9 @@ public class FindCommandParserTest {
     @Test
     public void parse_invalidRoleKeyword_throwsParseException() {
         assertParseFailure(parser, " r/professor ta",
-                "r/ field must contain exactly one keyword: 'professor' or 'TA' (case-insensitive).");
+                "r/ field must contain exactly one keyword: 'prof' or 'TA' (case-insensitive).");
         assertParseFailure(parser, " r/student",
-                "r/ field only accepts 'professor' or 'TA' (case-insensitive).");
+                Role.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -170,7 +179,25 @@ public class FindCommandParserTest {
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.ROLE, List.of("TA"));
         FindCommand expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
         assertParseSuccess(parser, " r/TA", expectedFindCommand);
-        assertParseSuccess(parser, " r/ TA", expectedFindCommand);
+        assertParseSuccess(parser, " r/ \n TA", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_telegram_returnsFindCommand() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.TELEGRAM, List.of("@darren", "fiona"));
+        FindCommand expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
+        assertParseSuccess(parser, " t/@darren fiona", expectedFindCommand);
+        assertParseSuccess(parser, " t/ @darren fiona", expectedFindCommand);
+        assertParseSuccess(parser, " t/ \n @darren \n fiona", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_invalidTelegram_throwsParseException() {
+        assertParseFailure(parser, " t/@O'neil",
+                "Telegram handle should only contain alphabets, digits, underscores or '@'.");
+        assertParseFailure(parser, " t/ @darren_*()#",
+                "Telegram handle should only contain alphabets, digits, underscores or '@'.");
     }
 
     @Test
