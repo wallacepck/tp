@@ -28,17 +28,17 @@ public class SampleDataUtil {
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 Role.PROFESSOR, getTagSet("Professor"), getModuleSet("CS2040S"), Optional.empty()),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                Role.TA, getTagSet("TA"), getModuleSet("CS2030S"), getTelegram("@sourceacademy")),
+                Role.TA, getTagSet("TA"), getModuleSet("CS2030S"), getTelegram("@sourceacademy1")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                Role.PROFESSOR, getTagSet("Professor"), getModuleSet("CS2100"), getTelegram("@sourceacademy")),
+                Role.PROFESSOR, getTagSet("Professor"), getModuleSet("CS2100"), getTelegram("@sourceacademy2")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                Role.TA, getTagSet("Professor"), getModuleSet("CS2106"), getTelegram("@sourceacademy")),
+                Role.TA, getTagSet("Professor"), getModuleSet("CS2106"), getTelegram("@sourceacademy3")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                Role.PROFESSOR, getTagSet("TA"), getModuleSet("CS2109S"), getTelegram("@sourceacademy")),
+                Role.PROFESSOR, getTagSet("TA"), getModuleSet("CS2109S"), getTelegram("@sourceacademy4")),
             new Person(new Name("Fernandez Keith"), new Phone("90900808"), new Email("fernk@example.com"),
-                Role.TA, getTagSet("Professor"), getModuleSet("CS3230"), getTelegram("@sourceacademy")),
+                Role.TA, getTagSet("Professor"), getModuleSet("CS3230"), getTelegram("@sourceacademy5")),
             new Person(new Name("Ishizawa Naoru"), new Phone("83221199"), new Email("naoishi@example.com"),
-                Role.PROFESSOR, getTagSet("TA"), getModuleSet("CS2101"), getTelegram("@sourceacademy"))
+                Role.PROFESSOR, getTagSet("TA"), getModuleSet("CS2101"), getTelegram("@sourceacademy6"))
         };
     }
 

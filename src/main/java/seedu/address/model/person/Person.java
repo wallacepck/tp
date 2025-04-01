@@ -104,17 +104,29 @@ public class Person {
     public Optional<Telegram> getTelegram() {
         return this.telegram;
     }
+
     /**
      * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
+    public boolean isSameName(Person otherPerson) {
         if (otherPerson == this) {
             return true;
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(this.name);
+    }
+
+    /**
+     * Returns true if both persons have the same telegram handle.
+     */
+    public boolean isSameTelegram(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getTelegram().equals(this.telegram);
     }
 
     /**

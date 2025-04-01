@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicateNameException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -50,23 +50,23 @@ public class AddressBookTest {
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateNameException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> addressBook.hasName(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(addressBook.hasName(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        assertTrue(addressBook.hasName(ALICE));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class AddressBookTest {
         addressBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasName(editedAlice));
     }
 
     @Test
