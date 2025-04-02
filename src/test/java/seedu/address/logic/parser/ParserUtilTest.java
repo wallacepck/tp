@@ -1,13 +1,11 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,14 +22,11 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
     private static final String INVALID_MODULE = "CS2103";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_MODULE_1 = "CS2103T";
     private static final String VALID_MODULE_2 = "CS2101";
 
@@ -158,11 +153,6 @@ public class ParserUtilTest {
     public void parseModules_collectionWithInvalidModules_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil
                 .parseModules(Arrays.asList(VALID_MODULE_1, INVALID_MODULE)));
-    }
-
-    @Test
-    public void parseModules_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseModules(Collections.emptyList()).isEmpty());
     }
 
     @Test

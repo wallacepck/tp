@@ -1,14 +1,17 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleRegistry;
 import seedu.address.model.person.ModuleRegistry.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -19,7 +22,9 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_TELEGRAM = "@academysource";
     public static final Role DEFAULT_ROLE = Role.PROFESSOR;
+    public static final String DEFAULT_MODULE_CODE = "CS2103T";
 
     private Name name;
     private Phone phone;
@@ -27,6 +32,7 @@ public class PersonBuilder {
     private Set<Module> modules;
     private Role role;
     private Boolean isFavourite;
+    private Optional<Telegram> telegram;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +41,9 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        telegram = Optional.of(new Telegram(DEFAULT_TELEGRAM));
         modules = new HashSet<>();
+        modules.add(ModuleRegistry.getModuleByCode(DEFAULT_MODULE_CODE));
         role = DEFAULT_ROLE;
         isFavourite = false;
     }
@@ -47,6 +55,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        telegram = personToCopy.getTelegram();
         modules = new HashSet<>(personToCopy.getModules());
         role = personToCopy.getRole();
         isFavourite = personToCopy.getIsFavourite();
@@ -100,8 +109,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code telegram} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTelegram(String telegram) {
+        this.telegram = Optional.of(new Telegram(telegram));
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, role, modules, isFavourite);
+        return new Person(name, phone, email, role, modules, isFavourite, telegram);
     }
 
 }
