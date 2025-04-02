@@ -14,6 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.exceptions.DuplicateNameException;
+import seedu.address.model.person.exceptions.DuplicateTelegramException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -81,6 +82,14 @@ public class UniquePersonListTest {
     @Test
     public void add_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePersonList.add(null));
+    }
+
+    @Test
+    public void add_duplicateTelegram_throwsDuplicateTelegramException() {
+        Person aliceSurname = new PersonBuilder(ALICE)
+                .withName("Alice Lee").build();
+        uniquePersonList.add(aliceSurname);
+        assertThrows(DuplicateTelegramException.class, () -> uniquePersonList.add(ALICE));
     }
 
     @Test
