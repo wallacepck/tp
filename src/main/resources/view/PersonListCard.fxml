@@ -33,9 +33,9 @@
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
         <ImageView fx:id="favourite" fitHeight="16" fitWidth="16" pickOnBounds="true" preserveRatio="true" translateX="10.0"/>
         <Region HBox.hgrow="ALWAYS" />
-          <StackPane fx:id="tag">
-              <ImageView fx:id="tagType" fitHeight="120.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0"/>
-              <Label fx:id="tagLabel" text="\$tag" translateX="-17.0" />
+          <StackPane fx:id="role">
+              <ImageView fx:id="roleType" fitHeight="120.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0"/>
+              <Label fx:id="roleLabel" text="\$role" translateX="-17.0" />
           </StackPane>
       </HBox>
       <Label fx:id="modules" />

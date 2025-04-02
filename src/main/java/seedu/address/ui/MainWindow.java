@@ -20,11 +20,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.InputHistory;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.ui.modulefolders.ModuleFolders;
 import seedu.address.ui.personlist.PersonListPanel;
@@ -34,7 +34,7 @@ import seedu.address.ui.topnav.HelpWindow;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, GuiFilterHandler {
+public class MainWindow extends UiPart<Stage> implements GuiFunctionHandler {
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -42,7 +42,6 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Gu
 
     private Stage primaryStage;
     private Logic logic;
-    private InputHistory history;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -81,7 +80,6 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Gu
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-        this.history = new InputHistory();
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -139,7 +137,7 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Gu
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand, this.history.getNavigator());
+        CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         sidebar = new Sidebar(this);
@@ -176,7 +174,13 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Gu
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> searchFieldMap = new HashMap<>();
         searchFieldMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, moduleCodeList);
         logic.updatePredicateViaGui(
-                new PersonContainsKeywordsPredicate(searchFieldMap));
+                new PersonContainsKeywordsPredicate(searchFieldMap)
+        );
+    }
+
+    @Override
+    public void filterListByFavourites() {
+        logic.updatePredicateViaGui(Person::getIsFavourite);
     }
 
     @Override
@@ -196,11 +200,8 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Gu
         }
     }
 
-    /**
-     * Opens the help window or focuses on it if it's already opened.
-     */
     @FXML
-    public void handleHelp() {
+    private void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
@@ -224,10 +225,6 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Gu
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -235,7 +232,6 @@ public class MainWindow extends UiPart<Stage> implements WindowSwitchHandler, Gu
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            history.enterCommand(commandText);
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
