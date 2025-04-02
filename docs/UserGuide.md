@@ -127,6 +127,28 @@ With AcademySource, you can:
 
 
 7. Refer to the [Features](#features) below for details of each command.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command box:**<br>
+
+The command box remembers up to 16 previous commands. You can use the Up Arrow (↑) on your keyboard to scroll back through them and the Down Arrow (↓) to move forward. This saves time by letting you reuse commands without retyping them.
+
+If you edit a recalled command, the history navigation resets, and you can’t scroll forward anymore. Once you press Enter, the modified command is saved as a new history entry.
+
+Example:
+1. You type: `find m/2040` and press Enter
+
+2. You type: `list` and press Enter
+
+3. You press Up Arrow (↑) once → It shows `list`.
+
+4. You press Up Arrow (↑) again → It shows `find m/2040`.
+
+5. Now, if you change `find m/2040` to `find m/2103` and then press Down Arrow (↓), you will notice that you aren't moving forward through history because you modified the command.
+
+</div>
+
 <br><br>
 [Back to top](#table-of-content)
 --------------------------------------------------------------------------------------------------------------------
@@ -177,6 +199,7 @@ Contacts Page:
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </div>
 
 <a id="prefix-table"></a>
