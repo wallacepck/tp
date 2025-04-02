@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -68,10 +69,10 @@ public class PersonTest {
         Person editedBob = new PersonBuilder(BOB).withTelegram(VALID_TELEGRAM_BOB.toLowerCase()).build();
         assertTrue(BOB.isSameTelegram(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> throws illegal argument exception
         String telegramWithTrailingSpaces = VALID_TELEGRAM_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withTelegram(telegramWithTrailingSpaces).build();
-        assertFalse(BOB.isSameTelegram(editedBob));
+        assertThrows(IllegalArgumentException.class, Telegram.MESSAGE_CONSTRAINTS, () -> new PersonBuilder(BOB)
+                .withTelegram(telegramWithTrailingSpaces).build());
     }
 
     @Test
