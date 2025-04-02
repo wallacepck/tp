@@ -80,7 +80,7 @@ public class ModuleFolders extends UiPart<Region> {
     }
 
     /**
-     * Create a folder element with its respective tag inside the Modules Tab.
+     * Create a folder element with its respective module inside the Modules Tab.
      * @param moduleString module code stored as a string.
      * @param mainWindow mainWindow object that is created when GUI is loaded.
      */
