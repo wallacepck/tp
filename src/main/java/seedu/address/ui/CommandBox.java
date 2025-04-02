@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
-import seedu.address.logic.HistoryNavigator;
+import seedu.address.logic.InputHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -19,7 +19,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
-    private final HistoryNavigator historyNavigator;
+    private final InputHistory historyNavigator;
 
     @FXML
     private TextField commandTextField;
@@ -27,12 +27,15 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor, HistoryNavigator historyNavigator) {
+    public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        this.historyNavigator = historyNavigator;
+        this.historyNavigator = new InputHistory();
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
-        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.textProperty().addListener((unused1, oldText, newText) -> {
+            onTextChanged(newText);
+            setStyleToDefault();
+        });
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, this::handleKeyPress);
     }
 
@@ -46,6 +49,7 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
+        historyNavigator.enterInput(commandText);
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
@@ -66,17 +70,24 @@ public class CommandBox extends UiPart<Region> {
         String history = switch (keyEvent.getCode()) {
         case UP -> {
             keyEvent.consume();
-            yield historyNavigator.backward();
+            yield historyNavigator.navigateBackward();
         }
         case DOWN -> {
             keyEvent.consume();
-            yield historyNavigator.forward();
+            yield historyNavigator.navigateForward();
         }
         default -> null;
         };
         if (history != null) {
             commandTextField.setText(history);
         }
+    }
+
+    /**
+     * Resets the history if the text was changed from the current entry
+     */
+    private void onTextChanged(String newText) {
+        historyNavigator.checkActiveText(newText);
     }
 
     /**
