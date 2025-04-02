@@ -12,7 +12,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -30,7 +29,6 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private Set<Tag> tags;
     private Set<Module> modules;
     private Role role;
     private Boolean isFavourite;
@@ -44,7 +42,6 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         telegram = Optional.of(new Telegram(DEFAULT_TELEGRAM));
-        tags = new HashSet<>();
         modules = new HashSet<>();
         modules.add(ModuleRegistry.getModuleByCode(DEFAULT_MODULE_CODE));
         role = DEFAULT_ROLE;
@@ -59,7 +56,6 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         telegram = personToCopy.getTelegram();
-        tags = new HashSet<>(personToCopy.getTags());
         modules = new HashSet<>(personToCopy.getModules());
         role = personToCopy.getRole();
         isFavourite = personToCopy.getIsFavourite();
@@ -70,14 +66,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -130,7 +118,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, role, tags, modules, isFavourite, telegram);
+        return new Person(name, phone, email, role, modules, isFavourite, telegram);
     }
 
 }

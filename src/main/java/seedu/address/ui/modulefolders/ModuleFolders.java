@@ -95,7 +95,7 @@ public class ModuleFolders extends UiPart<Region> {
     }
 
     /**
-     * Creates a folder element with its respective tag inside the Modules Tab.
+     * Creates a folder element with with its respective module inside the Modules Tab.
      *
      * @param moduleString       module code stored as a string.
      * @param guiFunctionHandler the Ui object that implements GuiFunctionHandler
