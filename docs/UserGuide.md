@@ -276,7 +276,7 @@ A person can have any number of modules (including 0)
 </div>
 
 * `ROLE` must be either `ta` or `prof` (Case-insensitive, which means `TA` or `prof` are also valid).
-* `MODULE`must be one of the accepted module codes given in [this table.](#modules-accepted-by-academysource-)
+* `MODULE`must be one of the accepted module codes given in [the module table.](#modules-accepted-by-academysource-)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/prof`
@@ -302,7 +302,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [m/MORE_MODULES]â€¦â
 * Existing values will be updated to the input values.
 * Roles can not be edited.
 * When editing modules, the existing modules of the person will be removed i.e adding of modules is not cumulative.
-* `MODULE`must be one of the accepted module codes given in [this table.](#modules-accepted-by-academysource-)
+* `MODULE`must be one of the accepted module codes given in [the module table.](#modules-accepted-by-academysource-)
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
