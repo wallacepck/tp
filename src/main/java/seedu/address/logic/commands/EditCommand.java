@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -41,7 +42,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_MODULE + "MODULE]...\n"
+            + "[" + PREFIX_MODULE + "MODULE]... "
+            + "[" + PREFIX_TELEGRAM + "TELEGRAM] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -97,7 +99,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
-        Optional<Telegram> updatedTelegram = personToEdit.getTelegram();
+        Optional<Telegram> updatedTelegram;
+        if (editPersonDescriptor.getTelegram() != null) {
+            updatedTelegram = editPersonDescriptor.getTelegram();
+        } else {
+            updatedTelegram = personToEdit.getTelegram();
+        }
 
         return new Person(updatedName, updatedPhone, updatedEmail, personToEdit.getRole(),
                 updatedModules, updatedTelegram);
@@ -136,6 +143,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Set<Module> modules;
+        private Optional<Telegram> telegram;
 
         public EditPersonDescriptor() {}
 
@@ -147,13 +155,14 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setModules(toCopy.modules);
+            setTelegram(toCopy.telegram);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, modules);
+            return CollectionUtil.isAnyNonNull(name, phone, email, modules, telegram);
         }
 
         public void setName(Name name) {
@@ -197,6 +206,30 @@ public class EditCommand extends Command {
             return (modules != null) ? Optional.of(Collections.unmodifiableSet(modules)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code telegram} to this objects {@code telegram}.
+         * A defensive copy of {@code telegram} is used internally.
+         */
+        public void setTelegram(Optional<Telegram> telegram) {
+            this.telegram = (telegram != null && telegram.isPresent())
+                    ? Optional.of(telegram.get())
+                    : telegram == null
+                    ? null
+                    : Optional.empty();
+        }
+
+        /**
+         * Returns a new Optional object that contains the {@code telegram}.
+         * Returns {@code Optional#empty()} if {@code telegram} is empty.
+         */
+        public Optional<Telegram> getTelegram() {
+            return (telegram != null && telegram.isPresent())
+                    ? Optional.of(telegram.get())
+                    : telegram == null
+                    ? null
+                    : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -222,6 +255,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("modules", modules)
+                    .add("telegram", telegram)
                     .toString();
         }
     }

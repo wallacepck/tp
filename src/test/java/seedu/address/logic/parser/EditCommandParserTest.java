@@ -3,16 +3,22 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_TELEGRAM_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MODULE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -30,6 +36,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -157,5 +164,49 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL));
+    }
+
+    @Test
+    public void parse_validModule_success() {
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + MODULE_DESC_AMY;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withModule("CS2103T").build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_unregisteredModule_failure() {
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + INVALID_MODULE_DESC;
+        assertParseFailure(parser, userInput, Messages.MESSAGE_INVALID_MODULE_CODE);
+    }
+
+    @Test
+    public void parse_validTelegram_success() {
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_AMY;
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTelegram(VALID_TELEGRAM_AMY).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_invalidTelegram_failure() {
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + INVALID_TELEGRAM_DESC;
+        assertParseFailure(parser, userInput, Telegram.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_emptyTelegramWithPrefix_success() {
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + EMPTY_TELEGRAM_DESC;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withEmptyTelegram().build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
