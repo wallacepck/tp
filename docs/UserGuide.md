@@ -463,15 +463,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                     |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                              |
-| **Delete** | `delete INDEX…​` <br> e.g., `delete 1` `delete 2 3`                                                                                                  |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                      |
-| **Find**   | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [m/MODULE_KEYWORDS] [f/FAVOURITE_STATUS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y`               |
-| **List**   | `list`                                                                                                                                               |
-| **Help**   | `help`                                                                                                                                               |
+| Action     | Format, Examples                                                                                                                                                                              |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA t/friend t/colleague`                                          |
+| **Clear**  | `clear`                                                                                                                                                                                       |
+| **Delete** | `delete INDEX…​` <br> e.g., `delete 1` `delete 2 3`                                                                                                                                           |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                               |
+| **Find**   | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOURITE_STATUS] [r/ROLE] [t/TELEGRAM_KEYWORDS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y t/@JamesLovesCS r/PROF` |
+| **List**   | `list`                                                                                                                                                                                        |
+| **Help**   | `help`                                                                                                                                                                                        |
 
 [back to top](#table-of-content)
 
