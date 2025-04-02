@@ -27,7 +27,7 @@ With AcademySource, you can:
         <a href="#features">Features</a>
     </summary>
     <a href="#prefix-table"> - Prefix table <br></a>
-    <a href="#modules-accepted-by-academysource"> - Modules Accepted by AcademySource <br></a>
+    <a href="#accepted-modules"> - Modules Accepted by AcademySource <br></a>
     <a href="#viewing-help--help"> - Viewing help <br></a>
     <a href="#listing-all-persons--list"> - Listing all persons <br></a>
     <a href="#adding-a-person--add"> - Adding a person <br></a>
@@ -217,8 +217,9 @@ Contacts Page:
 | `f/`       | Favourite                  | `f/y` or `f/n`                      | Not used in `add` or `edit`. |
 | `mm/`      | Module(s)                  | `mm/CS2103T` or `mm/CS2101 CS2103T` | Not used in `add` or `edit`. |
 
-<a id="prefix-table"></a>
+<a id="accepted-modules"></a>
 ### Modules Accepted by AcademySource [🔝](#table-of-content)
+
 | **Module Code** | **Module Name**                                       |
 |-----------------|-------------------------------------------------------|
 | CS1231S         | Discrete Structures                                   |
