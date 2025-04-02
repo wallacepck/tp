@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -26,7 +25,7 @@ import seedu.address.model.person.ModuleRegistry.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Telegram;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -42,7 +41,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_MODULE + "MODULE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -98,10 +96,11 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
+        Optional<Telegram> updatedTelegram = personToEdit.getTelegram();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, personToEdit.getRole(), updatedTags, updatedModules);
+        return new Person(updatedName, updatedPhone, updatedEmail, personToEdit.getRole(),
+                updatedModules, updatedTelegram);
     }
 
     @Override
@@ -136,20 +135,17 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Set<Tag> tags;
         private Set<Module> modules;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setTags(toCopy.tags);
             setModules(toCopy.modules);
         }
 
@@ -157,7 +153,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags, modules);
+            return CollectionUtil.isAnyNonNull(name, phone, email, modules);
         }
 
         public void setName(Name name) {
@@ -185,23 +181,6 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
-        /**
          * Sets {@code modules} to this object's {@code modules}.
          * A defensive copy of {@code modules} is used internally.
          */
@@ -210,7 +189,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable module set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code modules} is null.
          */
@@ -233,7 +212,6 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(modules, otherEditPersonDescriptor.modules);
         }
 
@@ -243,7 +221,6 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("tags", tags)
                     .add("modules", modules)
                     .toString();
         }

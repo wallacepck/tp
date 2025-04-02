@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 
 import java.util.Collection;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleRegistry;
@@ -19,7 +21,7 @@ import seedu.address.model.person.ModuleRegistry.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Telegram;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -104,21 +106,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(trimmedTag);
-    }
-
-    /**
      * Parses a {@code String role} into a {@code role}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -131,18 +118,6 @@ public class ParserUtil {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
         return Role.getRole(trimmedTag);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
     }
 
     /**
@@ -170,10 +145,33 @@ public class ParserUtil {
      */
     public static Set<Module> parseModules(Collection<String> moduleCodes) throws ParseException {
         requireNonNull(moduleCodes);
+        if (moduleCodes.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
         final Set<Module> moduleSet = new HashSet<>();
         for (String moduleCode : moduleCodes) {
             moduleSet.add(parseModule(moduleCode));
         }
         return moduleSet;
+    }
+
+    /**
+     * Parse a {@code Optional<String>} into an {@code Optional<Telegram>} object.
+     * If the {@code ArgumentMultimap} does not contain the prefix for telegram, return an empty Optional object.
+     * Otherwise, return an Optional object containing the Telegram object.
+     * @param telegramString Optional object from {@code ArgumentMultimap}
+     * @return a {@code Optional} object containing {@code Telegram} if it is present.
+     * @throws ParseException
+     */
+    public static Optional<Telegram> parseTelegram(Optional<String> telegramString) throws ParseException {
+        requireNonNull(telegramString);
+        if (telegramString.isEmpty()) {
+            return Optional.empty();
+        }
+        String telegramHandle = telegramString.get();
+        if (!Telegram.isValidHandle(telegramHandle)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
+        }
+        return Optional.of(new Telegram(telegramHandle));
     }
 }

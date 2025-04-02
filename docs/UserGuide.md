@@ -13,7 +13,7 @@ title: User Guide
 removing the need to dig through emails or portals. With its simple and efficient CLI-based design, AcademySource lets you manage academic contacts quickly and effortlessly—so you can stay organized and focused on your learning journey.
 
 With AcademySource, you can:
-* Store and manage contact information of professors and TAs (e.g., email, phone number, role, tags, module)
+* Store and manage contact information of professors and TAs (e.g., email, phone number, role, module)
 * Search for contacts by name, contact details, role, and/or module code
 * Mark important contacts as favorites for quick access
   
@@ -127,6 +127,28 @@ With AcademySource, you can:
 
 
 7. Refer to the [Features](#features) below for details of each command.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command box:**<br>
+
+The command box remembers up to 16 previous commands. You can use the Up Arrow (↑) on your keyboard to scroll back through them and the Down Arrow (↓) to move forward. This saves time by letting you reuse commands without retyping them.
+
+If you edit a recalled command, the history navigation resets, and you can’t scroll forward anymore. Once you press Enter, the modified command is saved as a new history entry.
+
+Example:
+1. You type: `find m/2040` and press Enter
+
+2. You type: `list` and press Enter
+
+3. You press Up Arrow (↑) once → It shows `list`.
+
+4. You press Up Arrow (↑) again → It shows `find m/2040`.
+
+5. Now, if you change `find m/2040` to `find m/2103` and then press Down Arrow (↓), you will notice that you aren't moving forward through history because you modified the command.
+
+</div>
+
 <br><br>
 [Back to top](#table-of-content)
 --------------------------------------------------------------------------------------------------------------------
@@ -165,10 +187,10 @@ Contacts Page:
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [m/MODULE]` can be used as `n/John Doe m/CS2103T` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[m/MODULE]…​` can be used as ` ` (i.e. 0 times), `m/CS2103T`, `m/CS2103T m/CS2040S` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -177,6 +199,7 @@ Contacts Page:
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </div>
 
 <a id="prefix-table"></a>
@@ -228,10 +251,10 @@ After command:
 
 <img src="images/add_after.png" width="500" onclick="openModal(this)"/>
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE [m/MODULE]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [m/MODULE] [m/MORE_MODULES]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of modules (including 0)
 </div>
 
 * `ROLE` must be either `ta` or `prof` (Case-insensitive, which means `TA` or `prof` are also valid).
@@ -253,20 +276,17 @@ After command:
 
 <img src="images/edit_after.png" width="500" onclick="openModal(this)"/>
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG] [m/MODULE] [m/MORE_MODULES]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [m/MORE_MODULES]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Roles can not be edited.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-* When editing modules, the existing modules will be replaced by the new modules.
+* When editing modules, the existing modules of the person will be removed i.e adding of modules is not cumulative.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower m/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing modules.
 *  `edit 2 m/CS2103T m/CS2106` Edits the module of the 2nd person to be `CS2103T` and `CS2106`.
 
 <a id="locating-persons-by-name-phone-module-and-favourites--find"></a>
@@ -440,15 +460,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                     |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                              |
-| **Delete** | `delete INDEX…​` <br> e.g., `delete 1` `delete 2 3`                                                                                                  |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                      |
-| **Find**   | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [m/MODULE_KEYWORDS] [f/FAVOURITE_STATUS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y`               |
-| **List**   | `list`                                                                                                                                               |
-| **Help**   | `help`                                                                                                                                               |
+| Action     | Format, Examples                                                                                                                               |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [m/MODULE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                        |
+| **Delete** | `delete INDEX…​` <br> e.g., `delete 1` `delete 2 3`                                                                                            |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                             |
+| **Find**   | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [m/MODULE_KEYWORDS] [f/FAVOURITE_STATUS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y`         |
+| **List**   | `list`                                                                                                                                         |
+| **Help**   | `help`                                                                                                                                         |
 
 [back to top](#table-of-content)
 

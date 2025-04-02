@@ -3,18 +3,18 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
+    "telegram" : "@sourceacademy",
     "address": "123, Jurong West Ave 6, #08-111",
     "role" : "ta",
-    "tags": [ "friends" ],
     "modules" : [ "CS2103T" ],
     "isFavourite" : false
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
+    "telegram" : "@sourceacademy",
     "address": "4th street",
     "role" : "ta",
-    "tags" : [ "friends" ],
     "modules" : [ "CS2103T" ],
     "isFavourite" : false
   } ]

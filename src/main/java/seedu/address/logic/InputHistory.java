@@ -1,35 +1,59 @@
 package seedu.address.logic;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Stack;
+import static java.util.Objects.requireNonNull;
+
+import seedu.address.logic.util.ArrayDequeWithRandomAccess;
 
 /**
  * Manages input history of the command line
  */
 public class InputHistory {
     public static final int MAX_SIZE = 16;
-    private final Deque<String> back;
-    private final Stack<String> front;
+    private final ArrayDequeWithRandomAccess<String> history;
+    private String activeInput = "";
+
+    /**
+     * A value of
+     * -1 : activeInput
+     * >= 0 : history
+     */
+    private int indexInHistory = -1;
 
     /**
      * Creates a {@code InputHistory} with blank history
      */
     public InputHistory() {
-        this.back = new LinkedList<>();
-        this.front = new Stack<>();
+        this.history = new ArrayDequeWithRandomAccess<>();
     }
 
     /**
-     * Returns the currently pointed command.
+     * Adds {@code commandText} to history and shifts the history to the active input.
+     * If the history is over {@link InputHistory.MAX_SIZE}, the oldest entry is deleted.
      *
-     * @return The pointed command (May be null)
+     * @param commandText The new command to add to history, cannot be null
      */
-    public String navigateCurrent() {
-        if (front.isEmpty()) {
-            return null;
-        } else {
-            return front.peek();
+    public void enterInput(String commandText) {
+        requireNonNull(commandText);
+        indexInHistory = -1;
+        history.addFirst(commandText);
+        activeInput = commandText;
+
+        if (history.size() > MAX_SIZE) {
+            history.removeLast();
+        }
+    }
+
+    /**
+     * If the current entry in history does not match {@code commandText}, sets the {@code activeInput}
+     * to {@code commandText} and sets the current entry to the active input.
+     *
+     * @param commandText The input command text, cannot be null
+     */
+    public void checkActiveText(String commandText) {
+        requireNonNull(commandText);
+        if (!getCurrentEntry().equals(commandText)) {
+            indexInHistory = -1;
+            activeInput = commandText;
         }
     }
 
@@ -37,69 +61,39 @@ public class InputHistory {
      * Shifts the history one command back if there are commands behind and returns the newly pointed command,
      * else returns the currently pointed command.
      *
-     * @return The pointed command (May be null)
+     * @return The pointed command
      */
     public String navigateBackward() {
-        if (back.isEmpty()) {
-            return this.navigateCurrent();
-        } else {
-            return front.push(back.removeFirst());
+        if (indexInHistory < history.size() - 1) {
+            indexInHistory++;
         }
+        return getCurrentEntry();
     }
 
     /**
      * Shifts the history one command forward if there are commands in front and returns the newly pointed command,
      * else returns the currently pointed command.
      *
-     * @return The pointed command (May be null)
+     * @return The pointed command
      */
     public String navigateForward() {
-        if (front.size() < 2) {
-            return this.navigateCurrent();
-        } else {
-            back.push(front.pop());
-            return front.peek();
+        if (indexInHistory >= 0) {
+            indexInHistory--;
         }
+        return getCurrentEntry();
     }
 
     /**
-     * Shifts the history to the command before {@code commandText} was entered, then adds {@code commandText}
-     * to history. If the history is over {@link InputHistory.MAX_SIZE}, the oldest entry is deleted.
+     * Returns the currently pointed command.
      *
-     * @param commandText The new command to add to history
+     * @return The pointed command
      */
-    public void enterCommand(String commandText) {
-        while (!front.isEmpty()) {
-            back.push(front.pop());
+    public String getCurrentEntry() {
+        if (history.isEmpty() || indexInHistory == -1) {
+            return activeInput;
         }
-        front.push(commandText);
 
-        if (back.size() > MAX_SIZE - 1) {
-            back.removeLast();
-        }
-    }
-
-    /**
-     * Returns a proxy class for easy navigation of the history
-     *
-     * @return The proxy
-     */
-    public HistoryNavigator getNavigator() {
-        return new HistoryNavigator() {
-            @Override
-            public String current() {
-                return InputHistory.this.navigateCurrent();
-            }
-
-            @Override
-            public String backward() {
-                return InputHistory.this.navigateBackward();
-            }
-
-            @Override
-            public String forward() {
-                return InputHistory.this.navigateForward();
-            }
-        };
+        assert indexInHistory >= 0 && indexInHistory < history.size();
+        return history.get(indexInHistory);
     }
 }

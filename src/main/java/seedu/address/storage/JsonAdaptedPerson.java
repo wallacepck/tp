@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,7 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Telegram;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -29,7 +30,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String telegram;
     private final List<String> modules = new ArrayList<>();
     private final String role;
     private final Boolean isFavourite;
@@ -40,18 +41,16 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("modules") List<String> modules,
-            @JsonProperty("role") String role, @JsonProperty("isFavourite") Boolean isFavourite) {
-
+            @JsonProperty("modules") List<String> modules,
+            @JsonProperty("role") String role, @JsonProperty("isFavourite") Boolean isFavourite,
+            @JsonProperty("telegram") String telegram) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
         this.modules.addAll(modules);
         this.role = role;
         this.isFavourite = isFavourite;
+        this.telegram = telegram;
     }
 
     /**
@@ -61,14 +60,14 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
         modules.addAll(source.getModules().stream()
                 .map(Module::getModuleCode)
                 .collect(Collectors.toList()));
         role = source.getRole().roleName;
         isFavourite = source.getIsFavourite();
+        telegram = source.getTelegram().isPresent()
+                ? source.getTelegram().get().toString()
+                : "";
     }
 
     /**
@@ -77,11 +76,7 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
         final List<Module> personModules = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
         for (String module : modules) {
             Module toAdd = ModuleRegistry.getModuleByCode(module);
             if (toAdd == null) {
@@ -114,6 +109,19 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (telegram == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "telegram"));
+        }
+        final Optional<Telegram> modelTelegram;
+        if (telegram.equals("")) {
+            modelTelegram = Optional.empty();
+        } else {
+            if (!Telegram.isValidHandle(telegram)) {
+                throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
+            }
+            modelTelegram = Optional.of(new Telegram(telegram));
+        }
+
         if (role == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
@@ -125,11 +133,11 @@ class JsonAdaptedPerson {
         if (isFavourite == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "is Favourite"));
         }
+
         final Boolean modelIsFavourite = isFavourite;
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-
         final Set<Module> modelModules = new HashSet<>(personModules);
-        return new Person(modelName, modelPhone, modelEmail, modelRole, modelTags, modelModules, modelIsFavourite);
+        return new Person(modelName, modelPhone, modelEmail, modelRole, modelModules, modelIsFavourite,
+                modelTelegram);
     }
 }

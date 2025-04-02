@@ -49,15 +49,17 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private StackPane tag;
+    private StackPane role;
     @FXML
-    private Label tagLabel;
+    private Label roleLabel;
     @FXML
-    private ImageView tagType;
+    private ImageView roleType;
     @FXML
     private Label modules;
     @FXML
     private ImageView favourite;
+    @FXML
+    private Label telegram;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -71,17 +73,23 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
+        telegram.setText(person.getTelegram().isPresent()
+                ? person.getTelegram().get().toString()
+                : "Telegram not added");
 
         Role role = person.getRole();
 
-        tagLabel.setText(role.toString());
+        roleLabel.setText(role.toString());
 
-        // sets tag colour based on the role. TA = yellow. Prof = orange
+        // sets role colour based on the role. TA = yellow. Prof = orange
+        Image taTag = new Image(getClass().getResourceAsStream("/images/tag_ta.png"));
+        Image profTag = new Image(getClass().getResourceAsStream("/images/tag_prof.png"));
+
         Image image = switch (role) {
         case TA -> TA_TAG;
         case PROFESSOR -> PROF_TAG;
         };
-        tagType.setImage(image);
+        roleType.setImage(image);
 
         favourite.setImage(FAVOURITE_STAR);
         favourite.visibleProperty().bind(isFavourite);

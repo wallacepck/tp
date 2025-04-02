@@ -99,12 +99,12 @@ public class ModuleFolders extends UiPart<Region> {
     }
 
     /**
-     * Creates a folder element with its respective tag inside the Modules Tab.
-     *
+     * Creates a folder element with its respective module inside the Modules Tab.
      * @param moduleString module code stored as a string.
      * @param mainWindow mainWindow object that is created when GUI is loaded.
      */
     private void createFolder(String moduleString, MainWindow mainWindow) {
+
         // Set folder image
         ImageView folderImageView = new ImageView(FOLDER_IMAGE);
         folderImageView.setFitHeight(100.0);

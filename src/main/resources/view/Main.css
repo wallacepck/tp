@@ -289,8 +289,8 @@
     -fx-border-color: transparent;
 }
 
-/* Handles styling of tags */
-#tagLabel {
+/* Handles styling of roles */
+#roleLabel {
     -fx-text-fill: black;
     -fx-font-size: 14;
 }
