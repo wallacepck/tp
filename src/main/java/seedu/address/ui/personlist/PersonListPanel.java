@@ -29,7 +29,7 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
 
-        /* Disable until tag drifting bug is fixed. */
+        /* Disable until role drifting bug is fixed. */
         /* TODO: This causes NullPointerException but does not crash application. Fix asap.*/
         personListView.setSelectionModel(null);
 
