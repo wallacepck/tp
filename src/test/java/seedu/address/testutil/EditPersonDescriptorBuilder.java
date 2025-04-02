@@ -1,15 +1,17 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleRegistry;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Telegram;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -34,7 +36,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setTags(person.getTags());
+        descriptor.setTelegram(person.getTelegram());
     }
 
     /**
@@ -62,12 +64,30 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code modules} into a {@code Set<Module>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditPersonDescriptorBuilder withModule(String... modules) {
+        Set<ModuleRegistry.Module> moduleSet = Stream.of(modules).map(ModuleRegistry::getModuleByCode)
+                .collect(Collectors.toSet());
+        descriptor.setModules(moduleSet);
+        return this;
+    }
+
+    /**
+     * Parse the {@code telegram} into a {@code Optional<Telegram>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withTelegram(String telegram) {
+        descriptor.setTelegram(Optional.of(new Telegram(telegram)));
+        return this;
+    }
+
+    /**
+     * Sets the {@code telegram} of {@code EditPersonDescriptor} that we are building to {@code Optiona.empty}.
+     */
+    public EditPersonDescriptorBuilder withEmptyTelegram() {
+        descriptor.setTelegram(Optional.empty());
         return this;
     }
 

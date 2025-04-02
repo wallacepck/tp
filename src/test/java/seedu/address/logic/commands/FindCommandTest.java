@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DARREN;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
@@ -122,25 +123,25 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_moduleSearch_onePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+    public void execute_moduleSearch_twoPersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         PersonContainsKeywordsPredicate predicate =
                 preparePredicate("CS3230", PersonContainsKeywordsPredicate.SearchField.MODULE);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(DARREN, FIONA), model.getFilteredPersonList());
     }
 
     @Test
-    public void execute_partialModuleSearch_onePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+    public void execute_partialModuleSearch_twoPersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         PersonContainsKeywordsPredicate predicate =
                 preparePredicate("3230", PersonContainsKeywordsPredicate.SearchField.MODULE);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(DARREN, FIONA), model.getFilteredPersonList());
     }
 
     @Test
@@ -152,6 +153,29 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.singletonList(FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_telegram_twoPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        PersonContainsKeywordsPredicate predicate =
+                preparePredicate("@fionakunz @darrenpotts",
+                        PersonContainsKeywordsPredicate.SearchField.TELEGRAM);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(DARREN, FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_partialKeywordTelegram_twoPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        PersonContainsKeywordsPredicate predicate =
+                preparePredicate("fio potts", PersonContainsKeywordsPredicate.SearchField.TELEGRAM);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(DARREN, FIONA), model.getFilteredPersonList());
     }
 
     @Test
@@ -192,13 +216,14 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_namePhoneModuleFavouriteAndRole_onePersonFound() {
+    public void execute_namePhoneModuleFavouriteTelegramAndRole_onePersonFound() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> map = new HashMap<>();
         map.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Fiona"));
         map.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("CS3230"));
         map.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
         map.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
         map.put(PersonContainsKeywordsPredicate.SearchField.ROLE, List.of("TA"));
+        map.put(PersonContainsKeywordsPredicate.SearchField.TELEGRAM, List.of("@fionakunz"));
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(map);
         FindCommand command = new FindCommand(predicate);
 
@@ -209,13 +234,14 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_partialNamePhoneModuleFavouriteAndRole_onePersonFound() {
+    public void execute_partialNamePhoneModuleFavouriteTelegramAndRole_onePersonFound() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> map = new HashMap<>();
         map.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("fio"));
         map.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("3230"));
         map.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("4567"));
         map.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
         map.put(PersonContainsKeywordsPredicate.SearchField.ROLE, List.of("ta"));
+        map.put(PersonContainsKeywordsPredicate.SearchField.TELEGRAM, List.of("fio"));
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(map);
         FindCommand command = new FindCommand(predicate);
 
@@ -228,7 +254,7 @@ public class FindCommandTest {
     @Test
     public void toStringMethod() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
-        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, Arrays.asList("keyword"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("keyword"));
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";

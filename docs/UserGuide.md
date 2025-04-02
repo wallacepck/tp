@@ -13,7 +13,7 @@ title: User Guide
 removing the need to dig through emails or portals. With its simple and efficient CLI-based design, AcademySource lets you manage academic contacts quickly and effortlessly—so you can stay organized and focused on your learning journey.
 
 With AcademySource, you can:
-* Store and manage contact information of professors and TAs (e.g., email, phone number, role, tags, module)
+* Store and manage contact information of professors and TAs (e.g., email, phone number, role, module)
 * Search for contacts by name, contact details, role, and/or module code
 * Mark important contacts as favorites for quick access
   
@@ -27,6 +27,7 @@ With AcademySource, you can:
         <a href="#features">Features</a>
     </summary>
     <a href="#prefix-table"> - Prefix table <br></a>
+    <a href="#accepted-modules"> - Modules Accepted by AcademySource <br></a>
     <a href="#viewing-help--help"> - Viewing help <br></a>
     <a href="#listing-all-persons--list"> - Listing all persons <br></a>
     <a href="#adding-a-person--add"> - Adding a person <br></a>
@@ -187,10 +188,10 @@ Contacts Page:
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [m/MODULE]` can be used as `n/John Doe m/CS2103T` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[m/MODULE]…​` can be used as ` ` (i.e. 0 times), `m/CS2103T`, `m/CS2103T m/CS2040S` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -205,14 +206,31 @@ Contacts Page:
 <a id="prefix-table"></a>
 ### Prefix Table [🔝](#table-of-content)
 
-| **Prefix** | **Meaning**                | **Usage Example**     | **Remarks**                                                           |
-|------------|----------------------------|-----------------------|-----------------------------------------------------------------------|
-| `n/`       | Name                       | `n/John Doe`          |                                                                       |
-| `p/`       | Phone number               | `p/98765432`          |                                                                       |
-| `e/`       | Email address              | `e/johnd@example.com` |                                                                       |
-| `r/`       | Role (`ta` or `prof`)      | `r/TA` or `r/PROF`    | Not used in `find`.                                                   |
-| `m/`       | Module (can have multiple) | `m/CS2103T m/CS2101`  | Used differently in `find`. For multiple modules, `m/CS2103T CS2106`. |
-| `f/`       | Favourite                  | `f/y` or `f/n`        | Not used in `add` or `edit`.                                          |
+| **Prefix** | **Meaning**                | **Usage Example**                   | **Remarks**                  |
+|------------|----------------------------|-------------------------------------|------------------------------|
+| `n/`       | Name                       | `n/John Doe`                        |                              |
+| `p/`       | Phone number               | `p/98765432`                        |                              |
+| `t/`       | Telegram                   | `t/@johndoe`                        |                              |
+| `r/`       | Role (`ta` or `prof`)      | `r/TA` or `r/PROF`                  |                              |
+| `e/`       | Email address              | `e/johnd@example.com`               | Not used in `find`           |
+| `m/`       | Module (can have multiple) | `m/CS2103T m/CS2101`                | Not used in `find`.          |
+| `f/`       | Favourite                  | `f/y` or `f/n`                      | Not used in `add` or `edit`. |
+| `mm/`      | Module(s)                  | `mm/CS2103T` or `mm/CS2101 CS2103T` | Not used in `add` or `edit`. |
+
+<a id="accepted-modules"></a>
+### Modules Accepted by AcademySource [🔝](#table-of-content)
+
+| **Module Code** | **Module Name**                                       |
+|-----------------|-------------------------------------------------------|
+| CS1231S         | Discrete Structures                                   |
+| CS2030S         | Programming Methodology II                            |
+| CS2040S         | Data Structures and Algorithms                        |
+| CS2100          | Computer Organisation                                 |
+| CS2103T         | Software Engineering                                  |
+| CS2106          | Introduction to Operating Systems                     |
+| CS2109S         | Introduction to AI and Machine Learning               |
+| CS3230          | Design and Analysis of Algorithms                     |
+| CS2101          | Effective Communication for Computing Professionals   |
 
 <a id="viewing-help--help"></a>
 ### Viewing help : `help` [🔝](#table-of-content)
@@ -251,13 +269,14 @@ After command:
 
 <img src="images/add_after.png" width="500" onclick="openModal(this)"/>
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE [m/MODULE]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [m/MODULE] [m/MORE_MODULES]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of modules (including 0)
 </div>
 
 * `ROLE` must be either `ta` or `prof` (Case-insensitive, which means `TA` or `prof` are also valid).
+* `MODULE`must be one of the accepted module codes given in [the module table.](#modules-accepted-by-academysource-)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/prof`
@@ -276,20 +295,18 @@ After command:
 
 <img src="images/edit_after.png" width="500" onclick="openModal(this)"/>
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG] [m/MODULE] [m/MORE_MODULES]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [m/MORE_MODULES]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Roles can not be edited.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-* When editing modules, the existing modules will be replaced by the new modules.
+* When editing modules, the existing modules of the person will be removed i.e adding of modules is not cumulative.
+* `MODULE`must be one of the accepted module codes given in [the module table.](#modules-accepted-by-academysource-)
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower m/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing modules.
 *  `edit 2 m/CS2103T m/CS2106` Edits the module of the 2nd person to be `CS2103T` and `CS2106`.
 
 <a id="locating-persons-by-name-phone-module-and-favourites--find"></a>
@@ -305,47 +322,68 @@ After command:
 
 <img src="images/find_after.png" width="500" onclick="openModal(this)"/>
 
-Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [m/MODULE_KEYWORDS] [f/FAVOURITE_STATUS]`
+Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOURITE_STATUS] [r/ROLE] [t/TELEGRAM_KEYWORDS]`
 
-- `n/` — Matches names using **case-insensitive, partial matches**.
-- `p/` — Matches phone numbers using **partial matches**.
-- `m/` — Matches module codes using **case-insensitive, partial matches**.
-- `f/` — Filters by favourite status. Accepts only:
-    - `y` → Favourite
-    - `n` → Not favourite
+**Prefix Details:**
+
+- **`n/`** — Matches names using **case-insensitive, partial matches**.
+- **`p/`** — Matches phone numbers using **partial matches**.
+- **`mm/`** — Matches module codes using **case-insensitive, partial matches**.
+- **`f/`** — Filters by favourite status using **case-insensitive matching**. Accepts only:
+    - **`y`** → Favourite
+    - **`n`** → Not favourite
+- **`r/`** — Filters by role using **case-insensitive matching**. Accepts only:
+    - **`prof`** → Professor
+    - **`ta`** → TA
+- **`t/`** — Matches Telegram handles. The matching is **case-insensitive** and allows handles containing alphabets, digits, underscores (`_`), and the `@` symbol.
+
+---
 
 #### 🔎 Search Behavior
 
-- Keywords are **case-insensitive** for `name`, `phone`, and `module`.
-- Name keyword **order does not matter**. For example, `Hans Bo` matches `Bo Hans`.
-- Supports **partial keyword matching** for name, phone, and module.
-- Only **one instance** of each prefix is allowed. Repeating a prefix is **not permitted**.
-- All specified prefixes must match (**AND keywords**) for a person to be included in the results.
+- **Case-Insensitive & Partial Matching:**  
+  The search for names, phone numbers, and module codes is performed in a case-insensitive manner and supports partial keyword matching.  
+  _Example:_ `find n/Hans Bo` matches a person named "Bo Hans".
+
+- **Keyword Order:**  
+  For names, the order of keywords does not matter. For example, `find n/Hans Bo` matches "Bo Hans".
+
+- **Single Instance per Prefix:**  
+  Only **one instance** of each prefix is allowed. Repeating a prefix (e.g. `n/John n/Doe`) is not permitted.
+
+- **AND Combination:**  
+  When multiple prefixes are specified (e.g. `find n/John mm/CS2103T`), a person must satisfy **all criteria** (i.e. the keywords across the different fields are combined using an AND operation) to be included in the results.
 
 ---
 
 #### ✅ Valid Examples
 
-| Command             | Description                                                                     |  
-|---------------------|---------------------------------------------------------------------------------|
-| `find n/John`       | Finds persons with names matching `John`, e.g., `John Doe`.                     |
-| `find n/alex david` | Finds persons with names matching either `alex` or `david`, e.g., `Alex Yeoh`, `David Li`. |
-| `find p/9123`       | Finds persons whose phone numbers contain `9123`. e.g. `91234567`               |
-| `find m/2103`       | Finds persons with module codes like "CS2103T".                                 |
-| `find f/y`          | Finds persons marked as favourites.                                             |
-| `find f/n`          | Finds persons who are not marked as favourites.                                 |
-| `find n/John m/CS2103T` | Finds persons whose name matches "John" **and** who are in the module "CS2103T".|
-| `find m/CS2103 f/y` | Finds persons whose module matches `CS2103` **and** who are marked as favourites. |             
+| Command                        | Description                                                                                             |
+|--------------------------------|---------------------------------------------------------------------------------------------------------|
+| `find n/John`                  | Finds persons with names matching `John` (e.g., "John Doe").                                            |
+| `find n/alex david`            | Finds persons with names matching either `alex` or `david` (e.g., "Alex Yeoh", "David Li").             |
+| `find p/9123`                  | Finds persons whose phone numbers contain `9123` (e.g., "91234567").                                    |
+| `find mm/2103 CS3230`          | Finds persons with module codes that contain "2103" **or** "CS3230" (e.g. `CS2103T`, `CS2103`, `CS3230` |
+| `find f/y`                     | Finds persons marked as favourites.                                                                     |
+| `find f/n`                     | Finds persons who are not marked as favourites.                                                         |
+| `find r/prof`                  | Finds persons with the role of Professor.                                                               |
+| `find r/ta`                    | Finds persons with the role of TA.                                                                      |
+| `find t/@john_doe`             | Finds persons whose Telegram handle matches `@john_doe`.                                                |
+| `find n/John Demar mm/CS2103T` | Finds persons whose name contains "John" **or** "Demar" **and** are in the module "CS2103T".            |
+| `find mm/CS2103 f/y`           | Finds persons whose module matches `CS2103` **and** who are marked as favourites.                       |
 
 ---
 
 #### ❌ Invalid Examples
 
-| Command | Reason |
-|--------|--------|
-| `find` | No search prefixes provided. |
-| `find n/John n/Doe` | Duplicate `n/` prefix is not allowed. |
-| `find f/maybe` | Invalid value for `f/`. Only `y` or `n` are allowed. |
+| Command                    | Reason                                                                                                                            |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `find`                     | No search prefixes provided.                                                                                                      |
+| `find n/John n/Doe`        | Duplicate `n/` prefix is not allowed.                                                                                             |
+| `find f/maybe`             | Invalid value for `f/`. Only `y` or `n` are allowed.                                                                              |
+| `find r/student`           | Invalid value for `r/`. Only `prof` or `ta` are allowed.                                                                          |
+| `find n/John$`             | Invalid name. Special characters like `$` are not permitted. *(Names only allow alphabets and spaces)*                            |
+| `find t/john#doe`          | Invalid Telegram handle. Characters like `#` are not allowed. *(Telegram handles only allow alphabets, digits, underscore, or @)* |
 
 ---
 
@@ -463,15 +501,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                     |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TAG] m/MODULE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                              |
-| **Delete** | `delete INDEX…​` <br> e.g., `delete 1` `delete 2 3`                                                                                                  |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                      |
-| **Find**   | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [m/MODULE_KEYWORDS] [f/FAVOURITE_STATUS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y`               |
-| **List**   | `list`                                                                                                                                               |
-| **Help**   | `help`                                                                                                                                               |
+| Action     | Format, Examples                                                                                                                                                                              |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [m/MODULE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA m/CS2103T`                                                           |
+| **Clear**  | `clear`                                                                                                                                                                                       |
+| **Delete** | `delete INDEX…​` <br> e.g., `delete 1` `delete 2 3`                                                                                                                                           |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                            |
+| **Find**   | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOURITE_STATUS] [r/ROLE] [t/TELEGRAM_KEYWORDS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y t/@JamesLovesCS r/PROF` |
+| **List**   | `list`                                                                                                                                                                                        |
+| **Help**   | `help`                                                                                                                                                                                        |
 
 [back to top](#table-of-content)
 
@@ -487,4 +525,3 @@ _Details coming soon ..._
 | **Field**      | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                       |
 
 [back to top](#table-of-content)
-

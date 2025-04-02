@@ -17,8 +17,7 @@ Class Person
 Class Email
 Class Name
 Class Phone
-Class Role
-Class Tag
+class Role
 Class ModuleRegistry
 Class Module
 
@@ -44,7 +43,6 @@ Person *--> Phone
 Person *--> Email
 Person *--> Role
 Person *--> Module
-Person *--> "*" Tag
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
