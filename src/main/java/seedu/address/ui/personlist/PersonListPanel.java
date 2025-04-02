@@ -2,6 +2,7 @@ package seedu.address.ui.personlist;
 
 import java.util.logging.Logger;
 
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -36,22 +37,6 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         personListView.setPlaceholder(createEmptyPlaceholder()); // Displays when personList is empty
-
-        /*
-         *
-         *  The following code addresses the issue of ListView flickering when a ListCell is selected.
-         *  Basically ListView re-renders whenever a selection is made, and this refreshing of
-         *  layout is what causes the flicker.
-         *  The code below essentially disables this behaviour, thus removing the flicker when an item
-         *  is selected.
-         *
-         *  The following code may be removed once the issue is fixed in the later JDK.
-         *
-         *  Relevant topic from StackOverflow:
-         *  https://stackoverflow.com/questions/76586932/javafx-listview-selection#comment135033888_76586932
-         */
-        personListView.setSelectionModel(null);
-        personListView.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> event.consume());
     }
 
     /**
@@ -78,11 +63,14 @@ public class PersonListPanel extends UiPart<Region> {
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Selection handling disabled until ListView flickering bug is resolved in the later JDK.
      */
     class PersonListViewCell extends ListCell<Person> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
+
+            // Disable selection on
             setOnMouseClicked(MouseEvent::consume);
 
             if (empty || person == null) {
@@ -91,6 +79,12 @@ public class PersonListPanel extends UiPart<Region> {
             } else {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
+        }
+
+        @Override
+        public void updateSelected(boolean selected) {
+            // Prevent visual selection effect
+            super.updateSelected(false);
         }
     }
 }
