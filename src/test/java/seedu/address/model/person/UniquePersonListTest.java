@@ -145,6 +145,16 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(BOB)
+                .withName("Alice")
+                .build();
+        uniquePersonList.add(editedAlice);
+        assertThrows(DuplicateTelegramException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+    }
+
+    @Test
+    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicateTelegramException() {
+        uniquePersonList.add(ALICE);
         uniquePersonList.add(BOB);
         assertThrows(DuplicateNameException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
     }
