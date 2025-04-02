@@ -60,7 +60,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", modules="
-                + editPersonDescriptor.getModules().orElse(null) + "}";
+                + editPersonDescriptor.getModules().orElse(null) + ", telegram="
+                + editPersonDescriptor.getTelegram() + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

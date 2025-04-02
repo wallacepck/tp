@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -44,7 +45,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_MODULE + "MODULE]...\n"
+            + "[" + PREFIX_MODULE + "MODULE]... "
+            + "[" + PREFIX_TELEGRAM + "TELEGRAM] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -52,6 +54,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TELEGRAM = "This telegram already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -101,7 +104,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
-        Optional<Telegram> updatedTelegram = personToEdit.getTelegram();
+        Optional<Telegram> updatedTelegram;
+        if (editPersonDescriptor.getTelegram() != null) {
+            updatedTelegram = editPersonDescriptor.getTelegram();
+        } else {
+            updatedTelegram = personToEdit.getTelegram();
+        }
 
         return new Person(updatedName, updatedPhone, updatedEmail, personToEdit.getRole(), updatedTags,
                 updatedModules, updatedTelegram);
@@ -141,6 +149,7 @@ public class EditCommand extends Command {
         private Email email;
         private Set<Tag> tags;
         private Set<Module> modules;
+        private Optional<Telegram> telegram;
 
         public EditPersonDescriptor() {}
 
@@ -154,13 +163,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTags(toCopy.tags);
             setModules(toCopy.modules);
+            setTelegram(toCopy.telegram);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags, modules);
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags, modules, telegram);
         }
 
         public void setName(Name name) {
@@ -221,6 +231,30 @@ public class EditCommand extends Command {
             return (modules != null) ? Optional.of(Collections.unmodifiableSet(modules)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code telegram} to this objects {@code telegram}.
+         * A defensive copy of {@code telegram} is used internally.
+         */
+        public void setTelegram(Optional<Telegram> telegram) {
+            this.telegram = (telegram != null && telegram.isPresent())
+                    ? Optional.of(telegram.get())
+                    : telegram == null
+                    ? null
+                    : Optional.empty();
+        }
+
+        /**
+         * Returns a new Optional object that contains the {@code telegram}.
+         * Returns {@code Optional#empty()} if {@code telegram} is empty.
+         */
+        public Optional<Telegram> getTelegram() {
+            return (telegram != null && telegram.isPresent())
+                    ? Optional.of(telegram.get())
+                    : telegram == null
+                    ? null
+                    : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -248,6 +282,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("tags", tags)
                     .add("modules", modules)
+                    .add("telegram", telegram)
                     .toString();
         }
     }

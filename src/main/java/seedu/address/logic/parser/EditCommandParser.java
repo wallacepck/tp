@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleRegistry.Module;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_TAG, PREFIX_MODULE);
+                        PREFIX_TAG, PREFIX_MODULE, PREFIX_TELEGRAM);
 
         Index index;
 
@@ -59,6 +61,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         parseModulesForEdit(argMultimap.getAllValues(PREFIX_MODULE)).ifPresent(editPersonDescriptor::setModules);
+        if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
+            editPersonDescriptor.setTelegram(parseTelegramForEdit(argMultimap.getValue(PREFIX_TELEGRAM).get()));
+        }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -97,6 +102,19 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ? Collections.emptySet()
                 : modules;
         return Optional.of(ParserUtil.parseModules(moduleSet));
+    }
+
+    /**
+     * Parses {@code telegramToParse} into a {@code Optional<Telegram>} object.
+     * Returns {@code Optional#empty} if telegramToParse is empty.
+     * Otherwise, parse using {@code ParserUtil#parseTelegram}.
+     */
+    private Optional<Telegram> parseTelegramForEdit(String telegramToParse) throws ParseException {
+        if (telegramToParse == "") {
+            return Optional.empty();
+        } else {
+            return ParserUtil.parseTelegram(Optional.of(telegramToParse));
+        }
     }
 
 }
