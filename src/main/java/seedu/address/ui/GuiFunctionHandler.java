@@ -1,10 +1,11 @@
 package seedu.address.ui;
 
 /**
- * Represents an interface for panes that allow filtering of person List with GUI interaction events
- * such as button press.
+ * Represents an interface that handles the display and functionality due to selection events.
  */
-public interface GuiFilterHandler {
+public interface GuiFunctionHandler {
+
+    // List filter functionality
 
     /**
      * Filters the contact list with the module code received via label in Module Folder.
@@ -22,4 +23,13 @@ public interface GuiFilterHandler {
      * Clears filter when switching to Contacts tab manually.
      */
     void clearFilter();
+
+    // Display switch functionality
+
+    /**
+     * Sets the placeholder content of the switchable window.
+     *
+     * @param url The identifier for the window content to switch to.
+     */
+    void setSwitchWindowPlaceholder(String url);
 }

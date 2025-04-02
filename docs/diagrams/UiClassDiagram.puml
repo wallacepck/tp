@@ -7,8 +7,7 @@ skinparam classBackgroundColor UI_COLOR
 package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
-Class "<<interface>>\n GuiFilterHandler" as GuiFilterHandler
-Class "<<interface>>\n WindowSwitchHandler" as WindowSwitchHandler
+Class "<<interface>>\n GuiFunctionHandler" as GuiFunctionHandler
 Class UiManager
 Class MainWindow
 Class HelpWindow
@@ -18,6 +17,7 @@ Class PersonListPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class Sidebar
 }
 
 package Model <<Rectangle>> {
@@ -38,10 +38,10 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow *-down-> "1" ModuleFolders
+MainWindow *-down-> "1" Sidebar
 MainWindow --> "0..1" HelpWindow
 
-GuiFilterHandler <|.. MainWindow
-WindowSwitchHandler <|.. MainWindow
+GuiFunctionHandler <|.. MainWindow
 
 PersonListPanel -down-> "*" PersonCard
 
@@ -54,15 +54,22 @@ PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 ModuleFolders --|> UiPart
+Sidebar --|> UiPart
 
-PersonCard ..> Model
+Model <.. PersonCard
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
+GuiFunctionHandler <.. PersonListPanel
+GuiFunctionHandler <.. ModuleFolders
+GuiFunctionHandler <.. Sidebar
+
+PersonListPanel -[hidden]right- ModuleFolders
+ModuleFolders -[hidden]right- Sidebar
+Sidebar -[hidden]right- HelpWindow
+HelpWindow -[hidden]right- CommandBox
+CommandBox -[hidden]right- ResultDisplay
+ResultDisplay -[hidden]right- StatusBarFooter
 
 MainWindow -[hidden]-|> UiPart
 @enduml

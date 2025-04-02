@@ -36,6 +36,7 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         personListView.setPlaceholder(createEmptyPlaceholder()); // Displays when personList is empty
+        personListView.setPlaceholder(createEmptyPlaceholder()); // Displays when personList is empty
     }
 
     /**
