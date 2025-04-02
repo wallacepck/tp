@@ -70,6 +70,15 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void contains_telegramWithSameIdentityFieldsInList_returnsFalse() {
+        uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withTelegram("@tempalice")
+                .build();
+        assertFalse(uniquePersonList.containsTelegram(editedAlice));
+    }
+
+    @Test
     public void add_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePersonList.add(null));
     }
