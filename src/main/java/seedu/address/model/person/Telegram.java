@@ -62,8 +62,8 @@ public class Telegram {
             return false;
         }
 
-        Telegram otherEmail = (Telegram) other;
-        return handle.equals(otherEmail.handle);
+        Telegram otherTelegram = (Telegram) other;
+        return handle.equalsIgnoreCase(otherTelegram.handle);
     }
 
     @Override

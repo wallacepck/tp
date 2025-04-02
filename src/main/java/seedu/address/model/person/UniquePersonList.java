@@ -80,7 +80,6 @@ public class UniquePersonList implements Iterable<Person> {
         if (!target.isSameName(editedPerson) && containsName(editedPerson)) {
             throw new DuplicateNameException();
         }
-        
         if (!target.isSameTelegram(editedPerson) && containsTelegram(editedPerson)) {
             throw new DuplicateTelegramException();
         }
