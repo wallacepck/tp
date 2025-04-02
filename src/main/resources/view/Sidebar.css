@@ -9,10 +9,16 @@
 
 .button:hover {
     -fx-cursor: hand;
+    -fx-background-color: #3c3c3c;
 }
 
 .button:focused {
-    -fx-background-color: #416989;
+    -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-border-color: transparent;
+}
+
+/* New class for the selected button */
+.selected-button {
+    -fx-background-color: #416989 !important;
 }
