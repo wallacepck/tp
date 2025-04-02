@@ -210,17 +210,44 @@ class PersonContainsKeywordsPredicateTest {
     }
 
     @Test
-    void test_keywordContainsNamePhoneModuleFavouriteAndRole_returnsTrue() {
+    void test_telegramContainsKeyword_returnsTrue() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.TELEGRAM, List.of("@darrenpotts"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertTrue(predicate.test(new PersonBuilder().withTelegram("@darrenpotts").build()));
+    }
+
+    @Test
+    void test_telegramContainsCaseInsensitivePartialKeyword_returnsTrue() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.TELEGRAM, List.of("DARREN"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertTrue(predicate.test(new PersonBuilder().withTelegram("@darrenpotts").build()));
+    }
+
+    @Test
+    void test_telegramDoesNotContainTelegram_returnsFalse() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.TELEGRAM, List.of("@darrenpotts"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertFalse(predicate.test(new PersonBuilder().withTelegram("@fionakunz").build()));
+    }
+
+    @Test
+    void test_keywordContainsNamePhoneModuleFavouriteTelegramAndRole_returnsTrue() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Alice"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("CS2103T"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.ROLE, List.of("professor"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.TELEGRAM, List.of("@alice"));
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice")
                 .withPhone("91234567").withFavourite(true)
-                .withModule("CS2103T").withRole(Role.PROFESSOR)
+                .withModule("CS2103T")
+                .withRole(Role.PROFESSOR)
+                .withTelegram("@alice")
                 .build()));
     }
 
@@ -232,9 +259,14 @@ class PersonContainsKeywordsPredicateTest {
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("2103"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.ROLE, List.of("professor"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.TELEGRAM, List.of("ali"));
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice")
-                .withPhone("91234567").withFavourite(true).withModule("CS2103T").build()));
+                .withPhone("91234567")
+                .withFavourite(true)
+                .withModule("CS2103T")
+                .withTelegram("@alice")
+                .build()));
     }
 
     @Test
