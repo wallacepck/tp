@@ -59,6 +59,8 @@ public interface Model {
 
     boolean hasTelegram(Person person);
 
+    boolean isDefaultTelegram(Person person);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.

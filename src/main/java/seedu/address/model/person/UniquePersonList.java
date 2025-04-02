@@ -42,7 +42,10 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean containsTelegram(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameName);
+        if (toCheck.getTelegram().isEmpty()) {
+            return false;
+        }
+        return internalList.stream().anyMatch(toCheck::isSameTelegram);
     }
 
     /**
@@ -160,8 +163,11 @@ public class UniquePersonList implements Iterable<Person> {
                 if (persons.get(i).isSameName(persons.get(j))) {
                     return false;
                 }
-                if (persons.get(i).isSameTelegram(persons.get(j))) {
-                    return false;
+
+                if (persons.get(i).getTelegram().isPresent() && persons.get(j).getTelegram().isPresent()) {
+                    if (persons.get(i).isSameTelegram(persons.get(j))) {
+                        return false;
+                    }
                 }
             }
         }

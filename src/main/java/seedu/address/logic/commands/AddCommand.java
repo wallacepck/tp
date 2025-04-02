@@ -64,8 +64,10 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_NAME);
         }
 
-        if (model.hasTelegram(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TELEGRAM);
+        if (!model.isDefaultTelegram(toAdd)) {
+            if (model.hasTelegram(toAdd)) {
+                throw new CommandException(MESSAGE_DUPLICATE_TELEGRAM);
+            }
         }
 
         model.addPerson(toAdd);
