@@ -213,6 +213,14 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void setPersons_listWithDuplicateTelegram_throwsDuplicateTelegramException() {
+        Person aliceSurname = new PersonBuilder(ALICE)
+                .withName("Alice Lee").build();
+        List<Person> listWithDuplicateTelegram = Arrays.asList(ALICE, aliceSurname);
+        assertThrows(DuplicateTelegramException.class, () -> uniquePersonList.setPersons(listWithDuplicateTelegram));
+    }
+
+    @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));

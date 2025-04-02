@@ -109,11 +109,9 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void setPersons(List<Person> persons) {
         requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
-            throw new DuplicateNameException();
+        if (personsAreUnique(persons)) {
+            internalList.setAll(persons);
         }
-
-        internalList.setAll(persons);
     }
 
     /**
@@ -160,12 +158,12 @@ public class UniquePersonList implements Iterable<Person> {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
                 if (persons.get(i).isSameName(persons.get(j))) {
-                    return false;
+                    throw new DuplicateNameException();
                 }
 
                 if (persons.get(i).hasTelegram() && persons.get(j).hasTelegram()) {
                     if (persons.get(i).isSameTelegram(persons.get(j))) {
-                        return false;
+                        throw new DuplicateTelegramException();
                     }
                 }
             }
