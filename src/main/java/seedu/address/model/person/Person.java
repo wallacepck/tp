@@ -129,6 +129,10 @@ public class Person {
                 && otherPerson.getTelegram().equals(this.telegram);
     }
 
+    public boolean hasDefaultTelegram() {
+        return telegram.isEmpty();
+    }
+
     /**
      * Creates a new person with the exact same attribute as the current person, except
      * isFavourite is toggled.

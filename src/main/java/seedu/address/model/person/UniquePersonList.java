@@ -164,7 +164,7 @@ public class UniquePersonList implements Iterable<Person> {
                     return false;
                 }
 
-                if (persons.get(i).getTelegram().isPresent() && persons.get(j).getTelegram().isPresent()) {
+                if (!persons.get(i).hasDefaultTelegram() && !persons.get(j).hasDefaultTelegram() ) {
                     if (persons.get(i).isSameTelegram(persons.get(j))) {
                         return false;
                     }

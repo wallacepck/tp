@@ -100,12 +100,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean isDefaultTelegram(Person person) {
-        requireNonNull(person);
-        return person.getTelegram().isEmpty();
-    }
-
-    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
