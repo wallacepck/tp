@@ -23,8 +23,10 @@ public class PersonTest {
         assertFalse(ALICE.isSameName(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .build();
         assertTrue(ALICE.isSameName(editedAlice));
 
         // different name, all other attributes same -> returns false

@@ -64,7 +64,7 @@ public class UniquePersonListTest {
     @Test
     public void contains_telegramWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE)
                 .build();
         assertTrue(uniquePersonList.containsTelegram(editedAlice));
     }

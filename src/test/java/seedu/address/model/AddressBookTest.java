@@ -95,7 +95,7 @@ public class AddressBookTest {
     @Test
     public void hasTelegram_telegramWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE)
                 .build();
         assertTrue(addressBook.hasTelegram(editedAlice));
     }
