@@ -180,6 +180,12 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSameName(person);
         }
+
+        @Override
+        public boolean hasTelegram(Person person) {
+            requireNonNull(person);
+            return this.person.isSameTelegram(person);
+        }
     }
 
     /**
@@ -192,6 +198,12 @@ public class AddCommandTest {
         public boolean hasName(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSameName);
+        }
+
+        @Override
+        public boolean hasTelegram(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSameTelegram);
         }
 
         @Override
