@@ -27,6 +27,7 @@ With AcademySource, you can:
         <a href="#features">Features</a>
     </summary>
     <a href="#prefix-table"> - Prefix table <br></a>
+    <a href="#modules-accepted-by-academysource"> - Modules Accepted by AcademySource <br></a>
     <a href="#viewing-help--help"> - Viewing help <br></a>
     <a href="#listing-all-persons--list"> - Listing all persons <br></a>
     <a href="#adding-a-person--add"> - Adding a person <br></a>
@@ -214,6 +215,20 @@ Contacts Page:
 | `m/`       | Module (can have multiple) | `m/CS2103T m/CS2101`  | Used differently in `find`. For multiple modules, `m/CS2103T CS2106`. |
 | `f/`       | Favourite                  | `f/y` or `f/n`        | Not used in `add` or `edit`.                                          |
 
+<a id="prefix-table"></a>
+### Modules Accepted by AcademySource [🔝](#table-of-content)
+| **Module Code** | **Module Name**                                       |
+|-----------------|-------------------------------------------------------|
+| CS1231S         | Discrete Structures                                   |
+| CS2030S         | Programming Methodology II                            |
+| CS2040S         | Data Structures and Algorithms                        |
+| CS2100          | Computer Organisation                                 |
+| CS2103T         | Software Engineering                                  |
+| CS2106          | Introduction to Operating Systems                     |
+| CS2109S         | Introduction to AI and Machine Learning               |
+| CS3230          | Design and Analysis of Algorithms                     |
+| CS2101          | Effective Communication for Computing Professionals   |
+
 <a id="viewing-help--help"></a>
 ### Viewing help : `help` [🔝](#table-of-content)
 
@@ -258,6 +273,7 @@ A person can have any number of modules (including 0)
 </div>
 
 * `ROLE` must be either `ta` or `prof` (Case-insensitive, which means `TA` or `prof` are also valid).
+* `MODULE`must be one of the accepted module codes given in [this table.](#modules-accepted-by-academysource-)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/prof`
@@ -283,6 +299,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [m/MODULE] [m/MORE_MODULES]…�
 * Existing values will be updated to the input values.
 * Roles can not be edited.
 * When editing modules, the existing modules of the person will be removed i.e adding of modules is not cumulative.
+* `MODULE`must be one of the accepted module codes given in [this table.](#modules-accepted-by-academysource-)
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -484,4 +501,3 @@ _Details coming soon ..._
 | **Field**      | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                       |
 
 [back to top](#table-of-content)
-
