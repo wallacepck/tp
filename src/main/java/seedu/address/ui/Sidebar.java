@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -37,13 +36,13 @@ public class Sidebar extends UiPart<Region> {
         // Set Module button
         setButtonImage(moduleButton, "/images/notebook-pen.png");
         moduleButton.setText("Modules");
+        moduleButton.getStyleClass().add("selected-button");
         selectedButton = moduleButton; // set module button as default on
+
         moduleButton.setOnAction(event -> {
             mainWindow.setSwitchWindowPlaceholder("Modules");
             setButtonOnClick(moduleButton);
         });
-
-        Platform.runLater(() -> moduleButton.requestFocus());
 
         // Set Contact button
         setButtonImage(contactButton, "/images/phone-icon.png");
@@ -79,8 +78,8 @@ public class Sidebar extends UiPart<Region> {
         if (selectedButton == button) {
             return;
         }
-        selectedButton.setStyle("-fx-background-color: derive(#3c3c3c, 20%);");
-        button.setStyle("-fx-background-color: #416989;");
+        selectedButton.getStyleClass().remove("selected-button");
+        button.getStyleClass().add("selected-button");
         selectedButton = button;
     }
 
@@ -91,12 +90,12 @@ public class Sidebar extends UiPart<Region> {
             return;
         }
 
-        selectedButton.setStyle("-fx-background-color: derive(#3c3c3c, 20%);");
+        selectedButton.getStyleClass().remove("selected-button");
         if (buttonName.equals("Modules")) {
-            moduleButton.setStyle("-fx-background-color: #416989;");
+            moduleButton.getStyleClass().add("selected-button");
             selectedButton = moduleButton;
         } else {
-            contactButton.setStyle("-fx-background-color: #416989;");
+            contactButton.getStyleClass().add("selected-button");
             selectedButton = contactButton;
         }
     }
