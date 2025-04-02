@@ -129,8 +129,11 @@ public class Person {
                 && otherPerson.getTelegram().equals(this.telegram);
     }
 
-    public boolean hasDefaultTelegram() {
-        return telegram.isEmpty();
+    /**
+     * Returns true if telegram handle is present for this Person.
+     */
+    public boolean hasTelegram() {
+        return this.telegram.isPresent();
     }
 
     /**

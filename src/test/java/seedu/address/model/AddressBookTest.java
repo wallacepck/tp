@@ -78,6 +78,30 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasTelegram_nullTelegram_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasTelegram(null));
+    }
+
+    @Test
+    public void hasTelegram_telegramNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasTelegram(ALICE));
+    }
+
+    @Test
+    public void hasTelegram_telegramInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        assertTrue(addressBook.hasTelegram(ALICE));
+    }
+
+    @Test
+    public void hasTelegram_telegramWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(addressBook.hasTelegram(editedAlice));
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }

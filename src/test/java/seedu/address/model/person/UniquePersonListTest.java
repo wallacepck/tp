@@ -47,6 +47,30 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void contains_nullTelegram_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.containsTelegram(null));
+    }
+
+    @Test
+    public void contains_telegramNotInList_returnsFalse() {
+        assertFalse(uniquePersonList.containsTelegram(ALICE));
+    }
+
+    @Test
+    public void contains_telegramInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        assertTrue(uniquePersonList.containsTelegram(ALICE));
+    }
+
+    @Test
+    public void contains_telegramWithSameIdentityFieldsInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(uniquePersonList.containsTelegram(editedAlice));
+    }
+
+    @Test
     public void add_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePersonList.add(null));
     }
