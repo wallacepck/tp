@@ -53,10 +53,13 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in AcademySource.
      */
     boolean hasName(Person person);
 
+    /**
+     * Returns true if a person with the same telegram handle as {@code person} exists in AcademySource.
+     */
     boolean hasTelegram(Person person);
 
     /**
