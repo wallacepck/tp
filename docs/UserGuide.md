@@ -484,4 +484,3 @@ _Details coming soon ..._
 | **Field**      | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                       |
 
 [back to top](#table-of-content)
-
