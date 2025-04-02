@@ -14,21 +14,23 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("find n/Darren m/2103")
+[-> LogicManager : execute("find n/Darren mm/2103")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find n/Darren m/2103")
+LogicManager -> AddressBookParser : parseCommand("find n/Darren mm/2103")
 activate AddressBookParser
 
-AddressBookParser -> FindCommandParser : parse("n/Darren m/2103")
+AddressBookParser -> FindCommandParser : parse("n/Darren mm/2103")
 activate FindCommandParser
 
 note right of FindCommandParser
 Parses multi-field input:
-- n/, p/, m/, f/
-• Name/Module = partial, case-insensitive
+- n/, p/, mm/, f/, r/, t/
+• Name/Module/Telegram = partial, case-insensitive
 • Phone = partial
 • Favourite = 'y' or 'n'
+• Role = 'prof' or 'ta'
+
 Returns a FindCommand
 end note
 

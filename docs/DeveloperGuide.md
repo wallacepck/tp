@@ -116,7 +116,7 @@ How the parsing works:
 
 The sequence diagram below is another example to illustrate the interactions within the `Logic` component, taking `execute("find n/John m/2103")` API call as an example.
 
-![Interactions Inside the Logic Component for the `find n/John m/2103` Command](images/FindSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `find n/John mm/2103` Command](images/FindSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
