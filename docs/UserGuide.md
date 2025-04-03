@@ -137,15 +137,15 @@ The command box remembers up to 16 previous commands. You can use the Up Arrow (
 If you edit a recalled command, the history navigation resets, and you can’t scroll forward anymore. Once you press Enter, the modified command is saved as a new history entry.
 
 Example:
-1. You type: `find m/2040` and press Enter
+1. You type: `find mm/2040` and press Enter
 
 2. You type: `list` and press Enter
 
 3. You press Up Arrow (↑) once → It shows `list`.
 
-4. You press Up Arrow (↑) again → It shows `find m/2040`.
+4. You press Up Arrow (↑) again → It shows `find mm/2040`.
 
-5. Now, if you change `find m/2040` to `find m/2103` and then press Down Arrow (↓), you will notice that you aren't moving forward through history because you modified the command.
+5. Now, if you change `find mm/2040` to `find mm/2103` and then press Down Arrow (↓), you will notice that you aren't moving forward through history because you modified the command.
 
 </div>
 
@@ -179,9 +179,21 @@ Contacts Page:
 
 ## Features
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+AcademySource works best with standard English letters. Using characters from other languages (like Arabic, Chinese, or Hebrew) or emojis might cause display and input issues. To keep things running smoothly, please stick to English letters for now.
+
+</div>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
+
+* Command words are case-sensitive.<br>
+  e.g. `list` works, but not `List` or `LIST`.
+
+* Prefixes are also case-sensitive.<br> 
+  e.g. `N/` (instead of `n/`) will not be allowed.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -199,8 +211,6 @@ Contacts Page:
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
-* Prefixes are case-sensitive. Using `N/` (instead of `n/`) will not be allowed.
 
 </div>
 
@@ -497,6 +507,7 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 1. **When using multiple screens,** if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **All commands are functional in Module Page,** despite not able to see the details of contacts. Use ```list``` or ```find``` command to display the desired contacts before editing the contact list.
+4. **Using special characters** causes the command box input to behave in weird ways. Avoid entering characters from script languages, such as Arabic and Hebrew, or complex characters like emojis. 
 
 [back to top](#table-of-content)
 
