@@ -23,6 +23,7 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_MODULE = "CS2103";
+    private static final String REPEATED_INDEXES = "1 2 2";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_NAME_SPACES = "Rachel                Walker";
@@ -171,5 +172,11 @@ public class ParserUtilTest {
                         ModuleRegistry.getModuleByCode(VALID_MODULE_2)));
 
         assertEquals(expectedModuleSet, actualModuleSet);
+    }
+
+    @Test
+    public void parseMassIndex_duplicateIndex_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil
+                .parseMassIndex(REPEATED_INDEXES));
     }
 }
