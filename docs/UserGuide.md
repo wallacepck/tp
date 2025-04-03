@@ -508,7 +508,7 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 1. **When using multiple screens,** if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **All commands are functional in Module Page,** despite not able to see the details of contacts. Use ```list``` or ```find``` command to display the desired contacts before editing the contact list.
-4. **Using special characters** causes the command box input to behave in weird ways. Avoid entering characters from script languages, such as Arabic and Hebrew, or complex characters like emojis. 
+4. **Using complex characters** like emojis or script (Arabic and Hebrew) causes the command box input to behave in weird ways. Avoid entering these characters in the command box. 
 
 [back to top](#table-of-content)
 
