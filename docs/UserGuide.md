@@ -275,7 +275,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TELEGRAM] [m/MODULE] [m/MOR
 A person can have any number of modules (including 0)
 </div>
 
-* `ROLE` must be either `ta` or `prof` (Case-insensitive, which means `TA` or `prof` are also valid).
+* `ROLE` must be either `ta` or `prof` (Case-insensitive, which means `TA` or `Prof` are also valid).
 * `MODULE`must be one of the accepted module codes given in [the module table.](#modules-accepted-by-academysource-)
 
 Examples:
