@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.ModuleRegistry.Module;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,15 +38,30 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append("Name: ")
+                .append(person.getName())
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Telegram:: ")
-                .append(person.getTelegram());
-        builder.append("; Modules: ");
-        person.getModules().forEach(builder::append);
+                .append(person.getEmail());
+
+        //add optional telegram line, if user added telegram
+        person.getTelegram().ifPresent(telegram ->
+                builder.append("; Telegram: ")
+                        .append(telegram)
+        );
+
+        //append role
+        builder.append("; Role: ")
+                .append(person.getRole());
+
+        //append modules
+        builder.append("; Modules: ")
+                .append(person.getModules()
+                        .stream()
+                        .map(Module::toString)
+                        .collect(Collectors.joining(", ")));
+
         return builder.toString();
     }
 
