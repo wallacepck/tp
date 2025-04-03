@@ -14,4 +14,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_FAVOURITE = new Prefix("f/");
     public static final Prefix PREFIX_MULTIPLE_MODULES = new Prefix("mm/");
     public static final Prefix PREFIX_TELEGRAM = new Prefix("t/");
+    public static final Prefix PREFIX_FIND_FAV = new Prefix("f/");
 }
