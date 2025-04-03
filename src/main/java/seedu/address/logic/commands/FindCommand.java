@@ -16,13 +16,14 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds contacts based on a specified field. "
-            + "Supported fields: n/, p/, f/, r/, t/, and mm/.\n"
+            + "Supported fields: n/, p/, f/, r/, t/, e/, and mm/.\n"
             + "Examples:\n"
             + "  " + COMMAND_WORD + " n/alice bob charlie\n"
             + "  " + COMMAND_WORD + " p/91234567\n"
             + "  " + COMMAND_WORD + " mm/CS2103T\n"
             + "  " + COMMAND_WORD + " f/y\n"
             + "  " + COMMAND_WORD + " r/professor\n"
+            + "  " + COMMAND_WORD + " e/alice@example.com\n"
             + "  " + COMMAND_WORD + " t/@sourceacademy\n";
 
     private final PersonContainsKeywordsPredicate predicate;
