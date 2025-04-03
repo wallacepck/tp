@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Application based on SE-EDU AB3: https://github.com/se-edu/addressbook-level3
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -261,41 +261,42 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target User Profile**:
 
-* struggles connecting with professors or teaching assistants
-* worry about losing contact details
-* prefer desktop apps over other types
-* prefers typing to mouse interactions
-* is comfortable using CLI apps
+* Has difficulty contacting professors and teaching assistants
+* Often misplaces or loses important contact information
+* Prefers using desktop applications over web or mobile alternatives
+* Favors keyboard input over mouse-based interactions
+* Feels comfortable using command-line interface (CLI) applications
 
-**Value proposition**: Effortlessly connect with your Professors and Teaching Assistants.
+**Value Proposition**: A streamlined CLI desktop application that makes it easy for students to access and manage contact details for Professors and TAs—all in one place.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                     | So that I can…​                                                     |
-|----------|----------|--------------------------------------------------|---------------------------------------------------------------------|
-| `* * *`  | user     | have my professors and TA's contact              | contact them in the future                                          |
-| `* * *`  | new user | have a guide                                     | navigate around and use the app easily                              |
-| `* * *`  | new user | have a CLI syntax table                          | I can refer to it while using the app                               |
-| `* * *`  | user     | filter contacts according to their role          | obtain all contacts with the same role                              |
-| `* * *`  | user     | set my contacts as TAs or professors             | filter them in one command                                          |
-| `* * *`  | user     | search contacts based on module code             | locate contact details without having to go through the entire list |
-| `* * *`  | user     | search contacts based on their name              | locate contact details without having to go through the entire list |
-| `* * *`  | user     | search contacts based on incomplete names        | locate contact details without remembering the full name            |
-| `* * *`  | user     | search contacts based on incomplete phone number | locate contact details without remembering the full phone number    |
-| `* * *`  | user     | search contacts based on incomplete module names | locate contact details without remembering the full module name     |
-| `* * *`  | user     | list all contacts                                | view of all my contact details                                      |
-| `* * *`  | user     | delete contacts                                  | remove outdated contacts                                            |
-| `* *`    | user     | mass operations                                  | make a lot of changes to my contact list efficiently                |
-| `* *`    | user     | a console window to display the contact          | copy and paste contact information efficiently                      |
-| `*`      | user     | have a personal contact list                     | locate contact details important to me                              |
-| `*`      | user     | add contacts to the personal contact list        | add important contacts to the list                                  |
-| `*`      | user     | delete contacts from the personal contact list   | remove no longer important contacts from the list                   |
-| `*`      | user     | list my personal contact list                    | view every contact in the list                                      |
+| Priority | As a …​  | I want to …​                                     | So that I can…​                                                      |
+|----------|----------|--------------------------------------------------|----------------------------------------------------------------------|
+| `* * *`  | user     | have my professors and TA's contact              | contact them in the future                                           |
+| `* * *`  | new user | have a guide                                     | navigate around and use the app easily                               |
+| `* * *`  | new user | have a CLI syntax table                          | I can refer to it while using the app                                |
+| `* * *`  | user     | filter contacts according to their role          | obtain all contacts with the same role                               |
+| `* * *`  | user     | set my contacts as TAs or professors             | filter them in one command                                           |
+| `* * *`  | user     | search contacts based on module code             | locate contact details without having to go through the entire list  |
+| `* * *`  | user     | search contacts based on their name              | locate contact details without having to go through the entire list  |
+| `* * *`  | user     | search contacts based on incomplete names        | locate contact details without remembering the full name             |
+| `* * *`  | user     | search contacts based on incomplete phone number | locate contact details without remembering the full phone number     |
+| `* * *`  | user     | search contacts based on incomplete module names | locate contact details without remembering the full module name      |
+| `* * *`  | user     | list all contacts                                | view of all my contact details                                       |
+| `* * *`  | user     | delete contacts                                  | remove outdated contacts                                             |
+| `* *`    | user     | mass operations                                  | make a lot of changes to my contact list efficiently                 |
+| `* *`    | user     | a console window to display the contact          | copy and paste contact information efficiently                       |
+| `*`      | user     | have a personal contact list                     | locate contact details important to me                               |
+| `*`      | user     | add contacts to the personal contact list        | add important contacts to the list                                   |
+| `*`      | user     | delete contacts from the personal contact list   | remove no longer important contacts from the list                    |
+| `*`      | user     | list my personal contact list                    | view every contact in the list                                       |
+| `*`      | user     | add Telegram handle to contacts                  | keep their telegram handle for easy contact                          |
 
 *{More to be added}*
 
@@ -352,7 +353,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AcademySource shows an error message.
 
       Use case resumes at step 1.
+  
+* 3a. The user give multiple indexes
 
+    * 3a1. AcademySource deletes all the corresponding contacts in the current list.
+        
+        Use case ends
 
 **Use case: UC04 - Search for a contact**
 
@@ -368,6 +374,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
+
+**Use case: UC05 - Edit a contact**
+
+**MSS**
+
+1. User requests to edit a contact by providing components to be edited
+2. AcademySource updates the corresponding component of the contact.
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. One of the component provided by user is invalid
+    * 2a1. AcademySource shows an error message
+      Use case ends.
 
 *{More to be added}*
 

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MULTIPLE_MODULES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -30,39 +31,32 @@ import seedu.address.model.person.Role;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
-    private static final List<String> ALLOWED_PREFIXES = List.of("n/", "p/", "mm/", "f/", "r/", "t/");
+    private static final List<String> ALLOWED_PREFIXES = List.of("n/", "p/", "mm/", "f/", "r/", "t/", "e/");
 
     @Override
     public FindCommand parse(String args) throws ParseException {
         detectInvalidPrefixes(args);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_NAME,
-                PREFIX_PHONE,
-                PREFIX_MULTIPLE_MODULES,
-                PREFIX_FAVOURITE,
-                PREFIX_ROLE,
-                PREFIX_TELEGRAM
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_MULTIPLE_MODULES, PREFIX_FAVOURITE, PREFIX_ROLE, PREFIX_TELEGRAM, PREFIX_EMAIL
         );
-        argMultimap.verifyNoDuplicatePrefixesFor(
-                PREFIX_NAME,
-                PREFIX_PHONE,
-                PREFIX_MULTIPLE_MODULES,
-                PREFIX_FAVOURITE,
-                PREFIX_ROLE,
-                PREFIX_TELEGRAM
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_MULTIPLE_MODULES,
+                PREFIX_FAVOURITE, PREFIX_ROLE, PREFIX_TELEGRAM, PREFIX_EMAIL
         );
 
         Map<SearchField, List<String>> fieldKeywordMap = new HashMap<>();
         addFieldIfPresent(argMultimap, PREFIX_NAME, SearchField.NAME, fieldKeywordMap, this::validateNameKeywords);
         addFieldIfPresent(argMultimap, PREFIX_PHONE, SearchField.PHONE, fieldKeywordMap, this::validatePhoneKeywords);
-        addFieldIfPresent(argMultimap, PREFIX_MULTIPLE_MODULES, SearchField.MODULE, fieldKeywordMap, null);
+        addFieldIfPresent(argMultimap, PREFIX_MULTIPLE_MODULES, SearchField.MODULE, fieldKeywordMap,
+                this::validateModuleKeywords);
         addFieldIfPresent(argMultimap, PREFIX_FAVOURITE, SearchField.FAVOURITE, fieldKeywordMap,
                 this::validateFavouriteKeywords);
         addFieldIfPresent(argMultimap, PREFIX_ROLE, SearchField.ROLE, fieldKeywordMap,
                 this::validateRoleKeywords);
         addFieldIfPresent(argMultimap, PREFIX_TELEGRAM, SearchField.TELEGRAM, fieldKeywordMap,
                 this::validateTelegramKeywords);
+        addFieldIfPresent(argMultimap, PREFIX_EMAIL, SearchField.EMAIL, fieldKeywordMap,
+                this::validateEmailKeywords);
         if (fieldKeywordMap.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -115,6 +109,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 
+    private void validateModuleKeywords(List<String> keywords) throws ParseException {
+        for (String keyword : keywords) {
+            if (keyword.trim().isEmpty()) {
+                throw new ParseException("Module keyword cannot be empty.");
+            }
+            if (!keyword.matches("^[A-Za-z0-9]+$")) {
+                throw new ParseException("Module keywords must contain only alphanumeric characters.");
+            }
+        }
+    }
+
     private void validateFavouriteKeywords(List<String> keywords) throws ParseException {
         if (keywords.size() != 1) {
             throw new ParseException("f/ field must contain exactly one keyword: 'y' or 'n' (case-insensitive).");
@@ -138,8 +143,19 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     private void validateTelegramKeywords(List<String> keywords) throws ParseException {
         for (String keyword : keywords) {
+            if (keyword.trim().isEmpty()) {
+                throw new ParseException("Telegram keyword cannot be empty.");
+            }
             if (!keyword.matches("^[A-Za-z0-9_@]+$")) {
                 throw new ParseException("Telegram handle should only contain alphabets, digits, underscores or '@'.");
+            }
+        }
+    }
+
+    private void validateEmailKeywords(List<String> keywords) throws ParseException {
+        for (String keyword : keywords) {
+            if (keyword.trim().isEmpty()) {
+                throw new ParseException("Email keyword cannot be empty.");
             }
         }
     }
