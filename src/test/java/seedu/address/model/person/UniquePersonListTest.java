@@ -13,7 +13,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicateNameException;
+import seedu.address.model.person.exceptions.DuplicateTelegramException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -23,18 +24,18 @@ public class UniquePersonListTest {
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.contains(null));
+        assertThrows(NullPointerException.class, () -> uniquePersonList.containsName(null));
     }
 
     @Test
     public void contains_personNotInList_returnsFalse() {
-        assertFalse(uniquePersonList.contains(ALICE));
+        assertFalse(uniquePersonList.containsName(ALICE));
     }
 
     @Test
     public void contains_personInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        assertTrue(uniquePersonList.contains(ALICE));
+        assertTrue(uniquePersonList.containsName(ALICE));
     }
 
     @Test
@@ -42,7 +43,40 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE)
                 .build();
-        assertTrue(uniquePersonList.contains(editedAlice));
+        assertTrue(uniquePersonList.containsName(editedAlice));
+    }
+
+    @Test
+    public void contains_nullTelegram_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.containsTelegram(null));
+    }
+
+    @Test
+    public void contains_telegramNotInList_returnsFalse() {
+        assertFalse(uniquePersonList.containsTelegram(ALICE));
+    }
+
+    @Test
+    public void contains_telegramInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        assertTrue(uniquePersonList.containsTelegram(ALICE));
+    }
+
+    @Test
+    public void contains_telegramWithSameIdentityFieldsInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE)
+                .build();
+        assertTrue(uniquePersonList.containsTelegram(editedAlice));
+    }
+
+    @Test
+    public void contains_telegramWithSameIdentityFieldsInList_returnsFalse() {
+        uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withTelegram("@tempalice")
+                .build();
+        assertFalse(uniquePersonList.containsTelegram(editedAlice));
     }
 
     @Test
@@ -51,9 +85,17 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void add_duplicateTelegram_throwsDuplicateTelegramException() {
+        Person aliceSurname = new PersonBuilder(ALICE)
+                .withName("Alice Lee").build();
+        uniquePersonList.add(aliceSurname);
+        assertThrows(DuplicateTelegramException.class, () -> uniquePersonList.add(ALICE));
+    }
+
+    @Test
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+        assertThrows(DuplicateNameException.class, () -> uniquePersonList.add(ALICE));
     }
 
     @Test
@@ -103,8 +145,18 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(BOB)
+                .withName("Alice")
+                .build();
+        uniquePersonList.add(editedAlice);
+        assertThrows(DuplicateTelegramException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+    }
+
+    @Test
+    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicateTelegramException() {
+        uniquePersonList.add(ALICE);
         uniquePersonList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+        assertThrows(DuplicateNameException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
     }
 
     @Test
@@ -157,7 +209,15 @@ public class UniquePersonListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+        assertThrows(DuplicateNameException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+    }
+
+    @Test
+    public void setPersons_listWithDuplicateTelegram_throwsDuplicateTelegramException() {
+        Person aliceSurname = new PersonBuilder(ALICE)
+                .withName("Alice Lee").build();
+        List<Person> listWithDuplicateTelegram = Arrays.asList(ALICE, aliceSurname);
+        assertThrows(DuplicateTelegramException.class, () -> uniquePersonList.setPersons(listWithDuplicateTelegram));
     }
 
     @Test
