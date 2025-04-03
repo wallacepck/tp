@@ -269,7 +269,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Favors keyboard input over mouse-based interactions
 * Feels comfortable using command-line interface (CLI) applications
 
-**Value proposition**: Seamlessly stay connected with your Professors and Teaching Assistants—without the hassle.
+**Value Proposition**: A streamlined CLI desktop application that makes it easy for students to access and manage contact details for Professors and TAs—all in one place.
 
 
 ### User stories
