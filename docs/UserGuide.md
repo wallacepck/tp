@@ -154,8 +154,8 @@ Example:
 --------------------------------------------------------------------------------------------------------------------
 ## Graphic User Interface Layout
 
-![Module Page](https://github.com/user-attachments/assets/b60b3f57-c899-435b-b07f-8ffcd3cdb34b)
-![Contacts Page](https://github.com/user-attachments/assets/16145b59-b771-4418-8859-b1cdfca36604)
+![Module Page](images/module-file-page.png)
+![Contacts Page](images/contact-list-page.png)
 
 
 Basic features:
