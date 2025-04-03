@@ -14,6 +14,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleRegistry;
@@ -52,9 +53,14 @@ public class ParserUtil {
     public static List<Index> parseMassIndex(String oneBasedIndexes) throws ParseException {
         String trimmedIndexes = oneBasedIndexes.trim();
         String[] splittedIndexes = trimmedIndexes.split(" ");
+        Set<String> addedIndex = new HashSet<>();
         List<Index> indexes = new LinkedList<>();
 
         for (String index : splittedIndexes) {
+            if (addedIndex.contains(index)) {
+                throw new ParseException(DeleteCommand.MESSAGE_DUPLICATE_INDEX);
+            }
+            addedIndex.add(index);
             indexes.add(parseIndex(index));
         }
         return indexes;
