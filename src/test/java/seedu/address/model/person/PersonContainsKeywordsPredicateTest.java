@@ -234,7 +234,28 @@ class PersonContainsKeywordsPredicateTest {
     }
 
     @Test
-    void test_keywordContainsNamePhoneModuleFavouriteTelegramAndRole_returnsTrue() {
+    void test_emailContainsKeyword_returnsTrue() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.EMAIL, List.of("darren@gmail.com"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertTrue(predicate.test(new PersonBuilder().withEmail("darren@gmail.com").build()));
+
+        fieldKeywordMap.clear();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.EMAIL, List.of("dar"));
+        predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertTrue(predicate.test(new PersonBuilder().withEmail("darren@gmail.com").build()));
+    }
+
+    @Test
+    void test_emailDoesNotContainKeyword_returnsFalse() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.EMAIL, List.of("dd@test.com"));
+        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
+        assertFalse(predicate.test(new PersonBuilder().withEmail("darren@gmail.com").build()));
+    }
+
+    @Test
+    void test_keywordContainsNamePhoneModuleFavouriteTelegramEmailAndRole_returnsTrue() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Alice"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
@@ -242,17 +263,19 @@ class PersonContainsKeywordsPredicateTest {
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("CS2103T"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.ROLE, List.of("professor"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.TELEGRAM, List.of("@alice"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.EMAIL, List.of("alice@gmail.com"));
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice")
                 .withPhone("91234567").withFavourite(true)
                 .withModule("CS2103T")
                 .withRole(Role.PROFESSOR)
                 .withTelegram("@alice")
+                .withEmail("alice@gmail.com")
                 .build()));
     }
 
     @Test
-    void test_partialKeywordContainsNamePhoneModuleFavouriteAndRole_returnsTrue() {
+    void test_partialKeywordContainsNamePhoneModuleFavouriteEmailAndRole_returnsTrue() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("A"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("9123"));
@@ -260,12 +283,14 @@ class PersonContainsKeywordsPredicateTest {
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("2103"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.ROLE, List.of("professor"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.TELEGRAM, List.of("ali"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.EMAIL, List.of("al"));
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(fieldKeywordMap);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice")
                 .withPhone("91234567")
                 .withFavourite(true)
                 .withModule("CS2103T")
                 .withTelegram("@alice")
+                .withEmail("alice@gmail.com")
                 .build()));
     }
 

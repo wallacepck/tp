@@ -37,7 +37,7 @@ public class AddCommand extends Command {
             + PREFIX_MODULE + "CS2103T ";
 
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New person added!\n%1$s";
     public static final String MESSAGE_DUPLICATE_NAME = "A contact with this name already exists in AcademySource.";
     public static final String MESSAGE_DUPLICATE_TELEGRAM = "A contact with this telegram handle "
             + "already exists in AcademySource.";

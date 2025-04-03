@@ -17,30 +17,13 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
      * Represents the search field type for finding persons.
      */
     public enum SearchField {
-        /**
-         * Search by name
-         */
         NAME,
-        /**
-         * Search by phone number
-         */
         PHONE,
-        /**
-         * Search by module
-         */
         MODULE,
-        /**
-         * Search by favourite
-         */
         FAVOURITE,
-        /**
-         * Search by role
-         */
         ROLE,
-        /**
-         * Search by telegram
-         */
         TELEGRAM,
+        EMAIL,
     }
 
     /**
@@ -69,6 +52,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         case FAVOURITE -> testFavourite(person, keywords);
         case ROLE -> testRole(person, keywords);
         case TELEGRAM -> testTelegram(person, keywords);
+        case EMAIL -> testEmail(person, keywords);
         };
     }
 
@@ -120,6 +104,15 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.stream()
                 .anyMatch(keyword -> person
                         .getTelegram()
+                        .toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()));
+    }
+
+    private boolean testEmail(Person person, List<String> keywords) {
+        return keywords.stream()
+                .anyMatch(keyword -> person
+                        .getEmail()
                         .toString()
                         .toLowerCase()
                         .contains(keyword.toLowerCase()));
