@@ -200,21 +200,23 @@ Contacts Page:
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+* Prefixes are case-sensitive. Using `N/` (instead of `n/`) will not be allowed.
+
 </div>
 
 <a id="prefix-table"></a>
 ### Prefix Table [🔝](#table-of-content)
 
-| **Prefix** | **Meaning**                | **Usage Example**                   | **Remarks**                  |
-|------------|----------------------------|-------------------------------------|------------------------------|
-| `n/`       | Name                       | `n/John Doe`                        |                              |
-| `p/`       | Phone number               | `p/98765432`                        |                              |
-| `t/`       | Telegram                   | `t/@johndoe`                        |                              |
-| `r/`       | Role (`ta` or `prof`)      | `r/TA` or `r/PROF`                  |                              |
-| `e/`       | Email address              | `e/johnd@example.com`               | Not used in `find`           |
-| `m/`       | Module (can have multiple) | `m/CS2103T m/CS2101`                | Not used in `find`.          |
-| `f/`       | Favourite                  | `f/y` or `f/n`                      | Not used in `add` or `edit`. |
-| `mm/`      | Module(s)                  | `mm/CS2103T` or `mm/CS2101 CS2103T` | Not used in `add` or `edit`. |
+| **Prefix** | **Meaning**                | **Usage Example**                   | **Remarks**                                                                                                                                                                                                                                                             |
+|------------|----------------------------|-------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `n/`       | Name                       | `n/John Doe`                        | Name must only contain alphanumeric characters (letters and digits) and duplicate names are not allowed.                                                                                                                                                                |
+| `p/`       | Phone number               | `p/98765432`                        | Phone number must only contain numbers.                                                                                                                                                                                                                                 |
+| `t/`       | Telegram                   | `t/@johndoe`                        | Must begin with '@' and have 5–32 characters (excluding starting '@'). The first character after '@' must be an alphabet; only alphanumerics and underscores are allowed in the remaining handle, and the handle after '@' cannot start or end with special characters. |
+| `r/`       | Role (`ta` or `prof`)      | `r/TA` or `r/PROF`                  |                                                                                                                                                                                                                                                                         |
+| `e/`       | Email address              | `e/johnd@example.com`               | Not used in `find`                                                                                                                                                                                                                                                      |
+| `m/`       | Module (can have multiple) | `m/CS2103T m/CS2101`                | Not used in `find`.                                                                                                                                                                                                                                                     |
+| `f/`       | Favourite                  | `f/y` or `f/n`                      | Not used in `add` or `edit`.                                                                                                                                                                                                                                            |
+| `mm/`      | Module(s)                  | `mm/CS2103T` or `mm/CS2101 CS2103T` | Not used in `add` or `edit`.                                                                                                                                                                                                                                            |
 
 <a id="viewing-help--help"></a>
 ### Viewing help : `help` [🔝](#table-of-content)
