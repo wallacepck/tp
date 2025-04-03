@@ -261,15 +261,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target User Profile**:
 
-* struggles connecting with professors or teaching assistants
-* worry about losing contact details
-* prefer desktop apps over other types
-* prefers typing to mouse interactions
-* is comfortable using CLI apps
+* Has difficulty contacting professors and teaching assistants
+* Often misplaces or loses important contact information
+* Prefers using desktop applications over web or mobile alternatives
+* Favors keyboard input over mouse-based interactions
+* Feels comfortable using command-line interface (CLI) applications
 
-**Value proposition**: Effortlessly connect with your Professors and Teaching Assistants.
+**Value Proposition**: A streamlined CLI desktop application that makes it easy for students to access and manage contact details for Professors and TAs—all in one place.
 
 
 ### User stories
