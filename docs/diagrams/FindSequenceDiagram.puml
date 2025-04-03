@@ -25,8 +25,8 @@ activate FindCommandParser
 
 note right of FindCommandParser
 Parses multi-field input:
-- n/, p/, mm/, f/, r/, t/
-• Name/Module/Telegram = partial, case-insensitive
+- n/, p/, mm/, f/, r/, t/, e/
+• Name/Module/Telegram/Email = partial, case-insensitive
 • Phone = partial
 • Favourite = 'y' or 'n'
 • Role = 'prof' or 'ta'
