@@ -244,6 +244,7 @@ public class MainWindow extends UiPart<Stage> implements GuiFunctionHandler {
                 handleExit();
             }
 
+            this.setSwitchWindowPlaceholder("Contacts");
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
