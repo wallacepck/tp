@@ -25,6 +25,7 @@ public class ParserUtilTest {
     private static final String INVALID_MODULE = "CS2103";
 
     private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_NAME_SPACES = "Rachel                Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_MODULE_1 = "CS2103T";
@@ -71,6 +72,13 @@ public class ParserUtilTest {
     @Test
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
+        Name expectedName = new Name(VALID_NAME);
+        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseName_validValueWithWhitespaceInbetween_returnsTrimmedName() throws Exception {
+        String nameWithWhitespace = VALID_NAME_SPACES;
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
     }
