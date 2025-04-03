@@ -29,10 +29,18 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_missingKeywords_throwsParseException() {
-        assertParseFailure(parser, "n/ ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "p/ ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/ ", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " p/ ",
+                "Phone number must only contain digits.");
+        assertParseFailure(parser, " e/ ",
+                "Email keyword cannot be empty.");
+        assertParseFailure(parser, " r/ ", Role.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " f/ ",
+                "f/ field only accepts 'y' or 'n' (case-insensitive).");
+        assertParseFailure(parser, " t/ ",
+                "Telegram keyword cannot be empty.");
+        assertParseFailure(parser, " mm/ ",
+                "Module keyword cannot be empty.");
     }
 
     @Test
@@ -40,10 +48,6 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " l/fiona@test.com",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " m/ 2101",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, " n/ Darren e/ darren@test.com",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, " n/Darren e/darren@test.com",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
@@ -54,6 +58,8 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " Mm/ 3230",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " T/@d",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " E/Ddd, ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
@@ -66,6 +72,13 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " n/Alice Bob", expectedFindCommand);
         assertParseSuccess(parser, " n/ Alice Bob", expectedFindCommand);
         assertParseSuccess(parser, " \n n/ Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, "  n/  Alice   Bob  ", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_specialCharactersInName_throwsParseException() {
+        assertParseFailure(parser, " n/ O'Connor", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " n/Daniel Lucas Jean-Luc", Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -95,6 +108,12 @@ public class FindCommandParserTest {
         expectedFindCommand =
                 new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
         assertParseSuccess(parser, " mm/2101 3230 IS", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_invalidModuleKeywords_throwsParseException() {
+        assertParseFailure(parser, " mm/CS2103T%^&#*@",
+                "Module keywords must contain only alphanumeric characters.");
     }
 
     @Test
@@ -130,21 +149,6 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_extraSpaces_returnsFindCommand() {
-        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
-        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, Arrays.asList("Charlie", "David"));
-        FindCommand expectedFindCommand =
-                new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
-        assertParseSuccess(parser, "  n/  Charlie   David  ", expectedFindCommand);
-    }
-
-    @Test
-    public void parse_specialCharactersInName_throwsParseException() {
-        assertParseFailure(parser, " n/ O'Connor", Name.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, " n/Daniel Lucas Jean-Luc", Name.MESSAGE_CONSTRAINTS);
-    }
-
-    @Test
     public void parse_favourite_returnsFindCommand() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
@@ -166,20 +170,20 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_invalidRoleKeyword_throwsParseException() {
-        assertParseFailure(parser, " r/professor ta",
-                "r/ field must contain exactly one keyword: 'prof' or 'TA' (case-insensitive).");
-        assertParseFailure(parser, " r/student",
-                Role.MESSAGE_CONSTRAINTS);
-    }
-
-    @Test
-    public void parse_role_returnsFindCommand() {
+    public void parse_validRoleKeyword_returnsFindCommand() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.ROLE, List.of("TA"));
         FindCommand expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
         assertParseSuccess(parser, " r/TA", expectedFindCommand);
         assertParseSuccess(parser, " r/ \n TA", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_invalidRoleKeyword_throwsParseException() {
+        assertParseFailure(parser, " r/prof ta",
+                "r/ field must contain exactly one keyword: 'prof' or 'TA' (case-insensitive).");
+        assertParseFailure(parser, " r/student",
+                Role.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -190,6 +194,7 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " t/@darren fiona", expectedFindCommand);
         assertParseSuccess(parser, " t/ @darren fiona", expectedFindCommand);
         assertParseSuccess(parser, " t/ \n @darren \n fiona", expectedFindCommand);
+        assertParseSuccess(parser, " t/      @darren        fiona   ", expectedFindCommand);
     }
 
     @Test
@@ -201,14 +206,46 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_namePhoneModuleFavouriteAndRole_returnsFindCommand() {
+    public void parse_validEmail_returnsFindCommand() {
+        Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.EMAIL, List.of("darren@example.com"));
+        FindCommand expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
+        assertParseSuccess(parser, " e/darren@example.com", expectedFindCommand);
+
+        fieldKeywordMap.clear();
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.EMAIL, List.of("darren", "fio@example.com"));
+        expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
+        assertParseSuccess(parser, " e/darren fio@example.com", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_namePhoneModuleFavouriteEmailAndRole_returnsFindCommand() {
         Map<PersonContainsKeywordsPredicate.SearchField, List<String>> fieldKeywordMap = new HashMap<>();
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.NAME, List.of("Darren"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, List.of("91234567"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.MODULE, List.of("CS3230"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.FAVOURITE, List.of("y"));
         fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.ROLE, List.of("TA"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.EMAIL, List.of("darren@example.com"));
         FindCommand expectedFindCommand = new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
-        assertParseSuccess(parser, " n/Darren p/91234567 mm/CS3230 f/y r/TA", expectedFindCommand);
+        assertParseSuccess(parser, " n/Darren p/91234567 mm/CS3230 f/y r/TA e/darren@example.com",
+                expectedFindCommand);
+    }
+
+    @Test
+    public void parse_multipleInvalidKeywords_throwsParseException() {
+        assertParseFailure(parser, " n/$$ mm/%%", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " mm/$$ n/$$", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " t/%% mm/$$",
+                "Module keywords must contain only alphanumeric characters.");
+    }
+
+    @Test
+    public void parse_multipleValidKeywordsAndOneInvalidKeyword_throwsParseException() {
+        assertParseFailure(parser, " n/Darren $$$", Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " n/Darren mm/3230 $$",
+                "Module keywords must contain only alphanumeric characters.");
+        assertParseFailure(parser, " t/@dd mm/dd e/dd p/dd",
+                "Phone number must only contain digits.");
     }
 }

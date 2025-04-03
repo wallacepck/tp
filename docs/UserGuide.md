@@ -323,7 +323,7 @@ After command:
 
 <img src="images/find_after.png" width="500" onclick="openModal(this)"/>
 
-Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOURITE_STATUS] [r/ROLE] [t/TELEGRAM_KEYWORDS]`
+Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOURITE_STATUS] [r/ROLE] [t/TELEGRAM_KEYWORDS] [e/EMAIL_KEYWORDS]`
 
 **Prefix Details:**
 
@@ -337,6 +337,9 @@ Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOU
     - **`prof`** → Professor
     - **`ta`** → TA
 - **`t/`** — Matches Telegram handles. The matching is **case-insensitive** and allows handles containing alphabets, digits, underscores (`_`), and the `@` symbol.
+- **`e/`** — Matches emails. The matching is **case-insensitive**.
+
+**Note:** Each prefix must be followed by at least one non-empty keyword. Empty keywords are not allowed for any of the prefixes.
 
 ---
 
@@ -370,6 +373,7 @@ Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOU
 | `find r/prof`                  | Finds persons with the role of Professor.                                                               |
 | `find r/ta`                    | Finds persons with the role of TA.                                                                      |
 | `find t/@john_doe`             | Finds persons whose Telegram handle matches `@john_doe`.                                                |
+| `find e/john@gmail.com`        | Finds persons whose email matches `john@gmail.com`                                                       |
 | `find n/John Demar mm/CS2103T` | Finds persons whose name contains "John" **or** "Demar" **and** are in the module "CS2103T".            |
 | `find mm/CS2103 f/y`           | Finds persons whose module matches `CS2103` **and** who are marked as favourites.                       |
 
@@ -502,15 +506,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                              |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [m/MODULE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA m/CS2103T`                                                           |
-| **Clear**  | `clear`                                                                                                                                                                                       |
-| **Delete** | `delete INDEX…​` <br> e.g., `delete 1` `delete 2 3`                                                                                                                                           |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                            |
-| **Find**   | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOURITE_STATUS] [r/ROLE] [t/TELEGRAM_KEYWORDS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y t/@JamesLovesCS r/PROF` |
-| **List**   | `list`                                                                                                                                                                                        |
-| **Help**   | `help`                                                                                                                                                                                        |
+| Action     | Format, Examples                                                                                                                                                                                                                   |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [m/MODULE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA m/CS2103T`                                                                                                |
+| **Clear**  | `clear`                                                                                                                                                                                                                            |
+| **Delete** | `delete INDEX…​` <br> e.g., `delete 1` `delete 2 3`                                                                                                                                                                                |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                 |
+| **Find**   | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOURITE_STATUS] [r/ROLE] [t/TELEGRAM_KEYWORDS] [e/EMAIL_KEYWORDS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y t/@JamesLovesCS r/PROF e/james@gmail.com` |
+| **List**   | `list`                                                                                                                                                                                                                             |
+| **Help**   | `help`                                                                                                                                                                                                                             |
 
 [back to top](#table-of-content)
 
