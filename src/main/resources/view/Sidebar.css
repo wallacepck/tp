@@ -16,6 +16,12 @@
     -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.button:pressed {
+    -fx-text-fill: white;
 }
 
 /* New class for the selected button */
