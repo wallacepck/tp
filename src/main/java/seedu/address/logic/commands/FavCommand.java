@@ -17,7 +17,9 @@ import seedu.address.model.person.Person;
  */
 public class FavCommand extends Command {
     public static final String COMMAND_WORD = "fav";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_NAME = "A contact with this name already exists in AcademySource.";
+    public static final String MESSAGE_DUPLICATE_TELEGRAM = "A contact with this telegram handle "
+            + "already exists in AcademySource.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Set/unset the favourite status "
             + "of the person identified "
             + "by the index number used in the displayed person list. "
@@ -49,8 +51,12 @@ public class FavCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person toggledPerson = personToEdit.toggleFav();
 
-        if (!personToEdit.isSamePerson(toggledPerson) && model.hasPerson(toggledPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!personToEdit.isSameName(toggledPerson) && model.hasName(toggledPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_NAME);
+        }
+
+        if (!personToEdit.isSameTelegram(toggledPerson) && model.hasTelegram(toggledPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TELEGRAM);
         }
 
         model.setPerson(personToEdit, toggledPerson);

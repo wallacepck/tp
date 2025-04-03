@@ -8,19 +8,20 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicateNameException;
+import seedu.address.model.person.exceptions.DuplicateTelegramException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
+ * A person is considered unique by comparing using {@code Person#isSameName(Person)}. As such, adding and updating of
+ * persons uses Person#isSameName(Person) for equality so as to ensure that the person being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
  * as to ensure that the person with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Person#isSameName(Person)
  */
 public class UniquePersonList implements Iterable<Person> {
 
@@ -29,11 +30,22 @@ public class UniquePersonList implements Iterable<Person> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent name of the Person to check.
      */
-    public boolean contains(Person toCheck) {
+    public boolean containsName(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameName);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent telegram handle of the Person to check.
+     */
+    public boolean containsTelegram(Person toCheck) {
+        requireNonNull(toCheck);
+        if (!toCheck.hasTelegram()) {
+            return false;
+        }
+        return internalList.stream().anyMatch(toCheck::isSameTelegram);
     }
 
     /**
@@ -42,8 +54,12 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+        if (containsName(toAdd)) {
+            throw new DuplicateNameException();
+        }
+
+        if (containsTelegram(toAdd)) {
+            throw new DuplicateTelegramException();
         }
         internalList.add(toAdd);
     }
@@ -61,8 +77,11 @@ public class UniquePersonList implements Iterable<Person> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
-            throw new DuplicatePersonException();
+        if (!target.isSameName(editedPerson) && containsName(editedPerson)) {
+            throw new DuplicateNameException();
+        }
+        if (!target.isSameTelegram(editedPerson) && containsTelegram(editedPerson)) {
+            throw new DuplicateTelegramException();
         }
 
         internalList.set(index, editedPerson);
@@ -90,11 +109,9 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void setPersons(List<Person> persons) {
         requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
-            throw new DuplicatePersonException();
+        if (personsAreUnique(persons)) {
+            internalList.setAll(persons);
         }
-
-        internalList.setAll(persons);
     }
 
     /**
@@ -140,8 +157,14 @@ public class UniquePersonList implements Iterable<Person> {
     private boolean personsAreUnique(List<Person> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
-                    return false;
+                if (persons.get(i).isSameName(persons.get(j))) {
+                    throw new DuplicateNameException();
+                }
+
+                if (persons.get(i).hasTelegram() && persons.get(j).hasTelegram()) {
+                    if (persons.get(i).isSameTelegram(persons.get(j))) {
+                        throw new DuplicateTelegramException();
+                    }
                 }
             }
         }

@@ -41,7 +41,9 @@ public class Messages {
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail());
+                .append(person.getEmail())
+                .append("; Telegram:: ")
+                .append(person.getTelegram());
         builder.append("; Modules: ");
         person.getModules().forEach(builder::append);
         return builder.toString();
