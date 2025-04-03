@@ -163,7 +163,7 @@ Basic features:
 1. Menu Bar: A top menu bar which provides access to various functions within AcademySource.
 2. Command Box: An input with a placeholder "Enter Command Here..." to enter commands into.
 3. Result Display: A rectangular display box to display success message upon successful command execution, or error message upon failure.
-4. Side Navigation: Navigates between Modules and Contacts tab.
+4. Side Navigation: Buttons to navigate between Modules and Contacts tab.
 
 Modules Page:
 1. Module Files: A folder that stores all contacts related to the module code.
@@ -178,7 +178,19 @@ Contacts Page:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Keybinds
+
+![keybinds](images/keybinds.png)
+
+* TAB: Toggles between window between Modules and Contacts Tab.
+* UP ARROW (↑): Goes back to previous command in history.
+* DOWN ARROW (↓): Goes forward to next command in history.
+
+[Back to top](#table-of-content)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features [🔝](#table-of-content)
 
 <div markdown="block" class="alert alert-info">
 
@@ -279,8 +291,8 @@ A person can have any number of modules (including 0)
 * `MODULE`must be one of the accepted module codes given in [the module table.](#modules-accepted-by-academysource-)
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/prof`
-* `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 r/TA m/CS2103T`
+* `add n/John Doe p/98765432 e/johnd@example.com r/prof m/CS2103T`
+* `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 r/TA t/@betsyboop1 m/CS3230`
 
 <a id="editing-a-person--edit"></a>
 ### Editing a person : `edit` [🔝](#table-of-content)
