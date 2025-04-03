@@ -149,9 +149,10 @@ Example:
 
 </div>
 
-<br><br>
 [Back to top](#table-of-content)
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## Graphic User Interface Layout
 
 ![Module Page](https://github.com/user-attachments/assets/b60b3f57-c899-435b-b07f-8ffcd3cdb34b)
