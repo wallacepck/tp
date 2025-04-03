@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -17,36 +19,68 @@ public class PersonTest {
     @Test
     public void isSamePerson() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(ALICE.isSameName(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePerson(null));
+        assertFalse(ALICE.isSameName(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
                 .build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertTrue(ALICE.isSameName(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSameName(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSameName(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertFalse(BOB.isSameName(editedBob));
+    }
+
+    @Test
+    public void isSameTelegram() {
+        // same object -> returns true
+        assertTrue(ALICE.isSameTelegram(ALICE));
+
+        // null -> returns false
+        assertFalse(ALICE.isSameTelegram(null));
+
+        // same name, all other attributes different -> returns true
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .build();
+        assertTrue(ALICE.isSameTelegram(editedAlice));
+
+        // different name, all other attributes same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
+        assertFalse(ALICE.isSameTelegram(editedAlice));
+
+        // name differs in case, all other attributes same -> returns true
+        Person editedBob = new PersonBuilder(BOB).withTelegram(VALID_TELEGRAM_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSameTelegram(editedBob));
+
+        // name has trailing spaces, all other attributes same -> throws illegal argument exception
+        String telegramWithTrailingSpaces = VALID_TELEGRAM_BOB + " ";
+        assertThrows(IllegalArgumentException.class, Telegram.MESSAGE_CONSTRAINTS, () -> new PersonBuilder(BOB)
+                .withTelegram(telegramWithTrailingSpaces).build());
     }
 
     @Test
     public void toggleFav() {
         Person notFavourite = new PersonBuilder(ALICE).build();
         Person favourite = new PersonBuilder(ALICE).withFavourite(true).build();
-        assertTrue(notFavourite.toggleFav().isSamePerson(favourite));
-        assertTrue(favourite.toggleFav().isSamePerson(notFavourite));
+        assertTrue(notFavourite.toggleFav().isSameName(favourite));
+        assertTrue(favourite.toggleFav().isSameName(notFavourite));
     }
 
     @Test

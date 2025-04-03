@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -29,29 +28,29 @@ public class Sidebar extends UiPart<Region> {
      * Constructs a Sidebar component.
      * Initializes buttons and their corresponding event handlers.
      *
-     * @param mainWindow Any UI component that implements SwitchableWindow interface.
+     * @param guiFunctionHandler Any UI component that implements SwitchableWindow interface.
      */
-    public Sidebar(MainWindow mainWindow) {
+    public Sidebar(GuiFunctionHandler guiFunctionHandler) {
         super(FXML);
 
         // Set Module button
         setButtonImage(moduleButton, "/images/notebook-pen.png");
         moduleButton.setText("Modules");
+        moduleButton.getStyleClass().add("selected-button");
         selectedButton = moduleButton; // set module button as default on
-        moduleButton.setOnAction(event -> {
-            mainWindow.setSwitchWindowPlaceholder("Modules");
-            setButtonOnClick(moduleButton);
-        });
 
-        Platform.runLater(() -> moduleButton.requestFocus());
+        moduleButton.setOnAction(event -> {
+            guiFunctionHandler.setSwitchWindowPlaceholder("Modules");
+            setButtonOnClick("Modules");
+        });
 
         // Set Contact button
         setButtonImage(contactButton, "/images/phone-icon.png");
         contactButton.setText("Contacts");
         contactButton.setOnAction(event -> {
-            mainWindow.setSwitchWindowPlaceholder("Contacts");
-            mainWindow.clearFilter();
-            setButtonOnClick(contactButton);
+            guiFunctionHandler.setSwitchWindowPlaceholder("Contacts");
+            guiFunctionHandler.clearFilter();
+            setButtonOnClick("Contacts");
         });
     }
 
@@ -71,19 +70,6 @@ public class Sidebar extends UiPart<Region> {
         button.setGraphic(buttonImage);
     }
 
-    /**
-     * Handles the change of style in buttons when it is clicked.
-     * @param button the new button press event
-     */
-    public void setButtonOnClick(Button button) {
-        if (selectedButton == button) {
-            return;
-        }
-        selectedButton.setStyle("-fx-background-color: derive(#3c3c3c, 20%);");
-        button.setStyle("-fx-background-color: #416989;");
-        selectedButton = button;
-    }
-
     public void setButtonOnClick(String buttonName) {
         if (!buttonName.equals("Modules") && !buttonName.equals("Contacts")) {
             return;
@@ -91,12 +77,12 @@ public class Sidebar extends UiPart<Region> {
             return;
         }
 
-        selectedButton.setStyle("-fx-background-color: derive(#3c3c3c, 20%);");
+        selectedButton.getStyleClass().remove("selected-button");
         if (buttonName.equals("Modules")) {
-            moduleButton.setStyle("-fx-background-color: #416989;");
+            moduleButton.getStyleClass().add("selected-button");
             selectedButton = moduleButton;
         } else {
-            contactButton.setStyle("-fx-background-color: #416989;");
+            contactButton.getStyleClass().add("selected-button");
             selectedButton = contactButton;
         }
     }

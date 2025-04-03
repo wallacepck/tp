@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -41,14 +42,17 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_MODULE + "MODULE]...\n"
+            + "[" + PREFIX_MODULE + "MODULE]... "
+            + "[" + PREFIX_TELEGRAM + "TELEGRAM] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_NAME = "A contact with this name already exists in AcademySource.";
+    public static final String MESSAGE_DUPLICATE_TELEGRAM = "A contact with this telegram handle "
+            + "already exists in AcademySource.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -77,8 +81,11 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!personToEdit.isSameName(editedPerson) && model.hasName(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_NAME);
+        }
+        if (!personToEdit.isSameTelegram(editedPerson) && model.hasTelegram(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TELEGRAM);
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -97,7 +104,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
-        Optional<Telegram> updatedTelegram = personToEdit.getTelegram();
+        Optional<Telegram> updatedTelegram;
+        if (editPersonDescriptor.getTelegram() != null) {
+            updatedTelegram = editPersonDescriptor.getTelegram();
+        } else {
+            updatedTelegram = personToEdit.getTelegram();
+        }
 
         return new Person(updatedName, updatedPhone, updatedEmail, personToEdit.getRole(),
                 updatedModules, updatedTelegram);
@@ -136,6 +148,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Set<Module> modules;
+        private Optional<Telegram> telegram;
 
         public EditPersonDescriptor() {}
 
@@ -147,13 +160,14 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setModules(toCopy.modules);
+            setTelegram(toCopy.telegram);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, modules);
+            return CollectionUtil.isAnyNonNull(name, phone, email, modules, telegram);
         }
 
         public void setName(Name name) {
@@ -197,6 +211,30 @@ public class EditCommand extends Command {
             return (modules != null) ? Optional.of(Collections.unmodifiableSet(modules)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code telegram} to this objects {@code telegram}.
+         * A defensive copy of {@code telegram} is used internally.
+         */
+        public void setTelegram(Optional<Telegram> telegram) {
+            this.telegram = (telegram != null && telegram.isPresent())
+                    ? Optional.of(telegram.get())
+                    : telegram == null
+                    ? null
+                    : Optional.empty();
+        }
+
+        /**
+         * Returns a new Optional object that contains the {@code telegram}.
+         * Returns {@code Optional#empty()} if {@code telegram} is empty.
+         */
+        public Optional<Telegram> getTelegram() {
+            return (telegram != null && telegram.isPresent())
+                    ? Optional.of(telegram.get())
+                    : telegram == null
+                    ? null
+                    : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -222,6 +260,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("modules", modules)
+                    .add("telegram", telegram)
                     .toString();
         }
     }
