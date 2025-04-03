@@ -39,8 +39,7 @@ With AcademySource, you can:
     <a href="#exiting-academysource--exit"> - Exiting AcademySource <br></a>
     <a href="#saving-the-data"> - Saving the data <br></a>
     <a href="#editing-the-data-file"> - Editing the data file <br></a>
-    <a href="#archiving-data-files"> - Archiving data files (coming soon) <br></a>
-
+  
   </details>
 - [FAQ](#faq)
 - [Known issues](#known-issues)
@@ -155,8 +154,8 @@ Example:
 --------------------------------------------------------------------------------------------------------------------
 ## Graphic User Interface Layout
 
-![Module Page](https://github.com/user-attachments/assets/b60b3f57-c899-435b-b07f-8ffcd3cdb34b)
-![Contacts Page](https://github.com/user-attachments/assets/16145b59-b771-4418-8859-b1cdfca36604)
+![Module Page](images/module-file-page.png)
+![Contacts Page](images/contact-list-page.png)
 
 
 Basic features:
@@ -494,11 +493,6 @@ If your changes to the data file makes its format invalid, AcademySource will di
 Furthermore, certain edits can cause AcademySource to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-<a id="archiving-data-files"></a>
-### Archiving data files `[coming in v2.0]` [🔝](#table-of-content)
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -512,8 +506,9 @@ _Details coming soon ..._
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens,** if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **All commands are functional in Module Page,** despite not able to see the details of contacts. Use ```list``` or ```find``` command to display the desired contacts before editing the contact list.
 
 [back to top](#table-of-content)
 
