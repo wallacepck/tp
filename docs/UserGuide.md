@@ -188,7 +188,7 @@ Contacts Page:
 
 <div markdown="block" class="alert alert-info">
 
-**:Notice regarding TAB key function:**<br>
+**:information_source: Notes regarding TAB key function:**<br>
 
 The TAB key will not switch windows between Modules and Contacts Tab if one of the Menu dropdowns is opened (File, Help)
 or if Help window is opened. This is an intended behaviour, not a bug.
