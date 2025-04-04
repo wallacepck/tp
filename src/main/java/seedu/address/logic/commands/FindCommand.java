@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_FAV;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MULTIPLE_MODULES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -26,7 +26,7 @@ public class FindCommand extends Command {
             + "Supported fields: "
             + PREFIX_NAME + " "
             + PREFIX_PHONE + " "
-            + PREFIX_FIND_FAV + " "
+            + PREFIX_FAVOURITE + " "
             + PREFIX_ROLE + " "
             + PREFIX_TELEGRAM + " "
             + PREFIX_EMAIL + " "
