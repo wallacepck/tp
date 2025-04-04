@@ -20,7 +20,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_MODULE_CODE = "The module code provided is invalid";
-    public static final String MESSAGE_INVALID_PREFIX_FORMAT = "Prefix: %1$S provided is invalid.";
+    public static final String MESSAGE_INVALID_PREFIX_FORMAT = "Prefix: %1$s provided is invalid.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
