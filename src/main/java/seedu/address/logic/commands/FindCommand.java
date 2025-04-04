@@ -1,6 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MULTIPLE_MODULES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -16,7 +23,14 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds contacts based on a specified field. "
-            + "Supported fields: n/, p/, f/, r/, t/, e/, and mm/.\n"
+            + "Supported fields: "
+            + PREFIX_NAME + " "
+            + PREFIX_PHONE + " "
+            + PREFIX_FAVOURITE + " "
+            + PREFIX_ROLE + " "
+            + PREFIX_TELEGRAM + " "
+            + PREFIX_EMAIL + " "
+            + " and " + PREFIX_MULTIPLE_MODULES + ".\n"
             + "Examples:\n"
             + "  " + COMMAND_WORD + " n/alice bob charlie\n"
             + "  " + COMMAND_WORD + " p/91234567\n"
