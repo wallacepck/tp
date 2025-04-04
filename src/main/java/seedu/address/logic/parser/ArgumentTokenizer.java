@@ -192,7 +192,7 @@ public class ArgumentTokenizer {
         Pattern prefixDetection = Pattern.compile("(?<=\\s|^)([a-zA-Z]+/)");
         Matcher matcher = prefixDetection.matcher(args);
         while (matcher.find()) {
-            String prefix = matcher.group(1).toLowerCase();
+            String prefix = matcher.group(1);
             if (!ALLOWED_PREFIXES.contains(prefix)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_PREFIX_FORMAT, prefix));
             }
@@ -206,7 +206,7 @@ public class ArgumentTokenizer {
         Pattern prefixDetection = Pattern.compile("(?<=\\s|^)([a-zA-Z]+/)");
         Matcher matcher = prefixDetection.matcher(args);
         while (matcher.find()) {
-            String prefix = matcher.group(1).toLowerCase();
+            String prefix = matcher.group(1);
             if (!ALLOWED_FIND_PREFIXES.contains(prefix)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
