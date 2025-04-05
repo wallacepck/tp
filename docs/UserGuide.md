@@ -54,7 +54,7 @@ With AcademySource, you can:
           <summary><strong>For Windows:</strong></summary>
               <ol>
                   <li>Hold down Windows button and R (⊞ Win + R)</li>
-                  <li>Type <code>cmd</code> and press enter</li>
+                  <li>Type <code>cmd</code> and press <code>Enter</code></li>
               </ol>
       </details>
       <details>
@@ -65,7 +65,7 @@ With AcademySource, you can:
               </ol>
       </details>
       
-   3. Type <code>java -version</code> and press enter. 
+   3. Type <code>java -version</code> and press <code>Enter</code>. 
    4. If you have `Java 17` installed, the terminal should look like:
        <details>
            <summary><strong>On Windows:</strong></summary>
@@ -100,7 +100,7 @@ With AcademySource, you can:
 4. Copy the file to the folder you want to use as the _home folder_ for AcademySource. Note: This will create additional files required for AcademySource in your _home folder_.
 
 
-5. Open AcademySource by double-clicking the program file, `academysource.jar`. Alternatively, you may type `java -jar academysource.jar` into your [terminal](#quick-start) and press enter.  
+5. Open AcademySource by double-clicking the program file, `academysource.jar`. Alternatively, you may type `java -jar academysource.jar` into your [terminal](#quick-start) and press `Enter`.  
    **What you'll see:**   
    <details>
         <summary><strong>On Windows:</strong></summary>
@@ -112,7 +112,7 @@ With AcademySource, you can:
    </details>
 
 
-6. Type a command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br>
+6. Type a command in the command box and press Enter to execute it. For example, typing **`help`** and pressing `Enter` will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all contacts.
@@ -134,12 +134,12 @@ With AcademySource, you can:
 
 The command box remembers up to 16 previous commands. You can use the Up Arrow (↑) on your keyboard to scroll back through them and the Down Arrow (↓) to move forward. This saves time by letting you reuse commands without retyping them.
 
-If you edit a recalled command, the history navigation resets, and you can’t scroll forward anymore. Once you press Enter, the modified command is saved as a new history entry.
+If you edit a recalled command, the history navigation resets, and you can’t scroll forward anymore. Once you press `Enter`, the modified command is saved as a new history entry.
 
 Example:
-1. You type: `find mm/2040` and press Enter
+1. You type: `find mm/2040` and press `Enter`
 
-2. You type: `list` and press Enter
+2. You type: `list` and press `Enter`
 
 3. You press Up Arrow (↑) once → It shows `list`.
 
@@ -553,12 +553,13 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
-| Term           | Definition                                                                                                                                                                     |
-|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **CLI**        | `Command Line Interface; a way to interact with the application using` <br> `text-based commands`                                                                              |
-| **Index**      | `A positive integer that refers to a contact's position in the displayed list`                                                                                                 |
-| **JDK**        | `Java Development Kit; a software development environment required to run and develop Java` <br> `applications like AcademySource. Version 17 or above is needed`              |
-| **Parameters** | `Values supplied by the user in commands (e.g., name, phone, module) that determine the` <br> `action taken by AcademySource. Often prefixed with identifiers like n/, p/, m/` |
-| **Field**      | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                       |
+| Term           | Definition                                                                                                                                                                                      |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**        | `Command Line Interface; a way to interact with the application using` <br> `text-based commands`                                                                                               |
+| **Index**      | `A positive integer that refers to a contact's position in the displayed list`                                                                                                                  |
+| **JDK**        | `Java Development Kit; a software development environment required to run and develop Java` <br> `applications like AcademySource. Version 17 or above is needed`                               |
+| **Parameters** | `Values supplied by the user in commands (e.g., name, phone, module) that determine the` <br> `action taken by AcademySource. Often prefixed with identifiers like n/, p/, m/`                  |
+| **GUI**        | `A GUI (Graphical User Interface) for a desktop application is a visual interface that` <br> `allows users to interact with software using graphical elements like windows, buttons, and menus` |
+| **Field**      | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                                        |
 
 [back to top](#table-of-content)
