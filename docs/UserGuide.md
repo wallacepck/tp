@@ -149,11 +149,9 @@ Example:
 
 </div>
 
-[Back to top](#table-of-content)
-
 --------------------------------------------------------------------------------------------------------------------
 
-## Graphic User Interface Layout
+## Graphic User Interface Layout [🔝](#table-of-content)
 
 ![Module Page](images/module-file-page.png)
 ![Contacts Page](images/contact-list-page.png)
@@ -196,8 +194,6 @@ or if Help window is opened. This is an intended behaviour, not a bug.
 
 </div>
 
-[Back to top](#table-of-content)
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features [🔝](#table-of-content)
@@ -222,10 +218,10 @@ AcademySource works best with standard English letters. Using characters from ot
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [m/MODULE]` can be used as `n/John Doe m/CS2103T` or as `n/John Doe`.
+  e.g `n/NAME [t/TELEGRAM]` can be used as `n/John Doe t/@johndoe` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[m/MODULE]…​` can be used as ` ` (i.e. 0 times), `m/CS2103T`, `m/CS2103T m/CS2040S` etc.
+* Items with `…`​ after them can be used more than 1 time.<br>
+  e.g. `m/MODULE…​` can be used as `m/CS2103T`, `m/CS2103T m/CS2040S` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -516,27 +512,23 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## FAQ [🔝](#table-of-content)
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AcademySource home folder.
 
-[back to top](#table-of-content)
-
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known issues [🔝](#table-of-content)
 
 1. **When using multiple screens,** if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **All commands are functional in Module Page,** despite not able to see the details of contacts. Use ```list``` or ```find``` command to display the desired contacts before editing the contact list.
-4. **Using complex characters** like emojis or script (Arabic and Hebrew) causes the command box input to behave in weird ways. Avoid entering these characters in the command box. 
-
-[back to top](#table-of-content)
+4. **Using complex characters** like emojis or script (Arabic and Hebrew) causes the command box input to behave in weird ways. Avoid entering these characters in the command box.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command summary [🔝](#table-of-content)
 
 | Action     | Format, Examples                                                                                                                                                                                                                   |
 |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -548,10 +540,8 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 | **List**   | `list`                                                                                                                                                                                                                             |
 | **Help**   | `help`                                                                                                                                                                                                                             |
 
-[back to top](#table-of-content)
-
 --------------------------------------------------------------------------------------------------------------------
-## Glossary
+## Glossary [🔝](#table-of-content)
 
 | Term           | Definition                                                                                                                                                                     |
 |----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -560,5 +550,3 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 | **JDK**        | `Java Development Kit; a software development environment required to run and develop Java` <br> `applications like AcademySource. Version 17 or above is needed`              |
 | **Parameters** | `Values supplied by the user in commands (e.g., name, phone, module) that determine the` <br> `action taken by AcademySource. Often prefixed with identifiers like n/, p/, m/` |
 | **Field**      | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                       |
-
-[back to top](#table-of-content)

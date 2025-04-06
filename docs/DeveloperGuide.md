@@ -45,7 +45,7 @@ The bulk of the app's work is done by the following four components:
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk or solid-state drive (SSD).
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
@@ -124,7 +124,7 @@ The sequence diagram below is another example to illustrate the interactions wit
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ImprovedModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
@@ -410,6 +410,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Contact**: An information that holds name, email, telegram handle, phone number, module, role.
 * **Module**: Any NUS course.
 * **Role**: TA / Professor
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
