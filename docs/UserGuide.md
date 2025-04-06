@@ -13,9 +13,9 @@ title: User Guide
 removing the need to dig through emails or portals. With its simple and efficient CLI-based design, AcademySource lets you manage academic contacts quickly and effortlessly—so you can stay organized and focused on your learning journey.
 
 With AcademySource, you can:
-* Store and manage contact information of professors and TAs (e.g., email, phone number, role, module)
-* Search for contacts by name, contact details, role, and/or module code
-* Mark important contacts as favorites for quick access
+* Store and manage contact information of professors and TAs (e.g., email, phone number, role, module).
+* Search for contacts by name, contact details, role, and/or module code.
+* Mark important contacts as favorites for quick access.
   
 --------------------------------------------------------------------------------------------------------------------
 
@@ -48,8 +48,8 @@ With AcademySource, you can:
 
 ## Quick start
 
-1. Ensure you have `Java 17` or above installed on your computer. Follow the steps below to check if you already have `Java 17` installed:
-   2. Navigate to your operating system's terminal:
+1. Ensure that you have `Java 17` or above installed on your computer. Follow the steps below to check if you already have `Java 17` installed:
+   2. Navigate to your operating system's terminal by following these steps:
       <details>
           <summary><strong>For Windows:</strong></summary>
               <ol>
@@ -66,7 +66,7 @@ With AcademySource, you can:
       </details>
       
    3. Type <code>java -version</code> and press the `Enter` key. 
-   4. If you have `Java 17` installed, the terminal should look like:
+   4. If `Java 17` is installed, your terminal will look like this:
        <details>
            <summary><strong>On Windows:</strong></summary>
                <pre><code>
@@ -126,7 +126,7 @@ With AcademySource, you can:
     * `exit` : Exits the app.
 
 
-7. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) section below for details of each command.
 
 <div markdown="block" class="alert alert-info">
 
@@ -160,11 +160,11 @@ Example:
 
 
 Basic features:
-1. Menu Bar: A top menu bar which provides access to various functions within AcademySource.
+1. Menu Bar: A top menu bar that provides access to various functions within AcademySource.
 2. Command Box: An input with a placeholder "Enter Command Here..." to enter commands into.
 3. Result Display: A rectangular display box to display success message upon successful command execution, or error message upon failure.
-4. Side Navigation: Buttons to navigate between Modules and Contacts tab. Press the buttons or the `Tab` key to navigate 
-between both.
+4. Side Navigation: Buttons to navigate between the Modules and Contacts tab. Press their buttons or the `Tab` key to navigate 
+between the two tabs.
 
 Modules Page:
 1. Module Folder: A folder that stores contacts of a module code.
@@ -183,7 +183,7 @@ Contacts Page:
 
 ![keybinds](images/keybinds.png)
 
-* `Tab`: Toggles between window between Modules and Contacts Tab.
+* `Tab`: Toggles between window between Modules and Contacts tab.
 * Up Arrow `(↑)`: Goes back to previous command in history.
 * Down Arrow `(↓)`: Goes forward to next command in history.
 
@@ -388,7 +388,7 @@ Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOU
   For names, the order of keywords does not matter. For example, `find n/Hans Bo` matches "Bo Hans".
 
 - **Single Instance per Prefix:**  
-  Only **one instance** of each prefix is allowed. Repeating a prefix (e.g. `n/John n/Doe`) is not permitted.
+  Only **one instance** of each prefix is allowed. Repeating a prefix (e.g., `n/John n/Doe`) is not permitted.
 
 - **AND Combination:**  
   When multiple prefixes are specified (e.g., `find n/John mm/CS2103T`), a person must satisfy **all criteria** (i.e. the keywords across the different fields are combined using an AND operation) to be included in the results.
