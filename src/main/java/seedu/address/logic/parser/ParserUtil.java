@@ -197,8 +197,9 @@ public class ParserUtil {
      */
     public static void validatePhoneKeywords(List<String> keywords) throws ParseException {
         for (String keyword : keywords) {
-            if (!keyword.matches("\\d+")) {
-                throw new ParseException("Phone number must only contain digits.");
+            if (!keyword.matches("\\+?\\d{1,17}")) {
+                throw new ParseException("Phone keywords should only contain digits, may optionally start with a '+', "
+                        + "and must be between 1 and 17 digits long.");
             }
         }
     }

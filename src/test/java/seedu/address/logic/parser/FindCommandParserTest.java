@@ -31,7 +31,8 @@ public class FindCommandParserTest {
     public void parse_missingKeywords_throwsParseException() {
         assertParseFailure(parser, " n/ ", Name.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, " p/ ",
-                "Phone number must only contain digits.");
+                "Phone keywords should only contain digits, may optionally start with a '+', "
+                        + "and must be between 1 and 17 digits long.");
         assertParseFailure(parser, " e/ ",
                 "Email keyword cannot be empty.");
         assertParseFailure(parser, " r/ ", Role.MESSAGE_CONSTRAINTS);
@@ -128,10 +129,10 @@ public class FindCommandParserTest {
 
         // Multiple phone numbers
         fieldKeywordMap.clear();
-        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, Arrays.asList("91234567", "98765432"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, Arrays.asList("91234567", "+98765432"));
         expectedFindCommand =
                 new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
-        assertParseSuccess(parser, " p/ 91234567 98765432", expectedFindCommand);
+        assertParseSuccess(parser, " p/91234567 +98765432", expectedFindCommand);
 
         // Multiple partial phone numbers
         fieldKeywordMap.clear();
@@ -142,10 +143,15 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_invalidPhone_throwsParseException() {
-        assertParseFailure(parser, " p/9123_4567",
-                "Phone number must only contain digits.");
+        assertParseFailure(parser, " p/-91234567",
+                "Phone keywords should only contain digits, may optionally start with a '+', "
+                        + "and must be between 1 and 17 digits long.");
         assertParseFailure(parser, " p/charlie",
-                "Phone number must only contain digits.");
+                "Phone keywords should only contain digits, may optionally start with a '+', "
+                        + "and must be between 1 and 17 digits long.");
+        assertParseFailure(parser, " p/99999999999999999999",
+                "Phone keywords should only contain digits, may optionally start with a '+', "
+                        + "and must be between 1 and 17 digits long.");
     }
 
     @Test
@@ -246,6 +252,7 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " n/Darren mm/3230 $$",
                 "Module keywords must contain only alphanumeric characters.");
         assertParseFailure(parser, " t/@dd mm/dd e/dd p/dd",
-                "Phone number must only contain digits.");
+                "Phone keywords should only contain digits, may optionally start with a '+', "
+                        + "and must be between 1 and 17 digits long.");
     }
 }
