@@ -406,10 +406,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Operations**: Any command-line input by the user.
 * **Data**: Contact data stored in the data/addressbook.json.
-* **CLI syntax table**: A strcutured reference that outlines the syntax, parameters and usage of command-line interface commands that helps the users to execute operations.
+* **CLI syntax table**: A structured reference that outlines the syntax, parameters and usage of command-line interface commands that helps the users to execute operations.
 * **Contact**: An information that holds name, email, telegram handle, phone number, module, role.
 * **Module**: Any NUS course.
 * **Role**: TA / Professor
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
