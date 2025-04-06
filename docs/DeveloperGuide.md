@@ -245,7 +245,7 @@ _{more aspects and alternatives to be added}_
 #### Proposed Implementation
 Modules can be added or removed by users.  
 ##### Current Implementation:
-There is fixed amount of modules inside `ModuleRegistry` as enums.
+There is fixed amount of modules inside `ModuleRegistry` as enums. Users can add modules to a contact using the `add` or `edit` commands.
 
 | **Module Code** | **Module Name**                                       |
 |-----------------|-------------------------------------------------------|
