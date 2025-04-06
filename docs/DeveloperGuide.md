@@ -428,13 +428,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file, or alternatively, type `java -jar academysource.jar` into your terminal in the directory holding the `academysource.jar` file and press enter. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
    3. Saving window preferences
 
    4. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   5. Re-launch the app by double-clicking the jar file.<br>
+   5. Re-launch the app by repeating step 2.<br>
   Expected: The most recent window size and location is retained.
 
 2. _{ more test cases …​ }_
