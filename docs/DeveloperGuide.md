@@ -244,6 +244,38 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Proposed\] More Modules
+
+#### Proposed Implementation
+Modules can be added or removed by users.  
+##### Current Implementation:
+There is fixed amount of modules inside `ModuleRegistry` as enums.
+
+| **Module Code** | **Module Name**                                       |
+|-----------------|-------------------------------------------------------|
+| CS1231S         | Discrete Structures                                   |
+| CS2030S         | Programming Methodology II                            |
+| CS2040S         | Data Structures and Algorithms                        |
+| CS2100          | Computer Organisation                                 |
+| CS2103T         | Software Engineering                                  |
+| CS2106          | Introduction to Operating Systems                     |
+| CS2109S         | Introduction to AI and Machine Learning               |
+| CS3230          | Design and Analysis of Algorithms                     |
+| CS2101          | Effective Communication for Computing Professionals   |
+
+##### Future Implementation:
+The future functionality of the `ModuleRegistry` system will enable users to **dynamically manage modules**.  
+
+Summary of Key Features:
+- **Add modules**: Allow users to add modules.
+- **Remove modules**: Allow users to delete user-added modules.
+- **Display modules**: Show both preset and user-added modules.
+- **Fixed set of preset modules**: The core set of modules cannot be modified by users.
+
+This functionality will enable users to customize their experience with modules while preserving the integrity of the default set.
+
+_{Explain here how the data archiving feature will be implemented}_
+
 
 --------------------------------------------------------------------------------------------------------------------
 
