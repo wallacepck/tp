@@ -54,7 +54,7 @@ With AcademySource, you can:
           <summary><strong>For Windows:</strong></summary>
               <ol>
                   <li>Hold down Windows button and R (⊞ Win + R)</li>
-                  <li>Type <code>cmd</code> and press <code>Enter</code></li>
+                  <li>Type <code>cmd</code> and press the <code>Enter</code> key</li>
               </ol>
       </details>
       <details>
@@ -65,7 +65,7 @@ With AcademySource, you can:
               </ol>
       </details>
       
-   3. Type <code>java -version</code> and press <code>Enter</code>. 
+   3. Type <code>java -version</code> and press the `Enter` key. 
    4. If you have `Java 17` installed, the terminal should look like:
        <details>
            <summary><strong>On Windows:</strong></summary>
@@ -100,7 +100,7 @@ With AcademySource, you can:
 4. Copy the file to the folder you want to use as the _home folder_ for AcademySource. Note: This will create additional files required for AcademySource in your _home folder_.
 
 
-5. Open AcademySource by double-clicking the program file, `academysource.jar`. Alternatively, you may type `java -jar academysource.jar` into your [terminal](#quick-start) and press `Enter`.  
+5. Open AcademySource by double-clicking the program file, `academysource.jar`. Alternatively, you may type `java -jar academysource.jar` into your [terminal](#quick-start) and press the `Enter` key.  
    **What you'll see:**   
    <details>
         <summary><strong>On Windows:</strong></summary>
@@ -112,7 +112,7 @@ With AcademySource, you can:
    </details>
 
 
-6. Type a command in the command box and press Enter to execute it. For example, typing **`help`** and pressing `Enter` will open the help window.<br>
+6. Type a command in the command box and press the `Enter` key to execute it. For example, typing **`help`** and pressing the `Enter` key will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all contacts.
@@ -132,20 +132,20 @@ With AcademySource, you can:
 
 **:information_source: Notes about the command box:**<br>
 
-The command box remembers up to 16 previous commands. You can use the Up Arrow (↑) on your keyboard to scroll back through them and the Down Arrow (↓) to move forward. This saves time by letting you reuse commands without retyping them.
+The command box remembers up to 16 previous commands. You can use the Up Arrow `(↑)` key on your keyboard to scroll back through them and the Down Arrow `(↓)` key to move forward. This saves time by letting you reuse commands without retyping them.
 
-If you edit a recalled command, the history navigation resets, and you can’t scroll forward anymore. Once you press `Enter`, the modified command is saved as a new history entry.
+If you edit a recalled command, the history navigation resets, and you can’t scroll forward anymore. Once you press the `Enter` key, the modified command is saved as a new history entry.
 
 Example:
-1. You type: `find mm/2040` and press `Enter`
+1. Type `find mm/2040` and press the `Enter` key.
 
-2. You type: `list` and press `Enter`
+2. Type `list` and press the `Enter` key.
 
-3. You press Up Arrow (↑) once → It shows `list`.
+3. Press the Up Arrow `(↑)` key once and you will see `list` in the command box.
 
-4. You press Up Arrow (↑) again → It shows `find mm/2040`.
+4. Press the Up Arrow `(↑)` key again and you will see `find mm/2040` in the command box.
 
-5. Now, if you change `find mm/2040` to `find mm/2103` and then press Down Arrow (↓), you will notice that you aren't moving forward through history because you modified the command.
+5. Now, if you change `find mm/2040` to `find mm/2103` and then press the Down Arrow `(↓)` key, you will notice that you aren't moving forward through history because you modified the command.
 
 </div>
 
@@ -163,17 +163,17 @@ Basic features:
 1. Menu Bar: A top menu bar which provides access to various functions within AcademySource.
 2. Command Box: An input with a placeholder "Enter Command Here..." to enter commands into.
 3. Result Display: A rectangular display box to display success message upon successful command execution, or error message upon failure.
-4. Side Navigation: Buttons to navigate between Modules and Contacts tab. Press the buttons or TAB key to navigate 
+4. Side Navigation: Buttons to navigate between Modules and Contacts tab. Press the buttons or the `Tab` key to navigate 
 between both.
 
 Modules Page:
-1. Module Files: A folder that stores all contacts related to the module code.
-   Upon pressing, AcademySource will be directed to contacts page which displays contacts that matches the module code.
+1. Module Folder: A folder that stores contacts of a module code.
+   Clicking a module folder will direct you to a page displaying contacts of that module code.
 
 Contacts Page:
 1. Contact List: A list of contacts stored inside AcademySource. Each row stores a contact name card with their relevant details.
-2. Role: The role which each contact is assigned to. TA will be displayed as yellow bookmarker while Professor will be displayed as orange bookmarker.
-3. Favourite Mark: A star symbol which indicate a contact is marked as favourite by you.
+2. Role: The role in which each contact is assigned to. `TA` will be displayed as yellow bookmark while `Professor` will be displayed as orange bookmark.
+3. Favourite Mark: A star symbol indicating contacts marked as favourite by you.
 
 [Back to top](#table-of-content)
 
@@ -183,16 +183,16 @@ Contacts Page:
 
 ![keybinds](images/keybinds.png)
 
-* TAB: Toggles between window between Modules and Contacts Tab.
-* UP ARROW (↑): Goes back to previous command in history.
-* DOWN ARROW (↓): Goes forward to next command in history.
+* `Tab`: Toggles between window between Modules and Contacts Tab.
+* Up Arrow `(↑)`: Goes back to previous command in history.
+* Down Arrow `(↓)`: Goes forward to next command in history.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes regarding TAB key function:**<br>
+**:information_source: Notes regarding `Tab` key function:**<br>  
 
-The TAB key will not switch windows between Modules and Contacts Tab if one of the Menu dropdowns is opened (File, Help)
-or if Help window is opened. This is an intended behaviour, not a bug.
+The `Tab` key will not switch windows between Modules and Contacts if one of the Menu dropdowns (File/Help)
+or Help window is open.
 
 </div>
 
@@ -204,7 +204,7 @@ or if Help window is opened. This is an intended behaviour, not a bug.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
-AcademySource works best with standard English letters. Using characters from other languages (like Arabic, Chinese, or Hebrew) or emojis might cause display and input issues. To keep things running smoothly, please stick to English letters for now.
+AcademySource works best with standard English characters. Using characters from other languages (e.g., Arabic, Chinese, or Hebrew) or emojis may cause display and input issues. To keep things running smoothly, please stick to English characters.
 
 </div>
 
@@ -213,25 +213,25 @@ AcademySource works best with standard English letters. Using characters from ot
 **:information_source: Notes about the command format:**<br>
 
 * Command words are case-sensitive.<br>
-  e.g. `list` works, but not `List` or `LIST`.
+  e.g., `list` works, but not `List` or `LIST`.
 
 * Prefixes are also case-sensitive.<br> 
-  e.g. `N/` (instead of `n/`) will not be allowed.
+  e.g., `N/` instead of `n/` will not be allowed.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are parameters to be supplied by the user.<br>
+  e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [m/MODULE]` can be used as `n/John Doe m/CS2103T` or as `n/John Doe`.
+* Fields in square brackets are optional.<br>
+  e.g., `n/NAME [m/MODULE]` can be used as `n/John Doe m/CS2103T` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[m/MODULE]…​` can be used as ` ` (i.e. 0 times), `m/CS2103T`, `m/CS2103T m/CS2040S` etc.
+* Items with `…`​ after them is optional and can be used multiple times.<br>
+  e.g., `[m/MODULE]…​` can be used as `m/CS2103T`, `m/CS2103T m/CS2040S`, or completely omitted.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be typed in any order.<br>
+  e.g., Both `n/NAME p/PHONE_NUMBER` and `p/PHONE_NUMBER n/NAME` are acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (e.g., `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g., if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
@@ -270,7 +270,7 @@ AcademySource works best with standard English letters. Using characters from ot
 <a id="viewing-help--help"></a>
 ### Viewing help : `help` [🔝](#table-of-content)
 
-Shows a message explaning how to access the help page.
+Shows a message with a URL to the help page.
 
 <img src="images/helpMessage.png" width="956" onclick="openModal(this)"/>
 
@@ -391,26 +391,26 @@ Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOU
   Only **one instance** of each prefix is allowed. Repeating a prefix (e.g. `n/John n/Doe`) is not permitted.
 
 - **AND Combination:**  
-  When multiple prefixes are specified (e.g. `find n/John mm/CS2103T`), a person must satisfy **all criteria** (i.e. the keywords across the different fields are combined using an AND operation) to be included in the results.
+  When multiple prefixes are specified (e.g., `find n/John mm/CS2103T`), a person must satisfy **all criteria** (i.e. the keywords across the different fields are combined using an AND operation) to be included in the results.
 
 ---
 
 #### ✅ Valid Examples
 
-| Command                        | Description                                                                                             |
-|--------------------------------|---------------------------------------------------------------------------------------------------------|
-| `find n/John`                  | Finds persons with names matching `John` (e.g., "John Doe").                                            |
-| `find n/alex david`            | Finds persons with names matching either `alex` or `david` (e.g., "Alex Yeoh", "David Li").             |
-| `find p/9123`                  | Finds persons whose phone numbers contain `9123` (e.g., "91234567").                                    |
-| `find mm/2103 CS3230`          | Finds persons with module codes that contain "2103" **or** "CS3230" (e.g. `CS2103T`, `CS2103`, `CS3230` |
-| `find f/y`                     | Finds persons marked as favourites.                                                                     |
-| `find f/n`                     | Finds persons who are not marked as favourites.                                                         |
-| `find r/prof`                  | Finds persons with the role of Professor.                                                               |
-| `find r/ta`                    | Finds persons with the role of TA.                                                                      |
-| `find t/@john_doe`             | Finds persons whose Telegram handle matches `@john_doe`.                                                |
+| Command                        | Description                                                                                              |
+|--------------------------------|----------------------------------------------------------------------------------------------------------|
+| `find n/John`                  | Finds persons with names matching `John` (e.g., "John Doe").                                             |
+| `find n/alex david`            | Finds persons with names matching either `alex` or `david` (e.g., "Alex Yeoh", "David Li").              |
+| `find p/9123`                  | Finds persons whose phone numbers contain `9123` (e.g., "91234567").                                     |
+| `find mm/2103 CS3230`          | Finds persons with module codes that contain "2103" **or** "CS3230" (e.g., `CS2103T`, `CS2103`, `CS3230` |
+| `find f/y`                     | Finds persons marked as favourites.                                                                      |
+| `find f/n`                     | Finds persons who are not marked as favourites.                                                          |
+| `find r/prof`                  | Finds persons with the role of Professor.                                                                |
+| `find r/ta`                    | Finds persons with the role of TA.                                                                       |
+| `find t/@john_doe`             | Finds persons whose Telegram handle matches `@john_doe`.                                                 |
 | `find e/john@gmail.com`        | Finds persons whose email matches `john@gmail.com`                                                       |
-| `find n/John Demar mm/CS2103T` | Finds persons whose name contains "John" **or** "Demar" **and** are in the module "CS2103T".            |
-| `find mm/CS2103 f/y`           | Finds persons whose module matches `CS2103` **and** who are marked as favourites.                       |
+| `find n/John Demar mm/CS2103T` | Finds persons whose name contains "John" **or** "Demar" **and** are in the module "CS2103T".             |
+| `find mm/CS2103 f/y`           | Finds persons whose module matches `CS2103` **and** who are marked as favourites.                        |
 
 ---
 
@@ -446,7 +446,7 @@ Format: `fav INDEX`
 
 * Toggles the favourite status of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* the index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `fav 2` marks the 2nd contact in AcademySource as favourite.
