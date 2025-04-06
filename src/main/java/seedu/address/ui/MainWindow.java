@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -87,6 +88,8 @@ public class MainWindow extends UiPart<Stage> implements GuiFunctionHandler {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        setTabEvent();
     }
 
     public Stage getPrimaryStage() {
@@ -95,6 +98,20 @@ public class MainWindow extends UiPart<Stage> implements GuiFunctionHandler {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+    }
+
+    /**
+     * Sets the Tab event functionality in MainWindow.
+     */
+    private void setTabEvent() {
+        // Handles the bug reported below.
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getTarget() instanceof TextInputControl
+                    && event.getCode() == KeyCode.TAB) {
+                handleSwitchTab(event);
+                event.consume();
+            }
+        });
     }
 
     /**
@@ -160,10 +177,10 @@ public class MainWindow extends UiPart<Stage> implements GuiFunctionHandler {
 
         if (selectedButton.equals("Modules")) {
             switchWindowPlaceholder.getChildren().add(moduleFolders.getRoot());
-            sidebar.setButtonOnClick("Modules");
+            sidebar.changeButtonState("Modules");
         } else {
             switchWindowPlaceholder.getChildren().add(personListPanel.getRoot());
-            sidebar.setButtonOnClick("Contacts");
+            sidebar.changeButtonState("Contacts");
         }
     }
 
@@ -244,11 +261,33 @@ public class MainWindow extends UiPart<Stage> implements GuiFunctionHandler {
                 handleExit();
             }
 
+            if (!commandResult.isShowHelp()) {
+                this.setSwitchWindowPlaceholder("Contacts");
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Handles the tab event which triggers the tab switching functionality.
+     * Tab will act as a toggle between Modules tab and Contacts tab.
+     *
+     * @param event the key press event.
+     */
+    @FXML
+    private void handleSwitchTab(KeyEvent event) {
+        if (event.getCode() != KeyCode.TAB) {
+            return;
+        }
+
+        if (sidebar.getSelectedButtonText().equals("Contacts")) {
+            setSwitchWindowPlaceholder("Modules");
+        } else {
+            setSwitchWindowPlaceholder("Contacts");
         }
     }
 }

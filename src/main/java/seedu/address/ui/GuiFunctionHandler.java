@@ -29,7 +29,7 @@ public interface GuiFunctionHandler {
     /**
      * Sets the placeholder content of the switchable window.
      *
-     * @param url The identifier for the window content to switch to.
+     * @param selectedButton The identifier for the window content to switch to.
      */
-    void setSwitchWindowPlaceholder(String url);
+    void setSwitchWindowPlaceholder(String selectedButton);
 }

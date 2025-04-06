@@ -1,9 +1,25 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PREFIX_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MULTIPLE_MODULES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
@@ -14,16 +30,40 @@ import java.util.stream.Collectors;
  *    in the above example.<br>
  */
 public class ArgumentTokenizer {
+    private static final List<String> ALLOWED_PREFIXES = List.of(PREFIX_NAME.toString(), PREFIX_PHONE.toString(),
+            PREFIX_EMAIL.toString(), PREFIX_ROLE.toString(), PREFIX_TELEGRAM.toString(), PREFIX_MODULE.toString());
+
+    private static final List<String> ALLOWED_FIND_PREFIXES = List.of(PREFIX_NAME.toString(), PREFIX_PHONE.toString(),
+            PREFIX_MULTIPLE_MODULES.toString(), PREFIX_FAVOURITE.toString(), PREFIX_ROLE.toString(),
+            PREFIX_TELEGRAM.toString(), PREFIX_EMAIL.toString());
 
     /**
      * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
      * respective argument values. Only the given prefixes will be recognized in the arguments string.
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
-     * @param prefixes   Prefixes to tokenize the arguments string with
-     * @return           ArgumentMultimap object that maps prefixes to their arguments
+     * @param prefixes   Prefixes to tokenize the arguments string with.
+     * @return           ArgumentMultimap object that maps prefixes to their arguments.
+     * @throws ParseException when any of the prefix is invalid against {@code ALLOWED_PREFIXES}
      */
-    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
+    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) throws ParseException {
+        detectInvalidPrefixes(argsString);
+        List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
+        return extractArguments(argsString, positions);
+    }
+
+    /**
+     * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object
+     * that maps prefixes valid for {@code FindCommand} to their respective argument values. Only the given prefixes
+     * will be recognized in the arguments string.
+     *
+     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * @param prefixes  Prefixes to tokenize the arguments string with.
+     * @return  argumentMultimap object that maps prefixes to their arguments.
+     * @throws ParseException when any of the prefix is invalid against {@code ALLOWED_FIND_PREFIXES}.
+     */
+    public static ArgumentMultimap tokenizeFind(String argsString, Prefix... prefixes) throws ParseException {
+        detectInvalidFindPrefixes(argsString);
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
     }
@@ -142,6 +182,34 @@ public class ArgumentTokenizer {
 
         Prefix getPrefix() {
             return prefix;
+        }
+    }
+
+    /**
+     * Validates the input argument.
+     */
+    private static void detectInvalidPrefixes(String args) throws ParseException {
+        Pattern prefixDetection = Pattern.compile("(?<=\\s|^)([a-zA-Z]+/)");
+        Matcher matcher = prefixDetection.matcher(args);
+        while (matcher.find()) {
+            String prefix = matcher.group(1);
+            if (!ALLOWED_PREFIXES.contains(prefix)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_PREFIX_FORMAT, prefix));
+            }
+        }
+    }
+
+    /**
+     * Validate the prefixes for Find command.
+     */
+    private static void detectInvalidFindPrefixes(String args) throws ParseException {
+        Pattern prefixDetection = Pattern.compile("(?<=\\s|^)([a-zA-Z]+/)");
+        Matcher matcher = prefixDetection.matcher(args);
+        while (matcher.find()) {
+            String prefix = matcher.group(1);
+            if (!ALLOWED_FIND_PREFIXES.contains(prefix)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
         }
     }
 

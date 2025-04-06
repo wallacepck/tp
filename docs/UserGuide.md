@@ -39,8 +39,7 @@ With AcademySource, you can:
     <a href="#exiting-academysource--exit"> - Exiting AcademySource <br></a>
     <a href="#saving-the-data"> - Saving the data <br></a>
     <a href="#editing-the-data-file"> - Editing the data file <br></a>
-    <a href="#archiving-data-files"> - Archiving data files (coming soon) <br></a>
-
+  
   </details>
 - [FAQ](#faq)
 - [Known issues](#known-issues)
@@ -138,32 +137,34 @@ The command box remembers up to 16 previous commands. You can use the Up Arrow (
 If you edit a recalled command, the history navigation resets, and you can’t scroll forward anymore. Once you press Enter, the modified command is saved as a new history entry.
 
 Example:
-1. You type: `find m/2040` and press Enter
+1. You type: `find mm/2040` and press Enter
 
 2. You type: `list` and press Enter
 
 3. You press Up Arrow (↑) once → It shows `list`.
 
-4. You press Up Arrow (↑) again → It shows `find m/2040`.
+4. You press Up Arrow (↑) again → It shows `find mm/2040`.
 
-5. Now, if you change `find m/2040` to `find m/2103` and then press Down Arrow (↓), you will notice that you aren't moving forward through history because you modified the command.
+5. Now, if you change `find mm/2040` to `find mm/2103` and then press Down Arrow (↓), you will notice that you aren't moving forward through history because you modified the command.
 
 </div>
 
-<br><br>
 [Back to top](#table-of-content)
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## Graphic User Interface Layout
 
-![Module Page](https://github.com/user-attachments/assets/b60b3f57-c899-435b-b07f-8ffcd3cdb34b)
-![Contacts Page](https://github.com/user-attachments/assets/16145b59-b771-4418-8859-b1cdfca36604)
+![Module Page](images/module-file-page.png)
+![Contacts Page](images/contact-list-page.png)
 
 
 Basic features:
 1. Menu Bar: A top menu bar which provides access to various functions within AcademySource.
 2. Command Box: An input with a placeholder "Enter Command Here..." to enter commands into.
 3. Result Display: A rectangular display box to display success message upon successful command execution, or error message upon failure.
-4. Side Navigation: Navigates between Modules and Contacts tab.
+4. Side Navigation: Buttons to navigate between Modules and Contacts tab. Press the buttons or TAB key to navigate 
+between both.
 
 Modules Page:
 1. Module Files: A folder that stores all contacts related to the module code.
@@ -178,11 +179,44 @@ Contacts Page:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Keybinds
+
+![keybinds](images/keybinds.png)
+
+* TAB: Toggles between window between Modules and Contacts Tab.
+* UP ARROW (↑): Goes back to previous command in history.
+* DOWN ARROW (↓): Goes forward to next command in history.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes regarding TAB key function:**<br>
+
+The TAB key will not switch windows between Modules and Contacts Tab if one of the Menu dropdowns is opened (File, Help)
+or if Help window is opened. This is an intended behaviour, not a bug.
+
+</div>
+
+[Back to top](#table-of-content)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features [🔝](#table-of-content)
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+AcademySource works best with standard English letters. Using characters from other languages (like Arabic, Chinese, or Hebrew) or emojis might cause display and input issues. To keep things running smoothly, please stick to English letters for now.
+
+</div>
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
+
+* Command words are case-sensitive.<br>
+  e.g. `list` works, but not `List` or `LIST`.
+
+* Prefixes are also case-sensitive.<br> 
+  e.g. `N/` (instead of `n/`) will not be allowed.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -206,16 +240,17 @@ Contacts Page:
 <a id="prefix-table"></a>
 ### Prefix Table [🔝](#table-of-content)
 
-| **Prefix** | **Meaning**                | **Usage Example**                   | **Remarks**                  |
-|------------|----------------------------|-------------------------------------|------------------------------|
-| `n/`       | Name                       | `n/John Doe`                        |                              |
-| `p/`       | Phone number               | `p/98765432`                        |                              |
-| `t/`       | Telegram                   | `t/@johnDoe123`                     |                              |
-| `r/`       | Role (`ta` or `prof`)      | `r/TA` or `r/PROF`                  |                              |
-| `e/`       | Email address              | `e/johnd@example.com`               | Not used in `find`           |
-| `m/`       | Module (can have multiple) | `m/CS2103T m/CS2101`                | Not used in `find`.          |
-| `f/`       | Favourite                  | `f/y` or `f/n`                      | Not used in `add` or `edit`. |
-| `mm/`      | Module(s)                  | `mm/CS2103T` or `mm/CS2101 CS2103T` | Not used in `add` or `edit`. |
+| **Prefix** | **Meaning**                | **Usage Example**                   | **Remarks**                                                                                                                                                                                                                                                                                                                                                                  |
+|------------|----------------------------|-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `n/`       | Name                       | `n/John Doe`                        | Name must only contain alphanumeric characters (letters and digits) and duplicate names are not allowed.                                                                                                                                                                                                                                                                     |
+| `p/`       | Phone number               | `p/98765432`                        | Phone number must only contain numbers.                                                                                                                                                                                                                                                                                                                                      |
+| `t/`       | Telegram                   | `t/@johndoe`                        | Must begin with '@' and have 5–32 characters (excluding starting '@'). The first character after '@' must be an alphabet; only alphanumerics and underscores are allowed in the remaining handle, and the handle after '@' cannot start or end with special characters.                                                                                                      |
+| `r/`       | Role (`ta` or `prof`)      | `r/TA` or `r/PROF`                  | Not used in `edit`. Used in `add` and `find`.                                                                                                                                                                                                                                                                                                                                |
+| `e/`       | Email address              | `e/johnd@example.com`               | Email must follow local-part@domain. The local-part may only contain alphanumerics and the allowed special characters (`+_.-`) without starting or ending with them. The domain consists of domain labels separated by periods, each starting and ending with alphanumerics (separated only by hyphens, if an), and the end domain label must be at least 2 characters long. |
+| `m/`       | Module (can have multiple) | `m/CS2103T m/CS2101`                | Only used in `add` and `edit`. See [Accepted Modules](#accepted-modules) for a list of valid module codes.                                                                                                                                                                                                                                                                   |
+| `f/`       | Favourite                  | `f/y` or `f/n`                      | Only used in `find`. Only accepts `y` or `n`.                                                                                                                                                                                                                                                                                                                                |
+| `mm/`      | Module(s)                  | `mm/CS2103T` or `mm/CS2101 CS2103T` | Only used in `find`. See [Accepted Modules](#accepted-modules) for a list of valid module codes.                                                                                                                                                                                                                                                                             |
+
 
 <a id="accepted-modules"></a>
 ### Modules Accepted by AcademySource [🔝](#table-of-content)
@@ -275,11 +310,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TELEGRAM] [m/MODULE] [m/MOR
 A person can have any number of modules (including 0)
 </div>
 
-* `ROLE` must be either `ta` or `prof` (Case-insensitive, which means `TA` or `prof` are also valid).
+* `ROLE` must be either `ta` or `prof` (Case-insensitive, which means `TA` or `Prof` are also valid).
 * `MODULE`must be one of the accepted module codes given in [the module table.](#modules-accepted-by-academysource-)
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/prof`
+* `add n/John Doe p/98765432 e/johnd@example.com r/prof m/CS2103T`
 * `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 r/TA m/CS2103T t/@johnd`
 
 <a id="editing-a-person--edit"></a>
@@ -347,7 +382,7 @@ Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOU
 
 - **Case-Insensitive & Partial Matching:**  
   The search for names, phone numbers, and module codes is performed in a case-insensitive manner and supports partial keyword matching.  
-  _Example:_ `find n/Hans Bo` matches a person named "Bo Hans".
+  _Example:_ `find n/john` matches a person named "John Doe".
 
 - **Keyword Order:**  
   For names, the order of keywords does not matter. For example, `find n/Hans Bo` matches "Bo Hans".
@@ -479,11 +514,6 @@ If your changes to the data file makes its format invalid, AcademySource will di
 Furthermore, certain edits can cause AcademySource to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-<a id="archiving-data-files"></a>
-### Archiving data files `[coming in v2.0]` [🔝](#table-of-content)
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -497,8 +527,10 @@ _Details coming soon ..._
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens,** if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **All commands are functional in Module Page,** despite not able to see the details of contacts. Use ```list``` or ```find``` command to display the desired contacts before editing the contact list.
+4. **Using complex characters** like emojis or script (Arabic and Hebrew) causes the command box input to behave in weird ways. Avoid entering these characters in the command box. 
 
 [back to top](#table-of-content)
 

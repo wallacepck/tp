@@ -14,6 +14,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleRegistry;
@@ -52,9 +53,14 @@ public class ParserUtil {
     public static List<Index> parseMassIndex(String oneBasedIndexes) throws ParseException {
         String trimmedIndexes = oneBasedIndexes.trim();
         String[] splittedIndexes = trimmedIndexes.split(" ");
+        Set<String> addedIndex = new HashSet<>();
         List<Index> indexes = new LinkedList<>();
 
         for (String index : splittedIndexes) {
+            if (addedIndex.contains(index)) {
+                throw new ParseException(DeleteCommand.MESSAGE_DUPLICATE_INDEX);
+            }
+            addedIndex.add(index);
             indexes.add(parseIndex(index));
         }
         return indexes;
@@ -68,7 +74,7 @@ public class ParserUtil {
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
-        String trimmedName = name.trim();
+        String trimmedName = name.trim().replaceAll(" +", " ");
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -173,5 +179,93 @@ public class ParserUtil {
             throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
         }
         return Optional.of(new Telegram(telegramHandle));
+    }
+
+    /**
+     * Validates the {@code keywords} are valid keywords for Name.
+     */
+    public static void validateNameKeywords(List<String> keywords) throws ParseException {
+        for (String keyword : keywords) {
+            if (!Name.isValidName(keyword)) {
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            }
+        }
+    }
+
+    /**
+     * Validates the {@code keywords} are valid keywords for Phone.
+     */
+    public static void validatePhoneKeywords(List<String> keywords) throws ParseException {
+        for (String keyword : keywords) {
+            if (!keyword.matches("\\d+")) {
+                throw new ParseException("Phone number must only contain digits.");
+            }
+        }
+    }
+
+    /**
+     * Validates the {@code keywords} are valid keywords for Modules.
+     */
+    public static void validateModuleKeywords(List<String> keywords) throws ParseException {
+        for (String keyword : keywords) {
+            if (keyword.trim().isEmpty()) {
+                throw new ParseException("Module keyword cannot be empty.");
+            }
+            if (!keyword.matches("^[A-Za-z0-9]+$")) {
+                throw new ParseException("Module keywords must contain only alphanumeric characters.");
+            }
+        }
+    }
+
+    /**
+     * Validates the {@code keywords} are valid keywords for Favourite.
+     */
+    public static void validateFavouriteKeywords(List<String> keywords) throws ParseException {
+        if (keywords.size() != 1) {
+            throw new ParseException("f/ field must contain exactly one keyword: 'y' or 'n' (case-insensitive).");
+        }
+        String lower = keywords.get(0).toLowerCase();
+        if (!lower.equals("y") && !lower.equals("n")) {
+            throw new ParseException("f/ field only accepts 'y' or 'n' (case-insensitive).");
+        }
+    }
+
+    /**
+     * Validates the {@code keywords} is a valid keyword for Role.
+     */
+    public static void validateRoleKeywords(List<String> keywords) throws ParseException {
+        if (keywords.size() != 1) {
+            throw new ParseException("r/ field must contain exactly one keyword: 'prof' "
+                    + "or 'TA' (case-insensitive).");
+        }
+        String lower = keywords.get(0).toLowerCase();
+        if (!Role.isValidRole(lower)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Validates the {@code keywords} are valid keywords for Telegram.
+     */
+    public static void validateTelegramKeywords(List<String> keywords) throws ParseException {
+        for (String keyword : keywords) {
+            if (keyword.trim().isEmpty()) {
+                throw new ParseException("Telegram keyword cannot be empty.");
+            }
+            if (!keyword.matches("^[A-Za-z0-9_@]+$")) {
+                throw new ParseException("Telegram handle should only contain alphabets, digits, underscores or '@'.");
+            }
+        }
+    }
+
+    /**
+     * Validates the {@code keywords} are valid keywords for Email.
+     */
+    public static void validateEmailKeywords(List<String> keywords) throws ParseException {
+        for (String keyword : keywords) {
+            if (keyword.trim().isEmpty()) {
+                throw new ParseException("Email keyword cannot be empty.");
+            }
+        }
     }
 }

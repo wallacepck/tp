@@ -13,16 +13,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.model.person.PersonContainsKeywordsPredicate.SearchField;
-import seedu.address.model.person.Role;
 
 /**
  * Parses input arguments and creates a new {@code FindCommand} object.
@@ -31,59 +27,67 @@ import seedu.address.model.person.Role;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
-    private static final List<String> ALLOWED_PREFIXES = List.of("n/", "p/", "mm/", "f/", "r/", "t/", "e/");
+    private static final List<String> ALLOWED_PREFIXES = List.of(PREFIX_NAME.toString(), PREFIX_PHONE.toString(),
+            PREFIX_MULTIPLE_MODULES.toString(), PREFIX_FAVOURITE.toString(), PREFIX_ROLE.toString(),
+            PREFIX_TELEGRAM.toString(), PREFIX_EMAIL.toString());
 
     @Override
     public FindCommand parse(String args) throws ParseException {
-        detectInvalidPrefixes(args);
+        Map<SearchField, List<String>> fieldKeywordMap = new HashMap<>();
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenizeFind(args, PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_MULTIPLE_MODULES, PREFIX_FAVOURITE, PREFIX_ROLE, PREFIX_TELEGRAM, PREFIX_EMAIL
         );
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_MULTIPLE_MODULES,
                 PREFIX_FAVOURITE, PREFIX_ROLE, PREFIX_TELEGRAM, PREFIX_EMAIL
         );
 
-        Map<SearchField, List<String>> fieldKeywordMap = new HashMap<>();
-        addFieldIfPresent(argMultimap, PREFIX_NAME, SearchField.NAME, fieldKeywordMap, this::validateNameKeywords);
-        addFieldIfPresent(argMultimap, PREFIX_PHONE, SearchField.PHONE, fieldKeywordMap, this::validatePhoneKeywords);
-        addFieldIfPresent(argMultimap, PREFIX_MULTIPLE_MODULES, SearchField.MODULE, fieldKeywordMap,
-                this::validateModuleKeywords);
-        addFieldIfPresent(argMultimap, PREFIX_FAVOURITE, SearchField.FAVOURITE, fieldKeywordMap,
-                this::validateFavouriteKeywords);
-        addFieldIfPresent(argMultimap, PREFIX_ROLE, SearchField.ROLE, fieldKeywordMap,
-                this::validateRoleKeywords);
-        addFieldIfPresent(argMultimap, PREFIX_TELEGRAM, SearchField.TELEGRAM, fieldKeywordMap,
-                this::validateTelegramKeywords);
-        addFieldIfPresent(argMultimap, PREFIX_EMAIL, SearchField.EMAIL, fieldKeywordMap,
-                this::validateEmailKeywords);
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            List<String> nameKeywords = extractKeywords(argMultimap, PREFIX_NAME);
+            ParserUtil.validateNameKeywords(nameKeywords);
+            fieldKeywordMap.put(SearchField.NAME, nameKeywords);
+        }
+
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            List<String> phoneKeywords = extractKeywords(argMultimap, PREFIX_PHONE);
+            ParserUtil.validatePhoneKeywords(phoneKeywords);
+            fieldKeywordMap.put(SearchField.PHONE, phoneKeywords);
+        }
+
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            List<String> emailKeywords = extractKeywords(argMultimap, PREFIX_EMAIL);
+            ParserUtil.validateEmailKeywords(emailKeywords);
+            fieldKeywordMap.put(SearchField.EMAIL, emailKeywords);
+        }
+
+        if (argMultimap.getValue(PREFIX_MULTIPLE_MODULES).isPresent()) {
+            List<String> modulesKeywords = extractKeywords(argMultimap, PREFIX_MULTIPLE_MODULES);
+            ParserUtil.validateModuleKeywords(modulesKeywords);
+            fieldKeywordMap.put(SearchField.MODULE, modulesKeywords);
+        }
+
+        if (argMultimap.getValue(PREFIX_FAVOURITE).isPresent()) {
+            List<String> favouriteKeywords = extractKeywords(argMultimap, PREFIX_FAVOURITE);
+            ParserUtil.validateFavouriteKeywords(favouriteKeywords);
+            fieldKeywordMap.put(SearchField.FAVOURITE, favouriteKeywords);
+        }
+
+        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            List<String> roleKeywords = extractKeywords(argMultimap, PREFIX_ROLE);
+            ParserUtil.validateRoleKeywords(roleKeywords);
+            fieldKeywordMap.put(SearchField.ROLE, roleKeywords);
+        }
+
+        if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
+            List<String> telegramKeywords = extractKeywords(argMultimap, PREFIX_TELEGRAM);
+            ParserUtil.validateTelegramKeywords(telegramKeywords);
+            fieldKeywordMap.put(SearchField.TELEGRAM, telegramKeywords);
+        }
+
         if (fieldKeywordMap.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         return new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
-    }
-
-    private void detectInvalidPrefixes(String args) throws ParseException {
-        Pattern prefixDetection = Pattern.compile("(?<=\\s|^)([a-zA-Z]+/)");
-        Matcher matcher = prefixDetection.matcher(args);
-        while (matcher.find()) {
-            String prefix = matcher.group(1).toLowerCase();
-            if (!ALLOWED_PREFIXES.contains(prefix)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-        }
-    }
-
-    private void addFieldIfPresent(ArgumentMultimap argMultimap, Prefix prefix, SearchField searchField,
-                                   Map<SearchField, List<String>> fieldKeywordMap,
-                                   Validator<List<String>> validator) throws ParseException {
-        if (isPrefixPresent(argMultimap, prefix)) {
-            List<String> keywords = extractKeywords(argMultimap, prefix);
-            if (validator != null) {
-                validator.validate(keywords);
-            }
-            fieldKeywordMap.put(searchField, keywords);
-        }
     }
 
     private List<String> extractKeywords(ArgumentMultimap argMultimap, Prefix prefix) {
@@ -91,81 +95,5 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .stream()
                 .flatMap(s -> Arrays.stream(s.split("\\s+")))
                 .collect(Collectors.toList());
-    }
-
-    private void validateNameKeywords(List<String> keywords) throws ParseException {
-        for (String keyword : keywords) {
-            if (!Name.isValidName(keyword)) {
-                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-            }
-        }
-    }
-
-    private void validatePhoneKeywords(List<String> keywords) throws ParseException {
-        for (String keyword : keywords) {
-            if (!keyword.matches("\\d+")) {
-                throw new ParseException("Phone number must only contain digits.");
-            }
-        }
-    }
-
-    private void validateModuleKeywords(List<String> keywords) throws ParseException {
-        for (String keyword : keywords) {
-            if (keyword.trim().isEmpty()) {
-                throw new ParseException("Module keyword cannot be empty.");
-            }
-            if (!keyword.matches("^[A-Za-z0-9]+$")) {
-                throw new ParseException("Module keywords must contain only alphanumeric characters.");
-            }
-        }
-    }
-
-    private void validateFavouriteKeywords(List<String> keywords) throws ParseException {
-        if (keywords.size() != 1) {
-            throw new ParseException("f/ field must contain exactly one keyword: 'y' or 'n' (case-insensitive).");
-        }
-        String lower = keywords.get(0).toLowerCase();
-        if (!lower.equals("y") && !lower.equals("n")) {
-            throw new ParseException("f/ field only accepts 'y' or 'n' (case-insensitive).");
-        }
-    }
-
-    private void validateRoleKeywords(List<String> keywords) throws ParseException {
-        if (keywords.size() != 1) {
-            throw new ParseException("r/ field must contain exactly one keyword: 'prof' "
-                    + "or 'TA' (case-insensitive).");
-        }
-        String lower = keywords.get(0).toLowerCase();
-        if (!Role.isValidRole(lower)) {
-            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
-        }
-    }
-
-    private void validateTelegramKeywords(List<String> keywords) throws ParseException {
-        for (String keyword : keywords) {
-            if (keyword.trim().isEmpty()) {
-                throw new ParseException("Telegram keyword cannot be empty.");
-            }
-            if (!keyword.matches("^[A-Za-z0-9_@]+$")) {
-                throw new ParseException("Telegram handle should only contain alphabets, digits, underscores or '@'.");
-            }
-        }
-    }
-
-    private void validateEmailKeywords(List<String> keywords) throws ParseException {
-        for (String keyword : keywords) {
-            if (keyword.trim().isEmpty()) {
-                throw new ParseException("Email keyword cannot be empty.");
-            }
-        }
-    }
-
-    private static boolean isPrefixPresent(ArgumentMultimap argMultimap, Prefix prefix) {
-        return argMultimap.getValue(prefix).isPresent();
-    }
-
-    @FunctionalInterface
-    private interface Validator<T> {
-        void validate(T t) throws ParseException;
     }
 }

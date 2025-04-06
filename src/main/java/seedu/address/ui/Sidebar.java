@@ -41,8 +41,10 @@ public class Sidebar extends UiPart<Region> {
 
         moduleButton.setOnAction(event -> {
             guiFunctionHandler.setSwitchWindowPlaceholder("Modules");
-            setButtonOnClick("Modules");
+            changeButtonState("Modules");
         });
+        // prevents focus redirection caused by button.
+        moduleButton.setFocusTraversable(false);
 
         // Set Contact button
         setButtonImage(contactButton, "/images/phone-icon.png");
@@ -50,8 +52,10 @@ public class Sidebar extends UiPart<Region> {
         contactButton.setOnAction(event -> {
             guiFunctionHandler.setSwitchWindowPlaceholder("Contacts");
             guiFunctionHandler.clearFilter();
-            setButtonOnClick("Contacts");
+            changeButtonState("Contacts");
         });
+        // prevents focus redirection caused by button.
+        contactButton.setFocusTraversable(false);
     }
 
     /**
@@ -70,7 +74,17 @@ public class Sidebar extends UiPart<Region> {
         button.setGraphic(buttonImage);
     }
 
-    public void setButtonOnClick(String buttonName) {
+    public String getSelectedButtonText() {
+        return this.selectedButton.getText();
+    }
+
+    /**
+     * Changes the selected button inside the sidebar based on state.
+     *
+     * @param buttonName state of the button. In this context only
+     *                   "Modules" and "Contacts" states are allowed.
+     */
+    public void changeButtonState(String buttonName) {
         if (!buttonName.equals("Modules") && !buttonName.equals("Contacts")) {
             return;
         } else if (buttonName.equals(selectedButton.getText())) {

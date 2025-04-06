@@ -17,9 +17,10 @@ Class Person
 Class Email
 Class Name
 Class Phone
-class Role
+Class Role
 Class ModuleRegistry
 Class Module
+Class Telegram
 
 Class I #FFFFFF
 }
@@ -43,6 +44,8 @@ Person *--> Phone
 Person *--> Email
 Person *--> Role
 Person *--> Module
+Person *--> Telegram
+ModuleRegistry *--> Module
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
