@@ -152,7 +152,7 @@ Example:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Graphic User Interface Layout [🔝](#table-of-content)
+## Graphic User Interface Layout [🔝](#table-of-contents)
 
 ![Module Page](images/module-file-page.png)
 ![Contacts Page](images/contact-list-page.png)
@@ -180,7 +180,7 @@ Contacts Page:
 2. Role: The role which each contact is assigned to. TA will be displayed as yellow bookmarker while Professor will be displayed as orange bookmarker.
 3. Favourite Mark: A star symbol which indicate a contact is marked as favourite by you.
 
-[Back to top](#table-of-content)
+[Back to top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -203,7 +203,7 @@ or if Help window is opened. This is an intended behaviour, not a bug.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features [🔝](#table-of-content)
+## Features [🔝](#table-of-contents)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
@@ -241,7 +241,7 @@ AcademySource works best with standard English letters. Using characters from ot
 </div>
 
 <a id="prefix-table"></a>
-### Prefix Table [🔝](#table-of-content)
+### Prefix Table [🔝](#table-of-contents)
 
 | **Prefix** | **Meaning**                | **Usage Example**                    | **Keyword(s) Rules**                                                                                                                                                                                                                                                                                                                                                                                                  |
 |------------|----------------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -259,7 +259,7 @@ AcademySource works best with standard English letters. Using characters from ot
 [Click here for find function prefix matching details](#prefix-matching-details)
 
 <a id="accepted-modules"></a>
-### Modules Accepted by AcademySource [🔝](#table-of-content)
+### Modules Accepted by AcademySource [🔝](#table-of-contents)
 
 | **Module Code** | **Module Name**                                       |
 |-----------------|-------------------------------------------------------|
@@ -274,7 +274,7 @@ AcademySource works best with standard English letters. Using characters from ot
 | CS2101          | Effective Communication for Computing Professionals   |
 
 <a id="viewing-help--help"></a>
-### Viewing help : `help` [🔝](#table-of-content)
+### Viewing help : `help` [🔝](#table-of-contents)
 
 Shows a message explaining how to access the help page.
 
@@ -283,7 +283,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 <a id="listing-all-persons--list"></a>
-### Listing all persons : `list` [🔝](#table-of-content)
+### Listing all persons : `list` [🔝](#table-of-contents)
 
 Shows a list of all contacts in AcademySource.
 
@@ -298,7 +298,7 @@ After command:
 Format: `list`
 
 <a id="adding-a-person--add"></a>
-### Adding a person: `add` [🔝](#table-of-content)
+### Adding a person: `add` [🔝](#table-of-contents)
 
 Adds a contact to AcademySource.
 
@@ -324,7 +324,7 @@ Examples:
 * `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 r/TA m/CS2103T t/@johnd`
 
 <a id="editing-a-person--edit"></a>
-### Editing a person : `edit` [🔝](#table-of-content)
+### Editing a person : `edit` [🔝](#table-of-contents)
 
 Edits an existing contact in AcademySource.
 
@@ -352,7 +352,7 @@ Examples:
 *  `edit 2 t/` clears existing telegram for 2nd person.
 
 <a id="locating-persons-by-name-phone-module-and-favourites--find"></a>
-### Locating persons by name, phone, module, and favourites: `find` [🔝](#table-of-content)
+### Locating persons by name, phone, module, and favourites: `find` [🔝](#table-of-contents)
 
 Finds persons whose names contain any of the given keywords.
 
@@ -427,7 +427,7 @@ Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOU
 ---
 
 <a id="mark-un-mark-a-person-as-favourite--fav"></a>
-### Mark / un-mark a person as favourite : `fav` [🔝](#table-of-content)
+### Mark / un-mark a person as favourite : `fav` [🔝](#table-of-contents)
 
 Mark a specific person as favourite, or un-mark a person from favourite if that person is
 already marked as favourite.
@@ -452,7 +452,7 @@ Examples:
 * `fav 2` again un-marks the person.
 
 <a id="deleting-a-person--delete"></a>
-### Deleting a person : `delete` [🔝](#table-of-content)
+### Deleting a person : `delete` [🔝](#table-of-contents)
 
 Deletes the specified contact from AcademySource.
 
@@ -477,7 +477,7 @@ Examples:
 * `delete 1 2 3` deletes the first 3 contacts, given that all indexes exist within the contact list.
 
 <a id="clearing-all-entries--clear"></a>
-### Clearing all entries : `clear` [🔝](#table-of-content)
+### Clearing all entries : `clear` [🔝](#table-of-contents)
 
 Clears all entries from AcademySource.
 
@@ -492,19 +492,19 @@ After command:
 Format: `clear`
 
 <a id="exiting-academysource--exit"></a>
-### Exiting AcademySource : `exit` [🔝](#table-of-content)
+### Exiting AcademySource : `exit` [🔝](#table-of-contents)
 
 Exits AcademySource.
 
 Format: `exit`
 
 <a id="saving-the-data"></a>
-### Saving the data [🔝](#table-of-content)
+### Saving the data [🔝](#table-of-contents)
 
 AcademySource data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 <a id="editing-the-data-file"></a>
-### Editing the data file [🔝](#table-of-content)
+### Editing the data file [🔝](#table-of-contents)
 
 AcademySource data are saved automatically as a JSON file `[JAR file location]/data/academysource.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -515,14 +515,14 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ [🔝](#table-of-content)
+## FAQ [🔝](#table-of-contents)
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AcademySource home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues [🔝](#table-of-content)
+## Known issues [🔝](#table-of-contents)
 
 1. **When using multiple screens,** if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
@@ -532,7 +532,7 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary [🔝](#table-of-content)
+## Command summary [🔝](#table-of-contents)
 
 | Action        | Format, Examples                                                                                                                                                                                                                   |
 |---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -547,7 +547,7 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 | **Exit**      | `exit`                                                                                                                                                                                                                             |
 
 --------------------------------------------------------------------------------------------------------------------
-## Glossary [🔝](#table-of-content)
+## Glossary [🔝](#table-of-contents)
 
 | Term           | Definition                                                                                                                                                                     |
 |----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

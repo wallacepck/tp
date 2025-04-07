@@ -303,6 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AcademySource shows an error message
       Use case ends.
 
+**Use case: UC0
 *{More to be added}*
 
 ### Non-Functional Requirements
