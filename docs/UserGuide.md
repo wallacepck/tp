@@ -150,8 +150,7 @@ Basic features:
 1. Menu Bar: A top menu bar that provides access to various functions within AcademySource.
 2. Command Box: An input with a placeholder "Enter Command Here..." to enter commands into.
 3. Result Display: A rectangular display box to display success message upon successful command execution, or error message upon failure.
-4. Side Navigation: Buttons to navigate between the Modules and Contacts tab. Press their buttons or the `Tab` key to navigate 
-between the two tabs.
+4. Side Navigation: Buttons to navigate between the Modules and Contacts tab. Press their buttons or the `Tab` key to navigate between the two tabs.
 
 Modules Page:
 1. Module Folder: A folder that stores contacts of a module code.
@@ -159,7 +158,8 @@ Modules Page:
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
-Commands can still be entered and work on the modules page, but the contact list is not visible. Thus, avoid entering commands that modify data (such as `edit`, `delete`) on the module page to prevent inadvertent actions.
+1. Commands can still be entered and work on the modules page, but the contact list is not visible. Thus, avoid entering commands that modify data (such as `edit`, `delete`) on the module page to prevent inadvertent actions.
+2. Switching to Contacts tab by pressing tab or pressing on `Contacts` button will clear all filters on the list.
 
 </div>
 
