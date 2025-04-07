@@ -142,7 +142,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both academy source data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -155,6 +155,88 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### \[Proposed\] Undo/redo feature
+
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedAddressBook#commit()` — Saves the current academy source state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous academy source state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone academy source state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial academy source state, and the `currentStatePointer` pointing to that single academy source state.
+
+![UndoRedoState0](images/UndoRedoState0.png)
+
+Step 2. The user executes `delete 5` command to delete the 5th person in the academy source. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the academy source after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted academy source state.
+
+![UndoRedoState1](images/UndoRedoState1.png)
+
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified academy source state to be saved into the `addressBookStateList`.
+
+![UndoRedoState2](images/UndoRedoState2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the academy source state will not be saved into the `addressBookStateList`.
+
+</div>
+
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous academy source state, and restores the academy source to that state.
+
+![UndoRedoState3](images/UndoRedoState3.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
+</div>
+
+The following sequence diagram shows how an undo operation goes through the `Logic` component:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+Similarly, how an undo operation goes through the `Model` component is shown below:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the academy source to that state.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest academy source state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</div>
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the academy source, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+
+![UndoRedoState4](images/UndoRedoState4.png)
+
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all academy source states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+
+![UndoRedoState5](images/UndoRedoState5.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<img src="images/CommitActivityDiagram.png" width="250" />
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire academy source.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -189,27 +271,28 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                     | So that I can…​                                                      |
-|----------|----------|--------------------------------------------------|----------------------------------------------------------------------|
-| `* * *`  | user     | have my professors and TA's contact              | contact them in the future                                           |
-| `* * *`  | new user | have a guide                                     | navigate around and use the app easily                               |
-| `* * *`  | new user | have a CLI syntax table                          | I can refer to it while using the app                                |
-| `* * *`  | user     | filter contacts according to their role          | obtain all contacts with the same role                               |
-| `* * *`  | user     | set my contacts as TAs or professors             | filter them in one command                                           |
-| `* * *`  | user     | search contacts based on module code             | locate contact details without having to go through the entire list  |
-| `* * *`  | user     | search contacts based on their name              | locate contact details without having to go through the entire list  |
-| `* * *`  | user     | search contacts based on incomplete names        | locate contact details without remembering the full name             |
-| `* * *`  | user     | search contacts based on incomplete phone number | locate contact details without remembering the full phone number     |
-| `* * *`  | user     | search contacts based on incomplete module names | locate contact details without remembering the full module name      |
-| `* * *`  | user     | list all contacts                                | view of all my contact details                                       |
-| `* * *`  | user     | delete contacts                                  | remove outdated contacts                                             |
-| `* *`    | user     | mass operations                                  | make a lot of changes to my contact list efficiently                 |
-| `* *`    | user     | a console window to display the contact          | copy and paste contact information efficiently                       |
-| `*`      | user     | have a personal contact list                     | locate contact details important to me                               |
-| `*`      | user     | add contacts to the personal contact list        | add important contacts to the list                                   |
-| `*`      | user     | delete contacts from the personal contact list   | remove no longer important contacts from the list                    |
-| `*`      | user     | list my personal contact list                    | view every contact in the list                                       |
-| `*`      | user     | add Telegram handle to contacts                  | keep their telegram handle for easy contact                          |
+| Priority | As a …​  | I want to …​                                          | So that I can…​                                                                                             |
+|----------|----------|-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| `* * *`  | user     | have my professors and TA's contact                   | contact them in the future                                                                                  |
+| `* * *`  | new user | have a guide                                          | navigate around and use the app easily                                                                      |
+| `* * *`  | new user | have a CLI syntax table                               | I can refer to it while using the app                                                                       |
+| `* * *`  | user     | set my contacts as TA or professor                    | find them in one command                                                                                    |
+| `* * *`  | user     | set my contacts as favourite                          | find them in one command                                                                                    |
+| `* * *`  | user     | find contact(s) by full/incomplete name(s)            | locate contact details without having to go through the entire list and remembering the full name           |
+| `* * *`  | user     | find contact(s) by full/incomplete module code(s)     | locate contact details without having to go through the entire list and remembering the full module code    |
+| `* * *`  | user     | find contact(s) by full/incomplete phone number(s)    | locate contact details without having to go through the entire list and remembering the full phone number   |
+| `* * *`  | user     | find contact(s) by full/incomplete email(s)           | locate contact details without having to go through the entire list and remembering the full email address  |
+| `* * *`  | user     | list all contacts                                     | view of all my contact details                                                                              |
+| `* * *`  | user     | delete contacts                                       | remove outdated contacts                                                                                    |
+| `* *`    | user     | mass operations                                       | make a lot of changes to my contact list efficiently                                                        |
+| `* *`    | user     | a console window to display the contact               | copy and paste contact information efficiently                                                              |
+| `* *`    | user     | add Telegram handle to contacts                       | keep their telegram handle for easy contact                                                                 |
+| `* *`    | user     | find contact(s) by full/incomplete telegram handle(s) | locate contact details without having to go through the entire list and remembering the full telegram handle |
+| `* *`    | user     | find contact(s) by multiple fields                    | locate specific contact details in one command                                                              |
+| `*`      | user     | have a personal contact list                          | locate contact details important to me                                                                      |
+| `*`      | user     | add contacts to the personal contact list             | add important contacts to the list                                                                          |
+| `*`      | user     | delete contacts from the personal contact list        | remove no longer important contacts from the list                                                           |
+| `*`      | user     | list my personal contact list                         | view every contact in the list                                                                              |
 
 *{More to be added}*
 
@@ -273,20 +356,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         
         Use case ends
 
-**Use case: UC04 - Search for a contact**
+**Use case: UC04 - Find contact(s) by name(s)**
 
 **MSS**
 
-1.  User requests to search for a contact using either a full/incomplete name, module name, module code, or contact number.
+1.  User requests to find contact(s) using any of full/incomplete name(s).
 2.  AcademySource shows a list of contacts matching the search.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The provided name(s) does not follow the syntax.
 
-  Use case ends.
+    *   1a1. AcademySource shows an error message
+
+        Use case resumes at step 1.
+
+* 2a. No contacts match the provided full/partial name(s).
+
+    * 2a1. AcademySource shows an empty list.
+
+      Use case ends.
 
 **Use case: UC05 - Edit a contact**
 
@@ -301,7 +392,71 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. One of the component provided by user is invalid
     * 2a1. AcademySource shows an error message
-      Use case ends.
+      
+        Use case ends.
+
+**Use case: UC06 - Find contact(s) by module, email, role, and favourite**
+
+**MSS**
+
+1. User requests to find contact(s) by providing full/partial module code(s), full/partial email(s), role, and favourite status.
+2. AcademySource shows a list of contacts matching the search.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The provided module code(s), email(s), role, and/or favourite status does not follow the syntax.
+
+    * 1a1. AcademySource shows an error message.
+
+        Use case resumes at step 1.
+
+* 2a. No contact match the provided module code(s), email(s), role, and favourite status.
+
+    * 2a1. AcademySource shows an empty list.
+
+        Use case ends.
+
+**Use case: UC07 - Favourite a contact**
+
+**MSS**
+
+1. User requests to <u>list contacts (UC02)</u>
+2. User requests to label a specific contact as favourite in the list
+3. AcademySource labels the contact as favourite
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is out of range.
+
+    * 2a1. AcademySource shows an error message.
+
+        Use case resumes at step 1.
+
+* 2b. The user provided multiple indexes.
+
+    * 2b1. AcademySource shows an error message.
+
+        Use case resumes at step 1.
+
+* 3a. The specified user is already a favourite contact.
+
+    * 3a1. AcademySource labels the contact as a non-favourite contact.
+
+        Use case ends.
+
+**Use case: UC08 - Clear contact(s)**
+
+**MSS**
+
+1. User requests to <u>list contacts (UC02)</u>.
+2. User requests to clear all contact(s).
+3. AcademySource clears every contact in the contact list.
+
+    Use case ends.
 
 **Use case: UC0
 *{More to be added}*
@@ -324,8 +479,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Operations**: Any command-line input by the user.
-* **Data**: Contact data stored in the data/addressbook.json.
-* **CLI syntax table**: A strcutured reference that outlines the syntax, parameters and usage of command-line interface commands that helps the users to execute operations.
+* **Data**: Contact data stored in the data/academysource.json.
+* **CLI syntax table**: A structured reference that outlines the syntax, parameters and usage of command-line interface commands that helps the users to execute operations.
 * **Contact**: An information that holds name, email, telegram handle, phone number, module, role.
 * **Module**: Any NUS course.
 * **Role**: TA / Professor
