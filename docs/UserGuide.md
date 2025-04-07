@@ -222,7 +222,7 @@ AcademySource works best with standard English characters. Using characters from
   e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Fields in square brackets are optional.<br>
-  e.g., `n/NAME [m/MODULE]` can be used as `n/John Doe m/CS2103T` or as `n/John Doe`.
+  e.g., `n/NAME [t/TELEGRAM]` can be used as `n/John Doe t/@JohnD` or as `n/John Doe`.
 
 * Items with `…`​ after them is optional and can be used multiple times.<br>
   e.g., `[m/MODULE]…​` can be used as `m/CS2103T`, `m/CS2103T m/CS2040S`, or completely omitted.
