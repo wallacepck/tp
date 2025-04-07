@@ -271,27 +271,29 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                     | So that I can…​                                                      |
-|----------|----------|--------------------------------------------------|----------------------------------------------------------------------|
-| `* * *`  | user     | have my professors and TA's contact              | contact them in the future                                           |
-| `* * *`  | new user | have a guide                                     | navigate around and use the app easily                               |
-| `* * *`  | new user | have a CLI syntax table                          | I can refer to it while using the app                                |
-| `* * *`  | user     | filter contacts according to their role          | obtain all contacts with the same role                               |
-| `* * *`  | user     | set my contacts as TAs or professors             | filter them in one command                                           |
-| `* * *`  | user     | search contacts based on module code             | locate contact details without having to go through the entire list  |
-| `* * *`  | user     | search contacts based on their name              | locate contact details without having to go through the entire list  |
-| `* * *`  | user     | search contacts based on incomplete names        | locate contact details without remembering the full name             |
-| `* * *`  | user     | search contacts based on incomplete phone number | locate contact details without remembering the full phone number     |
-| `* * *`  | user     | search contacts based on incomplete module names | locate contact details without remembering the full module name      |
-| `* * *`  | user     | list all contacts                                | view of all my contact details                                       |
-| `* * *`  | user     | delete contacts                                  | remove outdated contacts                                             |
-| `* *`    | user     | mass operations                                  | make a lot of changes to my contact list efficiently                 |
-| `* *`    | user     | a console window to display the contact          | copy and paste contact information efficiently                       |
-| `*`      | user     | have a personal contact list                     | locate contact details important to me                               |
-| `*`      | user     | add contacts to the personal contact list        | add important contacts to the list                                   |
-| `*`      | user     | delete contacts from the personal contact list   | remove no longer important contacts from the list                    |
-| `*`      | user     | list my personal contact list                    | view every contact in the list                                       |
-| `*`      | user     | add Telegram handle to contacts                  | keep their telegram handle for easy contact                          |
+| Priority  | As a …​  | I want to …​                                     | So that I can…​                                                     |
+|-----------|----------|--------------------------------------------------|---------------------------------------------------------------------|
+| `* * *`   | user     | have my professors and TA's contact              | contact them in the future                                          |
+| `* * *`   | new user | have a guide                                     | navigate around and use the app easily                              |
+| `* * *`   | new user | have a CLI syntax table                          | I can refer to it while using the app                               |
+| `* * *`   | user     | filter contacts according to their role          | obtain all contacts with the same role                              |
+| `* * *`   | user     | set my contacts as TAs or professors             | filter them in one command                                          |
+| `* * *`   | user     | search contacts based on module code             | locate contact details without having to go through the entire list |
+| `* * *`   | user     | search contacts based on their name              | locate contact details without having to go through the entire list |
+| `* * *`   | user     | search contacts based on incomplete names        | locate contact details without remembering the full name            |
+| `* * *`   | user     | search contacts based on incomplete phone number | locate contact details without remembering the full phone number    |
+| `* * *`   | user     | search contacts based on incomplete module names | locate contact details without remembering the full module name     |
+| `* * *`   | user     | list all contacts                                | view of all my contact details                                      |
+| `* * *`   | user     | delete contacts                                  | remove outdated contacts                                            |
+| `* *`     | user     | mass operations                                  | make a lot of changes to my contact list efficiently                |
+| `* *`     | user     | a console window to display the contact          | copy and paste contact information efficiently                      |
+| `*`       | user     | have a personal contact list                     | locate contact details important to me                              |
+| `*`       | user     | add contacts to the personal contact list        | add important contacts to the list                                  |
+| `*`       | user     | delete contacts from the personal contact list   | remove no longer important contacts from the list                   |
+| `*`       | user     | list my personal contact list                    | view every contact in the list                                      |
+| `*`       | user     | add Telegram handle to contacts                  | keep their telegram handle for easy contact                         |
+| .`*`      | user     | have my customized favourite contact list        | easily search for contacts important to me.                         | 
+
 
 *{More to be added}*
 
@@ -303,7 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to adds a contact
+1.  User requests to add a contact
 2.  AcademySource adds a contact
 
     Use case ends.
