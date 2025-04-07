@@ -563,7 +563,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete 0`<br>
       Expected: No contact is deleted. Error details shown in the status message. 
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 2. Deleting multiple contacts while all contacts are being shown
@@ -588,10 +588,10 @@ testers are expected to do more *exploratory* testing.
       Expected: First contact's name, module, and telegram will be changed. Details of the edited contact will be shown in the status message.
    
    3. Test case: `edit 2 n/Jon Jones` <br>
-      Expected: No contact to be edited due to the name. Error message to be shown in the status message.
+      Expected: No contact to be edited due to invalid name. Error message to be shown in the status message.
    
    4. Test case: `edit 2 t/jonnyboy` <br>
-      Expected: No contact to be edited due to the telegram handle. Error message to be shown in the status message.
+      Expected: No contact to be edited due to invalid telegram handle. Error message to be shown in the status message.
    
    5. Other incorrect add commands to try: `edit x n/NAME p/PHONE e/EMAIL m/MODULE t/TELEGRAM`, where either: <br>
       * x is either less than 1 or larger than the size of the list OR <br>
@@ -634,7 +634,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `fav 0` <br>
    Expected: No contact is labelled as favourite. Error details shown in the status message.
    
-   4. Other incorrect favourite commands to try: `fav`, `fav x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect favourite commands to try: `fav`, `fav x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Saving data
