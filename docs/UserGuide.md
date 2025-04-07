@@ -65,7 +65,6 @@ With AcademySource, you can:
                   <li>In the Finder, open the <code>/Applications/Utilities</code> folder, then double-click Terminal.</li>
               </ol>
       </details>
-      
    3. Type <code>java -version</code> and press the `Enter` key. 
    4. If `Java 17` is installed, your terminal will look like this:
        <details>
@@ -86,12 +85,13 @@ With AcademySource, you can:
       OpenJDK 64-Bit Server VM Zulu17.50+19-CA (build 17.0.11+9-LTS, mixed mode, sharing)
                </code></pre>
        </details>
-   <br>
+    
+    
 2. If you have `Java 17` installed, proceed to Step 3. If not, follow these instructions:
    3. Download `Java 17` from [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html). 
    4. Select the installation package based on your Operating System. 
    5. Follow the instruction guide to install Java on your device. For more information, click [here](https://docs.oracle.com/en/java/javase/23/install/overview-jdk-installation.html).
-   6. **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).  
+   6. **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html). 
 
 
 3. Download the latest version of AcademySource from [here](https://github.com/AY2425S2-CS2103T-T17-4/tp/releases/tag/v1.3). Select `academysource.jar` to begin the download.
@@ -110,7 +110,8 @@ With AcademySource, you can:
         <summary><strong>On Mac OS:</strong></summary>
             <img src="images/BootGui.png" width="700" onclick="openModal(this)"/>
    </details>
-    <br>
+   
+
 6. Type a command in the command box and press the `Enter` key to execute it. For example, typing **`help`** and pressing the `Enter` key will open the help window.<br>
    Some example commands you can try:
 
