@@ -535,9 +535,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Add contact
 
-1. Add a contact
+1. Add a contact while all contacts are being shown
 
-    1. Prerequisites: List all contacts. Ensure there are no contacts with the same name and telegram handles as any of the test cases provided below. Perform the below test cases sequentially.
+    1. Prerequisites: List all contacts using the `list` command. Ensure there are no contacts with the same name and telegram handles as any of the test cases provided below. Perform the below test cases sequentially.
 
     2. Test case: `add n/John Doe p/98765432 e/johnd@example.com t/@johnacademysource r/TA m/CS2103T` <br>
        Expected: The contact will be added to the list. Details of the added contact shown in the status message.
@@ -580,7 +580,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No contact to be deleted. Error details shown in the status message.
 
 ### Edit contact
-1. Edit a contact
+1. Edit a contact while all contacts are being shown
 
    1. Prerequisites: List all contacts using the `list` command. Minimally 2 contact in the list. Ensure there are no contacts with the same name and telegram handles as any of the test cases provided below. Perform the below test cases sequentially.
    
@@ -618,7 +618,7 @@ testers are expected to do more *exploratory* testing.
     
 ### Favourite/Un-favourite contact
 
-1. Favourite a contact
+1. Favourite a contact while all contacts are being shown
 
    1. Prerequisites: List all contacts using the `list` command. Ensure multiple contacts in the list and ensure first contact is not a favourite.
    
