@@ -243,7 +243,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user     | delete contacts from the personal contact list        | remove no longer important contacts from the list                                                            |
 | `*`      | user     | list my personal contact list                         | view every contact in the list                                                                               |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -426,7 +425,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -438,8 +436,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6.  Application should be user-friendly to first time users.
 7.  The application should support seamless upgrades without data loss.
 8.  Comprehensive documentation should be available for users and developers.
-
-*{More to be added}*
 
 
 ### Glossary
