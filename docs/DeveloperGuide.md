@@ -277,7 +277,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|----------|-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | `* * *`  | user     | have my professors and TA's contact                   | contact them in the future                                                                                   |
 | `* * *`  | new user | have a guide                                          | navigate around and use the app easily                                                                       |
-| `* * *`  | new user | have a CLI syntax table                               | I can refer to it while using the app                                                                        |
 | `* * *`  | user     | set my contacts as TA or professor                    | find them in one command                                                                                     |
 | `* * *`  | user     | set my contacts as favourite                          | find them in one command                                                                                     |
 | `* * *`  | user     | find contact(s) by full/incomplete name(s)            | locate contact details without having to go through the entire list and remembering the full name            |
@@ -291,6 +290,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user     | add Telegram handle to contacts                       | keep their telegram handle for easy contact                                                                  |
 | `* *`    | user     | find contact(s) by full/incomplete telegram handle(s) | locate contact details without having to go through the entire list and remembering the full telegram handle |
 | `* *`    | user     | find contact(s) by multiple fields                    | locate specific contact details in one command                                                               |
+| `* *`    | user     | have contacts organised by modules                    | quickly access contacts that belong to the module group with a click of a button                             |
+| `* *`    | user     | have contacts organised by favourite                  | quickly access favourite contacts with a click of a button                                                   |
 | `*`      | user     | have a personal contact list                          | locate contact details important to me                                                                       |
 | `*`      | user     | add contacts to the personal contact list             | add important contacts to the list                                                                           |
 | `*`      | user     | delete contacts from the personal contact list        | remove no longer important contacts from the list                                                            |
