@@ -12,7 +12,6 @@ public class Telegram {
     public static final String MESSAGE_CONSTRAINTS = "Telegram should be of the format @handle "
             + "and adhere to the following constraints:\n"
             + "1. The telegram handle should start with '@'.\n"
-            + "The handle may not start with any numbers.\n"
             + "2. The handle should only contain alphanumeric characters and " + UNDERSCORE + ". The handle may "
             + "not start or end with any special characters including _ .\n"
             + "The handle may not start with any numbers.\n"
