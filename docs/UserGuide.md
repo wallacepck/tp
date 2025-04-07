@@ -85,22 +85,13 @@ With AcademySource, you can:
       OpenJDK 64-Bit Server VM Zulu17.50+19-CA (build 17.0.11+9-LTS, mixed mode, sharing)
                </code></pre>
        </details>
-    
-    
-    
 2. If you have `Java 17` installed, proceed to Step 3. If not, follow these instructions:  
    3. Download `Java 17` from [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).  
    4. Select the installation package based on your Operating System.  
    5. Follow the instruction guide to install Java on your device. For more information, click [here](https://docs.oracle.com/en/java/javase/23/install/overview-jdk-installation.html).  
-   6. **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).  
-
-
+   6. **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 3. Download the latest version of AcademySource from [here](https://github.com/AY2425S2-CS2103T-T17-4/tp/releases/tag/v1.3). Select `academysource.jar` to begin the download.
-
-
 4. Copy the file to the folder you want to use as the _home folder_ for AcademySource. Note: This will create additional files required for AcademySource in your _home folder_.
-
-
 5. Open AcademySource by double-clicking the program file, `academysource.jar`. Alternatively, you may type `java -jar academysource.jar` into your [terminal](#quick-start) and press the `Enter` key.  
    **What you'll see:**   
    <details>
@@ -111,9 +102,6 @@ With AcademySource, you can:
         <summary><strong>On Mac OS:</strong></summary>
             <img src="images/BootGui.png" width="700" onclick="openModal(this)"/>
    </details>
-   
-
-
 6. Type a command in the command box and press the `Enter` key to execute it. For example, typing **`help`** and pressing the `Enter` key will open the help window.<br>
    Some example commands you can try:
 
@@ -126,8 +114,6 @@ With AcademySource, you can:
     * `clear` : Deletes all contacts.
 
     * `exit` : Exits the app.
-
-
 7. Refer to the [Features](#features-) section below for details of each command.
 
 <div markdown="block" class="alert alert-info">
