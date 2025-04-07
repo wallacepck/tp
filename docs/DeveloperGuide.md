@@ -232,7 +232,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | list all contacts                                     | view of all my contact details                                                                               |
 | `* * *`  | user     | delete contacts                                       | remove outdated contacts                                                                                     |
 | `* *`    | user     | mass operations                                       | make a lot of changes to my contact list efficiently                                                         |
-| `* *`    | user     | a console window to display the contact               | copy and paste contact information efficiently                                                               |
+| `* *`    | user     | have a console window to display the contact          | copy and paste contact information efficiently                                                               |
 | `* *`    | user     | add Telegram handle to contacts                       | keep their telegram handle for easy contact                                                                  |
 | `* *`    | user     | find contact(s) by full/incomplete telegram handle(s) | locate contact details without having to go through the entire list and remembering the full telegram handle |
 | `* *`    | user     | find contact(s) by multiple fields                    | locate specific contact details in one command                                                               |
@@ -243,7 +243,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user     | delete contacts from the personal contact list        | remove no longer important contacts from the list                                                            |
 | `*`      | user     | list my personal contact list                         | view every contact in the list                                                                               |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -426,7 +425,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -438,8 +436,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6.  Application should be user-friendly to first time users.
 7.  The application should support seamless upgrades without data loss.
 8.  Comprehensive documentation should be available for users and developers.
-
-*{More to be added}*
 
 
 ### Glossary
