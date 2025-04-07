@@ -19,7 +19,7 @@ With AcademySource, you can:
   
 --------------------------------------------------------------------------------------------------------------------
 
-## Table of Content
+## Table of Contents
 - [Quick start](#quick-start)
 - [Graphic User Interface Layout](#graphic-user-interface-layout)
 - <details>
@@ -134,7 +134,7 @@ With AcademySource, you can:
 
 The command box remembers up to 16 previous commands. You can use the Up Arrow (↑) on your keyboard to scroll back through them and the Down Arrow (↓) to move forward. This saves time by letting you reuse commands without retyping them.
 
-If you edit a recalled command, the history navigation resets, and you can’t scroll forward anymore. Once you press Enter, the modified command is saved as a new history entry.
+If you edit a recalled command, the navigation resets, and you can’t scroll forward anymore. Once you press Enter, the modified command is saved as a new history entry.
 
 Example:
 1. You type: `find mm/2040` and press Enter
@@ -146,6 +146,7 @@ Example:
 4. You press Up Arrow (↑) again → It shows `find mm/2040`.
 
 5. Now, if you change `find mm/2040` to `find mm/2103` and then press Down Arrow (↓), you will notice that you aren't moving forward through history because you modified the command.
+   However, you can still press Up Arrow (↑) to access `list` and `find mm/2040` again.
 
 </div>
 
@@ -169,6 +170,12 @@ between both.
 Modules Page:
 1. Module Files: A folder that stores all contacts related to the module code.
    Upon pressing, AcademySource will be directed to contacts page which displays contacts that matches the module code.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+Commands can still be entered and work on the modules page, but the contact list is not visible. Thus, avoid entering commands that modify data (such as `edit`, `delete`) on the module page to prevent inadvertent actions.
+
+</div>
 
 Contacts Page:
 1. Contact List: A list of contacts stored inside AcademySource. Each row stores a contact name card with their relevant details.
@@ -240,17 +247,20 @@ AcademySource works best with standard English letters. Using characters from ot
 <a id="prefix-table"></a>
 ### Prefix Table [🔝](#table-of-content)
 
-| **Prefix** | **Meaning**                | **Usage Example**                   | **Remarks**                                                                                                                                                                                                                                                                                                                                                                  |
-|------------|----------------------------|-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `n/`       | Name                       | `n/John Doe`                        | Name must only contain alphanumeric characters (letters and digits) and duplicate names are not allowed.                                                                                                                                                                                                                                                                     |
-| `p/`       | Phone number               | `p/98765432`                        | Phone number must only contain numbers.                                                                                                                                                                                                                                                                                                                                      |
-| `t/`       | Telegram                   | `t/@johndoe`                        | Must begin with '@' and have 5–32 characters (excluding starting '@'). The first character after '@' must be an alphabet; only alphanumerics and underscores are allowed in the remaining handle, and the handle after '@' cannot start or end with special characters.                                                                                                      |
-| `r/`       | Role (`ta` or `prof`)      | `r/TA` or `r/PROF`                  | Not used in `edit`. Used in `add` and `find`.                                                                                                                                                                                                                                                                                                                                |
-| `e/`       | Email address              | `e/johnd@example.com`               | Email must follow local-part@domain. The local-part may only contain alphanumerics and the allowed special characters (`+_.-`) without starting or ending with them. The domain consists of domain labels separated by periods, each starting and ending with alphanumerics (separated only by hyphens, if an), and the end domain label must be at least 2 characters long. |
-| `m/`       | Module (can have multiple) | `m/CS2103T m/CS2101`                | Only used in `add` and `edit`. See [Accepted Modules](#accepted-modules) for a list of valid module codes.                                                                                                                                                                                                                                                                   |
-| `f/`       | Favourite                  | `f/y` or `f/n`                      | Only used in `find`. Only accepts `y` or `n`.                                                                                                                                                                                                                                                                                                                                |
-| `mm/`      | Module(s)                  | `mm/CS2103T` or `mm/CS2101 CS2103T` | Only used in `find`. See [Accepted Modules](#accepted-modules) for a list of valid module codes.                                                                                                                                                                                                                                                                             |
+| **Prefix** | **Meaning**                | **Usage Example**                    | **Keyword(s) Rules**                                                                                                                                                                                                                                                                                                                                                                                                  |
+|------------|----------------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `n/`       | Name                       | `n/John Doe`                         | `add`, `edit`, and `find`: Name must only contain alphanumeric characters and spaces. <br> **NOTE: When using `add` or `edit`, duplicate names will not be allowed.**                                                                                                                                                                                                                           |
+| `p/`       | Phone number               | `p/98765432`<br> `p/+91234567`       | `add` & `edit`: Phone can optionally start with a `+`, followed by 3-17 digits. <br> `find`: Phone can optionally start with a `+`, followed by 1-17 digits.                                                                                                                                                                                                                         |
+| `t/`       | Telegram                   | `t/@johndoe`                         | `add` & `edit`: Telegram must begin with `@` and have 5–32 characters (excluding starting `@`). The first character after '@' must be an alphabet; only alphanumerics and underscores are allowed in the remaining handle, and the handle after '@' cannot start or end with special characters. <br> `find`: Must only contain alphanumerics, underscores, or @.                                                     |
+| `r/`       | Role (`ta` or `prof`)      | `r/TA` or `r/PROF`                   | `add` & `find`: Role must either be one of two roles, `TA` or `PROF`, case-insensitive. <br> **NOTE: Not used in `edit`.**                                                                                                                                                                                                                                                                                            |
+| `e/`       | Email address              | `e/johnd@example.com`                | `add` & `edit`: Email must follow local-part@domain. The local-part may only contain alphanumerics and the allowed special characters (`+_.-`) without starting or ending with them. The domain consists of domain labels separated by periods, each starting and ending with alphanumerics (separated only by hyphens, if any), and the end domain label must be at least 2 characters long. <br> `find`: No restriction. |
+| `m/`       | Module (can have multiple) | `m/CS2101` <br> `m/CS2103T m/CS2101` | `add` & `edit`. Module must be a valid module code, case-insensitive. <br> **NOTE: Not used in `find`.** <br> See [Accepted Modules](#accepted-modules) for a list of valid module codes.                                                                                                                                                                                                                             |
+| `f/`       | Favourite                  | `f/y` or `f/n`                       | `find`: Favourite must be either one `y` or `n`. <br> **NOTE: Not used in `add` and `edit`.**                                                                                                                                                                                                                                                                                                                         |
+| `mm/`      | Module(s)                  | `mm/CS2103T` or `mm/CS2101 CS2103T`  | `find`: Module(s) must only contain alphanumerics. <br> **NOTE: Not used in `add` and `edit`.**                                                                                                                                                                                                                                                                                                                       |
 
+**Note:** Each prefix must be followed by at least one non-empty keyword. Empty keywords are not allowed for any of the prefixes.
+
+[Click here for find function prefix matching details](#prefix-matching-details)
 
 <a id="accepted-modules"></a>
 ### Modules Accepted by AcademySource [🔝](#table-of-content)
@@ -270,7 +280,7 @@ AcademySource works best with standard English letters. Using characters from ot
 <a id="viewing-help--help"></a>
 ### Viewing help : `help` [🔝](#table-of-content)
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 <img src="images/helpMessage.png" width="956" onclick="openModal(this)"/>
 
@@ -360,21 +370,16 @@ After command:
 
 Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOURITE_STATUS] [r/ROLE] [t/TELEGRAM_KEYWORDS] [e/EMAIL_KEYWORDS]`
 
-**Prefix Details:**
+<a id="prefix-matching-details"></a>
+**Prefix Matching Details:**
 
-- **`n/`** — Matches names using **case-insensitive, partial matches**.
-- **`p/`** — Matches phone numbers using **partial matches**.
-- **`mm/`** — Matches module codes using **case-insensitive, partial matches**.
-- **`f/`** — Filters by favourite status using **case-insensitive matching**. Accepts only:
-    - **`y`** → Favourite
-    - **`n`** → Not favourite
-- **`r/`** — Filters by role using **case-insensitive matching**. Accepts only:
-    - **`prof`** → Professor
-    - **`ta`** → TA
-- **`t/`** — Matches Telegram handles. The matching is **case-insensitive** and allows handles containing alphabets, digits, underscores (`_`), and the `@` symbol.
-- **`e/`** — Matches emails. The matching is **case-insensitive**.
-
-**Note:** Each prefix must be followed by at least one non-empty keyword. Empty keywords are not allowed for any of the prefixes.
+- **`n/`** — Supports **case-insensitive** and **partial** name matches.
+- **`p/`** — Supports **partial** phone number matches.
+- **`mm/`** — Supports **case-insensitive** and **partial** module code matches.
+- **`f/`** — Supports **case-insensitive** favourite status matches.
+- **`r/`** — Supports **case-insensitive** role matches.
+- **`t/`** — Supports **case-insensitive** and **partial** Telegram handle matches.
+- **`e/`** — Supports **case-insensitive** and **partial** email matches.
 
 ---
 
@@ -404,9 +409,7 @@ Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOU
 | `find p/9123`                  | Finds persons whose phone numbers contain `9123` (e.g., "91234567").                                    |
 | `find mm/2103 CS3230`          | Finds persons with module codes that contain "2103" **or** "CS3230" (e.g. `CS2103T`, `CS2103`, `CS3230` |
 | `find f/y`                     | Finds persons marked as favourites.                                                                     |
-| `find f/n`                     | Finds persons who are not marked as favourites.                                                         |
 | `find r/prof`                  | Finds persons with the role of Professor.                                                               |
-| `find r/ta`                    | Finds persons with the role of TA.                                                                      |
 | `find t/@john_doe`             | Finds persons whose Telegram handle matches `@john_doe`.                                                |
 | `find e/john@gmail.com`        | Finds persons whose email matches `john@gmail.com`                                                       |
 | `find n/John Demar mm/CS2103T` | Finds persons whose name contains "John" **or** "Demar" **and** are in the module "CS2103T".            |
@@ -530,7 +533,8 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 1. **When using multiple screens,** if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **All commands are functional in Module Page,** despite not able to see the details of contacts. Use ```list``` or ```find``` command to display the desired contacts before editing the contact list.
-4. **Using complex characters** like emojis or script (Arabic and Hebrew) causes the command box input to behave in weird ways. Avoid entering these characters in the command box. 
+4. **Using complex characters** like emojis or script (Arabic and Hebrew) causes the command box input to behave in weird ways. Avoid entering these characters in the command box.
+5. **On the modules page** commands can still be entered and work, but the contact list is not visible. Thus, avoid entering commands on the module page to prevent inadvertent actions. 
 
 [back to top](#table-of-content)
 
@@ -538,15 +542,17 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                                   |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [m/MODULE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA m/CS2103T`                                                                                                |
-| **Clear**  | `clear`                                                                                                                                                                                                                            |
-| **Delete** | `delete INDEX…​` <br> e.g., `delete 1` `delete 2 3`                                                                                                                                                                                |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                 |
-| **Find**   | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOURITE_STATUS] [r/ROLE] [t/TELEGRAM_KEYWORDS] [e/EMAIL_KEYWORDS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y t/@JamesLovesCS r/PROF e/james@gmail.com` |
-| **List**   | `list`                                                                                                                                                                                                                             |
-| **Help**   | `help`                                                                                                                                                                                                                             |
+| Action        | Format, Examples                                                                                                                                                                                                                   |
+|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [m/MODULE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA m/CS2103T`                                                                                                |
+| **Clear**     | `clear`                                                                                                                                                                                                                            |
+| **Delete**    | `delete INDEX…​` <br> e.g., `delete 1` `delete 2 3`                                                                                                                                                                                |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                 |
+| **Find**      | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOURITE_STATUS] [r/ROLE] [t/TELEGRAM_KEYWORDS] [e/EMAIL_KEYWORDS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y t/@JamesLovesCS r/PROF e/james@gmail.com` |
+| **Favourite** | `fav INDEX` <br> e.g., `fav 1`                                                                                                                                                                                                      |
+| **List**      | `list`                                                                                                                                                                                                                             |
+| **Help**      | `help`                                                                                                                                                                                                                             |
+| **Exit**      | `exit`                                                                                                                                                                                                                             |
 
 [back to top](#table-of-content)
 
