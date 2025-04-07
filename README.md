@@ -9,7 +9,7 @@
 
 Ever wished to conduct research for a specific field but don't know the correct professors to look for?
 
-Ever felt the dread of losing hundreds of telegram contacts because you lose your telegram account, with no way of getting them back without their telegram handle? 
+Ever felt the dread of losing hundreds of telegram contacts because you lose your telegram account, with no way of getting them back without their telegram handle?
 
 Or what if you want to become a TA for a module, want to know more about the TA experience from the senior who have taught you as a TA, but simply forgot their name and contacts?
 
@@ -22,4 +22,4 @@ Detailed user guide can be found in the [User Guide](https://ay2425s2-cs2103t-t1
 Interested to contribute to AcademySource? You may follow the [Developer Guide](https://ay2425s2-cs2103t-t17-4.github.io/tp/DeveloperGuide.html) for more.
 
 ## Acknowledgement
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org). 
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
