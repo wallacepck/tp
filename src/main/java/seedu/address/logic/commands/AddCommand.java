@@ -28,13 +28,13 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ROLE + "ROLE "
             + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
-            + PREFIX_MODULE + "MODULE " + "[" + PREFIX_MODULE + "MORE_MODULES]...\n"
+            + PREFIX_MODULE + "MODULE" + "...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_TELEGRAM + "@academysource "
             + PREFIX_ROLE + "TA "
+            + PREFIX_TELEGRAM + "@academysource "
             + PREFIX_MODULE + "CS2103T ";
 
 
