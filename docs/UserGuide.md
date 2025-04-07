@@ -150,8 +150,13 @@ Basic features:
 1. Menu Bar: A top menu bar that provides access to various functions within AcademySource.
 2. Command Box: An input with a placeholder "Enter Command Here..." to enter commands into.
 3. Result Display: A rectangular display box to display success message upon successful command execution, or error message upon failure.
-4. Side Navigation: Buttons to navigate between the Modules and Contacts tab. Press their buttons or the `Tab` key to navigate 
-between the two tabs.
+4. Side Navigation: Buttons to navigate between the Modules and Contacts tab. Press their buttons or the `Tab` key to navigate between the two tabs.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+Switching to Contacts tab by pressing tab or pressing on `Contacts` button will clear all filters on the list. 
+
+</div>
 
 Modules Page:
 1. Module Folder: A folder that stores contacts of a module code.
@@ -372,13 +377,10 @@ Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOU
 - **Case-Insensitive & Partial Matching:**  
   The search for names, phone numbers, and module codes is performed in a case-insensitive manner and supports partial keyword matching.  
   _Example:_ `find n/john` matches a person named "John Doe".
-
 - **Keyword Order:**  
   For names, the order of keywords does not matter. For example, `find n/Hans Bo` matches "Bo Hans".
-
 - **Single Instance per Prefix:**  
   Only **one instance** of each prefix is allowed. Repeating a prefix (e.g., `n/John n/Doe`) is not permitted.
-
 - **AND Combination:**  
   When multiple prefixes are specified (e.g., `find n/John mm/CS2103T`), a person must satisfy **all criteria** (i.e. the keywords across the different fields are combined using an AND operation) to be included in the results.
 
