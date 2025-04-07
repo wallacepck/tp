@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_FIND_INVALID_PHONE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,7 +32,7 @@ public class FindCommandParserTest {
     public void parse_missingKeywords_throwsParseException() {
         assertParseFailure(parser, " n/ ", Name.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, " p/ ",
-                "Phone number must only contain digits.");
+                MESSAGE_FIND_INVALID_PHONE);
         assertParseFailure(parser, " e/ ",
                 "Email keyword cannot be empty.");
         assertParseFailure(parser, " r/ ", Role.MESSAGE_CONSTRAINTS);
@@ -128,10 +129,10 @@ public class FindCommandParserTest {
 
         // Multiple phone numbers
         fieldKeywordMap.clear();
-        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, Arrays.asList("91234567", "98765432"));
+        fieldKeywordMap.put(PersonContainsKeywordsPredicate.SearchField.PHONE, Arrays.asList("91234567", "+98765432"));
         expectedFindCommand =
                 new FindCommand(new PersonContainsKeywordsPredicate(fieldKeywordMap));
-        assertParseSuccess(parser, " p/ 91234567 98765432", expectedFindCommand);
+        assertParseSuccess(parser, " p/91234567 +98765432", expectedFindCommand);
 
         // Multiple partial phone numbers
         fieldKeywordMap.clear();
@@ -142,10 +143,12 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_invalidPhone_throwsParseException() {
-        assertParseFailure(parser, " p/9123_4567",
-                "Phone number must only contain digits.");
+        assertParseFailure(parser, " p/-91234567",
+                MESSAGE_FIND_INVALID_PHONE);
         assertParseFailure(parser, " p/charlie",
-                "Phone number must only contain digits.");
+                MESSAGE_FIND_INVALID_PHONE);
+        assertParseFailure(parser, " p/99999999999999999999",
+                MESSAGE_FIND_INVALID_PHONE);
     }
 
     @Test
@@ -246,6 +249,6 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " n/Darren mm/3230 $$",
                 "Module keywords must contain only alphanumeric characters.");
         assertParseFailure(parser, " t/@dd mm/dd e/dd p/dd",
-                "Phone number must only contain digits.");
+                MESSAGE_FIND_INVALID_PHONE);
     }
 }
