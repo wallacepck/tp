@@ -134,7 +134,7 @@ With AcademySource, you can:
 
 The command box remembers up to 16 previous commands. You can use the Up Arrow (↑) on your keyboard to scroll back through them and the Down Arrow (↓) to move forward. This saves time by letting you reuse commands without retyping them.
 
-If you edit a recalled command, the history navigation resets, and you can’t scroll forward anymore. Once you press Enter, the modified command is saved as a new history entry.
+If you edit a recalled command, the navigation resets, and you can’t scroll forward anymore. Once you press Enter, the modified command is saved as a new history entry.
 
 Example:
 1. You type: `find mm/2040` and press Enter
@@ -146,6 +146,7 @@ Example:
 4. You press Up Arrow (↑) again → It shows `find mm/2040`.
 
 5. Now, if you change `find mm/2040` to `find mm/2103` and then press Down Arrow (↓), you will notice that you aren't moving forward through history because you modified the command.
+   However, you can still press Up Arrow (↑) to access `list` and `find mm/2040` again.
 
 </div>
 
@@ -169,6 +170,12 @@ between both.
 Modules Page:
 1. Module Files: A folder that stores all contacts related to the module code.
    Upon pressing, AcademySource will be directed to contacts page which displays contacts that matches the module code.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+
+Commands can still be entered and work on the modules page, but the contact list is not visible. Thus, avoid entering commands that modify data (such as `edit`, `delete`) on the module page to prevent inadvertent actions.
+
+</div>
 
 Contacts Page:
 1. Contact List: A list of contacts stored inside AcademySource. Each row stores a contact name card with their relevant details.
@@ -530,7 +537,8 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 1. **When using multiple screens,** if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **All commands are functional in Module Page,** despite not able to see the details of contacts. Use ```list``` or ```find``` command to display the desired contacts before editing the contact list.
-4. **Using complex characters** like emojis or script (Arabic and Hebrew) causes the command box input to behave in weird ways. Avoid entering these characters in the command box. 
+4. **Using complex characters** like emojis or script (Arabic and Hebrew) causes the command box input to behave in weird ways. Avoid entering these characters in the command box.
+5. **On the modules page** commands can still be entered and work, but the contact list is not visible. Thus, avoid entering commands on the module page to prevent inadvertent actions. 
 
 [back to top](#table-of-content)
 
