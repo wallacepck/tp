@@ -533,7 +533,8 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **All commands are functional in Module Page,** despite not able to see the details of contacts. Use ```list``` or ```find``` command to display the desired contacts before editing the contact list.
 4. **Using complex characters** like emojis or script (Arabic and Hebrew) causes the command box input to behave in weird ways. Avoid entering these characters in the command box.
-5. **On the modules page** commands can still be entered and work, but the contact list is not visible. Thus, avoid entering commands on the module page to prevent inadvertent actions. 
+5. **On the modules page** commands can still be entered and work, but the contact list is not visible. Thus, avoid entering commands on the module page to prevent inadvertent actions.
+6. **If you are using OS Debian GNU/Linux 12 (bookworm) x86_64 with Gnome**, you will realise you may be able to shrink the window size below **minimum dimension of 740x600**. We currently have no workarounds for this. If you are using this OS, please keep the window above the minimum dimension to prevent JavaFX rendering issues.
 
 [back to top](#table-of-contents)
 
