@@ -102,10 +102,9 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
 
     private boolean testTelegram(Person person, List<String> keywords) {
         return keywords.stream()
-                .anyMatch(keyword -> person
-                        .getTelegram()
-                        .toString()
-                        .toLowerCase()
+                .anyMatch(keyword -> person.getTelegram()
+                        .map(telegram -> telegram.toString().toLowerCase())
+                        .orElse("")
                         .contains(keyword.toLowerCase()));
     }
 
