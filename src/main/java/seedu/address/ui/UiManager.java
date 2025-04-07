@@ -36,6 +36,10 @@ public class UiManager implements Ui {
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
 
+        //Set minimum height and width.
+        primaryStage.setMinHeight(600);
+        primaryStage.setMinWidth(740);
+
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
