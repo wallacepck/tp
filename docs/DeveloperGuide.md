@@ -478,24 +478,113 @@ testers are expected to do more *exploratory* testing.
    5. Re-launch the app by repeating step 2.<br>
   Expected: The most recent window size and location is retained.
 
-2. _{ more test cases …​ }_
+2. Shutdown
 
-### Deleting a person
+    1. In the AcademySource GUI command box, enter `exit`. Expected: the GUI for AcademySource closes.
 
-1. Deleting a person while all persons are being shown
+### Add contact
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Add a contact while all contacts are being shown
+
+    1. Prerequisites: List all contacts using the `list` command. Ensure there are no contacts with the same name and telegram handles as any of the test cases provided below. Perform the following test cases sequentially.
+
+    2. Test case: `add n/John Doe p/98765432 e/johnd@example.com t/@johnacademysource r/TA m/CS2103T` <br>
+       Expected: The contact will be added to the list. Details of the added contact shown in the status message.
+
+    3. Test case: `add n/John Doe p/98765432 e/johnd@example.com t/@johnacademysource1 r/PROF m/CS2101` <br>
+       Expected: No contact added to the list due to the name. Error details shown in the status message.
+
+    4. Test case: `add n/Robin p/98765432 e/johnd@example.com t/@johnacademysource r/PROF m/CS2101` <br>
+       Expected: No contact added to the list due to the telegram handle. Error details shown in the status message.
+
+    5. Other incorrect add commands to try: `add n/NAME p/PHONE e/EMAIL t/TELEGRAM r/ROLE m/MODULE` (where either NAME, PHONE, EMAIL, TELEGRAM, ROLE, or MODULE is empty or is invalid) <br>
+       Expected: No contact added to the list. Error details shown in the status message.
+
+### Deleting contact(s)
+
+1. Deleting a contact while all contacts are being shown
+
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. 
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+2. Deleting multiple contacts while all contacts are being shown
+
+   1. Prerequisites: List all contacts using the `list` command. Minimally 4 contacts in the list. 
+   
+   2. Test case: `delete 1 2 3` <br>
+      Expected: First three contacts are to be deleted from the list. Details of the deleted contacts shown in the status message.
+   
+   3. Test case: `delete 0 1` <br>
+      Expected: No contact to be deleted. Error details shown in the status message.
+   
+   4. Test case: `delete 1 1` <br>
+      Expected: No contact to be deleted. Error details shown in the status message.
+
+### Edit contact
+1. Edit a contact while all contacts are being shown
+
+   1. Prerequisites: List all contacts using the `list` command. Minimally 2 contact in the list. Ensure there are no contacts with the same name and telegram handles as any of the test cases provided below. Perform the following test cases sequentially.
+   
+   2. Test case: `edit 1 n/Jon Jones m/CS2106 m/CS3230 t/jonnyboy` <br>
+      Expected: First contact's name, module, and telegram will be changed. Details of the edited contact will be shown in the status message.
+   
+   3. Test case: `edit 2 n/Jon Jones` <br>
+      Expected: No contact to be edited due to invalid name. Error message to be shown in the status message.
+   
+   4. Test case: `edit 2 t/jonnyboy` <br>
+      Expected: No contact to be edited due to invalid telegram handle. Error message to be shown in the status message.
+   
+   5. Other incorrect add commands to try: `edit x n/NAME p/PHONE e/EMAIL m/MODULE t/TELEGRAM`, where either: <br>
+      * x is either less than 1 or larger than the size of the list OR <br>
+      * one of NAME, PHONE, EMAIL, MODULE, and TELEGRAM is blank or invalid<br>
+      Expected: No contact to be edited. Error message to be shown in the status message.
+
+### Find contact(s)
+
+1. Find contact(s)
+
+   1. Prerequisites: Enter the following command, `add n/James Tan p/81234567 e/jamestan@example.com t/@jamestan r/PROF m/CS2040S`. 
+   
+      1. If a contact with the name or telegram already exists, and the role is `PROF`, edit that contact to match the contact above. (e.g. if contact is at index 1, enter `edit 1 n/James Tan p/81234567 e/jamestan@example.com t/@jamestan m/CS2040S`)
+      
+      2. If a contact with the name or telegram already exists, and the role is `TA`, delete that contact and enter the add command above. (e.g. if contact is at index 1, enter `delete 1`)
+   
+   2. Test case: `find n/james` <br>
+   Expected: The added/edited contact above to be shown.
+   
+   3. Test case: `find p/81234 e/jamestan r/PROF`
+   Expected: The added/edited contact above to be shown.
+   
+   4. Test case: `find n/james david peter mm/2040s 2100 t/tan f/n` <br>
+   Expected: The added/edited contact above to be shown.
+   
+   5. Incorrect find commands to try: `find n/NAMES p/PHONES e/EMAILS t/TELEGRAMS mm/MODULES r/ROLE f/FAVOURITE` (where one of NAMES, PHONES, EMAILS, TELEGRAMS, MODULES, ROLE, FAVOURITE is blank or invalid) <br>
+   Expected: Error message to be shown in the status message.
+    
+### Favourite/Un-favourite contact
+
+1. Favourite a contact while all contacts are being shown
+
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   
+      1. If the first contact in the list is already labelled as favourite, enter `fav 1` to un-favourite the contact.
+   
+   2. Test case: `fav 1` <br>
+   Expected: First contact will be labelled as favourite. Details of the new favourite contact to be shown in the status message.
+
+   3. Test case: `fav 0` <br>
+   Expected: No contact is labelled as favourite. Error details shown in the status message.
+   
+   4. Other incorrect favourite commands to try: `fav`, `fav x` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
 ### Saving data
 
