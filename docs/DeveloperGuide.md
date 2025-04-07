@@ -45,7 +45,7 @@ The bulk of the app's work is done by the following four components:
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk or solid-state drive (SSD).
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
@@ -124,7 +124,7 @@ The sequence diagram below is another example to illustrate the interactions wit
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ImprovedModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
@@ -458,6 +458,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: UC09 - Help**
+
+**MSS** 
+
+1. User requests help to use AcademySource.
+2. AcademySource provides the user with URL to AcademySource website.
+3. User copies the URL to device's clipboard.
+
+    Use case ends.
+
+**Use case: UC10 - Exit**
+
+**MSS**
+
+1. User requests to exist the app.
+2. GUI for AcademySource closes.
+
+    Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -501,13 +520,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file, or alternatively, type `java -jar academysource.jar` into your terminal in the directory holding the `academysource.jar` file and press enter. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
    3. Saving window preferences
 
    4. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   5. Re-launch the app by double-clicking the jar file.<br>
+   5. Re-launch the app by repeating step 2.<br>
   Expected: The most recent window size and location is retained.
 
 2. _{ more test cases …​ }_
