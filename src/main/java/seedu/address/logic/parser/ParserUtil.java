@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_MODULE_CODE;
 
 import java.util.Collection;
@@ -13,7 +12,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
@@ -30,6 +28,8 @@ import seedu.address.model.person.Telegram;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_FIND_INVALID_PHONE = "Phone keywords should only contain digits, "
+            + "may optionally start with a '+', and must be between 1 and 17 digits long.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -52,7 +52,7 @@ public class ParserUtil {
      */
     public static List<Index> parseMassIndex(String oneBasedIndexes) throws ParseException {
         String trimmedIndexes = oneBasedIndexes.trim();
-        String[] splittedIndexes = trimmedIndexes.split(" ");
+        String[] splittedIndexes = trimmedIndexes.split("\\s+");
         Set<String> addedIndex = new HashSet<>();
         List<Index> indexes = new LinkedList<>();
 
@@ -152,7 +152,7 @@ public class ParserUtil {
     public static Set<Module> parseModules(Collection<String> moduleCodes) throws ParseException {
         requireNonNull(moduleCodes);
         if (moduleCodes.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_MODULE_CODE);
         }
         final Set<Module> moduleSet = new HashSet<>();
         for (String moduleCode : moduleCodes) {
@@ -197,8 +197,8 @@ public class ParserUtil {
      */
     public static void validatePhoneKeywords(List<String> keywords) throws ParseException {
         for (String keyword : keywords) {
-            if (!keyword.matches("\\d+")) {
-                throw new ParseException("Phone number must only contain digits.");
+            if (!keyword.matches("\\+?\\d{1,17}")) {
+                throw new ParseException(MESSAGE_FIND_INVALID_PHONE);
             }
         }
     }
