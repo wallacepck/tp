@@ -38,6 +38,12 @@ import seedu.address.ui.topnav.HelpWindow;
 public class MainWindow extends UiPart<Stage> implements GuiFunctionHandler {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String MODULE_PRESS_RESPONSE_PREFIX =
+            "Viewing contacts list filtered by module code";
+    private static final String FAVOURITE_FILE_PRESS_RESPONSE =
+            "Viewing contacts list filtered by favourite.";
+    private static final String FILTER_CLEAR_RESPONSE =
+            "Displaying all contacts.";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -165,6 +171,8 @@ public class MainWindow extends UiPart<Stage> implements GuiFunctionHandler {
         moduleFolders = new ModuleFolders(logic.getUnfilteredPersonList(), this);
 
         setSwitchWindowPlaceholder("Modules");
+
+        resultDisplay.setFeedbackToUser("Hi! Welcome to AcademySource.");
     }
 
     @Override
@@ -193,16 +201,20 @@ public class MainWindow extends UiPart<Stage> implements GuiFunctionHandler {
         logic.updatePredicateViaGui(
                 new PersonContainsKeywordsPredicate(searchFieldMap)
         );
+        String modulePressResponse = String.format("%s %s.", MODULE_PRESS_RESPONSE_PREFIX, moduleCode);
+        resultDisplay.setFeedbackToUser(modulePressResponse);
     }
 
     @Override
     public void filterListByFavourites() {
         logic.updatePredicateViaGui(Person::getIsFavourite);
+        resultDisplay.setFeedbackToUser(FAVOURITE_FILE_PRESS_RESPONSE);
     }
 
     @Override
     public void clearFilter() {
         logic.updatePredicateViaGui(PREDICATE_SHOW_ALL_PERSONS);
+        resultDisplay.setFeedbackToUser(FILTER_CLEAR_RESPONSE);
     }
 
     /**
@@ -288,6 +300,10 @@ public class MainWindow extends UiPart<Stage> implements GuiFunctionHandler {
             setSwitchWindowPlaceholder("Modules");
         } else {
             setSwitchWindowPlaceholder("Contacts");
+
+            // ensure consistent behaviour between tab press and button press contact
+            logic.updatePredicateViaGui(PREDICATE_SHOW_ALL_PERSONS);
+            resultDisplay.setFeedbackToUser(FILTER_CLEAR_RESPONSE);
         }
     }
 }
