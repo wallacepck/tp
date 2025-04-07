@@ -583,8 +583,22 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files 
+   1. Download jar file and copy it into an empty folder. Run the jar file to create a `academysource.json` file in the `data` folder. 
+   2. Enter `exit` command to exit the application.
+   3. Delete the `data` folder created in step 1, to simulate a missing data file.
+   4. Run the jar file.
+   
+        Expected: A new `academysource.json` file is created and populated with default data.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+2. Dealing with corrupted data files
+   1. Download jar file and copy it into an empty folder. Run the jar file to create a `academysource.json` file in the `data` folder.
+   2. Enter `exit` command to exit the application.
+   3. Open the `academysource.json` file created in step 1, delete a `name` field in a random contact in the file to simulate a corrupted data file.
+   4. Run the jar file.
 
-2. _{ more test cases …​ }_
+        Expected: `academysource.json` now contains no contact details.
+
+   5. Delete the `academysource.json` file and run the jar file again.
+
+        Expected: A new `academysoure.json` file is created and populated with default data.

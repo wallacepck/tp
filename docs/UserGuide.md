@@ -21,7 +21,8 @@ With AcademySource, you can:
 
 ## Table of Contents
 - [Quick start](#quick-start)
-- [Graphic User Interface Layout](#graphic-user-interface-layout)
+- [Graphic User Interface Layout](#graphic-user-interface-layout-)
+- [Keybinds](#keybinds-)
 - <details>
     <summary>
         <a href="#features">Features</a>
@@ -41,10 +42,10 @@ With AcademySource, you can:
     <a href="#editing-the-data-file"> - Editing the data file <br></a>
   
   </details>
-- [FAQ](#faq)
-- [Known issues](#known-issues)
-- [Command summary](#command-summary)
-- [Glossary](#glossary)
+- [FAQ](#faq-)
+- [Known issues](#known-issues-)
+- [Command summary](#command-summary-)
+- [Glossary](#glossary-)
 
 ## Quick start
 
@@ -126,7 +127,7 @@ With AcademySource, you can:
     * `exit` : Exits the app.
 
 
-7. Refer to the [Features](#features) section below for details of each command.
+7. Refer to the [Features](#features-) section below for details of each command.
 
 <div markdown="block" class="alert alert-info">
 
@@ -180,11 +181,11 @@ Contacts Page:
 2. Role: The role in which each contact is assigned to. `TA` will be displayed as yellow bookmark while `Professor` will be displayed as orange bookmark.
 3. Favourite Mark: A star symbol indicating contacts marked as favourite by you.
 
-[Back to top](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Keybinds
+## Keybinds [🔝](#table-of-contents)
 
 ![keybinds](images/keybinds.png)
 
