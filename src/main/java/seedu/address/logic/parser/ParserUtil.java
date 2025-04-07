@@ -52,7 +52,7 @@ public class ParserUtil {
      */
     public static List<Index> parseMassIndex(String oneBasedIndexes) throws ParseException {
         String trimmedIndexes = oneBasedIndexes.trim();
-        String[] splittedIndexes = trimmedIndexes.split(" ");
+        String[] splittedIndexes = trimmedIndexes.split("\\s+");
         Set<String> addedIndex = new HashSet<>();
         List<Index> indexes = new LinkedList<>();
 
