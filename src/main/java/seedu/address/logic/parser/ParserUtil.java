@@ -30,6 +30,8 @@ import seedu.address.model.person.Telegram;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_FIND_INVALID_PHONE = "Phone keywords should only contain digits, "
+            + "may optionally start with a '+', and must be between 1 and 17 digits long.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -198,8 +200,7 @@ public class ParserUtil {
     public static void validatePhoneKeywords(List<String> keywords) throws ParseException {
         for (String keyword : keywords) {
             if (!keyword.matches("\\+?\\d{1,17}")) {
-                throw new ParseException("Phone keywords should only contain digits, may optionally start with a '+', "
-                        + "and must be between 1 and 17 digits long.");
+                throw new ParseException(MESSAGE_FIND_INVALID_PHONE);
             }
         }
     }
