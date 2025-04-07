@@ -458,7 +458,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC0
+**Use case: UC09 - Help**
+
+**MSS** 
+
+1. User requests help to use AcademySource.
+2. AcademySource provides the user with URL to AcademySource website.
+3. User copies the URL to device's clipboard.
+
+    Use case ends.
+
+**Use case: UC10 - Exit**
+
+**MSS**
+
+1. User requests to exist the app.
+2. GUI for AcademySource closes.
+
+    Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
