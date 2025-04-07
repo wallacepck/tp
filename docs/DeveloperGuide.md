@@ -270,9 +270,6 @@ Summary of Key Features:
 
 This functionality will enable users to customize their experience with modules while preserving the integrity of the default set.
 
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
