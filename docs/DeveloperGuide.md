@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +68,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S2-CS2103T-T17-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -83,9 +83,11 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+The `GuiFilterHandler` component handles the mouse and key events on the GUI. This component is inherited by MainWindow and controls events done on `PersonListPanel`, `ModuleFolders` and `Sidebar` component.
+
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -122,7 +124,7 @@ The sequence diagram below is another example to illustrate the interactions wit
 </div>
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ImprovedModelClassDiagram.png" width="450" />
 
@@ -137,7 +139,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S2-CS2103T-T17-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -240,6 +242,36 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### \[Proposed\] More Modules
+
+#### Proposed Implementation
+Modules can be added or removed by users.  
+##### Current Implementation:
+There is fixed amount of modules inside `ModuleRegistry` as enums. Users can add modules to a contact using the `add` or `edit` commands.
+
+| **Module Code** | **Module Name**                                       |
+|-----------------|-------------------------------------------------------|
+| CS1231S         | Discrete Structures                                   |
+| CS2030S         | Programming Methodology II                            |
+| CS2040S         | Data Structures and Algorithms                        |
+| CS2100          | Computer Organisation                                 |
+| CS2103T         | Software Engineering                                  |
+| CS2106          | Introduction to Operating Systems                     |
+| CS2109S         | Introduction to AI and Machine Learning               |
+| CS3230          | Design and Analysis of Algorithms                     |
+| CS2101          | Effective Communication for Computing Professionals   |
+
+##### Future Implementation:
+The future functionality of the `ModuleRegistry` system will enable users to **dynamically manage modules**.  
+
+Summary of Key Features:
+- **Add modules**: Allow users to add modules.
+- **Remove modules**: Allow users to delete user-added modules.
+- **Display modules**: Show both preset and user-added modules.
+- **Fixed set of preset modules**: The core set of modules cannot be modified by users.
+
+This functionality will enable users to customize their experience with modules while preserving the integrity of the default set.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -271,28 +303,29 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                          | So that I can…​                                                                                             |
-|----------|----------|-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| `* * *`  | user     | have my professors and TA's contact                   | contact them in the future                                                                                  |
-| `* * *`  | new user | have a guide                                          | navigate around and use the app easily                                                                      |
-| `* * *`  | new user | have a CLI syntax table                               | I can refer to it while using the app                                                                       |
-| `* * *`  | user     | set my contacts as TA or professor                    | find them in one command                                                                                    |
-| `* * *`  | user     | set my contacts as favourite                          | find them in one command                                                                                    |
-| `* * *`  | user     | find contact(s) by full/incomplete name(s)            | locate contact details without having to go through the entire list and remembering the full name           |
-| `* * *`  | user     | find contact(s) by full/incomplete module code(s)     | locate contact details without having to go through the entire list and remembering the full module code    |
-| `* * *`  | user     | find contact(s) by full/incomplete phone number(s)    | locate contact details without having to go through the entire list and remembering the full phone number   |
-| `* * *`  | user     | find contact(s) by full/incomplete email(s)           | locate contact details without having to go through the entire list and remembering the full email address  |
-| `* * *`  | user     | list all contacts                                     | view of all my contact details                                                                              |
-| `* * *`  | user     | delete contacts                                       | remove outdated contacts                                                                                    |
-| `* *`    | user     | mass operations                                       | make a lot of changes to my contact list efficiently                                                        |
-| `* *`    | user     | a console window to display the contact               | copy and paste contact information efficiently                                                              |
-| `* *`    | user     | add Telegram handle to contacts                       | keep their telegram handle for easy contact                                                                 |
+| Priority | As a …​  | I want to …​                                          | So that I can…​                                                                                              |
+|----------|----------|-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| `* * *`  | user     | have my professors and TA's contact                   | contact them in the future                                                                                   |
+| `* * *`  | new user | have a guide                                          | navigate around and use the app easily                                                                       |
+| `* * *`  | user     | set my contacts as TA or professor                    | find them in one command                                                                                     |
+| `* * *`  | user     | set my contacts as favourite                          | find them in one command                                                                                     |
+| `* * *`  | user     | find contact(s) by full/incomplete name(s)            | locate contact details without having to go through the entire list and remembering the full name            |
+| `* * *`  | user     | find contact(s) by full/incomplete module code(s)     | locate contact details without having to go through the entire list and remembering the full module code     |
+| `* * *`  | user     | find contact(s) by full/incomplete phone number(s)    | locate contact details without having to go through the entire list and remembering the full phone number    |
+| `* * *`  | user     | find contact(s) by full/incomplete email(s)           | locate contact details without having to go through the entire list and remembering the full email address   |
+| `* * *`  | user     | list all contacts                                     | view of all my contact details                                                                               |
+| `* * *`  | user     | delete contacts                                       | remove outdated contacts                                                                                     |
+| `* *`    | user     | mass operations                                       | make a lot of changes to my contact list efficiently                                                         |
+| `* *`    | user     | a console window to display the contact               | copy and paste contact information efficiently                                                               |
+| `* *`    | user     | add Telegram handle to contacts                       | keep their telegram handle for easy contact                                                                  |
 | `* *`    | user     | find contact(s) by full/incomplete telegram handle(s) | locate contact details without having to go through the entire list and remembering the full telegram handle |
-| `* *`    | user     | find contact(s) by multiple fields                    | locate specific contact details in one command                                                              |
-| `*`      | user     | have a personal contact list                          | locate contact details important to me                                                                      |
-| `*`      | user     | add contacts to the personal contact list             | add important contacts to the list                                                                          |
-| `*`      | user     | delete contacts from the personal contact list        | remove no longer important contacts from the list                                                           |
-| `*`      | user     | list my personal contact list                         | view every contact in the list                                                                              |
+| `* *`    | user     | find contact(s) by multiple fields                    | locate specific contact details in one command                                                               |
+| `* *`    | user     | have contacts organised by modules                    | quickly access contacts that belong to the module group with a click of a button                             |
+| `* *`    | user     | have contacts organised by favourite                  | quickly access favourite contacts with a click of a button                                                   |
+| `*`      | user     | have a personal contact list                          | locate contact details important to me                                                                       |
+| `*`      | user     | add contacts to the personal contact list             | add important contacts to the list                                                                           |
+| `*`      | user     | delete contacts from the personal contact list        | remove no longer important contacts from the list                                                            |
+| `*`      | user     | list my personal contact list                         | view every contact in the list                                                                               |
 
 *{More to be added}*
 
@@ -304,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to adds a contact
+1.  User requests to add a contact
 2.  AcademySource adds a contact
 
     Use case ends.
@@ -458,7 +491,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC0
+**Use case: UC09 - Help**
+
+**MSS** 
+
+1. User requests help to use AcademySource.
+2. AcademySource provides the user with URL to AcademySource website.
+3. User copies the URL to device's clipboard.
+
+    Use case ends.
+
+**Use case: UC10 - Exit**
+
+**MSS**
+
+1. User requests to exist the app.
+2. GUI for AcademySource closes.
+
+    Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
