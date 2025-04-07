@@ -561,5 +561,6 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 | **Parameters** | `Values supplied by the user in commands (e.g., name, phone, module) that determine the` <br> `action taken by AcademySource. Often prefixed with identifiers like n/, p/, m/`                  |
 | **GUI**        | `A GUI (Graphical User Interface) for a desktop application is a visual interface that` <br> `allows users to interact with software using graphical elements like windows, buttons, and menus` |
 | **Field**      | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                                        |
+| **URL**        | `A URL (Uniform Resource Locator) is the address used to access a resource on the internet.`                                                                                                    |
 
 [back to top](#table-of-content)
