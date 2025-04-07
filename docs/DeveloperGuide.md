@@ -537,7 +537,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Add a contact while all contacts are being shown
 
-    1. Prerequisites: List all contacts using the `list` command. Ensure there are no contacts with the same name and telegram handles as any of the test cases provided below. Perform the below test cases sequentially.
+    1. Prerequisites: List all contacts using the `list` command. Ensure there are no contacts with the same name and telegram handles as any of the test cases provided below. Perform the following test cases sequentially.
 
     2. Test case: `add n/John Doe p/98765432 e/johnd@example.com t/@johnacademysource r/TA m/CS2103T` <br>
        Expected: The contact will be added to the list. Details of the added contact shown in the status message.
@@ -582,7 +582,7 @@ testers are expected to do more *exploratory* testing.
 ### Edit contact
 1. Edit a contact while all contacts are being shown
 
-   1. Prerequisites: List all contacts using the `list` command. Minimally 2 contact in the list. Ensure there are no contacts with the same name and telegram handles as any of the test cases provided below. Perform the below test cases sequentially.
+   1. Prerequisites: List all contacts using the `list` command. Minimally 2 contact in the list. Ensure there are no contacts with the same name and telegram handles as any of the test cases provided below. Perform the following test cases sequentially.
    
    2. Test case: `edit 1 n/Jon Jones m/CS2106 m/CS3230 t/jonnyboy` <br>
       Expected: First contact's name, module, and telegram will be changed. Details of the edited contact will be shown in the status message.
@@ -602,7 +602,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Find contact(s)
 
-   1. Prerequisites: Enter the following command, `add n/James Tan p/81234567 e/jamestan@example.com t/@jamestan r/PROF m/CS2040S`. If a contact with the name or telegram already exists, edit that contact to the same information. 
+   1. Prerequisites: Enter the following command, `add n/James Tan p/81234567 e/jamestan@example.com t/@jamestan r/PROF m/CS2040S`. 
+   
+      1. If a contact with the name or telegram already exists, and the role is `PROF`, edit that contact to match the contact above. (e.g. if contact is at index 1, enter `edit 1 n/James Tan p/81234567 e/jamestan@example.com t/@jamestan m/CS2040S`)
+      
+      2. If a contact with the name or telegram already exists, and the role is `TA`, delete that contact and enter the add command above. (e.g. if contact is at index 1, enter `delete 1`)
    
    2. Test case: `find n/james` <br>
    Expected: The added/edited contact above to be shown.
@@ -620,7 +624,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Favourite a contact while all contacts are being shown
 
-   1. Prerequisites: List all contacts using the `list` command. Ensure multiple contacts in the list and ensure first contact is not a favourite.
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   
+      1. If the first contact in the list is already labelled as favourite, enter `fav 1` to un-favourite the contact.
    
    2. Test case: `fav 1` <br>
    Expected: First contact will be labelled as favourite. Details of the new favourite contact to be shown in the status message.
