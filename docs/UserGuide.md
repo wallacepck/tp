@@ -372,13 +372,10 @@ Format: `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOU
 - **Case-Insensitive & Partial Matching:**  
   The search for names, phone numbers, and module codes is performed in a case-insensitive manner and supports partial keyword matching.  
   _Example:_ `find n/john` matches a person named "John Doe".
-
 - **Keyword Order:**  
   For names, the order of keywords does not matter. For example, `find n/Hans Bo` matches "Bo Hans".
-
 - **Single Instance per Prefix:**  
   Only **one instance** of each prefix is allowed. Repeating a prefix (e.g., `n/John n/Doe`) is not permitted.
-
 - **AND Combination:**  
   When multiple prefixes are specified (e.g., `find n/John mm/CS2103T`), a person must satisfy **all criteria** (i.e. the keywords across the different fields are combined using an AND operation) to be included in the results.
 
