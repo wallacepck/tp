@@ -534,29 +534,27 @@ Furthermore, certain edits can cause AcademySource to behave in unexpected ways 
 
 ## Command summary [🔝](#table-of-contents)
 
-| Action        | Format, Examples                                                                                                                                                                                                                   |
-|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TELEGRAM] m/MODULE …​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA t/@JamesLovesCS m/CS2103T`                                                                    |
-| **Clear**     | `clear`                                                                                                                                                                                                                            |
-| **Delete**    | `delete INDEX…​` <br> e.g., `delete 1` `delete 2 3`                                                                                                                                                                                |
-| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                 |
-| **Find**      | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOURITE_STATUS] [r/ROLE] [t/TELEGRAM_KEYWORDS] [e/EMAIL_KEYWORDS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y t/@JamesLovesCS r/PROF e/james@gmail.com` |
-| **Favourite** | `fav INDEX` <br> e.g., `fav 1`                                                                                                                                                                                                     |
-| **List**      | `list`                                                                                                                                                                                                                             |
-| **Help**      | `help`                                                                                                                                                                                                                             |
-| **Exit**      | `exit`                                                                                                                                                                                                                             |
+| Action        | Format, Examples                                                                                                                                                                                                                    |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [t/TELEGRAM] m/MODULE …​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/TA t/@JamesLovesCS m/CS2103T`                                                                     |
+| **Clear**     | `clear`                                                                                                                                                                                                                             |
+| **Delete**    | `delete INDEX…​` <br> e.g., `delete 1` `delete 2 3`                                                                                                                                                                                 |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                  |
+| **Find**      | `find [n/NAME_KEYWORDS] [p/PHONE_KEYWORDS] [mm/MODULE_KEYWORDS] [f/FAVOURITE_STATUS] [r/ROLE] [t/TELEGRAM_KEYWORDS] [e/EMAIL_KEYWORDS]` <br> e.g., `find n/James p/98765432 m/CS2106 f/y t/@JamesLovesCS r/PROF e/james@gmail.com`  |
+| **Favourite** | `fav INDEX` <br> e.g., `fav 1`                                                                                                                                                                                                      |
+| **List**      | `list`                                                                                                                                                                                                                              |
+| **Help**      | `help`                                                                                                                                                                                                                              |
+| **Exit**      | `exit`                                                                                                                                                                                                                              |
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary [🔝](#table-of-contents)
 
-| Term           | Definition                                                                                                                                                                                      |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **CLI**        | `Command Line Interface; a way to interact with the application using` <br> `text-based commands`                                                                                               |
-| **Index**      | `A positive integer that refers to a contact's position in the displayed list`                                                                                                                  |
-| **JDK**        | `Java Development Kit; a software development environment required to run and develop Java` <br> `applications like AcademySource. Version 17 or above is needed`                               |
-| **Parameters** | `Values supplied by the user in commands (e.g., name, phone, module) that determine the` <br> `action taken by AcademySource. Often prefixed with identifiers like n/, p/, m/`                  |
-| **GUI**        | `A GUI (Graphical User Interface) for a desktop application is a visual interface that` <br> `allows users to interact with software using graphical elements like windows, buttons, and menus` |
-| **Field**      | `A specific piece of information in a contact entry, such as name, phone number, email, role, or module`                                                                                        |
-| **URL**        | `A URL (Uniform Resource Locator) is the address used to access a resource on the internet.`                                                                                                    |
-
-[back to top](#table-of-content)
+| Term           | Definition                                                                                                                                                                   |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**        | Command Line Interface; a way to interact with the application using text-based commands.                                                                                    |
+| **Index**      | A positive integer that refers to a contact's position in the displayed list.                                                                                                |
+| **JDK**        | Java Development Kit; a software development environment required to run and develop Java applications like AcademySource. Version 17 or above is needed.                    |
+| **Parameters** | Values supplied by the user in commands (e.g., name, phone, module) that determine the action taken by AcademySource. Often prefixed with identifiers like `n/`, `p/`, `m/`. |
+| **GUI**        | A GUI (Graphical User Interface) is a visual interface that lets users interact with software using elements like windows, buttons, and menus.                               |
+| **Field**      | A specific piece of information in a contact entry, such as name, phone number, email, role, or module.                                                                      |
+| **URL**        | A URL (Uniform Resource Locator) is the address used to access a resource on the internet.                                                                                   |
